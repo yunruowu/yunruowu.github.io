@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
+  <meta name="msapplication-config" content="/images/yun-32x32.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CH4 Torus Networks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-10">
+<meta property="og:url" content="http://yoursite.com/2020/07/20/Interconnection-Networks-ch5/index.html">
+<meta property="og:site_name" content="Yun的博客">
+<meta property="og:description" content="CH4 Torus Networks">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200720140511291.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200720141524634.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161336861.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161423232.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161456946.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161558619.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161807795.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161854710.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161920581.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161938362.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161959797.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722162116800.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722162144750.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722162239212.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722163218184.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722181511667.png">
+<meta property="article:published_time" content="2020-07-20T07:21:59.000Z">
+<meta property="article:modified_time" content="2020-08-06T08:40:06.252Z">
+<meta property="article:author" content="云若无">
+<meta property="article:tag" content="Interconnection_Networks">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200720140511291.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/20/Interconnection-Networks-ch5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LeetCode-10 | Yun的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yun的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">致奋斗的自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/20/Interconnection-Networks-ch5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/15.png">
+      <meta itemprop="name" content="云若无">
+      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode-10
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-20 15:21:59" itemprop="dateCreated datePublished" datetime="2020-07-20T15:21:59+08:00">2020-07-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-06 16:40:06" itemprop="dateModified" datetime="2020-08-06T16:40:06+08:00">2020-08-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/20/Interconnection-Networks-ch5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/Interconnection-Networks-ch5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="CH4-Torus-Networks"><a href="#CH4-Torus-Networks" class="headerlink" title="CH4 Torus Networks"></a>CH4 Torus Networks<a id="more"></a></h2><p>圆环和网状网络（ k-ary n-cubes）在规则的n维网格中打包$N=k^n$个节点，每个维中都有k个节点，并且最近邻之间有通道。</p>
+<p>优点：</p>
+<ul>
+<li>这种规则的物理布置与包装约束非常匹配。</li>
+<li>具有良好的路径分集，即使在排列流量上也可以具有良好的负载平衡。</li>
+<li>通道是双向的,可以利用双向信令，从而更有效地利用引脚和电线。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>它们的跳数比对数网络大；</li>
+<li>增加了网络的引脚成本。</li>
+</ul>
+<h3 id="4-1The-Structure-of-T-orus-Networks"><a href="#4-1The-Structure-of-T-orus-Networks" class="headerlink" title="4.1The Structure of T orus Networks"></a>4.1The Structure of T orus Networks</h3><ul>
+<li>$N=k^n$个节点</li>
+<li>每个维中都有k个节点</li>
+<li>每个节点同时充当网络的输入端，输出端和交换节点</li>
+<li>每个节点被分配一个n-digit radix-k地址{an−1,…,a0}</li>
+<li>通过一对通道（每个方向一个）连接到地址相差±1（mod k）的所有节点。只需一个地址位。</li>
+<li>每个节点每个维度需要2个通道，总共2nN个通道。</li>
+</ul>
+<p>规则的（所有节点的度数相同），并且也是边缘对称的。<br>网状网络和环状网络的区别：</p>
+<ol>
+<li>网状网络 在每个方向上都省略了从地址ak−1到地址a0的连接</li>
+<li>网状网络具有相同的节点度，但是对等通道的数目是具有相同基数和尺寸的圆环的一半</li>
+<li>放弃了圆环的边缘对称性，对中央通道的需求可能会大大高于对边缘通道的需求</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200720140511291.png" alt="image-20200720140511291"></p>
+<p>环面网络的每个维度都可以具有不同的基数。例如，下图说明了一个2,3,4-ary 3-mesh，其y方向的基数为2<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200720141524634.png" alt="image-20200720141524634"></p>
+<h3 id="5-2-performance"><a href="#5-2-performance" class="headerlink" title="5.2 performance"></a>5.2 performance</h3><p>throughput, latency, and path diversity.</p>
+<h4 id="5-2-1-Throughput"><a href="#5-2-1-Throughput" class="headerlink" title="5.2.1 Throughput"></a>5.2.1 Throughput</h4><p>在两层封装模型中，吞吐量受引脚带宽或二等分带宽限制。我们首先考虑对分限制并计算网络的信道对分为:</p>
+<p>k为偶数</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161336861.png" alt="image-20200722161336861"></p>
+<p>由于<strong>圆环</strong>既是节点对称的，又是边缘对称的，从平分信道负载中确定均匀流量下的信道负载。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161423232.png" alt="image-20200722161423232"></p>
+<p>由于<strong>圆环</strong>的边缘对称性：</p>
+<p>​                    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161456946.png" alt="image-20200722161456946"></p>
+<p>由于网格是不对称的，由于上面用于圆环的跳数，它无法达到下限。相反，在统一流量下<strong>网格</strong>的信道负载为<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161558619.png" alt="image-20200722161558619"></p>
+<p>对于最坏情况的流量，所有流量都会越过平分线，并且通道负载会加倍。        </p>
+<p>​                            <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161807795.png" alt="image-20200722161807795"></p>
+<p>每个节点四个信道：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161854710.png" alt="image-20200722161854710"></p>
+<p><strong>圆环</strong>的最大通道宽度<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161920581.png" alt="image-20200722161920581"></p>
+<p><strong>网格</strong>的：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161938362.png" alt="image-20200722161938362"></p>
+<p>计算均匀负载下的吞吐量：</p>
+<p>​    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722161959797.png" alt="image-20200722161959797"></p>
+<h4 id="5-2-2-Latency"><a href="#5-2-2-Latency" class="headerlink" title="5.2.2 Latency"></a>5.2.2 Latency</h4><p><strong>环形</strong>网络的延迟在很大程度上取决于尺寸。在低维度上，延迟是由高跳数决定的。在维度的极端情况下，串行延迟由于通道宽度w的狭窄而占主导地位。最佳等待时间通常发生在较低的中间维度。</p>
+<p><strong>环型</strong>网络的串行化等待时间</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722162116800.png" alt="image-20200722162116800"></p>
+<p><strong>网格</strong>网络</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722162144750.png" alt="image-20200722162144750"></p>
+<p><strong>圆环</strong>网络中的平均最小跳数是通过对所有节点对上的最短距离求平均来确定的，从而得出<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722162239212.png" alt="image-20200722162239212"></p>
+<p><strong>网格网络</strong>：在均匀的流量和偶数基数的情况下，数据包平均在n个维度中的每个维度上四分之一地传播，即$\frac{k}{4}$跳。因此偶数k，跳数为$\frac{nk}{4}$,对于奇数k，平均距离包括一个小的附加系数。</p>
+<p>​    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722163218184.png" alt="image-20200722163218184"></p>
+<h4 id="5-2-3-Path-Diversity"><a href="#5-2-3-Path-Diversity" class="headerlink" title="5.2.3 Path Diversity"></a>5.2.3 Path Diversity</h4><p>路径数量，我们只考虑最短路径，并且所有路径在每个维度（单向路线）都采用相同的方向。</p>
+<ul>
+<li><p>一维网络，只有一个路径</p>
+</li>
+<li><p>二维网络，考虑节点a，b，如果在x方向，二者被$\Delta x$跳分割，y方向上，$\Delta y$跳，那么路径数量为：</p>
+<script type="math/tex; mode=display">
+\begin{vmatrix}
+R_{ab}
+\end{vmatrix}=\binom{\Delta_x+\Delta_y}{\Delta_x}</script></li>
+<li><p>三维网络，增加z的维度</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+    \begin{vmatrix}
+    R_{ab}
+    \end{vmatrix}=\binom{\Delta_x+\Delta_y+\Delta_z}{\Delta_x}\binom{\Delta_y+\Delta_y}{\Delta_y}=\frac{(\Delta_x+\Delta_y+\Delta_z)!}{\Delta_x!\Delta_y!\Delta_z!}</script><ul>
+<li>n维：从a到b的最小单向路线的总数为<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722181511667.png" alt="image-20200722181511667"></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Interconnection-Networks/" rel="tag"><i class="fa fa-tag"></i> Interconnection_Networks</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/19/Interconnection-Networks-ch3/" rel="prev" title="Interconnection-Networks-ch4.md">
+      <i class="fa fa-chevron-left"></i> Interconnection-Networks-ch4.md
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/20/Interconnection-Networks-ch5-1/" rel="next" title="Interconnection-Networks-ch5-1">
+      Interconnection-Networks-ch5-1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CH4-Torus-Networks"><span class="nav-number">1.</span> <span class="nav-text">CH4 Torus Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1The-Structure-of-T-orus-Networks"><span class="nav-number">1.1.</span> <span class="nav-text">4.1The Structure of T orus Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-performance"><span class="nav-number">1.2.</span> <span class="nav-text">5.2 performance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-Throughput"><span class="nav-number">1.2.1.</span> <span class="nav-text">5.2.1 Throughput</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-Latency"><span class="nav-number">1.2.2.</span> <span class="nav-text">5.2.2 Latency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3-Path-Diversity"><span class="nav-number">1.2.3.</span> <span class="nav-text">5.2.3 Path Diversity</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云若无"
+      src="/images/15.png">
+  <p class="site-author-name" itemprop="name">云若无</p>
+  <div class="site-description" itemprop="description">还记得自己的梦想吗？！！！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yunruowu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yunruowu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yunruowu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">57k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">52 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
+      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

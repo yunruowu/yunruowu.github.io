@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
+  <meta name="msapplication-config" content="/images/yun-32x32.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="RDMA 背景知识A. RDMA verbsverbs决定了通信操作的类型。RDMA的verbs可以分成两类，双边two-sided(SEND, RECV)的和单边的one-sided(READ, WRITE)。two的涉及到两个通信端点，这种情况下，远程主机需要提前发布（pre-post）RECV,本地主机需要发布SEND。one-part仅仅涉及一个通信端点（源）。使用WRITE可以直接在远程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both">
+<meta property="og:url" content="http://yoursite.com/2020/08/28/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both/index.html">
+<meta property="og:site_name" content="Yun的博客">
+<meta property="og:description" content="RDMA 背景知识A. RDMA verbsverbs决定了通信操作的类型。RDMA的verbs可以分成两类，双边two-sided(SEND, RECV)的和单边的one-sided(READ, WRITE)。two的涉及到两个通信端点，这种情况下，远程主机需要提前发布（pre-post）RECV,本地主机需要发布SEND。one-part仅仅涉及一个通信端点（源）。使用WRITE可以直接在远程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201026101151798.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201026102358284.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201026195810000.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200829090835329.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028203924233.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204009514.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204412779.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204658627.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204706756.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205112105.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205133251.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205219090.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205655531.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028210109093.png">
+<meta property="article:published_time" content="2020-08-28T13:52:32.000Z">
+<meta property="article:modified_time" content="2020-10-29T08:13:58.948Z">
+<meta property="article:author" content="云若无">
+<meta property="article:tag" content="IB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201026101151798.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/28/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both | Yun的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yun的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">致奋斗的自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/28/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/15.png">
+      <meta itemprop="name" content="云若无">
+      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-28 21:52:32" itemprop="dateCreated datePublished" datetime="2020-08-28T21:52:32+08:00">2020-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-29 16:13:58" itemprop="dateModified" datetime="2020-10-29T16:13:58+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HiNA/" itemprop="url" rel="index"><span itemprop="name">HiNA</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HiNA/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HiNA/Papers/IB/" itemprop="url" rel="index"><span itemprop="name">IB</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/28/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/28/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="RDMA-背景知识"><a href="#RDMA-背景知识" class="headerlink" title="RDMA 背景知识"></a>RDMA 背景知识</h2><h3 id="A-RDMA-verbs"><a href="#A-RDMA-verbs" class="headerlink" title="A. RDMA verbs"></a>A. RDMA verbs</h3><p>verbs决定了通信操作的类型。RDMA的verbs可以分成两类，双边<strong>two-sided(SEND, RECV)</strong>的和单边的<strong>one-sided(READ, WRITE)</strong>。two的涉及到两个通信端点，这种情况下，远程主机需要提前发布（pre-post）RECV,本地主机需要发布SEND。one-part仅仅涉及一个通信端点（源）。使用WRITE可以直接在远程主机写入数据，使用READ直接从远程主机内存直接读取数据，并且不需要通知远程主机。</p>
+<p>RDMA的动词遵循异步I/O模型。数据传输是非阻塞的，因此允许程序在发布的请求完成之前继续执行。通过向完成队列发送CQE信号，告知完成；应用程序轮询队列接收CQE确定完成。</p>
+<h3 id="B-RDMA-transport"><a href="#B-RDMA-transport" class="headerlink" title="B. RDMA transport"></a>B. RDMA transport</h3><p>RDMA提供了不可靠（UD）和可靠（RC）传输类型。  UD传输不保证请求的交付。此外，UD仅提供双面动词。对于RC传输，RNIC使用确认（ACK）来保证请求的传递。此外，RC传输支持单侧和双侧动词。</p>
+<h3 id="C-RDMA-execution-path"><a href="#C-RDMA-execution-path" class="headerlink" title="C. RDMA execution path"></a>C. RDMA execution path</h3><p>根据动词和传输类型的选择，RDMA事务遵循通信主机之间特定的交互序列。不论什么事务，每次事务开始时，host通过PCIe的MMIO事务向本地RNIC发送请求，RNIC根据请求中的动词类型，决定处理请求的办法：<br>如下图：</p>
+<p><strong>RDMA operations execution sequence：</strong></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201026101151798.png" alt="image-20201026101151798"></p>
+<ul>
+<li>READ： 本地RNIC通过网络结构发送请求。远程RNIC通过从主机的内存层次结构读取的DMA服务请求，并将数据发送回本地RNIC。接收到数据后，本地RNIC发出DMA写操作以将数据存储在本地内存中。之后，本地RNIC执行另一次DMA写操作以发出CQE。</li>
+<li>WRITE：首先，本地RNIC通过DMA读取获取有效负载。接下来，通过网络结构发送请求。远程RNIC 执行一个DMA写的操作将数据存储在主机的内存中，然后发送一个ACK.</li>
+</ul>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201026102358284.png" alt="image-20201026102358284"></p>
+<ul>
+<li>SEND：首先，本地RNIC通过DMA读取获取有效负载。然后，该请求通过网络结构发送。远程RNIC收到请求后，会发回ACK（如果使用RC传输），并通过DMA写入将有效负载写入其主机的内存中。根据SEND请求使用的RDMA传输方式的不同，本地RNIC会在网络（fabric）发送请求后立即发出CQE（UD，图c），或者一旦从远程RNIC接收到ACK（RC，图d），则发出 。</li>
+</ul>
+<h2 id="IB"><a href="#IB" class="headerlink" title="IB"></a>IB</h2><h3 id="I-InfiniBand-QoS-support"><a href="#I-InfiniBand-QoS-support" class="headerlink" title="I. InfiniBand QoS support"></a>I. InfiniBand QoS support</h3><p>为了提供按流的性能差异，IB提供了一组优先级，称为服务级（SL），可以将其分配给流。IB使用SL的抽象来隐藏其两个有助于实现QoS的体系结构组件:</p>
+<ol>
+<li>Virtual Lane (VL):</li>
+<li>Virtual Lane Arbitration (VLArb):</li>
+</ol>
+<h3 id="II-IB-SWITCH-LATENCY-MEASUREMENT"><a href="#II-IB-SWITCH-LATENCY-MEASUREMENT" class="headerlink" title="II. IB SWITCH LATENCY MEASUREMENT"></a>II. IB SWITCH LATENCY MEASUREMENT</h3><p>IB网络可以达到10微秒内的延迟，导致测量需要很准确，但是如此低的延迟为准确的NIC至NIC延迟测量提出了一些挑战。主要挑战是将交换机的延迟与其他组件（尤其是软件和PCIe）隔离开。</p>
+<p>解决办法：</p>
+<ol>
+<li><p>理想的：直接通过交换机测量单向端口到端口的延迟。</p>
+<p> <strong>代价</strong>：需要使用昂贵的数据采集设备</p>
+</li>
+<li><p>另一种：端点上使用精确的亚微秒时钟同步。</p>
+<p> <strong>不足和假设：</strong>基于两个方向上的单向等待时间相同的假设，在拥塞情况下，尤其是在聚合交通模式下，情况并非如此。</p>
+</li>
+<li><p>ping-pong style test: 获得软件中的往返时间（round-trip time:RTT）</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201026195810000.png" alt="image-20201026195810000"></p>
+<p> 问题：</p>
+<ol>
+<li>远程：远程端处理的偏差，而且是生成和传输ack所必须的，远程侧处理包括用于生成响应的软件开销以及用于向RNIC传输数据或从RNIC传输数据所需的PCIe事务。但是不会影响真正的网络延迟，所以需要排除在测量中。</li>
+<li><p>本地：本地处理延迟，软件捕获到的是请求的发送时间而不是传输时间（transmiting time）。所以会造成测量偏差。</p>
+<p>相关工作：</p>
+</li>
+<li><p>RDMA Bench </p>
+</li>
+<li>Perftest</li>
+<li>QPerf</li>
+</ol>
+</li>
+</ol>
+<h3 id="RPERF"><a href="#RPERF" class="headerlink" title="RPERF"></a>RPERF</h3><p>​        细节：RPerf测量本地主机和远程主机之间的RTT，并利用RDMA谓词来准确地测量延迟，而不包括端点延迟。接下来，我们描述RPerf设计的关键方面。</p>
+<ol>
+<li><p>Excluding remote-side processing：post-poll方法</p>
+<ul>
+<li>利用RC传输，远程RNIC在其中生成响应而不涉及目标主机，RPerf避免了远程端的软件处理开销。</li>
+<li>使用SEND verb ，排除远端PCIe的延迟，SEND使远程RNIC在收到请求后立即生成对源RNIC的响应，而无需等待PCIe事务在远程端完成。</li>
+</ul>
+</li>
+<li>Excluding local-side processing：<ul>
+<li>local-side processing overhead：actions at the local host and the RNIC    </li>
+<li>解决：发送lookback message，通过本地RNIC从主机发送到自身的消息（over-<br>  the-wire SEND）</li>
+</ul>
+</li>
+<li>RTT calculation:同时发送两个消息，一个是over-the-write，一个是lookback message。</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200829090835329.png" alt="image-20200829090835329"></p>
+<script type="math/tex; mode=display">
+RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化由软件引起的性能差异，每个RPerf线程都固定到CPU内核，并且为所有必需的缓冲区分配了巨大的页面。为了准确捕获事件的时间戳，RPerf通过rdtsc  x86汇编指令使用时间戳计数器，该指令在用户空间内提供高精度的时间戳测量。 RPerf遵循英特尔关于TSC校准和访问的建议。  RPerf的多个实例可以在不同的服务器上运行，并且用户可以指定流量模式（例如，一对一或多对一）来测量系统的特定方面，例如零负载延迟，峰值带宽或负载延迟。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><ol>
+<li>Hardware testbed</li>
+<li>Simulator</li>
+<li>Traffic pattern</li>
+<li>Metrics</li>
+</ol>
+<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h3><h4 id="ONE-TO-ONE-TRAFFIC"><a href="#ONE-TO-ONE-TRAFFIC" class="headerlink" title="ONE-TO-ONE TRAFFIC"></a>ONE-TO-ONE TRAFFIC</h4><p>对照组：有无switch， Perftest and Qperf.</p>
+<h5 id="A-Latency-and-bandwidth-without-the-switch-AND-B-Latency-and-bandwidth-with-the-switch"><a href="#A-Latency-and-bandwidth-without-the-switch-AND-B-Latency-and-bandwidth-with-the-switch" class="headerlink" title="A. Latency and bandwidth without the switch AND  B. Latency and bandwidth with the switch"></a>A. Latency and bandwidth without the switch AND  B. Latency and bandwidth with the switch</h5><ol>
+<li>RTT</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028203924233.png" alt="image-20201028203924233"></p>
+<ol>
+<li>Bandwith</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204009514.png" alt="image-20201028204009514"></p>
+<h5 id="C-Latency-calculation-by-existing-tools"><a href="#C-Latency-calculation-by-existing-tools" class="headerlink" title="C. Latency calculation by existing tools"></a>C. Latency calculation by existing tools</h5><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204412779.png" alt="image-20201028204412779"></p>
+<h4 id="融合流量下的表现"><a href="#融合流量下的表现" class="headerlink" title="融合流量下的表现"></a>融合流量下的表现</h4><p>在这种设置中，数量众多的BSG（从1到5）将带宽密集的流以4096B有效负载的大小发送到一台目标服务器，从而形成一种融合的流量模式。同时，LSG将对延迟敏感的流发送到同一目标服务器。</p>
+<h5 id="Latency-of-LSG"><a href="#Latency-of-LSG" class="headerlink" title="Latency of LSG:"></a>Latency of LSG:</h5><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204658627.png" alt="image-20201028204658627"></p>
+<h5 id="Bandwidth-of-BSGs"><a href="#Bandwidth-of-BSGs" class="headerlink" title="Bandwidth of BSGs:"></a>Bandwidth of BSGs:</h5><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028204706756.png" alt="image-20201028204706756"></p>
+<h4 id="尝试保护延迟敏感的流程"><a href="#尝试保护延迟敏感的流程" class="headerlink" title="尝试保护延迟敏感的流程"></a>尝试保护延迟敏感的流程</h4><h5 id="A-BSGs-with-different-message-sizes"><a href="#A-BSGs-with-different-message-sizes" class="headerlink" title="A. BSGs with different message sizes"></a>A. BSGs with different message sizes</h5><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205112105.png" alt="image-20201028205112105"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205133251.png" alt="image-20201028205133251"></p>
+<h5 id="B-Packet-scheduling-policy-at-the-switch"><a href="#B-Packet-scheduling-policy-at-the-switch" class="headerlink" title="B. Packet scheduling policy at the switch"></a>B. Packet scheduling policy at the switch</h5><ol>
+<li><p>FCFS policy:</p>
+</li>
+<li><p>Round-Robin policy:使用RR策略，仲裁器可以在每个回合中选择一个端口，并在该端口的开头选择数据包。在这种情况下，每当LSG数据包到达时，它最多等待活动端口的数量。</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205219090.png" alt="image-20201028205219090"></p>
+<ol>
+<li><p>Packet scheduling policies in a multi-hop topology</p>
+<p> 我们将模拟设置扩展到两跳拓扑，其中一对交换机连接在一起。两个BSG和一个LSG连接到上游交换机，三个BSG连接到下游交换机。目标服务器也连接到下游交换机。所有BSG都将4096B消息发送到目标服务器。</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028205655531.png" alt="image-20201028205655531"></p>
+<h5 id="C-InfiniBand-QoS"><a href="#C-InfiniBand-QoS" class="headerlink" title="C. InfiniBand QoS"></a>C. InfiniBand QoS</h5><p>使用专有的SL</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201028210109093.png" alt="image-20201028210109093"></p>
+<p>区分流类型并为每种流类型分配优先级可以有效地保护对延迟敏感的流。</p>
+<h6 id="Gaming-the-dedicated-SL-VL-setup"><a href="#Gaming-the-dedicated-SL-VL-setup" class="headerlink" title="Gaming the dedicated SL/VL setup:"></a>Gaming the dedicated SL/VL setup:</h6><p>带宽密集的流假装成短消息</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/IB/" rel="tag"><i class="fa fa-tag"></i> IB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/21/%E5%AD%A6%E4%B9%A0MakeFile/" rel="prev" title="学习MakeFile">
+      <i class="fa fa-chevron-left"></i> 学习MakeFile
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/03/LeetCode-12/" rel="next" title="LeetCode-12">
+      LeetCode-12 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RDMA-背景知识"><span class="nav-number">1.</span> <span class="nav-text">RDMA 背景知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-RDMA-verbs"><span class="nav-number">1.1.</span> <span class="nav-text">A. RDMA verbs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-RDMA-transport"><span class="nav-number">1.2.</span> <span class="nav-text">B. RDMA transport</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-RDMA-execution-path"><span class="nav-number">1.3.</span> <span class="nav-text">C. RDMA execution path</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IB"><span class="nav-number">2.</span> <span class="nav-text">IB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-InfiniBand-QoS-support"><span class="nav-number">2.1.</span> <span class="nav-text">I. InfiniBand QoS support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-IB-SWITCH-LATENCY-MEASUREMENT"><span class="nav-number">2.2.</span> <span class="nav-text">II. IB SWITCH LATENCY MEASUREMENT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPERF"><span class="nav-number">2.3.</span> <span class="nav-text">RPERF</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验设置"><span class="nav-number">3.1.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能表现"><span class="nav-number">3.2.</span> <span class="nav-text">性能表现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ONE-TO-ONE-TRAFFIC"><span class="nav-number">3.2.1.</span> <span class="nav-text">ONE-TO-ONE TRAFFIC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-Latency-and-bandwidth-without-the-switch-AND-B-Latency-and-bandwidth-with-the-switch"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">A. Latency and bandwidth without the switch AND  B. Latency and bandwidth with the switch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-Latency-calculation-by-existing-tools"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">C. Latency calculation by existing tools</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#融合流量下的表现"><span class="nav-number">3.2.2.</span> <span class="nav-text">融合流量下的表现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Latency-of-LSG"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">Latency of LSG:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bandwidth-of-BSGs"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">Bandwidth of BSGs:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尝试保护延迟敏感的流程"><span class="nav-number">3.2.3.</span> <span class="nav-text">尝试保护延迟敏感的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-BSGs-with-different-message-sizes"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">A. BSGs with different message sizes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-Packet-scheduling-policy-at-the-switch"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">B. Packet scheduling policy at the switch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-InfiniBand-QoS"><span class="nav-number">3.2.3.3.</span> <span class="nav-text">C. InfiniBand QoS</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Gaming-the-dedicated-SL-VL-setup"><span class="nav-number">3.2.3.3.1.</span> <span class="nav-text">Gaming the dedicated SL&#x2F;VL setup:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云若无"
+      src="/images/15.png">
+  <p class="site-author-name" itemprop="name">云若无</p>
+  <div class="site-description" itemprop="description">还记得自己的梦想吗？！！！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yunruowu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yunruowu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yunruowu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">57k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">52 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
+      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
+  <meta name="msapplication-config" content="/images/yun-32x32.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Abstract1. Question?网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。 作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC） 2. Method?FFC 两个挑战：最小化吞吐量损失">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Traffic Engineering with Forward Fault Correction">
+<meta property="og:url" content="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/index.html">
+<meta property="og:site_name" content="Yun的博客">
+<meta property="og:description" content="Abstract1. Question?网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。 作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC） 2. Method?FFC 两个挑战：最小化吞吐量损失">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153846174.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153952523.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154532269.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154541378.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009181529820.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201010083835104.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163513463.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163648041.png">
+<meta property="og:image" content="c:/Users/mcdxw/AppData/Roaming/Typora/typora-user-images/image-20201011163706163.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163721701.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163919417.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164411420.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164542058.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011165405226.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009124937857.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130211633.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009125758340.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130222759.png">
+<meta property="article:published_time" content="2020-10-09T04:10:53.000Z">
+<meta property="article:modified_time" content="2020-10-12T07:18:50.479Z">
+<meta property="article:author" content="云若无">
+<meta property="article:tag" content="云">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153846174.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Traffic Engineering with Forward Fault Correction | Yun的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yun的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">致奋斗的自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/15.png">
+      <meta itemprop="name" content="云若无">
+      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Traffic Engineering with Forward Fault Correction
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-09 12:10:53" itemprop="dateCreated datePublished" datetime="2020-10-09T12:10:53+08:00">2020-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-12 15:18:50" itemprop="dateModified" datetime="2020-10-12T15:18:50+08:00">2020-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HiNA/" itemprop="url" rel="index"><span itemprop="name">HiNA</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HiNA/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="1-Question"><a href="#1-Question" class="headerlink" title="1. Question?"></a>1. Question?</h3><p>网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。</p>
+<p>作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC）</p>
+<h3 id="2-Method"><a href="#2-Method" class="headerlink" title="2. Method?"></a>2. Method?</h3><p>FFC</p>
+<p>两个挑战：最小化吞吐量损失和计算可伸缩性</p>
+<h4 id="FFC-Overview-and-Challenge"><a href="#FFC-Overview-and-Challenge" class="headerlink" title="FFC Overview and Challenge"></a>FFC Overview and Challenge</h4><ol>
+<li><p>FFC for control plane faults</p>
+<p> 控制平面FFC保证只要发生配置故障的交换机数量最多为k，就不会发生拥塞。</p>
+<p> 正常情况下，网络会因为配置失败产生拥塞</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153846174.png" alt="image-20201009153846174"></p>
+<p> 讲配置修改为：这样第一个网络可以容忍k=2,第二个网络k=1.</p>
+<p> a）的网络缺点是网络吞吐量低于没有故障和FFC时的吞吐量。但是，如果没有流量需求（或网络拓扑）的进一步变化，此吞吐量开销将是暂时的，比如可以在s2和s3配置好之后，将s1到s4的流量提高到10。即使是暂时的吞吐量降低，也是FFC提供的鲁棒性的开销。</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153952523.png" alt="image-20201009153952523"></p>
+</li>
+<li><p>FFC for data plane faults</p>
+<p> 数据平面FFC保证了多达k条链路或交换机发生故障时，重新缩放后不会发生拥塞。</p>
+<p> 考虑下面的情况：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154532269.png" alt="image-20201009154532269"></p>
+<p> 上图出现链路失败时，重新分配后，会导致网络的拥塞。</p>
+<p> 但是按照下图的分配方法，任意一条链路失败后，不会发送网络拥塞</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154541378.png" alt="image-20201009154541378"></p>
+<p> 缺点：</p>
+<p> ​    像控制平面FFC一样，数据平面FFC也会降低吞吐量。但是，控制平面的FFC仅在更新网络时承担开销，但数据平面FFC的开销却是持久的。两种情况的区别在于，当链路或交换机发生故障时，网络容量会减少。为了避免发生故障后发生拥塞，我们必须保留备用容量来吸收发生故障的元素所承载的流量。</p>
+</li>
+<li><p>Applying FFC</p>
+<p> 不同的需要对应不同的网络配置，k的选择，需要进去取舍。</p>
+</li>
+<li><p>Challenges and overview of techniques</p>
+<p> 第一， The first is the scalability with which robust traffic distributions can be computed.</p>
+<p> ​                可伸缩性，可用来计算可靠的流量分布。</p>
+<p> 第二，We must meet the computational challenge while meeting the second challenge of minimizing the loss in network throughput.</p>
+<p> ​        满足计算挑战，同时还要满足使网络吞吐量损失最小化的第二个挑战。</p>
+<p> 解决办法：</p>
+<ul>
+<li>交通量和传播条件作为线性约束条件（公式时精确的，但是又很多限制）</li>
+<li>将约束转换为所谓的“bounded M-sum”问题。此类问题中的所有约束都可以减少为对最大（或最小）M个变量的单个约束。</li>
+<li>最后，借助排序网络，我们使用有效的线性表达式对这些变量进行编码。</li>
+<li><p>结果是具有O（kn）约束的FFC公式。</p>
+<p>两个设置：</p>
+</li>
+</ul>
+<ol>
+<li>故障的影响易于建模。如果交换机配置失败，它将保留其旧配置；如果链路失败，则入口交换机将确定性地重新调整流量。这种简单性使我们能够使用有效的线性约束来捕获FFC施加的条件。</li>
+<li>虽然故障很常见，但故障率（即发生故障的元件比例）很低。因此，足以防止少量故障（k）。解决k的高值将需要大量计算并且会产生高吞吐量开销</li>
+</ol>
+</li>
+</ol>
+<h3 id="3-Answer"><a href="#3-Answer" class="headerlink" title="3. Answer?"></a>3. Answer?</h3><h4 id="3-1-Basic-FFC-Formulation"><a href="#3-1-Basic-FFC-Formulation" class="headerlink" title="3.1 Basic FFC Formulation"></a>3.1 Basic FFC Formulation</h4><h5 id="3-1-1-Basic-TE-without-FFC"><a href="#3-1-1-Basic-TE-without-FFC" class="headerlink" title="3.1.1 Basic TE (without FFC)"></a>3.1.1 Basic TE (without FFC)</h5><p>​    输入是图G =（V，E），其中V和E是交换机集以及交换机之间的有向链接。 </p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009181529820.png" alt="image-20201009181529820"></p>
+<p>​    The TE problem can be solved based on path-constrained multicommodity flow problem ：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201010083835104.png" alt="image-20201010083835104"></p>
+<p>等式2表示没有链接应该过载，等式3指出，流在其所有隧道中的分配总和不应小于其分配速率。等式4指出分配给流的速率不应超过需求，并且所有变量均为非负数。</p>
+<h5 id="3-1-2-Modeling-control-plane-faults"><a href="#3-1-2-Modeling-control-plane-faults" class="headerlink" title="3.1.2 Modeling control plane faults"></a>3.1.2 Modeling control plane faults</h5><ol>
+<li><p>控制面板错误：</p>
+<p> FFC的目标是计算新配置$( { b<em>f},{a</em>{f,t}} )$以便只要$k<em>c$或者更少的交换机无法更新他们的旧配置$( { b_f^{‘}},{a</em>{f,t}^{‘}} )$就不会发生拥塞。</p>
+<p> 令$λ<em>v=  1$表示至少有一个以v作为入口开关的流配置失败；$ λ_v= 0$表示从v开始的所有流都配置成功。网络中控制平面故障的个别情况可以用表示每个开关状态的向量$λ= [λ_v| v∈V]$表示。因此FFC对于$k_c$个失败是具有鲁棒性的就要求网络在情况合集$Λ</em>{kc}= {λ|\sum_{v∈V}\ {λ_v}≤ k_c}$下没有过载的链路。可以被捕获为：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163513463.png" alt="123"></p>
+<p> $\hat{a}_{v,e} $表示是在没有配置错误的情况下可以从v开始的流到达链路e的总流量也就是：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163648041.png" alt="image-20201011163648041"></p>
+<p> S[t,v]表示隧道t的源交换机是否为v。</p>
+<p> $\hat{\beta}_{v,e} $表示是发生故障（λv= 1）时链路e中从v开始的流（flow)的流量(trafic)上限。即：</p>
+<p> <img src="C:\Users\mcdxw\AppData\Roaming\Typora\typora-user-images\image-20201011163706163.png" alt="image-20201011163706163"></p>
+<p> $\beta<em>{f,t}$，当$f$发生故障时，$f$流在隧道t上的流量的上限，由于我们假设速率限制器的更新成功，因此可以将$\beta</em>{f,t}$建模为：</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163721701.png" alt="1231"></p>
+<p>$w’_{f，t}$表示流f在旧配置下隧道t的分配权重（已知）</p>
+<p>但是上式约束很多，解决几乎不可能。</p>
+<h5 id="3-1-3-Modeling-data-plane-faults"><a href="#3-1-3-Modeling-data-plane-faults" class="headerlink" title="3.1.3 Modeling data plane faults"></a>3.1.3 Modeling data plane faults</h5><p>​    对于数据平面故障，FFC的目标是计算流量分配，以便即使在最多$k_e$链路失败和最多$k_v$交换机失败后也不会发生拥塞。</p>
+<p>需要保证，发生的故障的链路不是连接在发生故障的交换机上。</p>
+<p><strong>建模：</strong></p>
+<ol>
+<li><p>$\mu_e=1$代表链路e发送了错误    $\eta_v=1$代表交换机v发送了错误</p>
+</li>
+<li><p>数据平面故障的情况可以表示为${\mu,\eta}$ ，其中向量$\mu=[\mu<em>e|e \in E],\eta=[\eta_v|v \in V]$.那么对于最多$k_e$链路失败和最多$k_v$交换机失败后也具有鲁棒性的TE要求在下面的硬件条件：$U</em>{k_e,k_v}= { (\mu,\eta)|\sum_e \mu_e\leq k_e,\sum_v \eta_v \leq k_v }$。</p>
+</li>
+<li><p>数据错误，入口交换机重新调整流量时，它们会改变网络上的流量分布，即将流量从受影响的隧道移到剩余的隧道中。给定故障情况${\mu,\eta}$，我们知道每个流$f$的剩余隧道$T^{\mu, \eta}_f$，这些隧道不穿越任何故障的链路或交换机。FFC要求f的剩余隧道能够保持其分配的速率。即满足：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163919417.png" alt="image-20201011163919417"></p>
+<p> 这个表明，当流$f$的$T^{\mu, \eta}_f = \phi$时，$b_f=0$</p>
+<p> 上式保证了没有链路会过载。</p>
+<p> LEMMA 1: 满足约束公式2–4,9在故障情况（µ，η）的TE配置$（{a_{f，t}，b_f }）$在所有入口交换机重新缩放后不会导致链路过载。</p>
+<p> 证明：</p>
+<p> 当发生数据平面故障情况（µ，η）时，流$f$在剩余隧道$t\in T^{\mu,\eta}_f$上的业务负载为：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164411420.png" alt="image-20201011164411420"></p>
+<p> 在链路$e$上的总流量负载为：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164542058.png" alt="image-20201011164542058"></p>
+<p> 得证。</p>
+<p> <strong>Robust tunnel layout</strong> </p>
+<h5 id="3-1-3-Efficiently-solving-FFC-constraints"><a href="#3-1-3-Efficiently-solving-FFC-constraints" class="headerlink" title="3.1.3 Efficiently solving FFC constraints"></a>3.1.3 Efficiently solving FFC constraints</h5><p> 为了轻松解决大量FFC约束，我们将它们转换为“有界M-sum”问题，然后使用分类网络对转换后的问题进行编码。</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011165405226.png" alt="image-20201011165405226"></p>
+<ol>
+<li>Transformation to bounded M-sum</li>
+<li>Encoding for largest (or smallest) M variables</li>
+<li><p>Throughput and computational overhead</p>
+<h5 id="3-1-4-Encoding-for-largest-or-smallest-M-variables"><a href="#3-1-4-Encoding-for-largest-or-smallest-M-variables" class="headerlink" title="3.1.4 Encoding for largest (or smallest) M variables"></a>3.1.4 Encoding for largest (or smallest) M variables</h5></li>
+</ol>
+</li>
+</ol>
+<p>最终的结果，效果很明显：</p>
+<ol>
+<li>ffc的开销可以忽略不记</li>
+<li>数据丢失减少了7-300倍</li>
+<li>对于不同优先级的网络，可以在保证网络总吞吐量损失忽略不计的情况下，可以保护高优先级流量免受几乎所有损失。</li>
+</ol>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="1-为什么研究这个课题"><a href="#1-为什么研究这个课题" class="headerlink" title="1.为什么研究这个课题?"></a>1.为什么研究这个课题?</h3><h3 id="2-目前这个课题研究到了哪个阶段"><a href="#2-目前这个课题研究到了哪个阶段" class="headerlink" title="2.目前这个课题研究到了哪个阶段?"></a>2.目前这个课题研究到了哪个阶段?</h3><h3 id="3-作者的理论基于哪些假设"><a href="#3-作者的理论基于哪些假设" class="headerlink" title="3.作者的理论基于哪些假设?"></a>3.作者的理论基于哪些假设?</h3><ol>
+<li><p>具有TE的网络，假设基于隧道的转发。一个或多个隧道（tunnel）在每个入口-出口交换机对之间传输流量。我们称此流量(traffic)为流量(flow)。在入口交换机上配置的相对权重决定了如何在隧道之间分配流量。</p>
+</li>
+<li><p>Impact of data plane faults</p>
+<p> 当链路或者交换机失效时，会影响所以通过它的通道，检测到之后，入口交换机会根据配置的权重将流量重新缩放到其余隧道。设一个流有3条权重为（0.5,0.3,0.2）的隧道。当第三条隧道发生故障时，权重（0.5 0.8,0.3 0.8,0）用于拆分流量。</p>
+<p> ​    举例子：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009124937857.png" alt="image-20201009124937857"></p>
+<p> 实际网络中的测试：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130211633.png" alt="image-20201009130211633"></p>
+</li>
+<li><p>Impact of control plane faults</p>
+<p> 说明在配置交换机的过程的延迟或失败是如何导致拥塞的。</p>
+<p> 举例说明：</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009125758340.png" alt="image-20201009125758340"></p>
+<p> 实际网络</p>
+<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130222759.png" alt="image-20201009130222759"></p>
+<p> 所以网络的流量控制改变需要按照步骤进行，上图中，步骤为：</p>
+<p> ​    1）更新s2和s3处的流量分配比率；  2）如果成功，则更新流率s1→s4。这样，如果s2（或s3）更新失败，将不会发生拥塞。但是，配置失败将使网络更新停止，因为在步骤1结束之前，步骤2无法继续进行。它们还会降低吞吐量，因为如果步骤1失败，则流s1→s4无法启动。 </p>
+</li>
+<li><p>Slow reaction to faults</p>
+</li>
+</ol>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><h3 id="1-文章的缺陷"><a href="#1-文章的缺陷" class="headerlink" title="1.文章的缺陷"></a>1.文章的缺陷</h3><h3 id="2-关于该课题，作者的构思"><a href="#2-关于该课题，作者的构思" class="headerlink" title="2.关于该课题，作者的构思?"></a>2.关于该课题，作者的构思?</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/28/PCF-Provably-Resilient-Flexible-Routing/" rel="prev" title="PCF: Provably Resilient Flexible Routing">
+      <i class="fa fa-chevron-left"></i> PCF: Provably Resilient Flexible Routing
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/16/python%E6%89%93%E5%8C%85%E4%B8%BA-exe%E7%A8%8B%E5%BA%8F/" rel="next" title="python打包为.exe程序">
+      python打包为.exe程序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Question"><span class="nav-number">1.1.</span> <span class="nav-text">1. Question?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Method"><span class="nav-number">1.2.</span> <span class="nav-text">2. Method?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FFC-Overview-and-Challenge"><span class="nav-number">1.2.1.</span> <span class="nav-text">FFC Overview and Challenge</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Answer"><span class="nav-number">1.3.</span> <span class="nav-text">3. Answer?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Basic-FFC-Formulation"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 Basic FFC Formulation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-Basic-TE-without-FFC"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">3.1.1 Basic TE (without FFC)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-Modeling-control-plane-faults"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">3.1.2 Modeling control plane faults</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-Modeling-data-plane-faults"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">3.1.3 Modeling data plane faults</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-Efficiently-solving-FFC-constraints"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">3.1.3 Efficiently solving FFC constraints</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-Encoding-for-largest-or-smallest-M-variables"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">3.1.4 Encoding for largest (or smallest) M variables</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-为什么研究这个课题"><span class="nav-number">2.1.</span> <span class="nav-text">1.为什么研究这个课题?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-目前这个课题研究到了哪个阶段"><span class="nav-number">2.2.</span> <span class="nav-text">2.目前这个课题研究到了哪个阶段?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-作者的理论基于哪些假设"><span class="nav-number">2.3.</span> <span class="nav-text">3.作者的理论基于哪些假设?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.</span> <span class="nav-text">Conclusion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-文章的缺陷"><span class="nav-number">3.1.</span> <span class="nav-text">1.文章的缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-关于该课题，作者的构思"><span class="nav-number">3.2.</span> <span class="nav-text">2.关于该课题，作者的构思?</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云若无"
+      src="/images/15.png">
+  <p class="site-author-name" itemprop="name">云若无</p>
+  <div class="site-description" itemprop="description">还记得自己的梦想吗？！！！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yunruowu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yunruowu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yunruowu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">57k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">52 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
+      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

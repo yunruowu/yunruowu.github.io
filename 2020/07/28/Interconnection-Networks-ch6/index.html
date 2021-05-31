@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
+  <meta name="msapplication-config" content="/images/yun-32x32.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Non-Blocking Networks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Interconnection-Networks-ch6">
+<meta property="og:url" content="http://yoursite.com/2020/07/28/Interconnection-Networks-ch6/index.html">
+<meta property="og:site_name" content="Yun的博客">
+<meta property="og:description" content="Non-Blocking Networks">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728123737611.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124036608.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124207488.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728125956171.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132321853.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132403217.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729082144535.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729081302659.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729083340014.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729093630509.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094145622.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094247379.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095529689.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095559587.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102606396.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103143490.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102709756.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103305798.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103331640.png">
+<meta property="og:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103048886.png">
+<meta property="article:published_time" content="2020-07-28T04:25:20.000Z">
+<meta property="article:modified_time" content="2020-08-06T08:40:09.238Z">
+<meta property="article:author" content="云若无">
+<meta property="article:tag" content="Interconnection_Networks">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728123737611.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/28/Interconnection-Networks-ch6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Interconnection-Networks-ch6 | Yun的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yun的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">致奋斗的自己</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/28/Interconnection-Networks-ch6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/15.png">
+      <meta itemprop="name" content="云若无">
+      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Interconnection-Networks-ch6
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-28 12:25:20" itemprop="dateCreated datePublished" datetime="2020-07-28T12:25:20+08:00">2020-07-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-06 16:40:09" itemprop="dateModified" datetime="2020-08-06T16:40:09+08:00">2020-08-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/28/Interconnection-Networks-ch6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/28/Interconnection-Networks-ch6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Non-Blocking-Networks"><a href="#Non-Blocking-Networks" class="headerlink" title="Non-Blocking Networks"></a>Non-Blocking Networks</h2><a id="more"></a>
+<p>如果网络可以处理输入和输出排列的所有电路请求，则称该网络为非阻塞网络。即，可以形成从每个输入到其选择的输出的专用路径，而没有任何冲突（共享通道）。相反，如果网络无法处理所有此类电路请求而没有冲突，则它就是阻塞网络.</p>
+<p>两种类型的非阻塞网络。strictly non-blocking, rearrangeably non-blocking</p>
+<p>首先，如果可以每次一个电路递增地设置任何排列，而无需重新路由（或重新排列）任何已设置的电路，则网络严格不阻塞。如果可以将任何未使用的输入连接到任何未使用的输出，而无需更改任何其他流量所采用的路径，则说明网络完全是无阻塞的。</p>
+<p>相反，如果网络可以路由电路进行任意排列，则网络可重新排列为非阻塞（或简单地可重新排列），但是排列的渐进式构造可能需要重新布置一些早期电路，以允许以后建立电路。可重新排列的网络可以将任何未连接的输入连接到任何未连接的输出，但是可能需要重新路由一些不相关的流量才能建立连接。</p>
+<h3 id="6-1-Non-Blocking-vs-Non-Interfering-Networks"><a href="#6-1-Non-Blocking-vs-Non-Interfering-Networks" class="headerlink" title="6.1 Non-Blocking vs. Non-Interfering Networks"></a>6.1 Non-Blocking vs. Non-Interfering Networks</h3><p>分组交换网络中，资源分配好之后就不会互相影响。</p>
+<p>实际上无阻塞的网络就是为了实现无干扰的网络。</p>
+<h3 id="6-2-Crossbar-Networks"><a href="#6-2-Crossbar-Networks" class="headerlink" title="6.2 Crossbar Networks"></a>6.2 Crossbar Networks</h3><p>一个n×m交叉开关或交叉点开关将n个输入直接连接到m个输出，没有中间级。</p>
+<p>m=n,square</p>
+<p>m&gt;n||m&lt;n,rectangular</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728123737611.png" alt="image-20200728123737611"></p>
+<p>在输入线与输出线交叉的每个点（即，在每个交叉点），开关都可以选择将输入线连接到输出线。为了正确操作，每个输出最多必须连接到一个输入。但是，输入可以连接到多个输出.</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124036608.png" alt="image-20200728124036608"></p>
+<p>今天，大多数交叉开关都是使用数字逻辑实现的，其结构如图所示。 n条输入线中的每条连接到m  n：1多路复用器的一个输入。多路复用器的输出驱动m个输出端口。多路复用器可以通过驱动输出线的三态门或线或门实现。</p>
+<p>简化图：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124207488.png" alt="image-20200728124207488"></p>
+<p>纵横开关显然对于单播和多播流量都严格不阻塞。可以通过开关不同开关门。</p>
+<p>建造其他无阻塞网络，原因是成本和可伸缩性。</p>
+<p>成本都是$N^2$的。</p>
+<p>下图显示了如何使用2×2的n×n交叉开关阵列构造2n×2n交叉开关，从小型交叉开关构建大型交叉开关的成本也是二次方。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728125956171.png" alt="image-20200728125956171"></p>
+<h3 id="6-3-Clos-Networks"><a href="#6-3-Clos-Networks" class="headerlink" title="6.3 Clos Networks"></a>6.3 Clos Networks</h3><h4 id="6-3-1-Structure-and-Properties-of-Clos-Networks"><a href="#6-3-1-Structure-and-Properties-of-Clos-Networks" class="headerlink" title="6.3.1 Structure and Properties of Clos Networks"></a>6.3.1 Structure and Properties of Clos Networks</h4><p>Clos网络是一个三阶段网络，其中每个阶段都由许多纵横开关组成。对称Clos的特征是三元组（m，n，r），其中m是中级开关的数量，n是每个输入（输出）开关上的输入（输出）端口的数量，r是输入和输出开关的数量。此处输入和输出都一样为r和n.对于不一样的网络可以设为$(m,n_0,n_1,r_0,r_1)$</p>
+<p>中级交换机，到每个输入和输出交换机都有相应的链路。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132321853.png" alt="image-20200728132321853"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132403217.png" alt="image-20200728132403217"></p>
+<p>在引用Clos网络的输入和输出端口时，我们将交换机s的端口p表示为s.p。</p>
+<h4 id="6-3-2-Unicast-Routing-on-Strictly-Non-Blocking-Clos-Networks"><a href="#6-3-2-Unicast-Routing-on-Strictly-Non-Blocking-Clos-Networks" class="headerlink" title="6.3.2 Unicast Routing on Strictly Non-Blocking Clos Networks"></a>6.3.2 Unicast Routing on Strictly Non-Blocking Clos Networks</h4><p>定理：A Clos network is strictly non-blocking for unicast traffic iff m ≥ 2n − 1.</p>
+<p>要将单播呼叫从a.i路由到b.j，可通过将a不使用的交换机列表与b不使用的交换机列表相交来找到中间级交换机。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729082144535.png" alt="image-20200729082144535"></p>
+<p>如下图，电路从输入1.1（1）路由到输出3.3（9）。其中虚线为已经本占用的线路。最终选择为加粗的线。一个完整的排列{5、7、11、6、12、1、8、10、3、2、9、4}。也就是说，输入1（1.1）路由到输出5（2.2），输入2（1.2）路由到输出7（3.1），依此类推。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729081302659.png" alt="image-20200729081302659"></p>
+<p>假设按{9,6,7,8,3,12,10,5,1,11,2,4}的顺序应用呼叫。</p>
+<p>显示了在（5,3,4）Clos网络上路由此呼叫集的过程。该表的每一行对应于路由过程中的一个步骤。该表的每一行对应于路由过程中的一个步骤。前三列显示呼叫来自的输入交换机（进入），呼叫去向的输出交换机（离开）和分配给呼叫的中间交换机（中间）。其余八列给出位向量，显示哪些中间交换机不受每个输入和输出开关的影响。</p>
+<p>第一个呼叫为9（3，3），查排列集合，输入交换机为3，输出应该为3，交换机为输出switch1。并且由于第一个调用没有阻塞的路径，因此将其分配给中间交换机1.所以将输入交换机的路径3到中间交换机1忙（输入空闲3 = 01111），从中间交换机1到输出交换机1的路径忙（输出空闲1 = 01111）。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729083340014.png" alt="image-20200729083340014"></p>
+<h4 id="6-3-3-Unicast-Routing-on-Rearrangeable-Clos-Networks"><a href="#6-3-3-Unicast-Routing-on-Rearrangeable-Clos-Networks" class="headerlink" title="6.3.3 Unicast Routing on Rearrangeable Clos Networks"></a>6.3.3 Unicast Routing on Rearrangeable Clos Networks</h4><p>定理：A Clos network with m ≥ n is rearrangeable.</p>
+<p>显示了一种在可重排的非阻塞网络上路由一组呼叫的算法。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729093630509.png" alt="image-20200729093630509"></p>
+<p>定理：使用循环算法建立单个呼叫需要最多重新安排2r-2个其他呼叫。</p>
+<h4 id="6-3-4-Routing-Clos-Networks-Using-Matrix-Decomposition"><a href="#6-3-4-Routing-Clos-Networks-Using-Matrix-Decomposition" class="headerlink" title="6.3.4 Routing Clos Networks Using Matrix Decomposition"></a>6.3.4 Routing Clos Networks Using Matrix Decomposition</h4><p>利用矩阵来路由网络。</p>
+<p>矩阵R，每一个元素$X_{ij}$表示从输入交换机i到输出交换机j的呼叫次数。</p>
+<p>例子：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094145622.png" alt="image-20200729094145622">该矩阵可以分解为一组m个正矩阵的总和，其中每一行和每一列的总和最多为1。该组中的每个矩阵对应于中间级开关的设置。<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094247379.png" alt="image-20200729094247379"></p>
+<p>矩阵分解可用于路由单播或多播流量，并可应用于可重排和严格无阻塞的Clos网络。</p>
+<h4 id="6-3-5-Multicast-Routing-on-Clos-Networks"><a href="#6-3-5-Multicast-Routing-on-Clos-Networks" class="headerlink" title="6.3.5 Multicast Routing on Clos Networks"></a>6.3.5 Multicast Routing on Clos Networks</h4><p>定义：多播呼叫集合$C={c<em>1,c_2,……,C_n}$，其中每个多播呼叫$c_i=(a_i,、{b</em>{i1},b<em>{i2}……,b</em>{if}})$，输入端口$a<em>i$，$f$个输出端口$b</em>{i1},b<em>{i2}……,b</em>{if}$，$f$为扇出。</p>
+<p>例子：考虑多播调用集（只考虑交换机号）：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095529689.png" alt=""></p>
+<p>向量表示：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095559587.png" alt="image-20200729095559587"></p>
+<p>如果$c_i \bigwedge c_j=0$ ,$c_i,c_j$可以映射到相同的中间阶段。</p>
+<p>上图实例不能实现，所以需要扇出。</p>
+<p>通过在输入开关中执行扇出，可以将输出集分配到多个中间阶段。</p>
+<p>k-way输入扇出，就是将$c_i={a,B}$分成k个呼叫，分别为：</p>
+<p>$c<em>{i1}=(a,B_1),…,c</em>{ik}=(a,B<em>k),\bigcup</em>{j=1}^kB_j=B$</p>
+<p>将上面的集合分解如下：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102606396.png" alt="image-20200729102606396"></p>
+<p>中间交换机的使用：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103143490.png" alt="image-20200729103143490"></p>
+<p>最终的路由线路：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102709756.png" alt="image-20200729102709756"></p>
+<p>知道中间交换机的数理，扇出的限制：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103305798.png" alt="image-20200729103305798"></p>
+<p>知道了扇出，中间交换机的要求：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103331640.png" alt="image-20200729103331640"></p>
+<p>算法流程：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103048886.png" alt="image-20200729103048886"></p>
+<h3 id="6-4-Beneˇ-s-Networks"><a href="#6-4-Beneˇ-s-Networks" class="headerlink" title="6.4 Beneˇ s Networks"></a>6.4 Beneˇ s Networks</h3><p>由2×2交换机构成的Clos网络也称为Beneˇ网络</p>
+<h3 id="6-5-Sorting-Networks"><a href="#6-5-Sorting-Networks" class="headerlink" title="6.5 Sorting Networks"></a>6.5 Sorting Networks</h3><p>N输入分类网络在其N个输入端子上接受一组用唯一分类键标记的N条记录，并在其N个输出端子上按键顺序输出这些记录。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Interconnection-Networks/" rel="tag"><i class="fa fa-tag"></i> Interconnection_Networks</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/20/Interconnection-Networks-ch5-1/" rel="prev" title="Interconnection-Networks-ch5-1">
+      <i class="fa fa-chevron-left"></i> Interconnection-Networks-ch5-1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/29/Interconnection-Networks-ch7/" rel="next" title="Interconnection-Networks-ch7">
+      Interconnection-Networks-ch7 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Non-Blocking-Networks"><span class="nav-number">1.</span> <span class="nav-text">Non-Blocking Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Non-Blocking-vs-Non-Interfering-Networks"><span class="nav-number">1.1.</span> <span class="nav-text">6.1 Non-Blocking vs. Non-Interfering Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Crossbar-Networks"><span class="nav-number">1.2.</span> <span class="nav-text">6.2 Crossbar Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-Clos-Networks"><span class="nav-number">1.3.</span> <span class="nav-text">6.3 Clos Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-1-Structure-and-Properties-of-Clos-Networks"><span class="nav-number">1.3.1.</span> <span class="nav-text">6.3.1 Structure and Properties of Clos Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2-Unicast-Routing-on-Strictly-Non-Blocking-Clos-Networks"><span class="nav-number">1.3.2.</span> <span class="nav-text">6.3.2 Unicast Routing on Strictly Non-Blocking Clos Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-3-Unicast-Routing-on-Rearrangeable-Clos-Networks"><span class="nav-number">1.3.3.</span> <span class="nav-text">6.3.3 Unicast Routing on Rearrangeable Clos Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-4-Routing-Clos-Networks-Using-Matrix-Decomposition"><span class="nav-number">1.3.4.</span> <span class="nav-text">6.3.4 Routing Clos Networks Using Matrix Decomposition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-5-Multicast-Routing-on-Clos-Networks"><span class="nav-number">1.3.5.</span> <span class="nav-text">6.3.5 Multicast Routing on Clos Networks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-Beneˇ-s-Networks"><span class="nav-number">1.4.</span> <span class="nav-text">6.4 Beneˇ s Networks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Sorting-Networks"><span class="nav-number">1.5.</span> <span class="nav-text">6.5 Sorting Networks</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="云若无"
+      src="/images/15.png">
+  <p class="site-author-name" itemprop="name">云若无</p>
+  <div class="site-description" itemprop="description">还记得自己的梦想吗？！！！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yunruowu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yunruowu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yunruowu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">57k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">52 分钟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : '',
+      projectId: ''
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
+      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
   <meta name="msapplication-config" content="/images/yun-32x32.png">
@@ -296,11 +296,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="消除游戏"><a href="#消除游戏" class="headerlink" title="消除游戏"></a><a href="https://leetcode-cn.com/problems/elimination-game/" target="_blank" rel="noopener">消除游戏</a></h2><p>题目描述：给定一个从1 到 n 排序的整数列表。<br>首先，从左到右，从第一个数字开始，每隔一个数字进行删除，直到列表的末尾。<br>第二步，在剩下的数字中，从右到左，从倒数第一个数字开始，每隔一个数字进行删除，直到列表开头。<br>我们不断重复这两步，从左到右和从右到左交替进行，直到只剩下一个数字。<br>返回长度为 n 的列表中，最后剩下的数字。</p>
+        <h2 id="消除游戏"><a href="#消除游戏" class="headerlink" title="消除游戏"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/elimination-game/">消除游戏</a></h2><p>题目描述：给定一个从1 到 n 排序的整数列表。<br>首先，从左到右，从第一个数字开始，每隔一个数字进行删除，直到列表的末尾。<br>第二步，在剩下的数字中，从右到左，从倒数第一个数字开始，每隔一个数字进行删除，直到列表开头。<br>我们不断重复这两步，从左到右和从右到左交替进行，直到只剩下一个数字。<br>返回长度为 n 的列表中，最后剩下的数字。</p>
 <h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>感觉不是很困难，然后就想着尝试解一下，然后发现自己又不会写代码了。感觉思路好乱，根本把握不住问题的根本，只能想着简单的例子来凑代码，比较难受。</p>
 <p>最终的解答还是很容易的，但是要利用数学来求解，自己没有忘这边考虑，走了很差的路子。</p>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastRemaining</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n==<span class="number">1</span> ? <span class="number">1</span> : <span class="number">2</span>*(n/<span class="number">2</span>+<span class="number">1</span>-lastRemaining(n/<span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>证明：    <a href="https://blog.csdn.net/afei__/article/details/83689502" target="_blank" rel="noopener">证明方法</a></p>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastRemaining</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n==<span class="number">1</span> ? <span class="number">1</span> : <span class="number">2</span>*(n/<span class="number">2</span>+<span class="number">1</span>-<span class="built_in">lastRemaining</span>(n/<span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>证明：    <a target="_blank" rel="noopener" href="https://blog.csdn.net/afei__/article/details/83689502">证明方法</a></p>
 
     </div>
 
@@ -386,7 +386,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#消除游戏"><span class="nav-number">1.</span> <span class="nav-text">消除游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#想法"><span class="nav-number">2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解答"><span class="nav-number">3.</span> <span class="nav-text">解答</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E9%99%A4%E6%B8%B8%E6%88%8F"><span class="nav-number">1.</span> <span class="nav-text">消除游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E7%AD%94"><span class="nav-number">3.</span> <span class="nav-text">解答</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -627,8 +627,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el         : '#valine-comments',
       verify     : false,
       notify     : false,
-      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
-      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
+      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
       placeholder: "Just go go",
       avatar     : 'mm',
       meta       : guest,
@@ -641,7 +641,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
   <meta name="msapplication-config" content="/images/yun-32x32.png">
@@ -271,7 +271,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>406</span>
+              <span>486</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -291,7 +291,7 @@
 
       
         <h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>最近做毕设的时候，需要画图来查看算法优化性能。之前都是利用截图来保存的，今天网上找到了可以自动保存图片的方法，在使用的过程中出现警告：<code>libpng warning: iCCP: known incorrect sRGB profile</code>。在查阅资料后发现是因为使用了QQ输入法，这个错误也太搞笑了，记录一下。顺便记录保存图片代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">69</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(t, t, <span class="string">'r'</span>, t, t**<span class="number">2</span>, <span class="string">'b'</span>)</span><br><span class="line">label = [<span class="string">'t'</span>, <span class="string">'t**2'</span>]</span><br><span class="line">plt.yscale(<span class="string">'log'</span>)</span><br><span class="line">plt.legend(label, loc=<span class="string">'upper left'</span>)</span><br><span class="line">plt.savefig(<span class="string">'./test'</span>+str(i)+<span class="string">'.png'</span>)</span><br><span class="line"><span class="comment"># plt.show()</span></span><br><span class="line">plt.pause(<span class="number">1.5</span>)</span><br><span class="line">plt.close()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">69</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(t, t, <span class="string">&#x27;r&#x27;</span>, t, t**<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">label = [<span class="string">&#x27;t&#x27;</span>, <span class="string">&#x27;t**2&#x27;</span>]</span><br><span class="line">plt.yscale(<span class="string">&#x27;log&#x27;</span>)</span><br><span class="line">plt.legend(label, loc=<span class="string">&#x27;upper left&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;./test&#x27;</span>+<span class="built_in">str</span>(i)+<span class="string">&#x27;.png&#x27;</span>)</span><br><span class="line"><span class="comment"># plt.show()</span></span><br><span class="line">plt.pause(<span class="number">1.5</span>)</span><br><span class="line">plt.close()</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -377,7 +377,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#警告"><span class="nav-number">1.</span> <span class="nav-text">警告</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AD%A6%E5%91%8A"><span class="nav-number">1.</span> <span class="nav-text">警告</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -618,8 +618,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el         : '#valine-comments',
       verify     : false,
       notify     : false,
-      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
-      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
+      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
       placeholder: "Just go go",
       avatar     : 'mm',
       meta       : guest,
@@ -632,7 +632,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

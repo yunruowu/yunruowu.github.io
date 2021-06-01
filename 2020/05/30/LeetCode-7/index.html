@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
   <meta name="msapplication-config" content="/images/yun-32x32.png">
@@ -297,9 +297,9 @@
 
       
         <h2 id="LeetCode-7"><a href="#LeetCode-7" class="headerlink" title="LeetCode_7"></a>LeetCode_7</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ol>
-<li><a href="https://leetcode-cn.com/problems/largest-perimeter-triangle/" target="_blank" rel="noopener">976.三角形最大周长</a></li>
-<li><a href="https://leetcode-cn.com/problems/squares-of-a-sorted-array/" target="_blank" rel="noopener">977.有序数组的平方</a></li>
-<li><a href="https://leetcode-cn.com/problems/add-to-array-form-of-integer/description/" target="_blank" rel="noopener">989.数组形式的整数加法</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-perimeter-triangle/">976.三角形最大周长</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/squares-of-a-sorted-array/">977.有序数组的平方</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-to-array-form-of-integer/description/">989.数组形式的整数加法</a></li>
 </ol>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="三角形最大周长"><a href="#三角形最大周长" class="headerlink" title="三角形最大周长"></a>三角形最大周长</h4><p>​    先排序，后面就三个一起往后移动。比如此时$a&gt;=b&gt;=c&gt;d$。如果$a,b,c$能组成三角形，那么其是最大的。如果不能，那么应该$a&gt;b+c$，那么$a&gt;b+d$也显然成立。所以直接比较$b,c,d$是否满足要求即可。</p>
 <h4 id="有序数组的平方"><a href="#有序数组的平方" class="headerlink" title="有序数组的平方"></a>有序数组的平方</h4><p>​    最简单的方法，直接计算，然后排序。</p>
@@ -390,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-7"><span class="nav-number">1.</span> <span class="nav-text">LeetCode_7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三角形最大周长"><span class="nav-number">1.2.1.</span> <span class="nav-text">三角形最大周长</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有序数组的平方"><span class="nav-number">1.2.2.</span> <span class="nav-text">有序数组的平方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组形式的整数加法"><span class="nav-number">1.2.3.</span> <span class="nav-text">数组形式的整数加法</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-7"><span class="nav-number">1.</span> <span class="nav-text">LeetCode_7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%A4%A7%E5%91%A8%E9%95%BF"><span class="nav-number">1.2.1.</span> <span class="nav-text">三角形最大周长</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">有序数组的平方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%95%B4%E6%95%B0%E5%8A%A0%E6%B3%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">数组形式的整数加法</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -631,8 +631,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el         : '#valine-comments',
       verify     : false,
       notify     : false,
-      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
-      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
+      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
       placeholder: "Just go go",
       avatar     : 'mm',
       meta       : guest,
@@ -645,7 +645,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

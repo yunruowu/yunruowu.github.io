@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
   <meta name="msapplication-config" content="/images/yun-32x32.png">
@@ -287,11 +287,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="消除游戏"><a href="#消除游戏" class="headerlink" title="消除游戏"></a><a href="https://leetcode-cn.com/problems/elimination-game/" target="_blank" rel="noopener">消除游戏</a></h2><p>题目描述：给定一个从1 到 n 排序的整数列表。<br>首先，从左到右，从第一个数字开始，每隔一个数字进行删除，直到列表的末尾。<br>第二步，在剩下的数字中，从右到左，从倒数第一个数字开始，每隔一个数字进行删除，直到列表开头。<br>我们不断重复这两步，从左到右和从右到左交替进行，直到只剩下一个数字。<br>返回长度为 n 的列表中，最后剩下的数字。</p>
+          <h2 id="消除游戏"><a href="#消除游戏" class="headerlink" title="消除游戏"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/elimination-game/">消除游戏</a></h2><p>题目描述：给定一个从1 到 n 排序的整数列表。<br>首先，从左到右，从第一个数字开始，每隔一个数字进行删除，直到列表的末尾。<br>第二步，在剩下的数字中，从右到左，从倒数第一个数字开始，每隔一个数字进行删除，直到列表开头。<br>我们不断重复这两步，从左到右和从右到左交替进行，直到只剩下一个数字。<br>返回长度为 n 的列表中，最后剩下的数字。</p>
 <h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>感觉不是很困难，然后就想着尝试解一下，然后发现自己又不会写代码了。感觉思路好乱，根本把握不住问题的根本，只能想着简单的例子来凑代码，比较难受。</p>
 <p>最终的解答还是很容易的，但是要利用数学来求解，自己没有忘这边考虑，走了很差的路子。</p>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastRemaining</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n==<span class="number">1</span> ? <span class="number">1</span> : <span class="number">2</span>*(n/<span class="number">2</span>+<span class="number">1</span>-lastRemaining(n/<span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>证明：    <a href="https://blog.csdn.net/afei__/article/details/83689502" target="_blank" rel="noopener">证明方法</a></p>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastRemaining</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n==<span class="number">1</span> ? <span class="number">1</span> : <span class="number">2</span>*(n/<span class="number">2</span>+<span class="number">1</span>-<span class="built_in">lastRemaining</span>(n/<span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>证明：    <a target="_blank" rel="noopener" href="https://blog.csdn.net/afei__/article/details/83689502">证明方法</a></p>
 
       
     </div>
@@ -610,8 +610,8 @@ RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化�
 
       
           <h2 id="一、Why"><a href="#一、Why" class="headerlink" title="一、Why?"></a>一、Why?</h2><p>​        最近在学习oMnet++，经常需要用到一些工程，里面有很多Makefile文件，经常会出现报错，尤其是在安装软件的时候，经常遇到，平时遇到的可能都是利用工具自动生成的，问题比较少。</p>
-<p><a href="https://blog.csdn.net/weixin_38391755/article/details/80380786" target="_blank" rel="noopener">先放链接</a></p>
-<p><a href="https://www.w3cschool.cn/mexvtg/adisqozt.html" target="_blank" rel="noopener">w3school的教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38391755/article/details/80380786">先放链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/mexvtg/adisqozt.html">w3school的教程</a></p>
 <h2 id="二、-程序的编译和链接"><a href="#二、-程序的编译和链接" class="headerlink" title="二、 程序的编译和链接"></a>二、 程序的编译和链接</h2><p>​        一般来说，无论是C、C++、还是pas，首先要把源文件编译成<strong><em>中间代码文件</em></strong>，在Windows下也就是 .obj 文件，UNIX下是 .o 文件，即 Object File，这个动作叫做<strong><em>编译（compile）</em></strong>。然后再把大量的Object File合成执行文件，这个动作叫作链接（link）。 </p>
 <p>​    <strong>编译时</strong>，编译器需要的是语法的正确，函数与变量的声明的正确。对于后者，通常是你需要告诉编译器头文件的所在位置（头文件中应该只是声明，而定义应该放在C/C++文件中），只要所有的语法正确，编译器就可以编译出中间目标文件。一般来说，每个源文件都应该对应于一个中间目标文件（O文件或是OBJ文件）。<br>​    <strong>链接时</strong>，主要是链接函数和全局变量，所以，我们可以使用这些中间目标文件（O文件或是OBJ文件）来链接我们的应用程序。链接器并不管函数所在的源文件，只管函数的中间目标文件（Object File），在大多数时候，由于源文件太多，编译生成的中间目标文件太多，而在链接时需要明显地指出中间目标文件名，这对于编译很不方便，所以，我们要给中间目标文件打个包，在Windows下这种包叫“<strong><em>\</em>库文件”（Library File)**</strong>，也就是 .lib 文件，在UNIX下，是Archive File，也就是 .a 文件。</p>
 <p>   总结一下，源文件首先会生成中间目标文件，再由中间目标文件生成执行文件。在编译时，编译器只检测程序语法，和函数、变量是否被声明。如果函数未被声明，编译器会给出一个警告，但可以生成Object File。而在链接程序时，链接器会在所有的Object File中找寻函数的实现，如果找不到，那到就会报链接错误码（Linker Error）。</p>
@@ -710,7 +710,7 @@ RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化�
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one</span><br><span class="line">two</span><br><span class="line">three</span><br></pre></td></tr></table></figure>
 <h3 id="3-9-函数"><a href="#3-9-函数" class="headerlink" title="3.9 函数"></a>3.9 函数</h3><p>Makefile 还可以使用函数，格式如下。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(function arguments)</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$&#123;function arguments&#125;</span><br></pre></td></tr></table></figure>
-<p>Makefile提供了许多<a href="http://www.gnu.org/software/make/manual/html_node/Functions.html" target="_blank" rel="noopener">内置函数</a>，可供调用。下面是几个常用的内置函数。</p>
+<p>Makefile提供了许多<a target="_blank" rel="noopener" href="http://www.gnu.org/software/make/manual/html_node/Functions.html">内置函数</a>，可供调用。下面是几个常用的内置函数。</p>
 <p><strong>（1）shell 函数</strong></p>
 <p>shell 函数用来执行 shell 命令</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srcfiles := <span class="variable">$(<span class="built_in">shell</span> echo src/&#123;00..99&#125;.txt)</span></span><br></pre></td></tr></table></figure>
@@ -723,7 +723,7 @@ RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化�
 <p>下面的例子将字符串”feet on the street”替换成”fEEt on the strEEt”。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(<span class="built_in">subst</span> ee,EE,feet on the street)</span></span><br></pre></td></tr></table></figure>
 <p>下面是一个稍微复杂的例子。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">comma:= ,</span><br><span class="line">empty:=</span><br><span class="line"><span class="comment"># space变量用两个空变量作为标识符，当中是一个空格</span></span><br><span class="line">space:= <span class="variable">$(empty)</span> <span class="variable">$(empty)</span></span><br><span class="line">foo:= a b c</span><br><span class="line">bar:= <span class="variable">$(<span class="built_in">subst</span> <span class="variable">$(space)</span>,<span class="variable">$(comma)</span>,<span class="variable">$(foo)</span>)</span></span><br><span class="line"><span class="comment"># bar is now `a,b,c'.</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">comma:= ,</span><br><span class="line">empty:=</span><br><span class="line"><span class="comment"># space变量用两个空变量作为标识符，当中是一个空格</span></span><br><span class="line">space:= <span class="variable">$(empty)</span> <span class="variable">$(empty)</span></span><br><span class="line">foo:= a b c</span><br><span class="line">bar:= <span class="variable">$(<span class="built_in">subst</span> <span class="variable">$(space)</span>,<span class="variable">$(comma)</span>,<span class="variable">$(foo)</span>)</span></span><br><span class="line"><span class="comment"># bar is now `a,b,c&#x27;.</span></span><br></pre></td></tr></table></figure>
 <p><strong>（4）patsubst函数</strong></p>
 <p>patsubst 函数用于模式匹配的替换，格式如下。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(<span class="built_in">patsubst</span> pattern,replacement,text)</span></span><br></pre></td></tr></table></figure>
@@ -841,7 +841,7 @@ RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化�
     <div class="post-body" itemprop="articleBody">
 
       
-          <a id="more"></a>
+          <span id="more"></span>
 <div align = center>
     <h2>送别歌 
     </h2>
@@ -1575,8 +1575,8 @@ RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化�
           <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>​        本来我这个博客也没有很多人看到，只是自己写着玩的，所以就没有设置评论的功能。</p>
 <p>​        但是今天有个小可爱问我怎么没有评论功能，导致她想评论的时候，没有办法。那不行呀，必须服务好她。所以就在网上找了一些教程。</p>
 <p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808212733403.png" alt="image-20200808212733403"></p>
-<p>​        首先是查看有哪些评论系统，网址在这里，<a href="https://www.zhihu.com/question/267598518" target="_blank" rel="noopener">Hexo（NexT 主题）评论系统哪个好？</a></p>
-<p>​        然后选择了Valine，然后它主页说hexo已经可以支持这个评论系统了，那下面的事情就简单很多了。接下来找了一个教程：<a href="https://yuanmomo.net/2019/06/20/hexo-add-valine/" target="_blank" rel="noopener">Hexo Next 主题添加 Valine 评论系统</a>。感谢博主的帮助。</p>
+<p>​        首先是查看有哪些评论系统，网址在这里，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/267598518">Hexo（NexT 主题）评论系统哪个好？</a></p>
+<p>​        然后选择了Valine，然后它主页说hexo已经可以支持这个评论系统了，那下面的事情就简单很多了。接下来找了一个教程：<a target="_blank" rel="noopener" href="https://yuanmomo.net/2019/06/20/hexo-add-valine/">Hexo Next 主题添加 Valine 评论系统</a>。感谢博主的帮助。</p>
 <h3 id="系统配置："><a href="#系统配置：" class="headerlink" title="系统配置："></a>系统配置：</h3><ol>
 <li><p>申请 LeanCloud账户，这个具体干啥的我也没研究，感觉功能挺多。</p>
 </li>
@@ -1593,7 +1593,7 @@ RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化�
 <li>编辑 next的_config.yml 文件</li>
 </ol>
 <p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214252561.png" alt="image-20200808214252561"></p>
-<p>修改 valine.min.js 的 cdn 文件地址，到这里 <a href="https://www.jsdelivr.com/package/npm/valine" target="_blank" rel="noopener">https://www.jsdelivr.com/package/npm/valine</a> 这个地址选择最新版本的Valine，然后获取cdn地址，修改到 主题配置文件 _config.yml 即可。</p>
+<p>修改 valine.min.js 的 cdn 文件地址，到这里 <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/npm/valine">https://www.jsdelivr.com/package/npm/valine</a> 这个地址选择最新版本的Valine，然后获取cdn地址，修改到 主题配置文件 _config.yml 即可。</p>
 <p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214325591.png" alt="image-20200808214325591"></p>
 <h2 id="成果："><a href="#成果：" class="headerlink" title="成果："></a>成果：</h2><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214539154.png" alt="image-20200808214539154"></p>
 <p>搞定啦！🐱‍🏍💞</p>
@@ -1961,8 +1961,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el         : '#valine-comments',
       verify     : false,
       notify     : false,
-      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
-      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
+      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
       placeholder: "Just go go",
       avatar     : 'mm',
       meta       : guest,
@@ -1975,7 +1975,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

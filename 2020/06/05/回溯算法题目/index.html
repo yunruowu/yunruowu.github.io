@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
   <meta name="msapplication-config" content="/images/yun-32x32.png">
@@ -293,11 +293,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a><a href="https://leetcode-cn.com/tag/backtracking/" target="_blank" rel="noopener">算法描述</a></h2><p>回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就 “回溯” 返回，尝试别的路径。回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为 “回溯点”。许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
+        <h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/tag/backtracking/">算法描述</a></h2><p>回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就 “回溯” 返回，尝试别的路径。回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为 “回溯点”。许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
 <p>回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。</p>
 <h2 id="算法使用方法"><a href="#算法使用方法" class="headerlink" title="算法使用方法"></a>算法使用方法</h2><p>我觉得在使用回溯算法的时候，需要使用树形的结构来帮助算法的运行。我在使用回溯的时候都是理由深度优先搜索算法和剪枝来解决问题的。</p>
 <p>整个深度搜索算法的结构如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;	<span class="comment">// 最终能达到的树的深度</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans; <span class="comment">//如果要求不重复，可以声明为set或者在算法中排除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;tags, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ins)</span><span class="comment">//cur表示当前到达的树的层次，tag表示一种约束，比如只能元素只能用一次等。ins 表示当前整个路径上的节点。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cur == n)&#123;<span class="comment">//可能还有其他限制条件，这里只是深度满足要求。</span></span><br><span class="line">        ans.push_back(ins);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>()&#123;<span class="comment">//遍历可以遍历的</span></span><br><span class="line">        <span class="comment">// 处理tags和ins</span></span><br><span class="line">        dfs(cur+<span class="number">1</span>, tags,ins);</span><br><span class="line">        <span class="comment">//恢复</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;	<span class="comment">// 最终能达到的树的深度</span></span><br><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; ans; <span class="comment">//如果要求不重复，可以声明为set或者在算法中排除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur, vector&lt;<span class="keyword">int</span>&gt;tags, vector&lt;<span class="keyword">int</span>&gt; ins)</span><span class="comment">//cur表示当前到达的树的层次，tag表示一种约束，比如只能元素只能用一次等。ins 表示当前整个路径上的节点。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cur == n)&#123;<span class="comment">//可能还有其他限制条件，这里只是深度满足要求。</span></span><br><span class="line">        ans.<span class="built_in">push_back</span>(ins);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>()&#123;<span class="comment">//遍历可以遍历的</span></span><br><span class="line">        <span class="comment">// 处理tags和ins</span></span><br><span class="line">        <span class="built_in">dfs</span>(cur+<span class="number">1</span>, tags,ins);</span><br><span class="line">        <span class="comment">//恢复</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下面用树形图来解释一下算法：</p>
 <p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605162618.png" alt="二叉树"></p>
 <p>首先就从空节点a开始，每次添加一个节点，从可选的节点中选择，继续到下一层，同时可以存在剪枝，在每个节点开始时，判断是否达到最终条件或者超过最终条件，这样可以将该节点及其以下的节点删除，不用遍历。在遍历子节点完成后，会回到当前节点的上一个状态，这样就是回溯。</p>
@@ -387,7 +387,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法描述"><span class="nav-number">1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法使用方法"><span class="nav-number">2.</span> <span class="nav-text">算法使用方法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">算法使用方法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -628,8 +628,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el         : '#valine-comments',
       verify     : false,
       notify     : false,
-      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
-      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
+      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
       placeholder: "Just go go",
       avatar     : 'mm',
       meta       : guest,
@@ -642,7 +642,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

@@ -4,7 +4,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
   <meta name="msapplication-config" content="/images/yun-32x32.png">
@@ -424,7 +424,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <a id="more"></a>
+          <span id="more"></span>
 <p>SRP，Speculative Reservation Protocol，投机预约协议。</p>
 <p>协议通过以下方式提高了拥塞控制的最新水平：</p>
 <ul>
@@ -1515,7 +1515,7 @@ f = min(f_0,f_0(\frac{l_w}{l_c})^{-2})</script><p>$l_c$:导线的临界长度</p
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="动态规划——收获"><a href="#动态规划——收获" class="headerlink" title="动态规划——收获"></a>动态规划——收获</h2><p>​    <a href="https://yunruowu.github.io/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/" target="_blank" rel="noopener">动态规划第一篇</a></p>
+          <h2 id="动态规划——收获"><a href="#动态规划——收获" class="headerlink" title="动态规划——收获"></a>动态规划——收获</h2><p>​    <a target="_blank" rel="noopener" href="https://yunruowu.github.io/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/">动态规划第一篇</a></p>
 <p>​    之前说了最近要学习动态规划算法，然后自己也刷了十几道题目。下面说一下自己的看法。</p>
 <p>​    首先动态规划的效率确实比很多暴力解法要好很多。但是同时必须要付出空间上的开销。一般都是一个dp数组。从我做的题目来看，动态规划就是求解N处的某个问题的解f(n)的最优解。同时f(n)又与f(n-1),f(n-2)等有关。最重要的就是如何求解这些关系。暴力方法可以使用递归直接去求解，但是如果用树形图画出求解过程，就会发现有很多f(k)会被多次计算，这就是开销最大的地方。那么我们自然而然的想法就是减少f(k)的计算次数，怎么做？一种是带一个备忘录，这个方法也不是最优的。最优的是自底向上的来计算f(i)并且进行记录，这样可以减少子问题的计算次数，也就提升了计算效率。有时间再取一些例子进行分享。</p>
 <p>​    😪</p>
@@ -1883,8 +1883,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       el         : '#valine-comments',
       verify     : false,
       notify     : false,
-      appId      : '0MLExVx3QwEj0ABKIWFASeLY-gzGzoHsz',
-      appKey     : 'MfPDlzzOFjnCQHgtPrxgg8I8',
+      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
+      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
       placeholder: "Just go go",
       avatar     : 'mm',
       meta       : guest,
@@ -1897,7 +1897,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

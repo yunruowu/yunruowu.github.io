@@ -198,135 +198,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/" class="post-title-link" itemprop="url">Network Endpoint Congestion Control for Fine-Grained Communication</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-29 22:53:54" itemprop="dateCreated datePublished" datetime="2020-07-29T22:53:54+08:00">2020-07-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:39:28" itemprop="dateModified" datetime="2020-08-06T16:39:28+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/" itemprop="url" rel="index"><span itemprop="name">HiNA</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">拥塞控制</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>需要快速的响应时间和较低的开销</p>
-<h4 id="Small-Message-Speculative-Reservation-Protocol"><a href="#Small-Message-Speculative-Reservation-Protocol" class="headerlink" title="Small-Message Speculative Reservation Protocol"></a>Small-Message Speculative Reservation Protocol</h4><p>SMSRP基于以下观察结果：如果端点没有拥塞，则无需为每个消息进行预留握手。与SRP协议会在每次消息传输之前急于启动保留的协议不同，SMSRP仅在通过推测性消息的丢弃在端点检测到拥塞之后才发布保留。    </p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200730071219006.png" alt="image-20200730071219006"></p>
-<p>图详细显示了SMSRP的操作。在此示例中，网络源正在将两个小消息M1和M2发送到可能拥塞的端点。每个消息足够小以适合单个网络数据包。消息准备好后，源将以推测模式立即将其发送。与SRP中的推测模式相似，推测消息使用低优先级VC，并且在发生拥塞时可以被网络丢弃。如果推测传输成功，例如在M1的肯定确认A1指示的情况下，则不需要保留。结果，当端点没有拥塞时，SMSRP几乎不会在网络中产生任何开销。</p>
-<p>如果网络端点拥塞，则经过一段时间的排队延迟后，网络将丢弃推测性消息，就像消息M2一样。网络交换机将相应的NACK发送回源。当消息源收到NACK时，它将启动到目的地的预留Res2，以获取消息的重传时间。在从目的地接收到授权Gnt $t_2$之后，源将等待直到分配的传输时间$t_2$为止，然后再以非推测性模式重新传输M2。保证非推测性消息是无损的，并使用单独的更高优先级的VC来确保它们不会在推测性消息之后被阻塞。</p>
-<p>除了在无拥塞的网络条件下具有较低的开销外，SMSRP的主要吸引力在于，它可以添加到已经实施SRP的网络中，而硬件改动很小。  SMSRP的投机丢弃策略和预约握手与SRP相同。唯一需要做的更改发生在源网络接口上：更改预约握手和推测性传输的顺序。</p>
-<h3 id="Last-Hop-Reservation-Protocol"><a href="#Last-Hop-Reservation-Protocol" class="headerlink" title="Last-Hop Reservation Protocol"></a>Last-Hop Reservation Protocol</h3><p>在网络不拥塞的情况下，以推测方式急切传输小消息可减少SMSRP的控制开销。但是，SMSRP的缺点是，当需要预约来解决拥塞时，控制消息必须到达端点处的预约调度程序。结果，预留握手消息与数据分组竞争弹出信道带宽。对于小消息，控制数据包消耗的一部分弹出带宽会极大地导致目标的额外超额预订，并可能导致更多的推测性消息丢失。直观上，弹出通道带宽是关键资源，仅应为数据包保留</p>
-<p>LHRP通过将预留调度程序从端点移动到端点上游的最后一跳交换机来避免导致端点超额预订。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200730071945735.png" alt="image-20200730071945735"></p>
-<p>LHRP的详细操作如图所示。像上一节中的示例一样，网络源正在向可能超额订阅的端点发送两个小消息。这两个消息都由源以推测方式立即发送。如果推测传输成功（如M1的情况），则不需要保留，并且协议不会产生额外的开销。</p>
-<p>LHRP通过将预留调度程序从端点移动到端点上游的最后一跳交换机来避免导致端点超额预订。通过允许在交换机为连接到该交换机的端点的服务保留请求提供服务时，我们消除了弹出通道的控制开销。在最后一跳交换机处处理预留也打开了其他优化机会。对于小消息，可以在数据消息本身以及与任何丢弃关联的NACK上piggy带保留和授权信息，而不是发送用于保留握手的单独控制包。此保留搭载优化对于SMSRP没有用，因为到达端点处的保留调度程序的数据包不再需要保留。</p>
-<p>如果端点被超额预订，则拥塞将首先在最后一跳交换机处发生。就像M2一样，推测消息可能会在最后一跳交换机上遇到较大的排队延迟。与SRP和SMSRP不同，LHRP推测性数据包仅在最后一跳交换机处合格。我们修改了网络交换机，以跟踪与交换机相连的每个端点排队的数据包数量。当端点的排队级别超过阈值时，交换机将开始丢弃发往该端点的推测消息。排队阈值的目的是动态地维持推测丢弃率，以使拥塞的推测消息不会备份到相邻的交换机中，从而在网络的其余部分中造成树饱和。</p>
-<p>当最后一跳交换机丢弃推测消息时，预留调度程序还为该消息分配了重传时间，该重传时间随NACK ，N2t2返回。当源节点接收到NACK时，它也接收到重发时间t2。然后，源节点以保证无损传输的非推测性模式在时间t2重新传输M2。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1534,6 +1405,116 @@ f = min(f_0,f_0(\frac{l_w}{l_c})^{-2})</script><p>$l_c$:导线的临界长度</p
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/15.png">
+      <meta itemprop="name" content="云若无">
+      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yun的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/" class="post-title-link" itemprop="url">20.6.25一点杂念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-25 22:02:54 / 修改时间：22:36:13" itemprop="dateCreated datePublished" datetime="2020-06-25T22:02:54+08:00">2020-06-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%9D%E6%83%B3%E7%9A%84%E7%81%AB%E8%8A%B1/" itemprop="url" rel="index"><span itemprop="name">思想的火花</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1605,7 +1586,7 @@ f = min(f_0,f_0(\frac{l_w}{l_c})^{-2})</script><p>$l_c$:导线的临界长度</p
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

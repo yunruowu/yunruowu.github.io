@@ -198,6 +198,126 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/%E6%9C%AC%E5%9C%B0git%E8%BF%9E%E6%8E%A5GitHub/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/15.png">
+      <meta itemprop="name" content="云若无">
+      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yun的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/16/%E6%9C%AC%E5%9C%B0git%E8%BF%9E%E6%8E%A5GitHub/" class="post-title-link" itemprop="url">本地git连接GitHub</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-16 00:03:13 / 修改时间：00:18:11" itemprop="dateCreated datePublished" datetime="2020-04-16T00:03:13+08:00">2020-04-16</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/16/%E6%9C%AC%E5%9C%B0git%E8%BF%9E%E6%8E%A5GitHub/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/16/%E6%9C%AC%E5%9C%B0git%E8%BF%9E%E6%8E%A5GitHub/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>534</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>进入要操作的文件夹</li>
+<li><p>命令行操作</p>
+<ul>
+<li><strong>第一步</strong>： 进入要所要上传文件的目录输入命令 <code>git init</code></li>
+<li><strong>第二步</strong>： 创建一个本地仓库origin，使用命令 <code>git remote add origin git@github.com:yourName/yourRepo.git</code> youname是你的GitHub的用户名，yourRepo是你要上传到GitHub的仓库，这是你再GitHub上添加的仓库。  </li>
+<li><p><strong>第三步</strong>： 比如你要添加一个文件xxx到本地仓库，使用命令 <code>git add xxx</code>，可以使用<code>git add .</code>自动判断添加哪些文件</p>
+</li>
+<li><p><strong>然后</strong>把这个添加提交到本地的仓库，使用命令 <code>git commit -m</code>说明这次的提交</p>
+</li>
+<li><p><strong>最后</strong>把本地仓库origin提交到远程的GitHub仓库，使用命令 <code>git push origin master</code></p>
+</li>
+</ul>
+</li>
+<li><p>出现问题时候的操做</p>
+<ol>
+<li><p>先拉下来，会自动合并的（不用操心）<br>git pull origin master</p>
+</li>
+<li><p>再上传<br><code>git push -u origin master</code></p>
+</li>
+</ol>
+</li>
+<li><p>出现错误：<br> fatal: remote origin already exists.<br> 先删除Git<br> <code>Git remote rm origin</code>  </p>
+</li>
+<li><p>注意事项<br> 一般来说，我都是新建项目之间进行关联，所以使用GitHub创建仓库时，不要生成readme.md就可以避免出现错误，因为生成之后两个文件就不一样了。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/15/LeetCode-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1228,7 +1348,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

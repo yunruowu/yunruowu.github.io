@@ -198,6 +198,133 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/08/hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/15.png">
+      <meta itemprop="name" content="云若无">
+      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yun的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/08/hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/" class="post-title-link" itemprop="url">YunBlog可以评论啦</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-08 21:22:52 / 修改时间：21:46:15" itemprop="dateCreated datePublished" datetime="2020-08-08T21:22:52+08:00">2020-08-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/08/hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/08/hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>586</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>​        本来我这个博客也没有很多人看到，只是自己写着玩的，所以就没有设置评论的功能。</p>
+<p>​        但是今天有个小可爱问我怎么没有评论功能，导致她想评论的时候，没有办法。那不行呀，必须服务好她。所以就在网上找了一些教程。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808212733403.png" alt="image-20200808212733403"></p>
+<p>​        首先是查看有哪些评论系统，网址在这里，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/267598518">Hexo（NexT 主题）评论系统哪个好？</a></p>
+<p>​        然后选择了Valine，然后它主页说hexo已经可以支持这个评论系统了，那下面的事情就简单很多了。接下来找了一个教程：<a target="_blank" rel="noopener" href="https://yuanmomo.net/2019/06/20/hexo-add-valine/">Hexo Next 主题添加 Valine 评论系统</a>。感谢博主的帮助。</p>
+<h3 id="系统配置："><a href="#系统配置：" class="headerlink" title="系统配置："></a>系统配置：</h3><ol>
+<li><p>申请 LeanCloud账户，这个具体干啥的我也没研究，感觉功能挺多。</p>
+</li>
+<li><p>申请应用，按照下图添加两个类：</p>
+</li>
+</ol>
+<pre><code>![image-20200808213759214](https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808213759214.png)
+</code></pre><ol>
+<li><p>最后应用Keys中记住两个<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214003660.png" alt="image-20200808214003660"></p>
+<p>​    这是要填写在配置文件中的。</p>
+</li>
+</ol>
+<h2 id="配置文件："><a href="#配置文件：" class="headerlink" title="配置文件："></a>配置文件：</h2><ol>
+<li>编辑 next的_config.yml 文件</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214252561.png" alt="image-20200808214252561"></p>
+<p>修改 valine.min.js 的 cdn 文件地址，到这里 <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/npm/valine">https://www.jsdelivr.com/package/npm/valine</a> 这个地址选择最新版本的Valine，然后获取cdn地址，修改到 主题配置文件 _config.yml 即可。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214325591.png" alt="image-20200808214325591"></p>
+<h2 id="成果："><a href="#成果：" class="headerlink" title="成果："></a>成果：</h2><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214539154.png" alt="image-20200808214539154"></p>
+<p>搞定啦！🐱‍🏍💞</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/08/%E5%8D%97%E5%9B%AD%E5%8D%81%E4%B8%89%E9%A6%96%EF%BC%88%E5%85%B6%E4%BA%94%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1295,133 +1422,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/" class="post-title-link" itemprop="url">BFRP: Endpoint Congestion Avoidance Through Bilateral Flow Reservation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-03 15:53:20" itemprop="dateCreated datePublished" datetime="2020-08-03T15:53:20+08:00">2020-08-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:40:24" itemprop="dateModified" datetime="2020-08-06T16:40:24+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/" itemprop="url" rel="index"><span itemprop="name">HiNA</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">拥塞控制</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Bilateral-Flow-Reservation-Protocol，BFRP"><a href="#Bilateral-Flow-Reservation-Protocol，BFRP" class="headerlink" title="Bilateral Flow Reservation Protocol，BFRP"></a>Bilateral Flow Reservation Protocol，BFRP</h2><p>​        与基于数据包的调度机制不同，BFRP通过调度流来避免拥塞。我们的设计基于SRP的调度策略。流完成时间与大流和小流的发送顺序有关。首先安排小流量可以减少平均流量完成时间。但是，当调度程序每次选择最小流量时，大流量可能会饿死。为了避免这种情况，我们为每个流设置优先级p，并且p等于流大小。每次调度程序对流进行舍入时，p的值都会减少d。当大流量四舍五入时，p的值将变得非常小，调度程序每次都会选择具有最小p的流量，以避免出现饥饿的情况。    </p>
-<p>​        图3显示了BFRP的过渡过程。在一个节点中，整个过程分为三种状态：SPECa，SPECb和NORMAL。如果网络没有拥塞，则BFRP将不会进入NORMAL状态。  SPECa状态是BFRP中发送方的初始状态。首先，发送方将选择具有最小p的流，并将推测性数据包发送到网络中。当发送方收到否定确认数据包（NACK）时，它将发送y预留数据包到目标，然后进入SPECb状态。但是，在SPECb状态下，如果发送方在预留数据包发送开始到授权时间到达之间的时间内未执行任何操作，则会急剧增加准备发送的其他流的排队延迟，从而导致平均流量延迟增加。因此，建议在达到授权时间之前，先发送其他流的推测包。详细地说，在发送方发送预留数据包之后，数据包调度程序会在其他发送队列中选择具有最小p的就绪流，然后提前发送这个流推测性数据包。当发送方收到确认数据包（ACK）时，它将继续发送推测数据包。当接收到NACK时，为了确保源的多个预约流没有冲突授予时间，发送方将不对此流进行预留，以确保只有一个流预约给目标。但是，调度程序将选择另一个具有最小p的流进行传输。在授予时间到来之前，BFRP进入正常状态，并且数据包调度程序选择保留的流，发送方以正常模式发送该流的数据包。传输完成后，调度程序将根据此规则选择其他准备传输的流。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803203856734.png" alt="image-20200803203856734"></p>
-<p>​        下图显示了BFRP的操作。首先，我们假设网络没有拥塞。数据包调度程序从发送方队列（1）中选择具有最小p的流。之后，发送方将推测性数据包发送到目的地（2）。推测数据包在低优先级VC上传输。每个推测性分组都与生存时间survival time（ST）和排队时间相关联，如果网络中的推测性分组的排队时间大于ST，则该推测性分组将被丢弃。在我们的实现中，ST是基于高负载均匀流量下网络的数据包延迟分布的固定值，当推测性数据包进入路由器的输入端口时，数据包的排队时间开始。当排队时间到达输出端口中VC的开头时，将检查排队时间。接收到推测性数据包后，目的地需要用ACK进行回复，以通知发送方这些数据包已被接受。当网络没有拥塞时，通常会接受推测性数据包，并且目标返回ACK（3）。这样，分组将以推测性分组的形式传输，并且不会带来任何其他开销。</p>
-<p>  <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200804090633984.png" alt="image-20200804090633984"></p>
-<p>​        在拥塞的网络中，初始操作与上述相同。但是，当面临端点拥塞时，由于到达ST的排队时间，推测性数据包将被丢弃。届时，NACK将在路由器中生成并发送回发送方（5）。发送方中的NACK管理器收到NACK数据包后，发送方将从SPECa状态转换为SPECb状态，然后发送预约数据包与目标进行握手（6）。预留数据包很小，优先级最高。它在单独的VC上传输，以确保高优先级传递。预留数据包包含一个值n，它是将要发送的数据包的数量。</p>
-<p>​        一旦接收到预留包，接收器中的时间管理器将根据预留包中的n为发送方分配授权时间（$t_s$），并在回复包中返回相应的授权时间（7）。之后，时间管理器状态将正确更新。如果有另一个发送方发送的其他保留数据包到达此接收方，则时间管理器将返回给该保留数据包不早于$t_s  + n(1+ε)T_p$的开始时间，其中常数$T_p$是接收方接收所需的时间信道来接收消息，并且ε取决于控制分组的带宽开销。发送方的授权管理器将在收到授权数据包后开始计时，然后数据包调度程序将选择准备发送到其他发送队列中的，具有最小p的流（8）。然后，选定的流以推测性数据包的形式发送数据包（9）。如果目的地没有拥塞，将返回ACK数据包（10）。发送方继续发送推测性分组（11）。但是，如果端点在某个时刻过载，则推测包将被丢弃，路由器将生成NACK包并将其返回给发送方（12）。在接收到NACK之后，发送方将不会调度该流以发送保留数据包，而是选择具有最小p的另一个流并继续发送推测性数据包（13）。当预留流达到授予时间时，BFRP从SPECb状态进入正常状态，并且调度程序调度发送队列以发送普通数据包(14)(15)。在所有剩余的数据包都已发送后，BFRP从正常状态进入SPECa状态。所有传输将重复此过程。应当强调的是，为了最小化由控制操作引起的开销，所有预留分组，ACK，NACK和授权分组都是小的并且在单独的高优先级信道上发送。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1489,7 +1493,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

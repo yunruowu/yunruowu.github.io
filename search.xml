@@ -123,6 +123,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Channel Reservation Protocol for Over-Subscribed Channels and Destinations</title>
+    <url>/2020/08/03/Channel-Reservation-Protocol-for-Over-Subscribed-Channels-and-Destinations/</url>
+    <content><![CDATA[<h2 id="Channel-Reservation-Protocol-for-Over-Subscribed-Channels-and-Destinationsv"><a href="#Channel-Reservation-Protocol-for-Over-Subscribed-Channels-and-Destinationsv" class="headerlink" title="Channel Reservation Protocol for Over-Subscribed Channels and Destinationsv"></a>Channel Reservation Protocol for Over-Subscribed Channels and Destinationsv</h2><h3 id="1-信道保留协议CHANNEL-RESERV-ATION-PROTOCOL"><a href="#1-信道保留协议CHANNEL-RESERV-ATION-PROTOCOL" class="headerlink" title="1. 信道保留协议CHANNEL RESERV ATION PROTOCOL"></a>1. 信道保留协议CHANNEL RESERV ATION PROTOCOL</h3><p>​        使用CRP，每个超额预订的信道和目的地都会保留一个预留表。该表中的每个单元代表一个未来的时隙，并以时钟周期（连续）粒度记录可用带宽。源发送记录参与资源可用性的请求。然后，目的地将计算满足请求大小的最早的公共可用性，并以授予进行响应。然后，Grant然后在转移回源时最终确定参与资源中的保留。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803174200355.png" alt="image-20200803174200355"></p>
+<h4 id="1-1-Reservation-Tables"><a href="#1-1-Reservation-Tables" class="headerlink" title="1.1 Reservation Tables"></a>1.1 Reservation Tables</h4><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803175034293.png" alt="image-20200803175034293"></p>
+<p>​        将预留表与每个资源相关联。表的每个单元格对应一个时隙，该单元格中的值表示相应时隙中可用带宽的cycles数。上图显示了32个表单元（$V<em>{cells}$）的示例配置，每个表单元占用512个周期（$C</em>{max}$）。在此示例中，将来最多可以保留16384个周期的资源。在图中，单元格A对应于包含周期0-511的时隙，单元格B代表周期512-1023的时隙，依此类推。如图所示，时隙（单元）A具有512个可用周期，而时隙B仅具有10个可用周期。<br>​        如果$t[i]&gt;0,t[i]+t[i+1]\geq x$，则资源可以在时隙i内容纳大小为x的请求。也就是说，对应的表格单元必须至少有一个空闲时钟周期，并且该表格单元与下一个单元的总和必须至少为请求大小。这允许请求跨越两个相邻的单元格，从而减少碎片的不利影响。<br>​        当时间提前$C<em>{max}$个cycles时，保留表在逻辑上会移动一个单元格。在上面的示例中，当系统时间变为512时，删除单元格A，并将表向左移动一个。在右侧插入了一个值为$C</em>{max}$的新单元格。为了保持同步，必须使用某种技术<em>（A fine-grain clock synchronization mechanism for myrinet clusters. ）</em>将所有资源同步到全球时基，且精度至少为±$C_{max}$个cycles。<br>​        为每个关键资源维护保留表。每个目标的网络接口卡（NIC）均包含该目标的出口通道的表格。每个路由器为驱动潜在瓶颈通道（例如群集间通道）的每个输出端口维护一个表。  </p>
+<h4 id="1-2-Reservation-Handling-in-Channels"><a href="#1-2-Reservation-Handling-in-Channels" class="headerlink" title="1.2 Reservation Handling in Channels"></a>1.2 Reservation Handling in Channels</h4><p>​        预留请求携带一个长度为$V_{cell}$的位向量，其中每个位都表示一个时隙的可用性。请求向量初始化为全true。每次请求向量传递资源时，该资源都会重置向量中与资源没有请求带宽的时隙相对应的任何位。实际上，每个资源在通过时将其可用性与请求向量进行“AND”运算。当请求向量到达目的地时，它表明：在请求通过资源时所有必需的关键资源都具有足够带宽来处理请求的时隙。 <img src="C:\Users\mcdxw\AppData\Roaming\Typora\typora-user-images\image-20200803184015703.png" alt="image-20200803184015703"> </p>
+<p>​        预留向量与预留表同时向左移动一位。当预留向量发生移位时，将在右边插入一个T比特，因为最初在新的时隙内资源可用。保留向量移位由路由器执行。</p>
+<p>​        考虑下图。在此示例中，单元格A和C保持为T，因为该表可以容纳这些时隙中的80个周期的请求。单元D将其位设置为false，因为它没有剩余带宽，而单元E将其位设置为false，因为单元E和F的总和不足以进行请求。最后，单元格B保持为真，因为单元格B和C的总和可以容纳80个循环。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803184159859.png" alt="image-20200803184159859"></p>
+<h4 id="1-3-Rservation-Handling-in-Destinations"><a href="#1-3-Rservation-Handling-in-Destinations" class="headerlink" title="1.3 Rservation Handling in Destinations"></a>1.3 Rservation Handling in Destinations</h4><p>​        目的地将到达的请求的预留向量与其自己的表进行比较，并计算出请求路径上所有参与资源（包括目的地）可以容纳的最早时隙。与信道中的向量处理类似，如果时隙具有可用周期并且其和下一个小区的可用带宽之和满足传入请求，则认为该时隙在目标位置可用。  </p>
+<p>​        在对它们的可用性进行“与”运算后放入请求向量中，目的地生成一个授权响应，该响应带有一个时间戳，该时间戳对应于最终向量的最左边的T位。这是所有必需资源都可用的最早时间。</p>
+<p>​        此操作如下图所示。在此示例中，目的地的单元格A无法容纳请求，因为目的地的保留表中的单元格A和B的总和小于所请求的80个周期。但是，单元格B可以容纳该请求，因为合并的单元格B和C具有140个自由周期。单元C也能够容纳该请求。我们选择单元格B作为最早可以处理请求并减少单元格B和C的表条目的表格，以保留80个周期（每个单元格40个）。实际的预留周期跨越了两个时隙，包】括时隙B的最后40个周期和时隙C的前40个周期。时间戳记为984，对应于时隙B的最后40个周期的第一个周期</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803184701842.png" alt="image-20200803184701842"></p>
+<h4 id="1-4-Grant-and-Retry-Operation"><a href="#1-4-Grant-and-Retry-Operation" class="headerlink" title="1.4 Grant and Retry Operation"></a>1.4 Grant and Retry Operation</h4><p>​        当授权数据包返回源时，它们会沿其路由递减每个保留表的相应单元，以将分配的带宽标记为其他流不可用（图2中的C点）。如果那时与时间戳相对应的单元没有足够的周期来满足请求，则从下一个单元中减去任何剩余的时隙。在图5的示例中，目标为80个保留周期的周期生成了周期984的授予时间戳记。当该授权到达具有图4中所示的预留表的信道时，单元B对应于周期984，因此将减少10，并将其设置为0，而将单元C减少剩余的70个周期，从而将其设置为30。</p>
+<p>​        如果两个表单元格不再具有足够的周期来满足请求，则授权将转换为重试响应。如果带宽是在保留请求到达其目的地，生成授权并返回到参与信道（从图2中的A点到C点）所花费的时间内由另一个流保留的，则可能会发生这种情况。如果预订请求的最终向量没有T位或不存在公共可用性，则目的地也会发出重试。重试指示在短暂的延迟($R<em>{cycles}$)后源重新传输。唯一的例外是当发出重试的原因是目的地的预订表在任何时间段内都无法使用指定的预订大小，而与预订请求的向量无关。在这种情况下，重试将指示源在$V</em>{cells}×C_{maxcycles}$之后减去往返延迟后重新发送其请求</p>
+<p>​        当授权在信道上转换为重试时，目的地中预留和信道中回复已经遍历过的预留不会取消。我们的实验证实了推测性数据包（在下面说明）和控制数据包有效地利用了带宽。大量超额预订的资源更靠近流量源会增加带宽不必要地在下游资源中以这种方式分配的可能性。</p>
+<p>​        为了防止由于多个流试图保留相同的时隙而导致重试，保留请求可以选择在它们遍历参与信道时急切地保留最早的时隙（图2中的A点）。如果有目的地，目的地将优先授予该预定的时隙。预留赠款会释放对赠款流程的所有不必要的急切保留。由于急切的预约与流标识符相关联，因此这需要标签匹配。为单个请求急于保留一个以上的时隙（$R_{res}$），会增加目的地授予预保留时隙的可能性，即使存在合格请求，也会增加空闲带宽的可能性。授予和重试被强制使用请求路径的相反方向返回，以便它们可以操纵正确的通道保留表。通过使请求数据包记录其路径或在确定性路由的情况下通过简单的计算来标识反向路径。</p>
+]]></content>
+      <categories>
+        <category>HiNA</category>
+        <category>Papers</category>
+        <category>拥塞控制</category>
+      </categories>
+      <tags>
+        <tag>拥塞控制</tag>
+        <tag>CRP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CRSP: Network Congestion Control Through Credit Reservation</title>
     <url>/2020/08/03/CRSP-Network-Congestion-Control-Through-Credit-Reservation/</url>
     <content><![CDATA[<h2 id="Network-Congestion-Control-Through-Credit-Reservation"><a href="#Network-Congestion-Control-Through-Credit-Reservation" class="headerlink" title="Network Congestion Control Through Credit Reservation"></a>Network Congestion Control Through Credit Reservation</h2><p>​        ECN对参数敏感，网络拥塞的响应时间较慢，而SRP的预留操作不准确。为了实现更有效的拥塞管理，提出了CRSP，一种主动的信用保留调度协议，它可以有效避免端点的拥塞并减少流完成时间。与SRP相似，CRSP还需要在发件人和目的地之间进行预留许可的握手操作，以避免形成网络拥塞。但是我们以控制报文少的轻量级版本实现了CRSP，并且CRSP的开销小于SRP。</p>
@@ -160,36 +190,6 @@
     <title>Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both</title>
     <url>/2020/10/25/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both-1/</url>
     <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Channel Reservation Protocol for Over-Subscribed Channels and Destinations</title>
-    <url>/2020/08/03/Channel-Reservation-Protocol-for-Over-Subscribed-Channels-and-Destinations/</url>
-    <content><![CDATA[<h2 id="Channel-Reservation-Protocol-for-Over-Subscribed-Channels-and-Destinationsv"><a href="#Channel-Reservation-Protocol-for-Over-Subscribed-Channels-and-Destinationsv" class="headerlink" title="Channel Reservation Protocol for Over-Subscribed Channels and Destinationsv"></a>Channel Reservation Protocol for Over-Subscribed Channels and Destinationsv</h2><h3 id="1-信道保留协议CHANNEL-RESERV-ATION-PROTOCOL"><a href="#1-信道保留协议CHANNEL-RESERV-ATION-PROTOCOL" class="headerlink" title="1. 信道保留协议CHANNEL RESERV ATION PROTOCOL"></a>1. 信道保留协议CHANNEL RESERV ATION PROTOCOL</h3><p>​        使用CRP，每个超额预订的信道和目的地都会保留一个预留表。该表中的每个单元代表一个未来的时隙，并以时钟周期（连续）粒度记录可用带宽。源发送记录参与资源可用性的请求。然后，目的地将计算满足请求大小的最早的公共可用性，并以授予进行响应。然后，Grant然后在转移回源时最终确定参与资源中的保留。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803174200355.png" alt="image-20200803174200355"></p>
-<h4 id="1-1-Reservation-Tables"><a href="#1-1-Reservation-Tables" class="headerlink" title="1.1 Reservation Tables"></a>1.1 Reservation Tables</h4><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803175034293.png" alt="image-20200803175034293"></p>
-<p>​        将预留表与每个资源相关联。表的每个单元格对应一个时隙，该单元格中的值表示相应时隙中可用带宽的cycles数。上图显示了32个表单元（$V<em>{cells}$）的示例配置，每个表单元占用512个周期（$C</em>{max}$）。在此示例中，将来最多可以保留16384个周期的资源。在图中，单元格A对应于包含周期0-511的时隙，单元格B代表周期512-1023的时隙，依此类推。如图所示，时隙（单元）A具有512个可用周期，而时隙B仅具有10个可用周期。<br>​        如果$t[i]&gt;0,t[i]+t[i+1]\geq x$，则资源可以在时隙i内容纳大小为x的请求。也就是说，对应的表格单元必须至少有一个空闲时钟周期，并且该表格单元与下一个单元的总和必须至少为请求大小。这允许请求跨越两个相邻的单元格，从而减少碎片的不利影响。<br>​        当时间提前$C<em>{max}$个cycles时，保留表在逻辑上会移动一个单元格。在上面的示例中，当系统时间变为512时，删除单元格A，并将表向左移动一个。在右侧插入了一个值为$C</em>{max}$的新单元格。为了保持同步，必须使用某种技术<em>（A fine-grain clock synchronization mechanism for myrinet clusters. ）</em>将所有资源同步到全球时基，且精度至少为±$C_{max}$个cycles。<br>​        为每个关键资源维护保留表。每个目标的网络接口卡（NIC）均包含该目标的出口通道的表格。每个路由器为驱动潜在瓶颈通道（例如群集间通道）的每个输出端口维护一个表。  </p>
-<h4 id="1-2-Reservation-Handling-in-Channels"><a href="#1-2-Reservation-Handling-in-Channels" class="headerlink" title="1.2 Reservation Handling in Channels"></a>1.2 Reservation Handling in Channels</h4><p>​        预留请求携带一个长度为$V_{cell}$的位向量，其中每个位都表示一个时隙的可用性。请求向量初始化为全true。每次请求向量传递资源时，该资源都会重置向量中与资源没有请求带宽的时隙相对应的任何位。实际上，每个资源在通过时将其可用性与请求向量进行“AND”运算。当请求向量到达目的地时，它表明：在请求通过资源时所有必需的关键资源都具有足够带宽来处理请求的时隙。 <img src="C:\Users\mcdxw\AppData\Roaming\Typora\typora-user-images\image-20200803184015703.png" alt="image-20200803184015703"> </p>
-<p>​        预留向量与预留表同时向左移动一位。当预留向量发生移位时，将在右边插入一个T比特，因为最初在新的时隙内资源可用。保留向量移位由路由器执行。</p>
-<p>​        考虑下图。在此示例中，单元格A和C保持为T，因为该表可以容纳这些时隙中的80个周期的请求。单元D将其位设置为false，因为它没有剩余带宽，而单元E将其位设置为false，因为单元E和F的总和不足以进行请求。最后，单元格B保持为真，因为单元格B和C的总和可以容纳80个循环。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803184159859.png" alt="image-20200803184159859"></p>
-<h4 id="1-3-Rservation-Handling-in-Destinations"><a href="#1-3-Rservation-Handling-in-Destinations" class="headerlink" title="1.3 Rservation Handling in Destinations"></a>1.3 Rservation Handling in Destinations</h4><p>​        目的地将到达的请求的预留向量与其自己的表进行比较，并计算出请求路径上所有参与资源（包括目的地）可以容纳的最早时隙。与信道中的向量处理类似，如果时隙具有可用周期并且其和下一个小区的可用带宽之和满足传入请求，则认为该时隙在目标位置可用。  </p>
-<p>​        在对它们的可用性进行“与”运算后放入请求向量中，目的地生成一个授权响应，该响应带有一个时间戳，该时间戳对应于最终向量的最左边的T位。这是所有必需资源都可用的最早时间。</p>
-<p>​        此操作如下图所示。在此示例中，目的地的单元格A无法容纳请求，因为目的地的保留表中的单元格A和B的总和小于所请求的80个周期。但是，单元格B可以容纳该请求，因为合并的单元格B和C具有140个自由周期。单元C也能够容纳该请求。我们选择单元格B作为最早可以处理请求并减少单元格B和C的表条目的表格，以保留80个周期（每个单元格40个）。实际的预留周期跨越了两个时隙，包】括时隙B的最后40个周期和时隙C的前40个周期。时间戳记为984，对应于时隙B的最后40个周期的第一个周期</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803184701842.png" alt="image-20200803184701842"></p>
-<h4 id="1-4-Grant-and-Retry-Operation"><a href="#1-4-Grant-and-Retry-Operation" class="headerlink" title="1.4 Grant and Retry Operation"></a>1.4 Grant and Retry Operation</h4><p>​        当授权数据包返回源时，它们会沿其路由递减每个保留表的相应单元，以将分配的带宽标记为其他流不可用（图2中的C点）。如果那时与时间戳相对应的单元没有足够的周期来满足请求，则从下一个单元中减去任何剩余的时隙。在图5的示例中，目标为80个保留周期的周期生成了周期984的授予时间戳记。当该授权到达具有图4中所示的预留表的信道时，单元B对应于周期984，因此将减少10，并将其设置为0，而将单元C减少剩余的70个周期，从而将其设置为30。</p>
-<p>​        如果两个表单元格不再具有足够的周期来满足请求，则授权将转换为重试响应。如果带宽是在保留请求到达其目的地，生成授权并返回到参与信道（从图2中的A点到C点）所花费的时间内由另一个流保留的，则可能会发生这种情况。如果预订请求的最终向量没有T位或不存在公共可用性，则目的地也会发出重试。重试指示在短暂的延迟($R<em>{cycles}$)后源重新传输。唯一的例外是当发出重试的原因是目的地的预订表在任何时间段内都无法使用指定的预订大小，而与预订请求的向量无关。在这种情况下，重试将指示源在$V</em>{cells}×C_{maxcycles}$之后减去往返延迟后重新发送其请求</p>
-<p>​        当授权在信道上转换为重试时，目的地中预留和信道中回复已经遍历过的预留不会取消。我们的实验证实了推测性数据包（在下面说明）和控制数据包有效地利用了带宽。大量超额预订的资源更靠近流量源会增加带宽不必要地在下游资源中以这种方式分配的可能性。</p>
-<p>​        为了防止由于多个流试图保留相同的时隙而导致重试，保留请求可以选择在它们遍历参与信道时急切地保留最早的时隙（图2中的A点）。如果有目的地，目的地将优先授予该预定的时隙。预留赠款会释放对赠款流程的所有不必要的急切保留。由于急切的预约与流标识符相关联，因此这需要标签匹配。为单个请求急于保留一个以上的时隙（$R_{res}$），会增加目的地授予预保留时隙的可能性，即使存在合格请求，也会增加空闲带宽的可能性。授予和重试被强制使用请求路径的相反方向返回，以便它们可以操纵正确的通道保留表。通过使请求数据包记录其路径或在确定性路由的情况下通过简单的计算来标识反向路径。</p>
-]]></content>
-      <categories>
-        <category>HiNA</category>
-        <category>Papers</category>
-        <category>拥塞控制</category>
-      </categories>
-      <tags>
-        <tag>拥塞控制</tag>
-        <tag>CRP</tag>
-      </tags>
   </entry>
   <entry>
     <title>Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both</title>
@@ -355,98 +355,6 @@ RTT = (T_W-T_P)-(T_L-T_P)=T_w-T_L</script><p>额外的技巧：为了最小化�
       </tags>
   </entry>
   <entry>
-    <title>Interconnection-Networks-ch5-1</title>
-    <url>/2020/07/20/Interconnection-Networks-ch5-1/</url>
-    <content><![CDATA[<h2 id="Torus-Network"><a href="#Torus-Network" class="headerlink" title="Torus Network"></a>Torus Network<span id="more"></span></h2><h3 id="5-3-Building-Mesh-and-T-orus-Networks"><a href="#5-3-Building-Mesh-and-T-orus-Networks" class="headerlink" title="5.3 Building Mesh and T orus Networks"></a>5.3 Building Mesh and T orus Networks</h3><p>将网络的抽象节点映射到物理空间中的实际位置，不同的封装技术可以实现一维的，二维的等映射。</p>
-<ul>
-<li><p>最简单的方式就是$p_i=a_i$，物理位置和逻辑地址相同，每个节点之间距离相同。</p>
-</li>
-<li><p>但是这将导致$p_k和p_0$之间距离过大，如此长的信道可能导致过多的等待时间或需要较慢的信令速率。所以提出折叠的环形网络来解决问题。一种环形网络的折叠入下：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131524647.png" alt="image-20200727131524647"></p>
-<p>消灭了 最长的网络，但是牺牲了以相邻节点距离短的优点。</p>
-</li>
-</ul>
-<p>最终的物理放置图对比：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131557787.png" alt="image-20200727131557787"></p>
-<p>通常，通过以折叠顺序组合k个折叠的k-ary n-1cube来构造折叠的k-ary n-cube</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131614133.png" alt="image-20200727131614133"></p>
-<p>当逻辑维数超过物理维数时，必须将几个逻辑维映射到每个物理维中。如果物理维数为q，则直接映射是将逻辑维的q折叠为每个物理维。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132711914.png" alt="image-20200727132711914"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132749954.png" alt="image-20200727132749954"></p>
-<h3 id="Express-Cubes"><a href="#Express-Cubes" class="headerlink" title="Express Cubes"></a>Express Cubes</h3><p>原因：环状网络通道短，$t_c$时间通常由$t_r$决定，与直径小的网络相比，导致更多的$T_H$。可以增加维度减小直径。但是会导致$T_s$增大。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114113438.png" alt="image-20200728114113438"></p>
-<p>所以Express sube出现了。就是添加了几个快速通道。通过路由必须在快速通道上的某个维度上经过较长距离的数据包，报头等待时间可以减少到接近信道等待时间限制。因为可以控制快速通道的数量以匹配网络的二等分宽度，所以可以在不增加序列化延迟的情况下实现报头延迟的减少。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114625185.png" alt="image-20200728114625185"></p>
-<p>每个维度，每隔i个节点设置一个express channel。</p>
-<p>普通网络中，在j维度有$H_j$跳，那么在快速立方体中，跳数为：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728115227480.png" alt="image-20200728115227480"></p>
-<p>对于长的维度，选择$i = \frac{t_r}{t_c}$,来平衡式中的两项，短的维度，选择$i=\sqrt{H_min}$</p>
-<p>分层的快速cube:</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120044122.png" alt="image-20200728120044122"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120023536.png" alt="image-20200728120023536"></p>
-]]></content>
-      <categories>
-        <category>Interconnection_Networks</category>
-      </categories>
-      <tags>
-        <tag>Interconnection_Networks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Interconnection-Networks-ch4.md</title>
-    <url>/2020/07/19/Interconnection-Networks-ch3/</url>
-    <content><![CDATA[<h2 id="Butterfly-Networks"><a href="#Butterfly-Networks" class="headerlink" title="Butterfly Networks"></a>Butterfly Networks</h2><p>俩个主要的拓扑家族</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719101415173.png" alt="image-20200719101415173"></p>
-<p>蝶形网络是最基本的间接网络。</p>
-<p>对于交换机度数为$\delta = 2k, H = \log_kN +1$的N个节点的网络，BN拥有最小的直径。</p>
-<p>缺点：</p>
-<ol>
-<li>no path diversity: there is exactly one route from each source node to each destination node.</li>
-<li>the butterfly cannot be realized without long wires that must traverse at least half the diameter of the machine. </li>
-</ol>
-<h3 id="4-1The-Structure-of-Butterfly-Networks"><a href="#4-1The-Structure-of-Butterfly-Networks" class="headerlink" title="4.1The Structure of Butterfly Networks"></a>4.1The Structure of Butterfly Networks</h3><p> k-ary n-fly</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719114542950.png" alt="image-20200719114542950"></p>
-<p>2-ary 4-fly</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719114551161.png" alt="image-20200719114551161"></p>
-<p>​    k-ary n-fly网络由$k^n$个源终端节点，n个阶段, 每个阶段$k^{n-1}$ k×k crossbar switch节点以及最后$k^n$目的地终端节点组成。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719115531276.png" alt="image-20200719115531276">            </p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719144626828.png" alt="    ">        </p>
-<p>​    关于网络中报文的走向问题。</p>
-<p>根据每一个发出报文的终端编号可以决定不同路由路径。我们使用 n-digit radix-k number, ${d<em>{n−1},d</em>{n−2},…,d_0}$. 来表示每一条路径。</p>
-<p>对于k-ary n-fly网络。每一级有$k^{n-1}$个路由器，所以需要有n-1比特来进行选择。前n−1个数字${d<em>{n−1},d</em>{n−2},…,d_1}$.标识交换机，最后一个数字$d_0$标识交换机上的终端也就是决定了最终出口的选择。具体的使用如下：</p>
-<ol>
-<li>​    从输入节点开始，比如9这个输入节点，对应的二进制为1001；前三位为100，那么第0级交换机选择为4号。</li>
-<li>此时，d_0可以随机选择为0或者1，这是再将d_0和d_3进行交换，可以得到前三位000或者100，这样第1级交换机可以选择为1，0或者1，4.</li>
-<li>依次类推，最好已经决定输出的终端。</li>
-</ol>
-<p>具体来说：第一级设置dn−1，第二级设置dn−2，依此类推，最后一级设置d0已处于正确位置，</p>
-<h3 id="4-2-Isomorphic-Butterflies（同构）"><a href="#4-2-Isomorphic-Butterflies（同构）" class="headerlink" title="4.2 Isomorphic Butterflies（同构）"></a>4.2 Isomorphic Butterflies（同构）</h3><p>网络K，其节点和信道集定义：$K=(N^*，C)$。</p>
-<p>如果$K_1=(N_1,C_1),K_2=(N_2,C_2)$是同构的 ：</p>
-<p>​         顶点中存在一个置换$\pi$，对于边${u,v}\ \in C_1$存在${\pi(u),\pi(v)} \in C_2$</p>
-<h3 id="4-3-Performance-and-Packaging-Cost"><a href="#4-3-Performance-and-Packaging-Cost" class="headerlink" title="4.3 Performance and Packaging Cost"></a>4.3 Performance and Packaging Cost</h3><p>​    对于k-ary,n-fly网络：</p>
-<p>​    交换节点的度$\delta _{fly}= 2k$</p>
-<p>​    信道二等分(N是偶数)$B_{C,fly } = \frac{N}{2}$</p>
-<p>​                                        <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719160533316.png" alt="image-20200719160533316"></p>
-<p>​    信道负载</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719160543008.png" alt="信道负载"></p>
-<p>计算出两层包装层次结构下蝶形网络的通道宽度：    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719172821869.png" alt="image-20200719172821869">        </p>
-<p>在均匀负载且γ= 1的情况下，理想吞吐量：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719173001335.png" alt="image-20200719173001335"></p>
-<p>蝶形网络的目标：</p>
-<p>​    目标是首先获得最大的吞吐量，其次是最大程度地减少消息延迟。</p>
-<p>为此选择最大的K</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719173225620.png" alt="image-20200719173225620"></p>
-<p>这个k值给出了最小的直径，这使得延迟的H部分最小化，同时使信道带宽最大化。这也最大限度地提高了理想的吞吐量并最小化了序列化延迟。任何小于此值的k都不会提高吞吐量，只会由于额外的跃点计数而增加延迟.</p>
-<h3 id="4-4-Path-Diversity-and-Extra-Stages"><a href="#4-4-Path-Diversity-and-Extra-Stages" class="headerlink" title="4.4 Path Diversity and Extra Stages"></a>4.4 Path Diversity and Extra Stages</h3><p><img src="C:\Users\mcdxw\AppData\Roaming\Typora\typora-user-images\image-20200720071823533.png" alt="image-20200720071823533">没有路径多样性</p>
-]]></content>
-      <categories>
-        <category>Interconnection_Networks</category>
-      </categories>
-      <tags>
-        <tag>Interconnection_Networks</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Interconnection_Networks-ch2</title>
     <url>/2020/07/09/Interconnection-Networks-ch2/</url>
     <content><![CDATA[<h2 id="CH2-A-Simple-Interconnection-Network"><a href="#CH2-A-Simple-Interconnection-Network" class="headerlink" title="CH2 A Simple Interconnection Network"></a>CH2 A Simple Interconnection Network</h2><h3 id="2-1网络规范和限制"><a href="#2-1网络规范和限制" class="headerlink" title="2.1网络规范和限制"></a>2.1网络规范和限制</h3><p>​    有关网络设备的规范和约束，规范比如端口数量，传输速率。约束有关带宽，消耗。</p>
@@ -578,104 +486,35 @@ f = min(f_0,f_0(\frac{l_w}{l_c})^{-2})</script><p>$l_c$:导线的临界长度</p
       </tags>
   </entry>
   <entry>
-    <title>Interconnection-Networks-ch6</title>
-    <url>/2020/07/28/Interconnection-Networks-ch6/</url>
-    <content><![CDATA[<h2 id="Non-Blocking-Networks"><a href="#Non-Blocking-Networks" class="headerlink" title="Non-Blocking Networks"></a>Non-Blocking Networks</h2><span id="more"></span>
-<p>如果网络可以处理输入和输出排列的所有电路请求，则称该网络为非阻塞网络。即，可以形成从每个输入到其选择的输出的专用路径，而没有任何冲突（共享通道）。相反，如果网络无法处理所有此类电路请求而没有冲突，则它就是阻塞网络.</p>
-<p>两种类型的非阻塞网络。strictly non-blocking, rearrangeably non-blocking</p>
-<p>首先，如果可以每次一个电路递增地设置任何排列，而无需重新路由（或重新排列）任何已设置的电路，则网络严格不阻塞。如果可以将任何未使用的输入连接到任何未使用的输出，而无需更改任何其他流量所采用的路径，则说明网络完全是无阻塞的。</p>
-<p>相反，如果网络可以路由电路进行任意排列，则网络可重新排列为非阻塞（或简单地可重新排列），但是排列的渐进式构造可能需要重新布置一些早期电路，以允许以后建立电路。可重新排列的网络可以将任何未连接的输入连接到任何未连接的输出，但是可能需要重新路由一些不相关的流量才能建立连接。</p>
-<h3 id="6-1-Non-Blocking-vs-Non-Interfering-Networks"><a href="#6-1-Non-Blocking-vs-Non-Interfering-Networks" class="headerlink" title="6.1 Non-Blocking vs. Non-Interfering Networks"></a>6.1 Non-Blocking vs. Non-Interfering Networks</h3><p>分组交换网络中，资源分配好之后就不会互相影响。</p>
-<p>实际上无阻塞的网络就是为了实现无干扰的网络。</p>
-<h3 id="6-2-Crossbar-Networks"><a href="#6-2-Crossbar-Networks" class="headerlink" title="6.2 Crossbar Networks"></a>6.2 Crossbar Networks</h3><p>一个n×m交叉开关或交叉点开关将n个输入直接连接到m个输出，没有中间级。</p>
-<p>m=n,square</p>
-<p>m&gt;n||m&lt;n,rectangular</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728123737611.png" alt="image-20200728123737611"></p>
-<p>在输入线与输出线交叉的每个点（即，在每个交叉点），开关都可以选择将输入线连接到输出线。为了正确操作，每个输出最多必须连接到一个输入。但是，输入可以连接到多个输出.</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124036608.png" alt="image-20200728124036608"></p>
-<p>今天，大多数交叉开关都是使用数字逻辑实现的，其结构如图所示。 n条输入线中的每条连接到m  n：1多路复用器的一个输入。多路复用器的输出驱动m个输出端口。多路复用器可以通过驱动输出线的三态门或线或门实现。</p>
-<p>简化图：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124207488.png" alt="image-20200728124207488"></p>
-<p>纵横开关显然对于单播和多播流量都严格不阻塞。可以通过开关不同开关门。</p>
-<p>建造其他无阻塞网络，原因是成本和可伸缩性。</p>
-<p>成本都是$N^2$的。</p>
-<p>下图显示了如何使用2×2的n×n交叉开关阵列构造2n×2n交叉开关，从小型交叉开关构建大型交叉开关的成本也是二次方。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728125956171.png" alt="image-20200728125956171"></p>
-<h3 id="6-3-Clos-Networks"><a href="#6-3-Clos-Networks" class="headerlink" title="6.3 Clos Networks"></a>6.3 Clos Networks</h3><h4 id="6-3-1-Structure-and-Properties-of-Clos-Networks"><a href="#6-3-1-Structure-and-Properties-of-Clos-Networks" class="headerlink" title="6.3.1 Structure and Properties of Clos Networks"></a>6.3.1 Structure and Properties of Clos Networks</h4><p>Clos网络是一个三阶段网络，其中每个阶段都由许多纵横开关组成。对称Clos的特征是三元组（m，n，r），其中m是中级开关的数量，n是每个输入（输出）开关上的输入（输出）端口的数量，r是输入和输出开关的数量。此处输入和输出都一样为r和n.对于不一样的网络可以设为$(m,n_0,n_1,r_0,r_1)$</p>
-<p>中级交换机，到每个输入和输出交换机都有相应的链路。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132321853.png" alt="image-20200728132321853"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132403217.png" alt="image-20200728132403217"></p>
-<p>在引用Clos网络的输入和输出端口时，我们将交换机s的端口p表示为s.p。</p>
-<h4 id="6-3-2-Unicast-Routing-on-Strictly-Non-Blocking-Clos-Networks"><a href="#6-3-2-Unicast-Routing-on-Strictly-Non-Blocking-Clos-Networks" class="headerlink" title="6.3.2 Unicast Routing on Strictly Non-Blocking Clos Networks"></a>6.3.2 Unicast Routing on Strictly Non-Blocking Clos Networks</h4><p>定理：A Clos network is strictly non-blocking for unicast traffic iff m ≥ 2n − 1.</p>
-<p>要将单播呼叫从a.i路由到b.j，可通过将a不使用的交换机列表与b不使用的交换机列表相交来找到中间级交换机。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729082144535.png" alt="image-20200729082144535"></p>
-<p>如下图，电路从输入1.1（1）路由到输出3.3（9）。其中虚线为已经本占用的线路。最终选择为加粗的线。一个完整的排列{5、7、11、6、12、1、8、10、3、2、9、4}。也就是说，输入1（1.1）路由到输出5（2.2），输入2（1.2）路由到输出7（3.1），依此类推。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729081302659.png" alt="image-20200729081302659"></p>
-<p>假设按{9,6,7,8,3,12,10,5,1,11,2,4}的顺序应用呼叫。</p>
-<p>显示了在（5,3,4）Clos网络上路由此呼叫集的过程。该表的每一行对应于路由过程中的一个步骤。该表的每一行对应于路由过程中的一个步骤。前三列显示呼叫来自的输入交换机（进入），呼叫去向的输出交换机（离开）和分配给呼叫的中间交换机（中间）。其余八列给出位向量，显示哪些中间交换机不受每个输入和输出开关的影响。</p>
-<p>第一个呼叫为9（3，3），查排列集合，输入交换机为3，输出应该为3，交换机为输出switch1。并且由于第一个调用没有阻塞的路径，因此将其分配给中间交换机1.所以将输入交换机的路径3到中间交换机1忙（输入空闲3 = 01111），从中间交换机1到输出交换机1的路径忙（输出空闲1 = 01111）。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729083340014.png" alt="image-20200729083340014"></p>
-<h4 id="6-3-3-Unicast-Routing-on-Rearrangeable-Clos-Networks"><a href="#6-3-3-Unicast-Routing-on-Rearrangeable-Clos-Networks" class="headerlink" title="6.3.3 Unicast Routing on Rearrangeable Clos Networks"></a>6.3.3 Unicast Routing on Rearrangeable Clos Networks</h4><p>定理：A Clos network with m ≥ n is rearrangeable.</p>
-<p>显示了一种在可重排的非阻塞网络上路由一组呼叫的算法。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729093630509.png" alt="image-20200729093630509"></p>
-<p>定理：使用循环算法建立单个呼叫需要最多重新安排2r-2个其他呼叫。</p>
-<h4 id="6-3-4-Routing-Clos-Networks-Using-Matrix-Decomposition"><a href="#6-3-4-Routing-Clos-Networks-Using-Matrix-Decomposition" class="headerlink" title="6.3.4 Routing Clos Networks Using Matrix Decomposition"></a>6.3.4 Routing Clos Networks Using Matrix Decomposition</h4><p>利用矩阵来路由网络。</p>
-<p>矩阵R，每一个元素$X_{ij}$表示从输入交换机i到输出交换机j的呼叫次数。</p>
-<p>例子：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094145622.png" alt="image-20200729094145622">该矩阵可以分解为一组m个正矩阵的总和，其中每一行和每一列的总和最多为1。该组中的每个矩阵对应于中间级开关的设置。<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094247379.png" alt="image-20200729094247379"></p>
-<p>矩阵分解可用于路由单播或多播流量，并可应用于可重排和严格无阻塞的Clos网络。</p>
-<h4 id="6-3-5-Multicast-Routing-on-Clos-Networks"><a href="#6-3-5-Multicast-Routing-on-Clos-Networks" class="headerlink" title="6.3.5 Multicast Routing on Clos Networks"></a>6.3.5 Multicast Routing on Clos Networks</h4><p>定义：多播呼叫集合$C={c<em>1,c_2,……,C_n}$，其中每个多播呼叫$c_i=(a_i,、{b</em>{i1},b<em>{i2}……,b</em>{if}})$，输入端口$a<em>i$，$f$个输出端口$b</em>{i1},b<em>{i2}……,b</em>{if}$，$f$为扇出。</p>
-<p>例子：考虑多播调用集（只考虑交换机号）：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095529689.png" alt=""></p>
-<p>向量表示：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095559587.png" alt="image-20200729095559587"></p>
-<p>如果$c_i \bigwedge c_j=0$ ,$c_i,c_j$可以映射到相同的中间阶段。</p>
-<p>上图实例不能实现，所以需要扇出。</p>
-<p>通过在输入开关中执行扇出，可以将输出集分配到多个中间阶段。</p>
-<p>k-way输入扇出，就是将$c_i={a,B}$分成k个呼叫，分别为：</p>
-<p>$c<em>{i1}=(a,B_1),…,c</em>{ik}=(a,B<em>k),\bigcup</em>{j=1}^kB_j=B$</p>
-<p>将上面的集合分解如下：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102606396.png" alt="image-20200729102606396"></p>
-<p>中间交换机的使用：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103143490.png" alt="image-20200729103143490"></p>
-<p>最终的路由线路：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102709756.png" alt="image-20200729102709756"></p>
-<p>知道中间交换机的数理，扇出的限制：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103305798.png" alt="image-20200729103305798"></p>
-<p>知道了扇出，中间交换机的要求：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103331640.png" alt="image-20200729103331640"></p>
-<p>算法流程：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103048886.png" alt="image-20200729103048886"></p>
-<h3 id="6-4-Beneˇ-s-Networks"><a href="#6-4-Beneˇ-s-Networks" class="headerlink" title="6.4 Beneˇ s Networks"></a>6.4 Beneˇ s Networks</h3><p>由2×2交换机构成的Clos网络也称为Beneˇ网络</p>
-<h3 id="6-5-Sorting-Networks"><a href="#6-5-Sorting-Networks" class="headerlink" title="6.5 Sorting Networks"></a>6.5 Sorting Networks</h3><p>N输入分类网络在其N个输入端子上接受一组用唯一分类键标记的N条记录，并在其N个输出端子上按键顺序输出这些记录。</p>
-]]></content>
-      <categories>
-        <category>Interconnection_Networks</category>
-      </categories>
-      <tags>
-        <tag>Interconnection_Networks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode 1</title>
-    <url>/2020/04/08/LeetCode-1/</url>
-    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><pre><code>33.搜索旋转数组
-46.全排列
-49.字母异位词分组
-</code></pre><h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><span id="more"></span>
+    <title>Interconnection-Networks-ch5-1</title>
+    <url>/2020/07/20/Interconnection-Networks-ch5-1/</url>
+    <content><![CDATA[<h2 id="Torus-Network"><a href="#Torus-Network" class="headerlink" title="Torus Network"></a>Torus Network<span id="more"></span></h2><h3 id="5-3-Building-Mesh-and-T-orus-Networks"><a href="#5-3-Building-Mesh-and-T-orus-Networks" class="headerlink" title="5.3 Building Mesh and T orus Networks"></a>5.3 Building Mesh and T orus Networks</h3><p>将网络的抽象节点映射到物理空间中的实际位置，不同的封装技术可以实现一维的，二维的等映射。</p>
 <ul>
-<li>搜索旋转数组<br>  主要是二分法。一半有序的数组，一半无序的数组。然后一次进行下去。</li>
-<li>全排列<br>  方法是回溯法，可以想成一个树状图，不断搜索，然后到叶子节点停止。</li>
-<li>字母异位词分组<br>  方法就是hash,自己先写的没有通过时间的限制。后面利用了网上的题解。思路就是使用unordered_map来存储，利用排序后的string作为关键字存贮，这样一次遍历就可以完成。</li>
+<li><p>最简单的方式就是$p_i=a_i$，物理位置和逻辑地址相同，每个节点之间距离相同。</p>
+</li>
+<li><p>但是这将导致$p_k和p_0$之间距离过大，如此长的信道可能导致过多的等待时间或需要较慢的信令速率。所以提出折叠的环形网络来解决问题。一种环形网络的折叠入下：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131524647.png" alt="image-20200727131524647"></p>
+<p>消灭了 最长的网络，但是牺牲了以相邻节点距离短的优点。</p>
+</li>
 </ul>
-]]></content>
-      <tags>
-        <tag>LeetCode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Interconnection-Networks-ch7</title>
-    <url>/2020/07/29/Interconnection-Networks-ch7/</url>
-    <content><![CDATA[<h2 id="CHAPTER-7-Slicing-and-Dicing"><a href="#CHAPTER-7-Slicing-and-Dicing" class="headerlink" title="CHAPTER 7 Slicing and Dicing"></a>CHAPTER 7 Slicing and Dicing</h2><p>我们首先看concentrators and distributors。集中器将多个终端节点的流量组合到单个网络通道上。当来自任何终端的流量很小以充分利用网络通道时，可以使用它们。它们还可以有效地组合来自许多突发性终端的流量。当峰值流量与平均流量之比较大时，使用集中器可降低序列化延迟，并降低网络成本。</p>
+<p>最终的物理放置图对比：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131557787.png" alt="image-20200727131557787"></p>
+<p>通常，通过以折叠顺序组合k个折叠的k-ary n-1cube来构造折叠的k-ary n-cube</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131614133.png" alt="image-20200727131614133"></p>
+<p>当逻辑维数超过物理维数时，必须将几个逻辑维映射到每个物理维中。如果物理维数为q，则直接映射是将逻辑维的q折叠为每个物理维。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132711914.png" alt="image-20200727132711914"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132749954.png" alt="image-20200727132749954"></p>
+<h3 id="Express-Cubes"><a href="#Express-Cubes" class="headerlink" title="Express Cubes"></a>Express Cubes</h3><p>原因：环状网络通道短，$t_c$时间通常由$t_r$决定，与直径小的网络相比，导致更多的$T_H$。可以增加维度减小直径。但是会导致$T_s$增大。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114113438.png" alt="image-20200728114113438"></p>
+<p>所以Express sube出现了。就是添加了几个快速通道。通过路由必须在快速通道上的某个维度上经过较长距离的数据包，报头等待时间可以减少到接近信道等待时间限制。因为可以控制快速通道的数量以匹配网络的二等分宽度，所以可以在不增加序列化延迟的情况下实现报头延迟的减少。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114625185.png" alt="image-20200728114625185"></p>
+<p>每个维度，每隔i个节点设置一个express channel。</p>
+<p>普通网络中，在j维度有$H_j$跳，那么在快速立方体中，跳数为：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728115227480.png" alt="image-20200728115227480"></p>
+<p>对于长的维度，选择$i = \frac{t_r}{t_c}$,来平衡式中的两项，短的维度，选择$i=\sqrt{H_min}$</p>
+<p>分层的快速cube:</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120044122.png" alt="image-20200728120044122"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120023536.png" alt="image-20200728120023536"></p>
 ]]></content>
       <categories>
         <category>Interconnection_Networks</category>
@@ -766,6 +605,167 @@ R_{ab}
       </tags>
   </entry>
   <entry>
+    <title>Interconnection-Networks-ch6</title>
+    <url>/2020/07/28/Interconnection-Networks-ch6/</url>
+    <content><![CDATA[<h2 id="Non-Blocking-Networks"><a href="#Non-Blocking-Networks" class="headerlink" title="Non-Blocking Networks"></a>Non-Blocking Networks</h2><span id="more"></span>
+<p>如果网络可以处理输入和输出排列的所有电路请求，则称该网络为非阻塞网络。即，可以形成从每个输入到其选择的输出的专用路径，而没有任何冲突（共享通道）。相反，如果网络无法处理所有此类电路请求而没有冲突，则它就是阻塞网络.</p>
+<p>两种类型的非阻塞网络。strictly non-blocking, rearrangeably non-blocking</p>
+<p>首先，如果可以每次一个电路递增地设置任何排列，而无需重新路由（或重新排列）任何已设置的电路，则网络严格不阻塞。如果可以将任何未使用的输入连接到任何未使用的输出，而无需更改任何其他流量所采用的路径，则说明网络完全是无阻塞的。</p>
+<p>相反，如果网络可以路由电路进行任意排列，则网络可重新排列为非阻塞（或简单地可重新排列），但是排列的渐进式构造可能需要重新布置一些早期电路，以允许以后建立电路。可重新排列的网络可以将任何未连接的输入连接到任何未连接的输出，但是可能需要重新路由一些不相关的流量才能建立连接。</p>
+<h3 id="6-1-Non-Blocking-vs-Non-Interfering-Networks"><a href="#6-1-Non-Blocking-vs-Non-Interfering-Networks" class="headerlink" title="6.1 Non-Blocking vs. Non-Interfering Networks"></a>6.1 Non-Blocking vs. Non-Interfering Networks</h3><p>分组交换网络中，资源分配好之后就不会互相影响。</p>
+<p>实际上无阻塞的网络就是为了实现无干扰的网络。</p>
+<h3 id="6-2-Crossbar-Networks"><a href="#6-2-Crossbar-Networks" class="headerlink" title="6.2 Crossbar Networks"></a>6.2 Crossbar Networks</h3><p>一个n×m交叉开关或交叉点开关将n个输入直接连接到m个输出，没有中间级。</p>
+<p>m=n,square</p>
+<p>m&gt;n||m&lt;n,rectangular</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728123737611.png" alt="image-20200728123737611"></p>
+<p>在输入线与输出线交叉的每个点（即，在每个交叉点），开关都可以选择将输入线连接到输出线。为了正确操作，每个输出最多必须连接到一个输入。但是，输入可以连接到多个输出.</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124036608.png" alt="image-20200728124036608"></p>
+<p>今天，大多数交叉开关都是使用数字逻辑实现的，其结构如图所示。 n条输入线中的每条连接到m  n：1多路复用器的一个输入。多路复用器的输出驱动m个输出端口。多路复用器可以通过驱动输出线的三态门或线或门实现。</p>
+<p>简化图：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728124207488.png" alt="image-20200728124207488"></p>
+<p>纵横开关显然对于单播和多播流量都严格不阻塞。可以通过开关不同开关门。</p>
+<p>建造其他无阻塞网络，原因是成本和可伸缩性。</p>
+<p>成本都是$N^2$的。</p>
+<p>下图显示了如何使用2×2的n×n交叉开关阵列构造2n×2n交叉开关，从小型交叉开关构建大型交叉开关的成本也是二次方。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728125956171.png" alt="image-20200728125956171"></p>
+<h3 id="6-3-Clos-Networks"><a href="#6-3-Clos-Networks" class="headerlink" title="6.3 Clos Networks"></a>6.3 Clos Networks</h3><h4 id="6-3-1-Structure-and-Properties-of-Clos-Networks"><a href="#6-3-1-Structure-and-Properties-of-Clos-Networks" class="headerlink" title="6.3.1 Structure and Properties of Clos Networks"></a>6.3.1 Structure and Properties of Clos Networks</h4><p>Clos网络是一个三阶段网络，其中每个阶段都由许多纵横开关组成。对称Clos的特征是三元组（m，n，r），其中m是中级开关的数量，n是每个输入（输出）开关上的输入（输出）端口的数量，r是输入和输出开关的数量。此处输入和输出都一样为r和n.对于不一样的网络可以设为$(m,n_0,n_1,r_0,r_1)$</p>
+<p>中级交换机，到每个输入和输出交换机都有相应的链路。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132321853.png" alt="image-20200728132321853"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728132403217.png" alt="image-20200728132403217"></p>
+<p>在引用Clos网络的输入和输出端口时，我们将交换机s的端口p表示为s.p。</p>
+<h4 id="6-3-2-Unicast-Routing-on-Strictly-Non-Blocking-Clos-Networks"><a href="#6-3-2-Unicast-Routing-on-Strictly-Non-Blocking-Clos-Networks" class="headerlink" title="6.3.2 Unicast Routing on Strictly Non-Blocking Clos Networks"></a>6.3.2 Unicast Routing on Strictly Non-Blocking Clos Networks</h4><p>定理：A Clos network is strictly non-blocking for unicast traffic iff m ≥ 2n − 1.</p>
+<p>要将单播呼叫从a.i路由到b.j，可通过将a不使用的交换机列表与b不使用的交换机列表相交来找到中间级交换机。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729082144535.png" alt="image-20200729082144535"></p>
+<p>如下图，电路从输入1.1（1）路由到输出3.3（9）。其中虚线为已经本占用的线路。最终选择为加粗的线。一个完整的排列{5、7、11、6、12、1、8、10、3、2、9、4}。也就是说，输入1（1.1）路由到输出5（2.2），输入2（1.2）路由到输出7（3.1），依此类推。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729081302659.png" alt="image-20200729081302659"></p>
+<p>假设按{9,6,7,8,3,12,10,5,1,11,2,4}的顺序应用呼叫。</p>
+<p>显示了在（5,3,4）Clos网络上路由此呼叫集的过程。该表的每一行对应于路由过程中的一个步骤。该表的每一行对应于路由过程中的一个步骤。前三列显示呼叫来自的输入交换机（进入），呼叫去向的输出交换机（离开）和分配给呼叫的中间交换机（中间）。其余八列给出位向量，显示哪些中间交换机不受每个输入和输出开关的影响。</p>
+<p>第一个呼叫为9（3，3），查排列集合，输入交换机为3，输出应该为3，交换机为输出switch1。并且由于第一个调用没有阻塞的路径，因此将其分配给中间交换机1.所以将输入交换机的路径3到中间交换机1忙（输入空闲3 = 01111），从中间交换机1到输出交换机1的路径忙（输出空闲1 = 01111）。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729083340014.png" alt="image-20200729083340014"></p>
+<h4 id="6-3-3-Unicast-Routing-on-Rearrangeable-Clos-Networks"><a href="#6-3-3-Unicast-Routing-on-Rearrangeable-Clos-Networks" class="headerlink" title="6.3.3 Unicast Routing on Rearrangeable Clos Networks"></a>6.3.3 Unicast Routing on Rearrangeable Clos Networks</h4><p>定理：A Clos network with m ≥ n is rearrangeable.</p>
+<p>显示了一种在可重排的非阻塞网络上路由一组呼叫的算法。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729093630509.png" alt="image-20200729093630509"></p>
+<p>定理：使用循环算法建立单个呼叫需要最多重新安排2r-2个其他呼叫。</p>
+<h4 id="6-3-4-Routing-Clos-Networks-Using-Matrix-Decomposition"><a href="#6-3-4-Routing-Clos-Networks-Using-Matrix-Decomposition" class="headerlink" title="6.3.4 Routing Clos Networks Using Matrix Decomposition"></a>6.3.4 Routing Clos Networks Using Matrix Decomposition</h4><p>利用矩阵来路由网络。</p>
+<p>矩阵R，每一个元素$X_{ij}$表示从输入交换机i到输出交换机j的呼叫次数。</p>
+<p>例子：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094145622.png" alt="image-20200729094145622">该矩阵可以分解为一组m个正矩阵的总和，其中每一行和每一列的总和最多为1。该组中的每个矩阵对应于中间级开关的设置。<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729094247379.png" alt="image-20200729094247379"></p>
+<p>矩阵分解可用于路由单播或多播流量，并可应用于可重排和严格无阻塞的Clos网络。</p>
+<h4 id="6-3-5-Multicast-Routing-on-Clos-Networks"><a href="#6-3-5-Multicast-Routing-on-Clos-Networks" class="headerlink" title="6.3.5 Multicast Routing on Clos Networks"></a>6.3.5 Multicast Routing on Clos Networks</h4><p>定义：多播呼叫集合$C={c<em>1,c_2,……,C_n}$，其中每个多播呼叫$c_i=(a_i,、{b</em>{i1},b<em>{i2}……,b</em>{if}})$，输入端口$a<em>i$，$f$个输出端口$b</em>{i1},b<em>{i2}……,b</em>{if}$，$f$为扇出。</p>
+<p>例子：考虑多播调用集（只考虑交换机号）：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095529689.png" alt=""></p>
+<p>向量表示：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729095559587.png" alt="image-20200729095559587"></p>
+<p>如果$c_i \bigwedge c_j=0$ ,$c_i,c_j$可以映射到相同的中间阶段。</p>
+<p>上图实例不能实现，所以需要扇出。</p>
+<p>通过在输入开关中执行扇出，可以将输出集分配到多个中间阶段。</p>
+<p>k-way输入扇出，就是将$c_i={a,B}$分成k个呼叫，分别为：</p>
+<p>$c<em>{i1}=(a,B_1),…,c</em>{ik}=(a,B<em>k),\bigcup</em>{j=1}^kB_j=B$</p>
+<p>将上面的集合分解如下：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102606396.png" alt="image-20200729102606396"></p>
+<p>中间交换机的使用：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103143490.png" alt="image-20200729103143490"></p>
+<p>最终的路由线路：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729102709756.png" alt="image-20200729102709756"></p>
+<p>知道中间交换机的数理，扇出的限制：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103305798.png" alt="image-20200729103305798"></p>
+<p>知道了扇出，中间交换机的要求：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103331640.png" alt="image-20200729103331640"></p>
+<p>算法流程：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729103048886.png" alt="image-20200729103048886"></p>
+<h3 id="6-4-Beneˇ-s-Networks"><a href="#6-4-Beneˇ-s-Networks" class="headerlink" title="6.4 Beneˇ s Networks"></a>6.4 Beneˇ s Networks</h3><p>由2×2交换机构成的Clos网络也称为Beneˇ网络</p>
+<h3 id="6-5-Sorting-Networks"><a href="#6-5-Sorting-Networks" class="headerlink" title="6.5 Sorting Networks"></a>6.5 Sorting Networks</h3><p>N输入分类网络在其N个输入端子上接受一组用唯一分类键标记的N条记录，并在其N个输出端子上按键顺序输出这些记录。</p>
+]]></content>
+      <categories>
+        <category>Interconnection_Networks</category>
+      </categories>
+      <tags>
+        <tag>Interconnection_Networks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Interconnection-Networks-ch7</title>
+    <url>/2020/07/29/Interconnection-Networks-ch7/</url>
+    <content><![CDATA[<h2 id="CHAPTER-7-Slicing-and-Dicing"><a href="#CHAPTER-7-Slicing-and-Dicing" class="headerlink" title="CHAPTER 7 Slicing and Dicing"></a>CHAPTER 7 Slicing and Dicing</h2><p>我们首先看concentrators and distributors。集中器将多个终端节点的流量组合到单个网络通道上。当来自任何终端的流量很小以充分利用网络通道时，可以使用它们。它们还可以有效地组合来自许多突发性终端的流量。当峰值流量与平均流量之比较大时，使用集中器可降低序列化延迟，并降低网络成本。</p>
+]]></content>
+      <categories>
+        <category>Interconnection_Networks</category>
+      </categories>
+      <tags>
+        <tag>Interconnection_Networks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode 1</title>
+    <url>/2020/04/08/LeetCode-1/</url>
+    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><pre><code>33.搜索旋转数组
+46.全排列
+49.字母异位词分组
+</code></pre><h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><span id="more"></span>
+<ul>
+<li>搜索旋转数组<br>  主要是二分法。一半有序的数组，一半无序的数组。然后一次进行下去。</li>
+<li>全排列<br>  方法是回溯法，可以想成一个树状图，不断搜索，然后到叶子节点停止。</li>
+<li>字母异位词分组<br>  方法就是hash,自己先写的没有通过时间的限制。后面利用了网上的题解。思路就是使用unordered_map来存储，利用排序后的string作为关键字存贮，这样一次遍历就可以完成。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Interconnection-Networks-ch4.md</title>
+    <url>/2020/07/19/Interconnection-Networks-ch3/</url>
+    <content><![CDATA[<h2 id="Butterfly-Networks"><a href="#Butterfly-Networks" class="headerlink" title="Butterfly Networks"></a>Butterfly Networks</h2><p>俩个主要的拓扑家族</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719101415173.png" alt="image-20200719101415173"></p>
+<p>蝶形网络是最基本的间接网络。</p>
+<p>对于交换机度数为$\delta = 2k, H = \log_kN +1$的N个节点的网络，BN拥有最小的直径。</p>
+<p>缺点：</p>
+<ol>
+<li>no path diversity: there is exactly one route from each source node to each destination node.</li>
+<li>the butterfly cannot be realized without long wires that must traverse at least half the diameter of the machine. </li>
+</ol>
+<h3 id="4-1The-Structure-of-Butterfly-Networks"><a href="#4-1The-Structure-of-Butterfly-Networks" class="headerlink" title="4.1The Structure of Butterfly Networks"></a>4.1The Structure of Butterfly Networks</h3><p> k-ary n-fly</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719114542950.png" alt="image-20200719114542950"></p>
+<p>2-ary 4-fly</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719114551161.png" alt="image-20200719114551161"></p>
+<p>​    k-ary n-fly网络由$k^n$个源终端节点，n个阶段, 每个阶段$k^{n-1}$ k×k crossbar switch节点以及最后$k^n$目的地终端节点组成。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719115531276.png" alt="image-20200719115531276">            </p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719144626828.png" alt="    ">        </p>
+<p>​    关于网络中报文的走向问题。</p>
+<p>根据每一个发出报文的终端编号可以决定不同路由路径。我们使用 n-digit radix-k number, ${d<em>{n−1},d</em>{n−2},…,d_0}$. 来表示每一条路径。</p>
+<p>对于k-ary n-fly网络。每一级有$k^{n-1}$个路由器，所以需要有n-1比特来进行选择。前n−1个数字${d<em>{n−1},d</em>{n−2},…,d_1}$.标识交换机，最后一个数字$d_0$标识交换机上的终端也就是决定了最终出口的选择。具体的使用如下：</p>
+<ol>
+<li>​    从输入节点开始，比如9这个输入节点，对应的二进制为1001；前三位为100，那么第0级交换机选择为4号。</li>
+<li>此时，d_0可以随机选择为0或者1，这是再将d_0和d_3进行交换，可以得到前三位000或者100，这样第1级交换机可以选择为1，0或者1，4.</li>
+<li>依次类推，最好已经决定输出的终端。</li>
+</ol>
+<p>具体来说：第一级设置dn−1，第二级设置dn−2，依此类推，最后一级设置d0已处于正确位置，</p>
+<h3 id="4-2-Isomorphic-Butterflies（同构）"><a href="#4-2-Isomorphic-Butterflies（同构）" class="headerlink" title="4.2 Isomorphic Butterflies（同构）"></a>4.2 Isomorphic Butterflies（同构）</h3><p>网络K，其节点和信道集定义：$K=(N^*，C)$。</p>
+<p>如果$K_1=(N_1,C_1),K_2=(N_2,C_2)$是同构的 ：</p>
+<p>​         顶点中存在一个置换$\pi$，对于边${u,v}\ \in C_1$存在${\pi(u),\pi(v)} \in C_2$</p>
+<h3 id="4-3-Performance-and-Packaging-Cost"><a href="#4-3-Performance-and-Packaging-Cost" class="headerlink" title="4.3 Performance and Packaging Cost"></a>4.3 Performance and Packaging Cost</h3><p>​    对于k-ary,n-fly网络：</p>
+<p>​    交换节点的度$\delta _{fly}= 2k$</p>
+<p>​    信道二等分(N是偶数)$B_{C,fly } = \frac{N}{2}$</p>
+<p>​                                        <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719160533316.png" alt="image-20200719160533316"></p>
+<p>​    信道负载</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719160543008.png" alt="信道负载"></p>
+<p>计算出两层包装层次结构下蝶形网络的通道宽度：    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719172821869.png" alt="image-20200719172821869">        </p>
+<p>在均匀负载且γ= 1的情况下，理想吞吐量：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719173001335.png" alt="image-20200719173001335"></p>
+<p>蝶形网络的目标：</p>
+<p>​    目标是首先获得最大的吞吐量，其次是最大程度地减少消息延迟。</p>
+<p>为此选择最大的K</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719173225620.png" alt="image-20200719173225620"></p>
+<p>这个k值给出了最小的直径，这使得延迟的H部分最小化，同时使信道带宽最大化。这也最大限度地提高了理想的吞吐量并最小化了序列化延迟。任何小于此值的k都不会提高吞吐量，只会由于额外的跃点计数而增加延迟.</p>
+<h3 id="4-4-Path-Diversity-and-Extra-Stages"><a href="#4-4-Path-Diversity-and-Extra-Stages" class="headerlink" title="4.4 Path Diversity and Extra Stages"></a>4.4 Path Diversity and Extra Stages</h3><p><img src="C:\Users\mcdxw\AppData\Roaming\Typora\typora-user-images\image-20200720071823533.png" alt="image-20200720071823533">没有路径多样性</p>
+]]></content>
+      <categories>
+        <category>Interconnection_Networks</category>
+      </categories>
+      <tags>
+        <tag>Interconnection_Networks</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode-10</title>
     <url>/2020/06/16/LeetCode-10/</url>
     <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>这次题目没啥。难度不大</p>
@@ -792,13 +792,13 @@ R_{ab}
       </tags>
   </entry>
   <entry>
-    <title>LeetCode-11</title>
-    <url>/2020/06/17/LeetCode-11/</url>
-    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ol>
-<li><a href="https://leetcode-cn.com/problems/repeated-dna-sequences/description/">187.重复的DNA序列</a></li>
-<li><a href="https://leetcode-cn.com/problems/single-number-ii/description/">137.只出现一次的数字 II </a></li>
-</ol>
-<p>两个题目都是关于位运算的。不得不承认自己不会💔，确实没有这方面的练习，完全没有想法。这个还是需要自己多去尝试，多学习学习。</p>
+    <title>LeetCode-12</title>
+    <url>/2020/09/03/LeetCode-12/</url>
+    <content><![CDATA[<h2 id="消除游戏"><a href="#消除游戏" class="headerlink" title="消除游戏"></a><a href="https://leetcode-cn.com/problems/elimination-game/">消除游戏</a></h2><p>题目描述：给定一个从1 到 n 排序的整数列表。<br>首先，从左到右，从第一个数字开始，每隔一个数字进行删除，直到列表的末尾。<br>第二步，在剩下的数字中，从右到左，从倒数第一个数字开始，每隔一个数字进行删除，直到列表开头。<br>我们不断重复这两步，从左到右和从右到左交替进行，直到只剩下一个数字。<br>返回长度为 n 的列表中，最后剩下的数字。</p>
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>感觉不是很困难，然后就想着尝试解一下，然后发现自己又不会写代码了。感觉思路好乱，根本把握不住问题的根本，只能想着简单的例子来凑代码，比较难受。</p>
+<p>最终的解答还是很容易的，但是要利用数学来求解，自己没有忘这边考虑，走了很差的路子。</p>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastRemaining</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n==<span class="number">1</span> ? <span class="number">1</span> : <span class="number">2</span>*(n/<span class="number">2</span>+<span class="number">1</span>-<span class="built_in">lastRemaining</span>(n/<span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>证明：    <a href="https://blog.csdn.net/afei__/article/details/83689502">证明方法</a></p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -808,13 +808,25 @@ R_{ab}
       </tags>
   </entry>
   <entry>
-    <title>LeetCode-12</title>
-    <url>/2020/09/03/LeetCode-12/</url>
-    <content><![CDATA[<h2 id="消除游戏"><a href="#消除游戏" class="headerlink" title="消除游戏"></a><a href="https://leetcode-cn.com/problems/elimination-game/">消除游戏</a></h2><p>题目描述：给定一个从1 到 n 排序的整数列表。<br>首先，从左到右，从第一个数字开始，每隔一个数字进行删除，直到列表的末尾。<br>第二步，在剩下的数字中，从右到左，从倒数第一个数字开始，每隔一个数字进行删除，直到列表开头。<br>我们不断重复这两步，从左到右和从右到左交替进行，直到只剩下一个数字。<br>返回长度为 n 的列表中，最后剩下的数字。</p>
-<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>感觉不是很困难，然后就想着尝试解一下，然后发现自己又不会写代码了。感觉思路好乱，根本把握不住问题的根本，只能想着简单的例子来凑代码，比较难受。</p>
-<p>最终的解答还是很容易的，但是要利用数学来求解，自己没有忘这边考虑，走了很差的路子。</p>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastRemaining</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> n==<span class="number">1</span> ? <span class="number">1</span> : <span class="number">2</span>*(n/<span class="number">2</span>+<span class="number">1</span>-<span class="built_in">lastRemaining</span>(n/<span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>证明：    <a href="https://blog.csdn.net/afei__/article/details/83689502">证明方法</a></p>
+    <title>LeetCode-3</title>
+    <url>/2020/04/10/LeetCode-3/</url>
+    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><pre><code>79.单词搜索
+今天就一题，最近再忙中期检查
+</code></pre><h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><span id="more"></span>
+<p>第一想法就是回溯，也就这么做了，四个方向分别探索，知道成功。时间空间效率极低😢.看来其他人的答案，主要是在判断上，我的是分开判断，人家的是||或了一下，这里有不同。再一个在确定是否探索过的问题上，我利用了一个tags二维数组，可以直接通过修改原数组来实现。这点我没有做导致空间不够。</p>
+]]></content>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-11</title>
+    <url>/2020/06/17/LeetCode-11/</url>
+    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ol>
+<li><a href="https://leetcode-cn.com/problems/repeated-dna-sequences/description/">187.重复的DNA序列</a></li>
+<li><a href="https://leetcode-cn.com/problems/single-number-ii/description/">137.只出现一次的数字 II </a></li>
+</ol>
+<p>两个题目都是关于位运算的。不得不承认自己不会💔，确实没有这方面的练习，完全没有想法。这个还是需要自己多去尝试，多学习学习。</p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -849,18 +861,6 @@ R_{ab}
 </li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&gt;k) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    k = <span class="built_in">max</span>(k, i+nums[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>LeetCode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode-3</title>
-    <url>/2020/04/10/LeetCode-3/</url>
-    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><pre><code>79.单词搜索
-今天就一题，最近再忙中期检查
-</code></pre><h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><span id="more"></span>
-<p>第一想法就是回溯，也就这么做了，四个方向分别探索，知道成功。时间空间效率极低😢.看来其他人的答案，主要是在判断上，我的是分开判断，人家的是||或了一下，这里有不同。再一个在确定是否探索过的问题上，我利用了一个tags二维数组，可以直接通过修改原数组来实现。这点我没有做导致空间不够。</p>
 ]]></content>
       <tags>
         <tag>LeetCode</tag>
@@ -982,6 +982,30 @@ R_{ab}
       </tags>
   </entry>
   <entry>
+    <title>LeetCode-9</title>
+    <url>/2020/06/06/LeetCode-9/</url>
+    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>今天就一个题目，有些不好意思🙈</p>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/find-peak-element/">寻找峰值</a></li>
+</ol>
+<p>具体点，就是求解数组中的极大值，并且假设相邻的不会相等，同时nums[-1],nums[n+1]为负无穷。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>​    看着题目很简单，一遍遍历即可，但是复杂的是O(n)的。题目要求$O(log(n))$。所以还需改进。</p>
+<p>​    我是看了一眼解答提到的边界值，想到解法的。</p>
+<p>​    思路就是比较中值mid和两段的中间值l_mid,r_mid。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(nums[mid]&lt;nums[l_mid])&#123;<span class="comment">//在左边</span></span><br><span class="line">        right = mid;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(nums[mid]&lt;nums[r_mid])&#123;<span class="comment">//在右边</span></span><br><span class="line">        left = mid;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;<span class="comment">//在中间</span></span><br><span class="line">        left = l_mid;</span><br><span class="line">        right = r_mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还是代码解释的快。嘎嘎嘎！</p>
+<p>还有一些边界值，这些比较简单，数组数目1，2可以单独考虑。再一个，最先比较边界的是否为极值也是一个简化的过程。</p>
+<p>最终还是完成，花费的时间比较久，主要是没有安心，而且没有认真理解题目。继续🐱‍🏍。</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>Leetcode</tag>
+        <tag>Binary_Search</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux命令积累</title>
     <url>/2020/06/24/Linux%E5%91%BD%E4%BB%A4%E7%A7%AF%E7%B4%AF/</url>
     <content><![CDATA[<h2 id="Linux命令积累"><a href="#Linux命令积累" class="headerlink" title="Linux命令积累"></a>Linux命令积累</h2><ol>
@@ -1008,30 +1032,6 @@ R_{ab}
       </categories>
       <tags>
         <tag>命令行</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode-9</title>
-    <url>/2020/06/06/LeetCode-9/</url>
-    <content><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>今天就一个题目，有些不好意思🙈</p>
-<ol>
-<li><a href="https://leetcode-cn.com/problems/find-peak-element/">寻找峰值</a></li>
-</ol>
-<p>具体点，就是求解数组中的极大值，并且假设相邻的不会相等，同时nums[-1],nums[n+1]为负无穷。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>​    看着题目很简单，一遍遍历即可，但是复杂的是O(n)的。题目要求$O(log(n))$。所以还需改进。</p>
-<p>​    我是看了一眼解答提到的边界值，想到解法的。</p>
-<p>​    思路就是比较中值mid和两段的中间值l_mid,r_mid。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(nums[mid]&lt;nums[l_mid])&#123;<span class="comment">//在左边</span></span><br><span class="line">        right = mid;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(nums[mid]&lt;nums[r_mid])&#123;<span class="comment">//在右边</span></span><br><span class="line">        left = mid;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;<span class="comment">//在中间</span></span><br><span class="line">        left = l_mid;</span><br><span class="line">        right = r_mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>还是代码解释的快。嘎嘎嘎！</p>
-<p>还有一些边界值，这些比较简单，数组数目1，2可以单独考虑。再一个，最先比较边界的是否为极值也是一个简化的过程。</p>
-<p>最终还是完成，花费的时间比较久，主要是没有安心，而且没有认真理解题目。继续🐱‍🏍。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>Binary_Search</tag>
       </tags>
   </entry>
   <entry>
@@ -1128,6 +1128,26 @@ R_{ab}
       </tags>
   </entry>
   <entry>
+    <title>Omnet++</title>
+    <url>/2020/08/03/Omnet++/</url>
+    <content><![CDATA[<h2 id="Omnet"><a href="#Omnet" class="headerlink" title="Omnet++"></a>Omnet++</h2><p>主要由六个部分组成：</p>
+<ol>
+<li>仿真内核库（simulation kernel library,简称Sim）</li>
+<li>网络描述语言的编译器（network description compiler, nedc）</li>
+<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
+<li>仿真程序的图形化用户接口－Tkenv</li>
+<li>仿真程序的命令行用户接口－Cmdenv</li>
+<li>图形化的输出工具－Plove和Scalar<br>整个结构如下：<br><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Omnet++</category>
+      </categories>
+      <tags>
+        <tag>Omnet++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Network Endpoint Congestion Control for Fine-Grained Communication</title>
     <url>/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/</url>
     <content><![CDATA[<p>需要快速的响应时间和较低的开销</p>
@@ -1153,26 +1173,6 @@ R_{ab}
         <tag>拥塞控制</tag>
         <tag>SMSRP</tag>
         <tag>LHRP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Omnet++</title>
-    <url>/2020/08/03/Omnet++/</url>
-    <content><![CDATA[<h2 id="Omnet"><a href="#Omnet" class="headerlink" title="Omnet++"></a>Omnet++</h2><p>主要由六个部分组成：</p>
-<ol>
-<li>仿真内核库（simulation kernel library,简称Sim）</li>
-<li>网络描述语言的编译器（network description compiler, nedc）</li>
-<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
-<li>仿真程序的图形化用户接口－Tkenv</li>
-<li>仿真程序的命令行用户接口－Cmdenv</li>
-<li>图形化的输出工具－Plove和Scalar<br>整个结构如下：<br><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Omnet++</category>
-      </categories>
-      <tags>
-        <tag>Omnet++</tag>
       </tags>
   </entry>
   <entry>
@@ -1221,6 +1221,50 @@ R_{ab}
       </categories>
       <tags>
         <tag>tail</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora上传图片</title>
+    <url>/2020/06/05/Typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</url>
+    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​    从开始用markdown写文章，自己只会写文字，现在有了多元的需求。比如图片，代码等。这些东西利用原生的代码可以完成，但是人总是偷懒的，没有人愿意先上传图片，再复制链接，最后写在文章中，这样存在很多无用功，所以需要偷懒。😀😉！</p>
+<h2 id="我的历程"><a href="#我的历程" class="headerlink" title="我的历程"></a>我的历程</h2><ol>
+<li>手写链接+本地保存。垃圾+蠢</li>
+<li>利用SMMS图床，用了几次感觉没啥意义，立马放弃。</li>
+<li>picGo+github图床。使用起来比较好用，但是国内访问github比较麻烦，上传问题不大，主要是本地显示问题。有点麻烦，于今天弃坑。</li>
+<li>picGo+gitee图床，这里必须表扬gitee，访问快，无阻碍。❤</li>
+</ol>
+<h2 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h2><p>现在说来只有一句，搞这个玩意，我花了4-5个小时，还不加之前配置picGo+github图床的时间，心累💢！。</p>
+<ol>
+<li><p>gitee创建仓库，生成令牌，这个比较简单，gitee全中文的界面没有障碍。</p>
+</li>
+<li><p>下载picGo插件picgo-plugin-gitee-uploader。不知道picGo怎么回事，反正我装了好久才成功，还使用了<code>`npm install picgo-plugin-gitee-uploader -g</code>下载，最终是怎么成功的，我自己也不知道了😅。</p>
+</li>
+<li><p>配置插件。    </p>
+<p>​     <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605164924.png" alt="image-20200605164924047"></p>
+</li>
+<li><p>配置Typora</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605165122.png" alt="image-20200605165122064"></p>
+<p>细节性的就不细说，看看就可以理解了。</p>
+</li>
+<li><p>最后验证一些即可。好用的不行。</p>
+</li>
+</ol>
+<h2 id="报错的排除"><a href="#报错的排除" class="headerlink" title="报错的排除"></a>报错的排除</h2><p>在上传的时候主要有两个错误</p>
+<ol>
+<li><p>“failed to fetch” 这个是picGo的端口设置错误，改成<strong>36677端口</strong>。</p>
+</li>
+<li><p>{“success”,false}，出错，基本上是配置（可能是重名）错了，现在运行起来基本不会出现。</p>
+</li>
+</ol>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在找解决办法的过程中，真的好无奈，啥也不敢确定，只能不断地测试，最终成功后：</p>
+<p><strong>拨开云雾见青天！</strong></p>
+<p>人的心情都好了😉😉😉！</p>
+]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>Typora</tag>
       </tags>
   </entry>
   <entry>
@@ -1358,50 +1402,6 @@ R_{ab}
       </categories>
   </entry>
   <entry>
-    <title>Typora上传图片</title>
-    <url>/2020/06/05/Typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</url>
-    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​    从开始用markdown写文章，自己只会写文字，现在有了多元的需求。比如图片，代码等。这些东西利用原生的代码可以完成，但是人总是偷懒的，没有人愿意先上传图片，再复制链接，最后写在文章中，这样存在很多无用功，所以需要偷懒。😀😉！</p>
-<h2 id="我的历程"><a href="#我的历程" class="headerlink" title="我的历程"></a>我的历程</h2><ol>
-<li>手写链接+本地保存。垃圾+蠢</li>
-<li>利用SMMS图床，用了几次感觉没啥意义，立马放弃。</li>
-<li>picGo+github图床。使用起来比较好用，但是国内访问github比较麻烦，上传问题不大，主要是本地显示问题。有点麻烦，于今天弃坑。</li>
-<li>picGo+gitee图床，这里必须表扬gitee，访问快，无阻碍。❤</li>
-</ol>
-<h2 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h2><p>现在说来只有一句，搞这个玩意，我花了4-5个小时，还不加之前配置picGo+github图床的时间，心累💢！。</p>
-<ol>
-<li><p>gitee创建仓库，生成令牌，这个比较简单，gitee全中文的界面没有障碍。</p>
-</li>
-<li><p>下载picGo插件picgo-plugin-gitee-uploader。不知道picGo怎么回事，反正我装了好久才成功，还使用了<code>`npm install picgo-plugin-gitee-uploader -g</code>下载，最终是怎么成功的，我自己也不知道了😅。</p>
-</li>
-<li><p>配置插件。    </p>
-<p>​     <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605164924.png" alt="image-20200605164924047"></p>
-</li>
-<li><p>配置Typora</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605165122.png" alt="image-20200605165122064"></p>
-<p>细节性的就不细说，看看就可以理解了。</p>
-</li>
-<li><p>最后验证一些即可。好用的不行。</p>
-</li>
-</ol>
-<h2 id="报错的排除"><a href="#报错的排除" class="headerlink" title="报错的排除"></a>报错的排除</h2><p>在上传的时候主要有两个错误</p>
-<ol>
-<li><p>“failed to fetch” 这个是picGo的端口设置错误，改成<strong>36677端口</strong>。</p>
-</li>
-<li><p>{“success”,false}，出错，基本上是配置（可能是重名）错了，现在运行起来基本不会出现。</p>
-</li>
-</ol>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在找解决办法的过程中，真的好无奈，啥也不敢确定，只能不断地测试，最终成功后：</p>
-<p><strong>拨开云雾见青天！</strong></p>
-<p>人的心情都好了😉😉😉！</p>
-]]></content>
-      <categories>
-        <category>markdown</category>
-      </categories>
-      <tags>
-        <tag>Typora</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora绘图</title>
     <url>/2020/06/05/Typora%E7%BB%98%E5%9B%BE/</url>
     <content><![CDATA[<p>在学习的过程中不可避免地要绘制流程图，树状图，这些图画起来比较简单，但是要达到美观就比较麻烦了。所以在网上找了一些绘图的工具，首先是Typora的自带绘图工具。</p>
@@ -1514,13 +1514,6 @@ R_{ab}
       </tags>
   </entry>
   <entry>
-    <title>dsdddddd</title>
-    <url>/2021/06/01/dsdddddd/</url>
-    <content><![CDATA[<p>dsds dasdas ad a<br>s<br>s<br>s<br>ss</p>
-<p>s<br>s</p>
-]]></content>
-  </entry>
-  <entry>
     <title>glex</title>
     <url>/2020/11/05/glex/</url>
     <content><![CDATA[<h2 id="Send"><a href="#Send" class="headerlink" title="Send"></a>Send</h2><ol>
@@ -1616,6 +1609,27 @@ R_{ab}
 ]]></content>
   </entry>
   <entry>
+    <title>dsdddddd</title>
+    <url>/2021/06/01/dsdddddd/</url>
+    <content><![CDATA[<p>dsds dasdas ad a<br>s<br>s<br>s<br>ss</p>
+<p>s<br>s</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>hexo_todo</title>
+    <url>/2021/06/01/hexo-todo/</url>
+    <content><![CDATA[<h2 id="偷懒之余，又想起了我的博客，准备重新搞起"><a href="#偷懒之余，又想起了我的博客，准备重新搞起" class="headerlink" title="偷懒之余，又想起了我的博客，准备重新搞起"></a>偷懒之余，又想起了我的博客，准备重新搞起</h2><p>最重要的：环境，美观，之前的东西很多都不好使了，需要更新迭代一下。</p>
+<ul>
+<li><p>[ ] Valine评论，邮件提示，删除power——by</p>
+</li>
+<li><p>[ ] 美化</p>
+</li>
+<li><p>[ ] 购买域名</p>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>YunBlog可以评论啦</title>
     <url>/2020/08/08/hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/</url>
     <content><![CDATA[<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>​        本来我这个博客也没有很多人看到，只是自己写着玩的，所以就没有设置评论的功能。</p>
@@ -1676,6 +1690,14 @@ R_{ab}
       </tags>
   </entry>
   <entry>
+    <title>test_my_site</title>
+    <url>/2020/04/02/test-my-site/</url>
+    <content><![CDATA[<p>dasd  </p>
+<p>d ad as </p>
+<p>das d </p>
+]]></content>
+  </entry>
+  <entry>
     <title>python打包为.exe程序</title>
     <url>/2020/10/16/python%E6%89%93%E5%8C%85%E4%B8%BA-exe%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<h2 id="Python导出exe打包"><a href="#Python导出exe打包" class="headerlink" title="Python导出exe打包"></a>Python导出exe打包</h2><p>最近做项目，看见可以把.py直接打包成.exe，在此学习一下。</p>
@@ -1695,12 +1717,9 @@ R_{ab}
       </tags>
   </entry>
   <entry>
-    <title>test_my_site</title>
-    <url>/2020/04/02/test-my-site/</url>
-    <content><![CDATA[<p>dasd  </p>
-<p>d ad as </p>
-<p>das d </p>
-]]></content>
+    <title>testy</title>
+    <url>/2021/03/07/testy/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>test</title>
@@ -1717,27 +1736,6 @@ R_{ab}
   </div>
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-  </entry>
-  <entry>
-    <title>testy</title>
-    <url>/2021/03/07/testy/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>win+ununtu双系统</title>
-    <url>/2020/08/04/win-ununtu%E5%8F%8C%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h2 id="win-ununtu双系统"><a href="#win-ununtu双系统" class="headerlink" title="win+ununtu双系统"></a>win+ununtu双系统</h2><p>​    现在学习需要使用Ubuntu16的系统，但是系统要求比较高，不能在虚拟机上安装，需要安装原生的系统，但是我的win10确实是很好了，舍不得放弃它，没办法只能装个双系统了。</p>
-<p>​    教程都是在百度上找的，下面这个很全面，很实用，我已经按照这个完成了。下面放出链接：<a href="https://blog.csdn.net/fanxueya1322/article/details/90205143">win+Ubuntu</a>。</p>
-<p>​    安装过程还是比较顺利的，就是安装的时间花费比较久。</p>
-<p>​    下一步就是美化Ubuntu了。</p>
-<p>​    我承认自己不折腾会死。💖🐱‍🏍</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>装软件</tag>
-      </tags>
   </entry>
   <entry>
     <title>win10汇编学习的环境配置</title>
@@ -1789,6 +1787,22 @@ R_{ab}
 ]]></content>
       <categories>
         <category>汇编</category>
+      </categories>
+      <tags>
+        <tag>装软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>win+ununtu双系统</title>
+    <url>/2020/08/04/win-ununtu%E5%8F%8C%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="win-ununtu双系统"><a href="#win-ununtu双系统" class="headerlink" title="win+ununtu双系统"></a>win+ununtu双系统</h2><p>​    现在学习需要使用Ubuntu16的系统，但是系统要求比较高，不能在虚拟机上安装，需要安装原生的系统，但是我的win10确实是很好了，舍不得放弃它，没办法只能装个双系统了。</p>
+<p>​    教程都是在百度上找的，下面这个很全面，很实用，我已经按照这个完成了。下面放出链接：<a href="https://blog.csdn.net/fanxueya1322/article/details/90205143">win+Ubuntu</a>。</p>
+<p>​    安装过程还是比较顺利的，就是安装的时间花费比较久。</p>
+<p>​    下一步就是美化Ubuntu了。</p>
+<p>​    我承认自己不折腾会死。💖🐱‍🏍</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>装软件</tag>
@@ -1893,20 +1907,6 @@ R_{ab}
       </tags>
   </entry>
   <entry>
-    <title>书生</title>
-    <url>/2020/07/04/%E4%B9%A6%E7%94%9F/</url>
-    <content><![CDATA[<p>书生不可以没有，但空谈误国！</p>
-<p>不可以空谈，但是要有向往！！！</p>
-<p>少年中国有希望！</p>
-]]></content>
-      <categories>
-        <category>我团</category>
-      </categories>
-      <tags>
-        <tag>生活的感悟</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>中国计算机学会推荐会议</title>
     <url>/2020/10/21/%E4%B8%AD%E5%9B%BD%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E4%BC%9A%E6%8E%A8%E8%8D%90%E4%BC%9A%E8%AE%AE/</url>
     <content><![CDATA[<h2 id="关于网络的"><a href="#关于网络的" class="headerlink" title="关于网络的"></a>关于网络的</h2><p>顶会</p>
@@ -1919,6 +1919,20 @@ R_{ab}
       <categories>
         <category>HiNA</category>
       </categories>
+  </entry>
+  <entry>
+    <title>书生</title>
+    <url>/2020/07/04/%E4%B9%A6%E7%94%9F/</url>
+    <content><![CDATA[<p>书生不可以没有，但空谈误国！</p>
+<p>不可以空谈，但是要有向往！！！</p>
+<p>少年中国有希望！</p>
+]]></content>
+      <categories>
+        <category>我团</category>
+      </categories>
+      <tags>
+        <tag>生活的感悟</tag>
+      </tags>
   </entry>
   <entry>
     <title>准备复试的某一天</title>
@@ -2241,23 +2255,6 @@ R_{ab}
       </tags>
   </entry>
   <entry>
-    <title>杂曲歌辞•杨柳枝</title>
-    <url>/2020/08/06/%E6%9D%82%E6%9B%B2%E6%AD%8C%E8%BE%9E%E2%80%A2%E6%9D%A8%E6%9F%B3%E6%9E%9D/</url>
-    <content><![CDATA[<p><h2><div align=center>杂曲歌辞•杨柳枝</div></p>
-<div align=center>[唐]白居易</div>
-
-<p><div align=center>一树春风千万枝， 嫩于金色软于丝。</p>
-<p><div align=center>永丰西角荒园里， 尽日无人属阿谁。</p>
-]]></content>
-      <categories>
-        <category>诗词赋 - 白居易</category>
-      </categories>
-      <tags>
-        <tag>诗</tag>
-        <tag>白居易</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>本地git连接GitHub</title>
     <url>/2020/04/16/%E6%9C%AC%E5%9C%B0git%E8%BF%9E%E6%8E%A5GitHub/</url>
     <content><![CDATA[<ol>
@@ -2291,6 +2288,23 @@ R_{ab}
       <tags>
         <tag>git，小技巧</tag>
         <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>杂曲歌辞•杨柳枝</title>
+    <url>/2020/08/06/%E6%9D%82%E6%9B%B2%E6%AD%8C%E8%BE%9E%E2%80%A2%E6%9D%A8%E6%9F%B3%E6%9E%9D/</url>
+    <content><![CDATA[<p><h2><div align=center>杂曲歌辞•杨柳枝</div></p>
+<div align=center>[唐]白居易</div>
+
+<p><div align=center>一树春风千万枝， 嫩于金色软于丝。</p>
+<p><div align=center>永丰西角荒园里， 尽日无人属阿谁。</p>
+]]></content>
+      <categories>
+        <category>诗词赋 - 白居易</category>
+      </categories>
+      <tags>
+        <tag>诗</tag>
+        <tag>白居易</tag>
       </tags>
   </entry>
   <entry>
@@ -2468,20 +2482,6 @@ R_{ab}
       </tags>
   </entry>
   <entry>
-    <title>道德经（第七十六章）</title>
-    <url>/2020/08/10/%E9%81%93%E5%BE%B7%E7%BB%8F%EF%BC%88%E7%AC%AC%E4%B8%83%E5%8D%81%E5%85%AD%E7%AB%A0%EF%BC%89/</url>
-    <content><![CDATA[<h2 align = center>道德经（第七十六章）</h2>
-
-<p>   人之生也柔弱，其死也坚强。草木之生也柔弱，其死也枯槁。故坚强者死之徒，柔弱者生之图。是以兵强则灭，木强则折。强大处下，柔弱处上。</p>
-]]></content>
-      <categories>
-        <category>道德经</category>
-      </categories>
-      <tags>
-        <tag>道德经</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>送别歌</title>
     <url>/2020/08/20/%E9%80%81%E5%88%AB%E6%AD%8C/</url>
     <content><![CDATA[<span id="more"></span>
@@ -2529,6 +2529,20 @@ R_{ab}
       <tags>
         <tag>歌</tag>
         <tag>李叔同</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>道德经（第七十六章）</title>
+    <url>/2020/08/10/%E9%81%93%E5%BE%B7%E7%BB%8F%EF%BC%88%E7%AC%AC%E4%B8%83%E5%8D%81%E5%85%AD%E7%AB%A0%EF%BC%89/</url>
+    <content><![CDATA[<h2 align = center>道德经（第七十六章）</h2>
+
+<p>   人之生也柔弱，其死也坚强。草木之生也柔弱，其死也枯槁。故坚强者死之徒，柔弱者生之图。是以兵强则灭，木强则折。强大处下，柔弱处上。</p>
+]]></content>
+      <categories>
+        <category>道德经</category>
+      </categories>
+      <tags>
+        <tag>道德经</tag>
       </tags>
   </entry>
 </search>

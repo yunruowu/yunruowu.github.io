@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Traffic Engineering with Forward Fault Correction | Yun's博客</title><meta name="keywords" content="云"><meta name="author" content="云若无"><meta name="copyright" content="云若无"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Abstract1. Question?网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。 作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC） 2. Method?FFC 两个挑战：最小化吞吐量损失">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Traffic Engineering with Forward Fault Correction | Yun's博客</title><meta name="keywords" content="云"><meta name="author" content="云若无"><meta name="copyright" content="云若无"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Abstract 1. Question? 网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。 作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC） 2. Method? FFC 两个挑战：最小化吞吐">
 <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
 <meta property="og:title" content="Traffic Engineering with Forward Fault Correction">
 <meta property="og:url" content="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/index.html">
 <meta property="og:site_name" content="Yun&#39;s博客">
-<meta property="og:description" content="Abstract1. Question?网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。 作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC） 2. Method?FFC 两个挑战：最小化吞吐量损失">
+<meta property="og:description" content="Abstract 1. Question? 网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。 作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC） 2. Method? FFC 两个挑战：最小化吞吐">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
 <meta property="article:published_time" content="2020-10-09T04:10:53.000Z">
 <meta property="article:modified_time" content="2020-10-12T07:18:50.479Z">
 <meta property="article:author" content="云若无">
 <meta property="article:tag" content="云">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: undefined,
@@ -140,101 +140,118 @@
           document.documentElement.classList.remove('hide-aside')
         }
       }
-    })(window)</script><meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yun's博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Traffic Engineering with Forward Fault Correction</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-10-09T04:10:53.000Z" title="发表于 2020-10-09 12:10:53">2020-10-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-12T07:18:50.479Z" title="更新于 2020-10-12 15:18:50">2020-10-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/HiNA/">HiNA</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/HiNA/Papers/">Papers</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Traffic Engineering with Forward Fault Correction"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><h3 id="1-Question"><a href="#1-Question" class="headerlink" title="1. Question?"></a>1. Question?</h3><p>网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。</p>
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC）</p>
-<h3 id="2-Method"><a href="#2-Method" class="headerlink" title="2. Method?"></a>2. Method?</h3><p>FFC</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yun's博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Traffic Engineering with Forward Fault Correction</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-10-09T04:10:53.000Z" title="发表于 2020-10-09 12:10:53">2020-10-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-12T07:18:50.479Z" title="更新于 2020-10-12 15:18:50">2020-10-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/HiNA/">HiNA</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/HiNA/Papers/">Papers</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Traffic Engineering with Forward Fault Correction"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Abstract">Abstract</h2>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><h3 id="1-Question">1. Question?</h3>
+<p>网络存在故障，已有的解决办法都是在拥塞出现后，采取行动，是一种后手的行为，加上大型网络传播的延迟，故障的恢复需要大量时间。</p>
+<p>作者提出了积极的故障处理办法，尤其是，TE应该在网络中传播流量，以便只要故障总数最多为k（可配置范围），就不会发生拥塞。此保证应适用于任意组合的故障。方法称为前向故障校正（FFC）</p>
+<h3 id="2-Method">2. Method?</h3>
+<p>FFC</p>
 <p>两个挑战：最小化吞吐量损失和计算可伸缩性</p>
-<h4 id="FFC-Overview-and-Challenge"><a href="#FFC-Overview-and-Challenge" class="headerlink" title="FFC Overview and Challenge"></a>FFC Overview and Challenge</h4><ol>
-<li><p>FFC for control plane faults</p>
-<p> 控制平面FFC保证只要发生配置故障的交换机数量最多为k，就不会发生拥塞。</p>
-<p> 正常情况下，网络会因为配置失败产生拥塞</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153846174.png" alt="image-20201009153846174"></p>
-<p> 讲配置修改为：这样第一个网络可以容忍k=2,第二个网络k=1.</p>
-<p> a）的网络缺点是网络吞吐量低于没有故障和FFC时的吞吐量。但是，如果没有流量需求（或网络拓扑）的进一步变化，此吞吐量开销将是暂时的，比如可以在s2和s3配置好之后，将s1到s4的流量提高到10。即使是暂时的吞吐量降低，也是FFC提供的鲁棒性的开销。</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153952523.png" alt="image-20201009153952523"></p>
+<h4 id="FFC-Overview-and-Challenge">FFC Overview and Challenge</h4>
+<ol>
+<li>
+<p>FFC for control plane faults</p>
+<p>控制平面FFC保证只要发生配置故障的交换机数量最多为k，就不会发生拥塞。</p>
+<p>正常情况下，网络会因为配置失败产生拥塞</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153846174.png" alt="image-20201009153846174"></p>
+<p>讲配置修改为：这样第一个网络可以容忍k=2,第二个网络k=1.</p>
+<p>a）的网络缺点是网络吞吐量低于没有故障和FFC时的吞吐量。但是，如果没有流量需求（或网络拓扑）的进一步变化，此吞吐量开销将是暂时的，比如可以在s2和s3配置好之后，将s1到s4的流量提高到10。即使是暂时的吞吐量降低，也是FFC提供的鲁棒性的开销。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009153952523.png" alt="image-20201009153952523"></p>
 </li>
-<li><p>FFC for data plane faults</p>
-<p> 数据平面FFC保证了多达k条链路或交换机发生故障时，重新缩放后不会发生拥塞。</p>
-<p> 考虑下面的情况：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154532269.png" alt="image-20201009154532269"></p>
-<p> 上图出现链路失败时，重新分配后，会导致网络的拥塞。</p>
-<p> 但是按照下图的分配方法，任意一条链路失败后，不会发送网络拥塞</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154541378.png" alt="image-20201009154541378"></p>
-<p> 缺点：</p>
-<p> ​    像控制平面FFC一样，数据平面FFC也会降低吞吐量。但是，控制平面的FFC仅在更新网络时承担开销，但数据平面FFC的开销却是持久的。两种情况的区别在于，当链路或交换机发生故障时，网络容量会减少。为了避免发生故障后发生拥塞，我们必须保留备用容量来吸收发生故障的元素所承载的流量。</p>
+<li>
+<p>FFC for data plane faults</p>
+<p>数据平面FFC保证了多达k条链路或交换机发生故障时，重新缩放后不会发生拥塞。</p>
+<p>考虑下面的情况：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154532269.png" alt="image-20201009154532269"></p>
+<p>上图出现链路失败时，重新分配后，会导致网络的拥塞。</p>
+<p>但是按照下图的分配方法，任意一条链路失败后，不会发送网络拥塞</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009154541378.png" alt="image-20201009154541378"></p>
+<p>缺点：</p>
+<p>​	像控制平面FFC一样，数据平面FFC也会降低吞吐量。但是，控制平面的FFC仅在更新网络时承担开销，但数据平面FFC的开销却是持久的。两种情况的区别在于，当链路或交换机发生故障时，网络容量会减少。为了避免发生故障后发生拥塞，我们必须保留备用容量来吸收发生故障的元素所承载的流量。</p>
 </li>
-<li><p>Applying FFC</p>
-<p> 不同的需要对应不同的网络配置，k的选择，需要进去取舍。</p>
+<li>
+<p>Applying FFC</p>
+<p>不同的需要对应不同的网络配置，k的选择，需要进去取舍。</p>
 </li>
-<li><p>Challenges and overview of techniques</p>
-<p> 第一， The first is the scalability with which robust traffic distributions can be computed.</p>
-<p> ​                可伸缩性，可用来计算可靠的流量分布。</p>
-<p> 第二，We must meet the computational challenge while meeting the second challenge of minimizing the loss in network throughput.</p>
-<p> ​        满足计算挑战，同时还要满足使网络吞吐量损失最小化的第二个挑战。</p>
-<p> 解决办法：</p>
+<li>
+<p>Challenges and overview of techniques</p>
+<p>第一， The first is the scalability with which robust traffic distributions can be computed.</p>
+<p>​				可伸缩性，可用来计算可靠的流量分布。</p>
+<p>第二，We must meet the computational challenge while meeting the second challenge of minimizing the loss in network throughput.</p>
+<p>​		满足计算挑战，同时还要满足使网络吞吐量损失最小化的第二个挑战。</p>
+<p>解决办法：</p>
 <ul>
 <li>交通量和传播条件作为线性约束条件（公式时精确的，但是又很多限制）</li>
 <li>将约束转换为所谓的“bounded M-sum”问题。此类问题中的所有约束都可以减少为对最大（或最小）M个变量的单个约束。</li>
 <li>最后，借助排序网络，我们使用有效的线性表达式对这些变量进行编码。</li>
-<li><p>结果是具有O（kn）约束的FFC公式。</p>
-<p>两个设置：</p>
-</li>
+<li>结果是具有O（kn）约束的FFC公式。</li>
 </ul>
+<p>两个设置：</p>
 <ol>
 <li>故障的影响易于建模。如果交换机配置失败，它将保留其旧配置；如果链路失败，则入口交换机将确定性地重新调整流量。这种简单性使我们能够使用有效的线性约束来捕获FFC施加的条件。</li>
 <li>虽然故障很常见，但故障率（即发生故障的元件比例）很低。因此，足以防止少量故障（k）。解决k的高值将需要大量计算并且会产生高吞吐量开销</li>
 </ol>
 </li>
 </ol>
-<h3 id="3-Answer"><a href="#3-Answer" class="headerlink" title="3. Answer?"></a>3. Answer?</h3><h4 id="3-1-Basic-FFC-Formulation"><a href="#3-1-Basic-FFC-Formulation" class="headerlink" title="3.1 Basic FFC Formulation"></a>3.1 Basic FFC Formulation</h4><h5 id="3-1-1-Basic-TE-without-FFC"><a href="#3-1-1-Basic-TE-without-FFC" class="headerlink" title="3.1.1 Basic TE (without FFC)"></a>3.1.1 Basic TE (without FFC)</h5><p>​    输入是图G =（V，E），其中V和E是交换机集以及交换机之间的有向链接。 </p>
+<h3 id="3-Answer">3. Answer?</h3>
+<h4 id="3-1-Basic-FFC-Formulation">3.1 Basic FFC Formulation</h4>
+<h5 id="3-1-1-Basic-TE-without-FFC">3.1.1 Basic TE (without FFC)</h5>
+<p>​	输入是图G =（V，E），其中V和E是交换机集以及交换机之间的有向链接。</p>
 <p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009181529820.png" alt="image-20201009181529820"></p>
-<p>​    The TE problem can be solved based on path-constrained multicommodity flow problem ：</p>
+<p>​	The TE problem can be solved based on path-constrained multicommodity flow problem ：</p>
 <p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201010083835104.png" alt="image-20201010083835104"></p>
 <p>等式2表示没有链接应该过载，等式3指出，流在其所有隧道中的分配总和不应小于其分配速率。等式4指出分配给流的速率不应超过需求，并且所有变量均为非负数。</p>
-<h5 id="3-1-2-Modeling-control-plane-faults"><a href="#3-1-2-Modeling-control-plane-faults" class="headerlink" title="3.1.2 Modeling control plane faults"></a>3.1.2 Modeling control plane faults</h5><ol>
-<li><p>控制面板错误：</p>
-<p> FFC的目标是计算新配置$( { b<em>f},{a</em>{f,t}} )$以便只要$k<em>c$或者更少的交换机无法更新他们的旧配置$( { b_f^{‘}},{a</em>{f,t}^{‘}} )$就不会发生拥塞。</p>
-<p> 令$λ<em>v=  1$表示至少有一个以v作为入口开关的流配置失败；$ λ_v= 0$表示从v开始的所有流都配置成功。网络中控制平面故障的个别情况可以用表示每个开关状态的向量$λ= [λ_v| v∈V]$表示。因此FFC对于$k_c$个失败是具有鲁棒性的就要求网络在情况合集$Λ</em>{kc}= {λ|\sum_{v∈V}\ {λ_v}≤ k_c}$下没有过载的链路。可以被捕获为：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163513463.png" alt="123"></p>
-<p> $\hat{a}_{v,e} $表示是在没有配置错误的情况下可以从v开始的流到达链路e的总流量也就是：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163648041.png" alt="image-20201011163648041"></p>
-<p> S[t,v]表示隧道t的源交换机是否为v。</p>
-<p> $\hat{\beta}_{v,e} $表示是发生故障（λv= 1）时链路e中从v开始的流（flow)的流量(trafic)上限。即：</p>
-<p> <img src="C:\Users\mcdxw\AppData\Roaming\Typora\typora-user-images\image-20201011163706163.png" alt="image-20201011163706163"></p>
-<p> $\beta<em>{f,t}$，当$f$发生故障时，$f$流在隧道t上的流量的上限，由于我们假设速率限制器的更新成功，因此可以将$\beta</em>{f,t}$建模为：</p>
+<h5 id="3-1-2-Modeling-control-plane-faults">3.1.2 Modeling control plane faults</h5>
+<ol>
+<li>
+<p>控制面板错误：</p>
+<p>FFC的目标是计算新配置$( { b_f},{a_{f,t}} )$以便只要$k_c$或者更少的交换机无法更新他们的旧配置$( { b_f^{‘}},{a_{f,t}^{’}} )$就不会发生拥塞。</p>
+<p>令$λ_v=  1$表示至少有一个以v作为入口开关的流配置失败；$ λ_v= 0$表示从v开始的所有流都配置成功。网络中控制平面故障的个别情况可以用表示每个开关状态的向量$λ= [λ_v| v∈V]$表示。因此FFC对于$k_c$个失败是具有鲁棒性的就要求网络在情况合集$Λ_{kc}= {λ|\sum_{v∈V}\ {λ_v}≤ k_c}$下没有过载的链路。可以被捕获为：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163513463.png" alt="123"></p>
+<p>$\hat{a}_{v,e} $表示是在没有配置错误的情况下可以从v开始的流到达链路e的总流量也就是：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163648041.png" alt="image-20201011163648041"></p>
+<p>S[t,v]表示隧道t的源交换机是否为v。</p>
+<p>$\hat{\beta}_{v,e} $表示是发生故障（λv= 1）时链路e中从v开始的流（flow)的流量(trafic)上限。即：</p>
+<p><img src="C:%5CUsers%5Cmcdxw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201011163706163.png" alt="image-20201011163706163"></p>
+<p>$\beta_{f,t}$，当$f$发生故障时，$f$流在隧道t上的流量的上限，由于我们假设速率限制器的更新成功，因此可以将$\beta_{f,t}$建模为：</p>
 </li>
 </ol>
 <p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163721701.png" alt="1231"></p>
 <p>$w’_{f，t}$表示流f在旧配置下隧道t的分配权重（已知）</p>
 <p>但是上式约束很多，解决几乎不可能。</p>
-<h5 id="3-1-3-Modeling-data-plane-faults"><a href="#3-1-3-Modeling-data-plane-faults" class="headerlink" title="3.1.3 Modeling data plane faults"></a>3.1.3 Modeling data plane faults</h5><p>​    对于数据平面故障，FFC的目标是计算流量分配，以便即使在最多$k_e$链路失败和最多$k_v$交换机失败后也不会发生拥塞。</p>
+<h5 id="3-1-3-Modeling-data-plane-faults">3.1.3 Modeling data plane faults</h5>
+<p>​	对于数据平面故障，FFC的目标是计算流量分配，以便即使在最多$k_e$链路失败和最多$k_v$交换机失败后也不会发生拥塞。</p>
 <p>需要保证，发生的故障的链路不是连接在发生故障的交换机上。</p>
 <p><strong>建模：</strong></p>
 <ol>
-<li><p>$\mu_e=1$代表链路e发送了错误    $\eta_v=1$代表交换机v发送了错误</p>
+<li>
+<p>$\mu_e=1$代表链路e发送了错误	$\eta_v=1$代表交换机v发送了错误</p>
 </li>
-<li><p>数据平面故障的情况可以表示为${\mu,\eta}$ ，其中向量$\mu=[\mu<em>e|e \in E],\eta=[\eta_v|v \in V]$.那么对于最多$k_e$链路失败和最多$k_v$交换机失败后也具有鲁棒性的TE要求在下面的硬件条件：$U</em>{k_e,k_v}= { (\mu,\eta)|\sum_e \mu_e\leq k_e,\sum_v \eta_v \leq k_v }$。</p>
+<li>
+<p>数据平面故障的情况可以表示为${\mu,\eta}$ ，其中向量$\mu=[\mu_e|e \in E],\eta=[\eta_v|v \in V]$.那么对于最多$k_e$链路失败和最多$k_v$交换机失败后也具有鲁棒性的TE要求在下面的硬件条件：$U_{k_e,k_v}= { (\mu,\eta)|\sum_e \mu_e\leq k_e,\sum_v \eta_v \leq k_v }$。</p>
 </li>
-<li><p>数据错误，入口交换机重新调整流量时，它们会改变网络上的流量分布，即将流量从受影响的隧道移到剩余的隧道中。给定故障情况${\mu,\eta}$，我们知道每个流$f$的剩余隧道$T^{\mu, \eta}_f$，这些隧道不穿越任何故障的链路或交换机。FFC要求f的剩余隧道能够保持其分配的速率。即满足：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163919417.png" alt="image-20201011163919417"></p>
-<p> 这个表明，当流$f$的$T^{\mu, \eta}_f = \phi$时，$b_f=0$</p>
-<p> 上式保证了没有链路会过载。</p>
-<p> LEMMA 1: 满足约束公式2–4,9在故障情况（µ，η）的TE配置$（{a_{f，t}，b_f }）$在所有入口交换机重新缩放后不会导致链路过载。</p>
-<p> 证明：</p>
-<p> 当发生数据平面故障情况（µ，η）时，流$f$在剩余隧道$t\in T^{\mu,\eta}_f$上的业务负载为：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164411420.png" alt="image-20201011164411420"></p>
-<p> 在链路$e$上的总流量负载为：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164542058.png" alt="image-20201011164542058"></p>
-<p> 得证。</p>
-<p> <strong>Robust tunnel layout</strong> </p>
-<h5 id="3-1-3-Efficiently-solving-FFC-constraints"><a href="#3-1-3-Efficiently-solving-FFC-constraints" class="headerlink" title="3.1.3 Efficiently solving FFC constraints"></a>3.1.3 Efficiently solving FFC constraints</h5><p> 为了轻松解决大量FFC约束，我们将它们转换为“有界M-sum”问题，然后使用分类网络对转换后的问题进行编码。</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011165405226.png" alt="image-20201011165405226"></p>
+<li>
+<p>数据错误，入口交换机重新调整流量时，它们会改变网络上的流量分布，即将流量从受影响的隧道移到剩余的隧道中。给定故障情况${\mu,\eta}$，我们知道每个流$f$的剩余隧道$T^{\mu, \eta}_f$，这些隧道不穿越任何故障的链路或交换机。FFC要求f的剩余隧道能够保持其分配的速率。即满足：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011163919417.png" alt="image-20201011163919417"></p>
+<p>这个表明，当流$f$的$T^{\mu, \eta}_f = \phi$时，$b_f=0$</p>
+<p>上式保证了没有链路会过载。</p>
+<p>LEMMA 1: 满足约束公式2–4,9在故障情况（µ，η）的TE配置$（{a_{f，t}，b_f }）$在所有入口交换机重新缩放后不会导致链路过载。</p>
+<p>证明：</p>
+<p>当发生数据平面故障情况（µ，η）时，流$f$在剩余隧道$t\in T^{\mu,\eta}_f$上的业务负载为：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164411420.png" alt="image-20201011164411420"></p>
+<p>在链路$e$上的总流量负载为：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011164542058.png" alt="image-20201011164542058"></p>
+<p>得证。</p>
+<p><strong>Robust tunnel layout</strong></p>
+<h5 id="3-1-3-Efficiently-solving-FFC-constraints">3.1.3 Efficiently solving FFC constraints</h5>
+<p>为了轻松解决大量FFC约束，我们将它们转换为“有界M-sum”问题，然后使用分类网络对转换后的问题进行编码。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201011165405226.png" alt="image-20201011165405226"></p>
 <ol>
 <li>Transformation to bounded M-sum</li>
 <li>Encoding for largest (or smallest) M variables</li>
-<li><p>Throughput and computational overhead</p>
-<h5 id="3-1-4-Encoding-for-largest-or-smallest-M-variables"><a href="#3-1-4-Encoding-for-largest-or-smallest-M-variables" class="headerlink" title="3.1.4 Encoding for largest (or smallest) M variables"></a>3.1.4 Encoding for largest (or smallest) M variables</h5></li>
+<li>Throughput and computational overhead</li>
 </ol>
+<h5 id="3-1-4-Encoding-for-largest-or-smallest-M-variables">3.1.4 Encoding for largest (or smallest) M variables</h5>
 </li>
 </ol>
 <p>最终的结果，效果很明显：</p>
@@ -243,29 +260,40 @@
 <li>数据丢失减少了7-300倍</li>
 <li>对于不同优先级的网络，可以在保证网络总吞吐量损失忽略不计的情况下，可以保护高优先级流量免受几乎所有损失。</li>
 </ol>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="1-为什么研究这个课题"><a href="#1-为什么研究这个课题" class="headerlink" title="1.为什么研究这个课题?"></a>1.为什么研究这个课题?</h3><h3 id="2-目前这个课题研究到了哪个阶段"><a href="#2-目前这个课题研究到了哪个阶段" class="headerlink" title="2.目前这个课题研究到了哪个阶段?"></a>2.目前这个课题研究到了哪个阶段?</h3><h3 id="3-作者的理论基于哪些假设"><a href="#3-作者的理论基于哪些假设" class="headerlink" title="3.作者的理论基于哪些假设?"></a>3.作者的理论基于哪些假设?</h3><ol>
-<li><p>具有TE的网络，假设基于隧道的转发。一个或多个隧道（tunnel）在每个入口-出口交换机对之间传输流量。我们称此流量(traffic)为流量(flow)。在入口交换机上配置的相对权重决定了如何在隧道之间分配流量。</p>
+<h2 id="Introduction">Introduction</h2>
+<h3 id="1-为什么研究这个课题">1.为什么研究这个课题?</h3>
+<h3 id="2-目前这个课题研究到了哪个阶段">2.目前这个课题研究到了哪个阶段?</h3>
+<h3 id="3-作者的理论基于哪些假设">3.作者的理论基于哪些假设?</h3>
+<ol>
+<li>
+<p>具有TE的网络，假设基于隧道的转发。一个或多个隧道（tunnel）在每个入口-出口交换机对之间传输流量。我们称此流量(traffic)为流量(flow)。在入口交换机上配置的相对权重决定了如何在隧道之间分配流量。</p>
 </li>
-<li><p>Impact of data plane faults</p>
-<p> 当链路或者交换机失效时，会影响所以通过它的通道，检测到之后，入口交换机会根据配置的权重将流量重新缩放到其余隧道。设一个流有3条权重为（0.5,0.3,0.2）的隧道。当第三条隧道发生故障时，权重（0.5 0.8,0.3 0.8,0）用于拆分流量。</p>
-<p> ​    举例子：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009124937857.png" alt="image-20201009124937857"></p>
-<p> 实际网络中的测试：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130211633.png" alt="image-20201009130211633"></p>
+<li>
+<p>Impact of data plane faults</p>
+<p>当链路或者交换机失效时，会影响所以通过它的通道，检测到之后，入口交换机会根据配置的权重将流量重新缩放到其余隧道。设一个流有3条权重为（0.5,0.3,0.2）的隧道。当第三条隧道发生故障时，权重（0.5 0.8,0.3 0.8,0）用于拆分流量。</p>
+<p>​	举例子：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009124937857.png" alt="image-20201009124937857"></p>
+<p>实际网络中的测试：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130211633.png" alt="image-20201009130211633"></p>
 </li>
-<li><p>Impact of control plane faults</p>
-<p> 说明在配置交换机的过程的延迟或失败是如何导致拥塞的。</p>
-<p> 举例说明：</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009125758340.png" alt="image-20201009125758340"></p>
-<p> 实际网络</p>
-<p> <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130222759.png" alt="image-20201009130222759"></p>
-<p> 所以网络的流量控制改变需要按照步骤进行，上图中，步骤为：</p>
-<p> ​    1）更新s2和s3处的流量分配比率；  2）如果成功，则更新流率s1→s4。这样，如果s2（或s3）更新失败，将不会发生拥塞。但是，配置失败将使网络更新停止，因为在步骤1结束之前，步骤2无法继续进行。它们还会降低吞吐量，因为如果步骤1失败，则流s1→s4无法启动。 </p>
+<li>
+<p>Impact of control plane faults</p>
+<p>说明在配置交换机的过程的延迟或失败是如何导致拥塞的。</p>
+<p>举例说明：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009125758340.png" alt="image-20201009125758340"></p>
+<p>实际网络</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20201009130222759.png" alt="image-20201009130222759"></p>
+<p>所以网络的流量控制改变需要按照步骤进行，上图中，步骤为：</p>
+<p>​	1）更新s2和s3处的流量分配比率；  2）如果成功，则更新流率s1→s4。这样，如果s2（或s3）更新失败，将不会发生拥塞。但是，配置失败将使网络更新停止，因为在步骤1结束之前，步骤2无法继续进行。它们还会降低吞吐量，因为如果步骤1失败，则流s1→s4无法启动。</p>
 </li>
-<li><p>Slow reaction to faults</p>
+<li>
+<p>Slow reaction to faults</p>
 </li>
 </ol>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><h3 id="1-文章的缺陷"><a href="#1-文章的缺陷" class="headerlink" title="1.文章的缺陷"></a>1.文章的缺陷</h3><h3 id="2-关于该课题，作者的构思"><a href="#2-关于该课题，作者的构思" class="headerlink" title="2.关于该课题，作者的构思?"></a>2.关于该课题，作者的构思?</h3></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">云若无</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/">http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">Yun's博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/10/16/python%E6%89%93%E5%8C%85%E4%B8%BA-exe%E7%A8%8B%E5%BA%8F/"><img class="prev-cover" src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python打包为.exe程序</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/28/PCF-Provably-Resilient-Flexible-Routing/"><img class="next-cover" src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PCF: Provably Resilient Flexible Routing</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云若无</div><div class="author-info__description">还记得自己的梦想吗？！！！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Question"><span class="toc-number">1.1.</span> <span class="toc-text">1. Question?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Method"><span class="toc-number">1.2.</span> <span class="toc-text">2. Method?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FFC-Overview-and-Challenge"><span class="toc-number">1.2.1.</span> <span class="toc-text">FFC Overview and Challenge</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Answer"><span class="toc-number">1.3.</span> <span class="toc-text">3. Answer?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Basic-FFC-Formulation"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 Basic FFC Formulation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-1-Basic-TE-without-FFC"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">3.1.1 Basic TE (without FFC)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-2-Modeling-control-plane-faults"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">3.1.2 Modeling control plane faults</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-3-Modeling-data-plane-faults"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">3.1.3 Modeling data plane faults</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-3-Efficiently-solving-FFC-constraints"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">3.1.3 Efficiently solving FFC constraints</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-4-Encoding-for-largest-or-smallest-M-variables"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">3.1.4 Encoding for largest (or smallest) M variables</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A0%94%E7%A9%B6%E8%BF%99%E4%B8%AA%E8%AF%BE%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text">1.为什么研究这个课题?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%9B%AE%E5%89%8D%E8%BF%99%E4%B8%AA%E8%AF%BE%E9%A2%98%E7%A0%94%E7%A9%B6%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">2.2.</span> <span class="toc-text">2.目前这个课题研究到了哪个阶段?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%9C%E8%80%85%E7%9A%84%E7%90%86%E8%AE%BA%E5%9F%BA%E4%BA%8E%E5%93%AA%E4%BA%9B%E5%81%87%E8%AE%BE"><span class="toc-number">2.3.</span> <span class="toc-text">3.作者的理论基于哪些假设?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%96%87%E7%AB%A0%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="toc-number">3.1.</span> <span class="toc-text">1.文章的缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%B3%E4%BA%8E%E8%AF%A5%E8%AF%BE%E9%A2%98%EF%BC%8C%E4%BD%9C%E8%80%85%E7%9A%84%E6%9E%84%E6%80%9D"><span class="toc-number">3.2.</span> <span class="toc-text">2.关于该课题，作者的构思?</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2021/06/01/dsdddddd/" title="dsdddddd">dsdddddd</a><time datetime="2021-06-01T03:03:02.000Z" title="发表于 2021-06-01 11:03:02">2021-06-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2021/06/01/hexo-todo/" title="hexo_todo">hexo_todo</a><time datetime="2021-06-01T01:50:53.000Z" title="发表于 2021-06-01 09:50:53">2021-06-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2021/03/07/testy/" title="testy">testy</a><time datetime="2021-03-07T14:18:53.000Z" title="发表于 2021-03-07 22:18:53">2021-03-07</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/11/05/glex/" title="glex">glex</a><time datetime="2020-11-05T00:19:28.000Z" title="发表于 2020-11-05 08:19:28">2020-11-05</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/10/25/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both-1/" title="Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both">Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both</a><time datetime="2020-10-25T10:08:55.000Z" title="发表于 2020-10-25 18:08:55">2020-10-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云若无</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function loadValine () {
+<h2 id="Conclusion">Conclusion</h2>
+<h3 id="1-文章的缺陷">1.文章的缺陷</h3>
+<h3 id="2-关于该课题，作者的构思">2.关于该课题，作者的构思?</h3>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">云若无</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/">http://yoursite.com/2020/10/09/Traffic-Engineering-with-Forward-Fault-Correction/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">Yun's博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/10/16/python%E6%89%93%E5%8C%85%E4%B8%BA-exe%E7%A8%8B%E5%BA%8F/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python打包为.exe程序</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/28/PCF-Provably-Resilient-Flexible-Routing/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">PCF: Provably Resilient Flexible Routing</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云若无</div><div class="author-info__description">还记得自己的梦想吗？！！！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Question"><span class="toc-number">1.1.</span> <span class="toc-text">1. Question?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Method"><span class="toc-number">1.2.</span> <span class="toc-text">2. Method?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FFC-Overview-and-Challenge"><span class="toc-number">1.2.1.</span> <span class="toc-text">FFC Overview and Challenge</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Answer"><span class="toc-number">1.3.</span> <span class="toc-text">3. Answer?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Basic-FFC-Formulation"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 Basic FFC Formulation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-1-Basic-TE-without-FFC"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">3.1.1 Basic TE (without FFC)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-2-Modeling-control-plane-faults"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">3.1.2 Modeling control plane faults</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-3-Modeling-data-plane-faults"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">3.1.3 Modeling data plane faults</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-3-Efficiently-solving-FFC-constraints"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">3.1.3 Efficiently solving FFC constraints</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-4-Encoding-for-largest-or-smallest-M-variables"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">3.1.4 Encoding for largest (or smallest) M variables</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A0%94%E7%A9%B6%E8%BF%99%E4%B8%AA%E8%AF%BE%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text">1.为什么研究这个课题?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%9B%AE%E5%89%8D%E8%BF%99%E4%B8%AA%E8%AF%BE%E9%A2%98%E7%A0%94%E7%A9%B6%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">2.2.</span> <span class="toc-text">2.目前这个课题研究到了哪个阶段?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%9C%E8%80%85%E7%9A%84%E7%90%86%E8%AE%BA%E5%9F%BA%E4%BA%8E%E5%93%AA%E4%BA%9B%E5%81%87%E8%AE%BE"><span class="toc-number">2.3.</span> <span class="toc-text">3.作者的理论基于哪些假设?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%96%87%E7%AB%A0%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="toc-number">3.1.</span> <span class="toc-text">1.文章的缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%B3%E4%BA%8E%E8%AF%A5%E8%AF%BE%E9%A2%98%EF%BC%8C%E4%BD%9C%E8%80%85%E7%9A%84%E6%9E%84%E6%80%9D"><span class="toc-number">3.2.</span> <span class="toc-text">2.关于该课题，作者的构思?</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/01/dsdddddd/" title="dsdddddd"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="dsdddddd"/></a><div class="content"><a class="title" href="/2021/06/01/dsdddddd/" title="dsdddddd">dsdddddd</a><time datetime="2021-06-01T03:03:02.000Z" title="发表于 2021-06-01 11:03:02">2021-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/01/hexo-todo/" title="hexo_todo"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo_todo"/></a><div class="content"><a class="title" href="/2021/06/01/hexo-todo/" title="hexo_todo">hexo_todo</a><time datetime="2021-06-01T01:50:53.000Z" title="发表于 2021-06-01 09:50:53">2021-06-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/07/testy/" title="testy"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="testy"/></a><div class="content"><a class="title" href="/2021/03/07/testy/" title="testy">testy</a><time datetime="2021-03-07T14:18:53.000Z" title="发表于 2021-03-07 22:18:53">2021-03-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/05/glex/" title="glex"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="glex"/></a><div class="content"><a class="title" href="/2020/11/05/glex/" title="glex">glex</a><time datetime="2020-11-05T00:19:28.000Z" title="发表于 2020-11-05 08:19:28">2020-11-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/25/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both-1/" title="Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both"/></a><div class="content"><a class="title" href="/2020/10/25/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both-1/" title="Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both">Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both</a><time datetime="2020-10-25T10:08:55.000Z" title="发表于 2020-10-25 18:08:55">2020-10-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云若无</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function loadValine () {
   function initValine () {
     const valine = new Valine(Object.assign({
       el: '#vcomment',
@@ -278,8 +306,8 @@
       lang: 'zh-cn',
       recordIP: false,
       serverURLs: '',
-      emojiCDN: 'tv_doge',
-      emojiMaps: {"tv_doge":"6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png","tv_亲亲":"a8111ad55953ef5e3be3327ef94eb4a39d535d06.png","tv_偷笑":"bb690d4107620f1c15cff29509db529a73aee261.png","tv_再见":"180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png","tv_冷漠":"b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png","tv_发怒":"34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png","tv_发财":"34db290afd2963723c6eb3c4560667db7253a21a.png","tv_可爱":"9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png","tv_吐血":"09dd16a7aa59b77baa1155d47484409624470c77.png","tv_呆":"fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png","tv_呕吐":"9f996894a39e282ccf5e66856af49483f81870f3.png","tv_困":"241ee304e44c0af029adceb294399391e4737ef2.png","tv_坏笑":"1f0b87f731a671079842116e0991c91c2c88645a.png","tv_大佬":"093c1e2c490161aca397afc45573c877cdead616.png","tv_大哭":"23269aeb35f99daee28dda129676f6e9ea87934f.png","tv_委屈":"d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png","tv_害羞":"a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png","tv_尴尬":"7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png","tv_微笑":"70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png","tv_思考":"90cf159733e558137ed20aa04d09964436f618a1.png","tv_惊吓":"0d15c7e2ee58e935adc6a7193ee042388adc22af.png"},
+      emojiCDN: '',
+      emojiMaps: "",
       enableQQ: false,
       path: window.location.pathname,
       requiredFields: ["nick,mail"],
@@ -298,4 +326,38 @@ if ('Valine' === 'Valine' || !false) {
   function loadOtherComment () {
     loadValine()
   }
-}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
+}</script></div><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "15a5d7e2-9e89-427a-9ca9-4fc594328dc2";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (false) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

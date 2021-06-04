@@ -1060,29 +1060,6 @@ $$</p>
       </tags>
   </entry>
   <entry>
-    <title>Omnet++</title>
-    <url>/2020/08/03/Omnet++/</url>
-    <content><![CDATA[<h2 id="Omnet">Omnet++</h2>
-<p>主要由六个部分组成：</p>
-<ol>
-<li>仿真内核库（simulation kernel library,简称Sim）</li>
-<li>网络描述语言的编译器（network description compiler, nedc）</li>
-<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
-<li>仿真程序的图形化用户接口－Tkenv</li>
-<li>仿真程序的命令行用户接口－Cmdenv</li>
-<li>图形化的输出工具－Plove和Scalar<br>
-整个结构如下：<br>
-<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Omnet++</category>
-      </categories>
-      <tags>
-        <tag>Omnet++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Network Congestion Avoidance through Packet-chaining Reservation</title>
     <url>/2020/08/03/Network-Congestion-Avoidance-through-Packet-chaining-Reservation/</url>
     <content><![CDATA[<h2 id="Network-Congestion-Avoidance-through-Packet-chaining-Reservation">Network Congestion Avoidance through Packet-chaining Reservation</h2>
@@ -1130,6 +1107,29 @@ $$</p>
       <tags>
         <tag>拥塞控制</tag>
         <tag>PCRP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Omnet++</title>
+    <url>/2020/08/03/Omnet++/</url>
+    <content><![CDATA[<h2 id="Omnet">Omnet++</h2>
+<p>主要由六个部分组成：</p>
+<ol>
+<li>仿真内核库（simulation kernel library,简称Sim）</li>
+<li>网络描述语言的编译器（network description compiler, nedc）</li>
+<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
+<li>仿真程序的图形化用户接口－Tkenv</li>
+<li>仿真程序的命令行用户接口－Cmdenv</li>
+<li>图形化的输出工具－Plove和Scalar<br>
+整个结构如下：<br>
+<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Omnet++</category>
+      </categories>
+      <tags>
+        <tag>Omnet++</tag>
       </tags>
   </entry>
   <entry>

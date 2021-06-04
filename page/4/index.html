@@ -1,1914 +1,253 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
-  <meta name="msapplication-config" content="/images/yun-32x32.png">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="还记得自己的梦想吗？！！！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yun的博客">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Yun's博客 - 致奋斗的自己</title><meta name="keywords" content="云"><meta name="author" content="云若无"><meta name="copyright" content="云若无"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="还记得自己的梦想吗？！！！">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="website">
+<meta property="og:title" content="Yun&#39;s博客">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
-<meta property="og:site_name" content="Yun的博客">
+<meta property="og:site_name" content="Yun&#39;s博客">
 <meta property="og:description" content="还记得自己的梦想吗？！！！">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:author" content="云若无">
 <meta property="article:tag" content="云">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://yoursite.com/page/4/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>Yun的博客</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/page/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Yun\'s博客',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-06-04 23:17:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Yun的博客</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">致奋斗的自己</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/" class="post-title-link" itemprop="url">BFRP: Endpoint Congestion Avoidance Through Bilateral Flow Reservation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-03 15:53:20" itemprop="dateCreated datePublished" datetime="2020-08-03T15:53:20+08:00">2020-08-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:40:24" itemprop="dateModified" datetime="2020-08-06T16:40:24+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/" itemprop="url" rel="index"><span itemprop="name">HiNA</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">拥塞控制</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Bilateral-Flow-Reservation-Protocol，BFRP"><a href="#Bilateral-Flow-Reservation-Protocol，BFRP" class="headerlink" title="Bilateral Flow Reservation Protocol，BFRP"></a>Bilateral Flow Reservation Protocol，BFRP</h2><p>​        与基于数据包的调度机制不同，BFRP通过调度流来避免拥塞。我们的设计基于SRP的调度策略。流完成时间与大流和小流的发送顺序有关。首先安排小流量可以减少平均流量完成时间。但是，当调度程序每次选择最小流量时，大流量可能会饿死。为了避免这种情况，我们为每个流设置优先级p，并且p等于流大小。每次调度程序对流进行舍入时，p的值都会减少d。当大流量四舍五入时，p的值将变得非常小，调度程序每次都会选择具有最小p的流量，以避免出现饥饿的情况。    </p>
-<p>​        图3显示了BFRP的过渡过程。在一个节点中，整个过程分为三种状态：SPECa，SPECb和NORMAL。如果网络没有拥塞，则BFRP将不会进入NORMAL状态。  SPECa状态是BFRP中发送方的初始状态。首先，发送方将选择具有最小p的流，并将推测性数据包发送到网络中。当发送方收到否定确认数据包（NACK）时，它将发送y预留数据包到目标，然后进入SPECb状态。但是，在SPECb状态下，如果发送方在预留数据包发送开始到授权时间到达之间的时间内未执行任何操作，则会急剧增加准备发送的其他流的排队延迟，从而导致平均流量延迟增加。因此，建议在达到授权时间之前，先发送其他流的推测包。详细地说，在发送方发送预留数据包之后，数据包调度程序会在其他发送队列中选择具有最小p的就绪流，然后提前发送这个流推测性数据包。当发送方收到确认数据包（ACK）时，它将继续发送推测数据包。当接收到NACK时，为了确保源的多个预约流没有冲突授予时间，发送方将不对此流进行预留，以确保只有一个流预约给目标。但是，调度程序将选择另一个具有最小p的流进行传输。在授予时间到来之前，BFRP进入正常状态，并且数据包调度程序选择保留的流，发送方以正常模式发送该流的数据包。传输完成后，调度程序将根据此规则选择其他准备传输的流。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803203856734.png" alt="image-20200803203856734"></p>
-<p>​        下图显示了BFRP的操作。首先，我们假设网络没有拥塞。数据包调度程序从发送方队列（1）中选择具有最小p的流。之后，发送方将推测性数据包发送到目的地（2）。推测数据包在低优先级VC上传输。每个推测性分组都与生存时间survival time（ST）和排队时间相关联，如果网络中的推测性分组的排队时间大于ST，则该推测性分组将被丢弃。在我们的实现中，ST是基于高负载均匀流量下网络的数据包延迟分布的固定值，当推测性数据包进入路由器的输入端口时，数据包的排队时间开始。当排队时间到达输出端口中VC的开头时，将检查排队时间。接收到推测性数据包后，目的地需要用ACK进行回复，以通知发送方这些数据包已被接受。当网络没有拥塞时，通常会接受推测性数据包，并且目标返回ACK（3）。这样，分组将以推测性分组的形式传输，并且不会带来任何其他开销。</p>
-<p>  <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200804090633984.png" alt="image-20200804090633984"></p>
-<p>​        在拥塞的网络中，初始操作与上述相同。但是，当面临端点拥塞时，由于到达ST的排队时间，推测性数据包将被丢弃。届时，NACK将在路由器中生成并发送回发送方（5）。发送方中的NACK管理器收到NACK数据包后，发送方将从SPECa状态转换为SPECb状态，然后发送预约数据包与目标进行握手（6）。预留数据包很小，优先级最高。它在单独的VC上传输，以确保高优先级传递。预留数据包包含一个值n，它是将要发送的数据包的数量。</p>
-<p>​        一旦接收到预留包，接收器中的时间管理器将根据预留包中的n为发送方分配授权时间（$t_s$），并在回复包中返回相应的授权时间（7）。之后，时间管理器状态将正确更新。如果有另一个发送方发送的其他保留数据包到达此接收方，则时间管理器将返回给该保留数据包不早于$t_s  + n(1+ε)T_p$的开始时间，其中常数$T_p$是接收方接收所需的时间信道来接收消息，并且ε取决于控制分组的带宽开销。发送方的授权管理器将在收到授权数据包后开始计时，然后数据包调度程序将选择准备发送到其他发送队列中的，具有最小p的流（8）。然后，选定的流以推测性数据包的形式发送数据包（9）。如果目的地没有拥塞，将返回ACK数据包（10）。发送方继续发送推测性分组（11）。但是，如果端点在某个时刻过载，则推测包将被丢弃，路由器将生成NACK包并将其返回给发送方（12）。在接收到NACK之后，发送方将不会调度该流以发送保留数据包，而是选择具有最小p的另一个流并继续发送推测性数据包（13）。当预留流达到授予时间时，BFRP从SPECb状态进入正常状态，并且调度程序调度发送队列以发送普通数据包(14)(15)。在所有剩余的数据包都已发送后，BFRP从正常状态进入SPECa状态。所有传输将重复此过程。应当强调的是，为了最小化由控制操作引起的开销，所有预留分组，ACK，NACK和授权分组都是小的并且在单独的高优先级信道上发送。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/" class="post-title-link" itemprop="url">Network Endpoint Congestion Control for Fine-Grained Communication</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-29 22:53:54" itemprop="dateCreated datePublished" datetime="2020-07-29T22:53:54+08:00">2020-07-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:39:28" itemprop="dateModified" datetime="2020-08-06T16:39:28+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/" itemprop="url" rel="index"><span itemprop="name">HiNA</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">拥塞控制</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>需要快速的响应时间和较低的开销</p>
-<h4 id="Small-Message-Speculative-Reservation-Protocol"><a href="#Small-Message-Speculative-Reservation-Protocol" class="headerlink" title="Small-Message Speculative Reservation Protocol"></a>Small-Message Speculative Reservation Protocol</h4><p>SMSRP基于以下观察结果：如果端点没有拥塞，则无需为每个消息进行预留握手。与SRP协议会在每次消息传输之前急于启动保留的协议不同，SMSRP仅在通过推测性消息的丢弃在端点检测到拥塞之后才发布保留。    </p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200730071219006.png" alt="image-20200730071219006"></p>
-<p>图详细显示了SMSRP的操作。在此示例中，网络源正在将两个小消息M1和M2发送到可能拥塞的端点。每个消息足够小以适合单个网络数据包。消息准备好后，源将以推测模式立即将其发送。与SRP中的推测模式相似，推测消息使用低优先级VC，并且在发生拥塞时可以被网络丢弃。如果推测传输成功，例如在M1的肯定确认A1指示的情况下，则不需要保留。结果，当端点没有拥塞时，SMSRP几乎不会在网络中产生任何开销。</p>
-<p>如果网络端点拥塞，则经过一段时间的排队延迟后，网络将丢弃推测性消息，就像消息M2一样。网络交换机将相应的NACK发送回源。当消息源收到NACK时，它将启动到目的地的预留Res2，以获取消息的重传时间。在从目的地接收到授权Gnt $t_2$之后，源将等待直到分配的传输时间$t_2$为止，然后再以非推测性模式重新传输M2。保证非推测性消息是无损的，并使用单独的更高优先级的VC来确保它们不会在推测性消息之后被阻塞。</p>
-<p>除了在无拥塞的网络条件下具有较低的开销外，SMSRP的主要吸引力在于，它可以添加到已经实施SRP的网络中，而硬件改动很小。  SMSRP的投机丢弃策略和预约握手与SRP相同。唯一需要做的更改发生在源网络接口上：更改预约握手和推测性传输的顺序。</p>
-<h3 id="Last-Hop-Reservation-Protocol"><a href="#Last-Hop-Reservation-Protocol" class="headerlink" title="Last-Hop Reservation Protocol"></a>Last-Hop Reservation Protocol</h3><p>在网络不拥塞的情况下，以推测方式急切传输小消息可减少SMSRP的控制开销。但是，SMSRP的缺点是，当需要预约来解决拥塞时，控制消息必须到达端点处的预约调度程序。结果，预留握手消息与数据分组竞争弹出信道带宽。对于小消息，控制数据包消耗的一部分弹出带宽会极大地导致目标的额外超额预订，并可能导致更多的推测性消息丢失。直观上，弹出通道带宽是关键资源，仅应为数据包保留</p>
-<p>LHRP通过将预留调度程序从端点移动到端点上游的最后一跳交换机来避免导致端点超额预订。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200730071945735.png" alt="image-20200730071945735"></p>
-<p>LHRP的详细操作如图所示。像上一节中的示例一样，网络源正在向可能超额订阅的端点发送两个小消息。这两个消息都由源以推测方式立即发送。如果推测传输成功（如M1的情况），则不需要保留，并且协议不会产生额外的开销。</p>
-<p>LHRP通过将预留调度程序从端点移动到端点上游的最后一跳交换机来避免导致端点超额预订。通过允许在交换机为连接到该交换机的端点的服务保留请求提供服务时，我们消除了弹出通道的控制开销。在最后一跳交换机处处理预留也打开了其他优化机会。对于小消息，可以在数据消息本身以及与任何丢弃关联的NACK上piggy带保留和授权信息，而不是发送用于保留握手的单独控制包。此保留搭载优化对于SMSRP没有用，因为到达端点处的保留调度程序的数据包不再需要保留。</p>
-<p>如果端点被超额预订，则拥塞将首先在最后一跳交换机处发生。就像M2一样，推测消息可能会在最后一跳交换机上遇到较大的排队延迟。与SRP和SMSRP不同，LHRP推测性数据包仅在最后一跳交换机处合格。我们修改了网络交换机，以跟踪与交换机相连的每个端点排队的数据包数量。当端点的排队级别超过阈值时，交换机将开始丢弃发往该端点的推测消息。排队阈值的目的是动态地维持推测丢弃率，以使拥塞的推测消息不会备份到相邻的交换机中，从而在网络的其余部分中造成树饱和。</p>
-<p>当最后一跳交换机丢弃推测消息时，预留调度程序还为该消息分配了重传时间，该重传时间随NACK ，N2t2返回。当源节点接收到NACK时，它也接收到重发时间t2。然后，源节点以保证无损传输的非推测性模式在时间t2重新传输M2。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/" class="post-title-link" itemprop="url">Network Congestion Avoidance Through Speculative Reservation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-29 16:37:33" itemprop="dateCreated datePublished" datetime="2020-07-29T16:37:33+08:00">2020-07-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:40:17" itemprop="dateModified" datetime="2020-08-06T16:40:17+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/" itemprop="url" rel="index"><span itemprop="name">HiNA</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">拥塞控制</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-<p>SRP，Speculative Reservation Protocol，投机预约协议。</p>
-<p>协议通过以下方式提高了拥塞控制的最新水平：</p>
-<ul>
-<li><p>SRP防止拥塞的形成，而不是在拥塞发生后对其进行反应。</p>
-</li>
-<li><p>SRP具有非常快速的瞬态响应，与易发生拥塞的流量的发生几乎立即做出反应，相比之下，像ECN这样的数据包标记协议需要数百微秒的响应时间。</p>
-</li>
-<li><p>SRP的开销很低，可以与网络媲美，而不会对良性流量进行拥塞控制。</p>
-</li>
-<li><p>SRP提高了争夺网络热点的来源之间的公平性。</p>
-<p>阻塞案例：拥塞的扩散影响。</p>
-</li>
-</ul>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205521681.png" alt="image-20200729205521681"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205638729.png" alt="image-20200729205638729"></p>
-<p>解决拥塞的办法：</p>
-<ol>
-<li><p>ECN</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205721994.png" alt="image-20200729205721994"></p>
-<p>启用ECN的路由器通过监视其输入或输出缓冲区的占用来检测拥塞。当缓冲区的占用率超过某个阈值时，路由器会标记通过缓冲区的数据包的ECN字段（在某些系统中，标记操作仅在标识为拥塞根源的端口上进行）。当标记的数据包到达其目的地时，ECN字段将使用拥塞通知数据包返回到数据包的源。发送方收到消息后会减缓发送速率，来缓解拥塞。在没有拥塞通知的情况下，发送方将逐渐提高其注入速率，以充分利用未拥塞网络的带宽。</p>
-</li>
-<li><p>Speculative Reservation Protocol</p>
-<p>预防拥塞。</p>
-<p>传输信息，需要一个预约许可的握手</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729210250143.png" alt="image-20200729210250143"></p>
-<p>a)是正常运行的时序图，在这种情况下，网络中不存在热点。发送方S通过首先发出预留数据包R来启动到目的地D的通信。此预留数据包很小，具有较高的网络优先级，并且在单独的控制虚拟通道（VC）[8]上传输以保证快速传递。预留中携带预留大小n，它指示源打算发送的数据包数量。选择大小以分摊多个数据包之间的SRP开销，同时提供对多个流的公平性和响应性。</p>
-</li>
-</ol>
-<p>发出预约后，S开始以投机地方式将数据包P1和P2发送至D。这些推测数据包在低优先级VC上传输，并且等待时间（TTW）有限。如果投机性数据包在网络内部的总累积排队时间大于其TTW，则路由器会将其丢弃。我们通过在到达路由器输入端口时对数据包打上时间戳，然后在数据包位于输入缓冲区的开头时对此时间戳执行检查来实现TTW跟踪。由于投机数据包的性质不可靠，因此需要ack以通知源是否已成功传送或丢弃了它们。</p>
-<p>一旦预约数据包到达 <em>D</em>，目的地将根据其当前预约时间表返回一个携带发送起始时间的小型授权数据包 <em>G</em>($T_s$)（Grant）。另外，<em>D</em> 更新其预约时间表，它给下一个源的发送起始时间不会早于 <em>$T_s$</em> + <em>n</em>(1 + <em>ϵ</em>)$τ_p$。其中，常数 $τ_p$ 是目的地接收单个数据包的时间，<em>ϵ</em> 表示控制数据包（如 reservation、grant、ACK 等）的带宽开销。所有发送源都必须通过如此预约的方式想目的地进行预约并获得开始发送时间。</p>
-<p>当 <em>S</em> 收到授权数据包时，它停止向 <em>D</em> 发送投机数据包。到达时间 $T_s$ 之后，<em>S</em> 以非投机数据包的模式（即正常数据包）恢复向 <em>D</em> 的传输，从图2.1（a）中的示例 <em>P</em>3 开始。正常数据包不能被丢弃，并且不需要 ACK。在 <em>S</em> 成功发送完所有<em>n</em> 个数据包之后，未来 <em>S</em> 和 <em>D</em> 之间的任何传输都将重复此预约过程。</p>
-<p>图b显示了一个时序图，说明了在拥挤的网络中且节点 <em>D</em> 处有热点时的 SRP 执行过程。最初，<em>S</em> 发送预约数据包和投机数据包的过程与上述示例相同，具有较高网络优先级的预约数据包很快到达 <em>D</em>。但是，投机数据包在 <em>D</em> 附近遇到了较大的排队延迟。当排队延迟超过其 TTW 时，投机数据包被路由器丢弃，并且路由器返回 NACK 数据包给 <em>S</em>。当 <em>S</em> 收到 NACK 数据包时，它将停止向目标传输投机数据包，而后以正常数据包的模式在$T_s$处恢复数据包传输，从之前被丢弃的的数据包开始。</p>
-<p>由于丢弃协议，每个预约内乱序包的到达都是可能的。在图b的情况下，如果NACK数据包在ts之后返回，则重新发送的数据包将以乱序到达D。这个可以通过牺牲带宽来避免这个问题。方法是通过修改协议，使得在达到ts之后，S重新传输所有未完成的推测性数据包。这样可以确保有序的数据包到达，但要以可能的重复数据包到达D为代价。</p>
-<p>SRP 可以减少延迟和带宽开销。发送投机数据包可以减少 SRP 的等待时间开销。在中低网络负载下，大多数投机数据包能够到达目的地，并使得 SRP 的延迟与基准网络的延迟相同。为了防止超短流预约开销过大和长流长时间垄断热点目标，SRP 设置了两个阈值：<em>$n_{min}$</em> 和 $n<em>{max}$。当流长度 n &lt; $n</em>{min}$，绕过 SRP协议直接发送；当流长度 n &gt; $n<em>{max}$ 时，则将长流按照$n</em>{max}$进行分段，分为多个长度为的$n_{max}$流，SRP 将他们视为不同的流，分别进行预约。</p>
-<p>在高网络负载下，由于增加的排队延迟，推测性数据包被更频繁地丢弃。丢弃推测性数据包会浪费网络带宽，并且是高负载时开销的主要来源。但是，推测性数据包永远不会减少可用于非推测性数据包的带宽，因为它们是在单独的较低优先级虚拟通道上发送的。可以通过调整推测的TTW和预留粒度来控制推测的丢弃开销。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/Interconnection-Networks-ch7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/29/Interconnection-Networks-ch7/" class="post-title-link" itemprop="url">Interconnection-Networks-ch7</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-29 11:49:18" itemprop="dateCreated datePublished" datetime="2020-07-29T11:49:18+08:00">2020-07-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:40:13" itemprop="dateModified" datetime="2020-08-06T16:40:13+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/29/Interconnection-Networks-ch7/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/29/Interconnection-Networks-ch7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>173</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="CHAPTER-7-Slicing-and-Dicing"><a href="#CHAPTER-7-Slicing-and-Dicing" class="headerlink" title="CHAPTER 7 Slicing and Dicing"></a>CHAPTER 7 Slicing and Dicing</h2><p>我们首先看concentrators and distributors。集中器将多个终端节点的流量组合到单个网络通道上。当来自任何终端的流量很小以充分利用网络通道时，可以使用它们。它们还可以有效地组合来自许多突发性终端的流量。当峰值流量与平均流量之比较大时，使用集中器可降低序列化延迟，并降低网络成本。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/28/Interconnection-Networks-ch6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/28/Interconnection-Networks-ch6/" class="post-title-link" itemprop="url">Interconnection-Networks-ch6</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-28 12:25:20" itemprop="dateCreated datePublished" datetime="2020-07-28T12:25:20+08:00">2020-07-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:40:09" itemprop="dateModified" datetime="2020-08-06T16:40:09+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/28/Interconnection-Networks-ch6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/28/Interconnection-Networks-ch6/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Non-Blocking-Networks"><a href="#Non-Blocking-Networks" class="headerlink" title="Non-Blocking Networks"></a>Non-Blocking Networks</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/07/28/Interconnection-Networks-ch6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/20/Interconnection-Networks-ch5-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/20/Interconnection-Networks-ch5-1/" class="post-title-link" itemprop="url">Interconnection-Networks-ch5-1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-20 15:21:59" itemprop="dateCreated datePublished" datetime="2020-07-20T15:21:59+08:00">2020-07-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:40:03" itemprop="dateModified" datetime="2020-08-06T16:40:03+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/20/Interconnection-Networks-ch5-1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/Interconnection-Networks-ch5-1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>702</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Torus-Network"><a href="#Torus-Network" class="headerlink" title="Torus Network"></a>Torus Network
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/07/20/Interconnection-Networks-ch5-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/20/Interconnection-Networks-ch5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/20/Interconnection-Networks-ch5/" class="post-title-link" itemprop="url">LeetCode-10</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-20 15:21:59" itemprop="dateCreated datePublished" datetime="2020-07-20T15:21:59+08:00">2020-07-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:40:06" itemprop="dateModified" datetime="2020-08-06T16:40:06+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/20/Interconnection-Networks-ch5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/Interconnection-Networks-ch5/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="CH4-Torus-Networks"><a href="#CH4-Torus-Networks" class="headerlink" title="CH4 Torus Networks"></a>CH4 Torus Networks
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/07/20/Interconnection-Networks-ch5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/19/Interconnection-Networks-ch3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/19/Interconnection-Networks-ch3/" class="post-title-link" itemprop="url">Interconnection-Networks-ch4.md</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-19 10:02:37" itemprop="dateCreated datePublished" datetime="2020-07-19T10:02:37+08:00">2020-07-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:39:55" itemprop="dateModified" datetime="2020-08-06T16:39:55+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/19/Interconnection-Networks-ch3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/19/Interconnection-Networks-ch3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Butterfly-Networks"><a href="#Butterfly-Networks" class="headerlink" title="Butterfly Networks"></a>Butterfly Networks</h2><p>俩个主要的拓扑家族</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719101415173.png" alt="image-20200719101415173"></p>
-<p>蝶形网络是最基本的间接网络。</p>
-<p>对于交换机度数为$\delta = 2k, H = \log_kN +1$的N个节点的网络，BN拥有最小的直径。</p>
-<p>缺点：</p>
-<ol>
-<li>no path diversity: there is exactly one route from each source node to each destination node.</li>
-<li>the butterfly cannot be realized without long wires that must traverse at least half the diameter of the machine. </li>
-</ol>
-<h3 id="4-1The-Structure-of-Butterfly-Networks"><a href="#4-1The-Structure-of-Butterfly-Networks" class="headerlink" title="4.1The Structure of Butterfly Networks"></a>4.1The Structure of Butterfly Networks</h3><p> k-ary n-fly</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719114542950.png" alt="image-20200719114542950"></p>
-<p>2-ary 4-fly</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719114551161.png" alt="image-20200719114551161"></p>
-<p>​    k-ary n-fly网络由$k^n$个源终端节点，n个阶段, 每个阶段$k^{n-1}$ k×k crossbar switch节点以及最后$k^n$目的地终端节点组成。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719115531276.png" alt="image-20200719115531276">            </p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719144626828.png" alt="    ">        </p>
-<p>​    关于网络中报文的走向问题。</p>
-<p>根据每一个发出报文的终端编号可以决定不同路由路径。我们使用 n-digit radix-k number, ${d<em>{n−1},d</em>{n−2},…,d_0}$. 来表示每一条路径。</p>
-<p>对于k-ary n-fly网络。每一级有$k^{n-1}$个路由器，所以需要有n-1比特来进行选择。前n−1个数字${d<em>{n−1},d</em>{n−2},…,d_1}$.标识交换机，最后一个数字$d_0$标识交换机上的终端也就是决定了最终出口的选择。具体的使用如下：</p>
-<ol>
-<li>​    从输入节点开始，比如9这个输入节点，对应的二进制为1001；前三位为100，那么第0级交换机选择为4号。</li>
-<li>此时，d_0可以随机选择为0或者1，这是再将d_0和d_3进行交换，可以得到前三位000或者100，这样第1级交换机可以选择为1，0或者1，4.</li>
-<li>依次类推，最好已经决定输出的终端。</li>
-</ol>
-<p>具体来说：第一级设置dn−1，第二级设置dn−2，依此类推，最后一级设置d0已处于正确位置，</p>
-<h3 id="4-2-Isomorphic-Butterflies（同构）"><a href="#4-2-Isomorphic-Butterflies（同构）" class="headerlink" title="4.2 Isomorphic Butterflies（同构）"></a>4.2 Isomorphic Butterflies（同构）</h3><p>网络K，其节点和信道集定义：$K=(N^*，C)$。</p>
-<p>如果$K_1=(N_1,C_1),K_2=(N_2,C_2)$是同构的 ：</p>
-<p>​         顶点中存在一个置换$\pi$，对于边${u,v}\ \in C_1$存在${\pi(u),\pi(v)} \in C_2$</p>
-<h3 id="4-3-Performance-and-Packaging-Cost"><a href="#4-3-Performance-and-Packaging-Cost" class="headerlink" title="4.3 Performance and Packaging Cost"></a>4.3 Performance and Packaging Cost</h3><p>​    对于k-ary,n-fly网络：</p>
-<p>​    交换节点的度$\delta _{fly}= 2k$</p>
-<p>​    信道二等分(N是偶数)$B_{C,fly } = \frac{N}{2}$</p>
-<p>​                                        <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719160533316.png" alt="image-20200719160533316"></p>
-<p>​    信道负载</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719160543008.png" alt="信道负载"></p>
-<p>计算出两层包装层次结构下蝶形网络的通道宽度：    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719172821869.png" alt="image-20200719172821869">        </p>
-<p>在均匀负载且γ= 1的情况下，理想吞吐量：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719173001335.png" alt="image-20200719173001335"></p>
-<p>蝶形网络的目标：</p>
-<p>​    目标是首先获得最大的吞吐量，其次是最大程度地减少消息延迟。</p>
-<p>为此选择最大的K</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200719173225620.png" alt="image-20200719173225620"></p>
-<p>这个k值给出了最小的直径，这使得延迟的H部分最小化，同时使信道带宽最大化。这也最大限度地提高了理想的吞吐量并最小化了序列化延迟。任何小于此值的k都不会提高吞吐量，只会由于额外的跃点计数而增加延迟.</p>
-<h3 id="4-4-Path-Diversity-and-Extra-Stages"><a href="#4-4-Path-Diversity-and-Extra-Stages" class="headerlink" title="4.4 Path Diversity and Extra Stages"></a>4.4 Path Diversity and Extra Stages</h3><p><img src="C:\Users\mcdxw\AppData\Roaming\Typora\typora-user-images\image-20200720071823533.png" alt="image-20200720071823533">没有路径多样性</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/09/Interconnection-Networks-ch2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/09/Interconnection-Networks-ch2/" class="post-title-link" itemprop="url">Interconnection_Networks-ch2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-09 10:30:22" itemprop="dateCreated datePublished" datetime="2020-07-09T10:30:22+08:00">2020-07-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:39:51" itemprop="dateModified" datetime="2020-08-06T16:39:51+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/09/Interconnection-Networks-ch2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/09/Interconnection-Networks-ch2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="CH2-A-Simple-Interconnection-Network"><a href="#CH2-A-Simple-Interconnection-Network" class="headerlink" title="CH2 A Simple Interconnection Network"></a>CH2 A Simple Interconnection Network</h2><h3 id="2-1网络规范和限制"><a href="#2-1网络规范和限制" class="headerlink" title="2.1网络规范和限制"></a>2.1网络规范和限制</h3><p>​    有关网络设备的规范和约束，规范比如端口数量，传输速率。约束有关带宽，消耗。</p>
-<h3 id="2-2拓扑"><a href="#2-2拓扑" class="headerlink" title="2.2拓扑"></a>2.2拓扑</h3><p>​    蝶形网络拓扑</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200713072010.png" alt="image-20200709110727663"></p>
-<p>​    speedup 加速比 网络总输入带宽与网络理想容量的比值。也被称为蝶形基数。</p>
-<h3 id="2-5路由器"><a href="#2-5路由器" class="headerlink" title="2.5路由器"></a>2.5路由器</h3><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200713072031.png" alt="image-20200713071446699"></p>
-<p>路由器的数据路径包括四个18位输入寄存器，四个18位4：1多路复用器，四个移位器（用于移位标头phits的路由字段）和四个18位输出寄存器。数据路径由144位寄存器和大约650个门（等效于2个输入NAND）组成。</p>
-<h4 id="Allocator"><a href="#Allocator" class="headerlink" title="Allocator"></a>Allocator</h4><p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200713072037.png" alt="image-20200713071629935"></p>
-<p>分配器由四个几乎相同的位片组成，每个位片分为三个部分：解码，仲裁和保持。</p>
-<p>在解码部分中，对每个输入phit的高四位进行解码。每个解码器生成两个信号。如果输入i是一个head phit并且路由字段的高两位与输出端口号匹配，则信号i请求为true。此信号指示输入phit请求使用此头phit开始使用输出端口路由数据包。如果输入i上的点是有效载荷点，则解码器还会生成信号有效载荷i。分配器的保持逻辑使用此信号在数据包持续时间内保持信道（只要有效载荷位在所选输入端口上）</p>
-<h3 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h3><p>通过三种方法来判断互连网络：成本，延迟和吞吐量。延迟和吞吐量都是性能指标：延迟是数据包穿越网络所花费的时间，吞吐量是网络可以从输入传输到输出的每秒位数。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200715163552820.png" alt="image-20200715163552820"></p>
-<p>对加权延迟求和，我们将平均延迟计算为</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200715164709817.png" alt="image-20200715164709817"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200715164655766.png" alt="image-20200715164655766"></p>
-<p>延迟和吞吐率的曲线</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200715165107829.png" alt="image-20200715165107829"></p>
-<p>相对延迟是简单网络的所提供流量（注入速率）的函数。实线显示了本文中介绍的简单模型，而虚线则包含了额外的排队延迟。</p>
-<h2 id="CH3-T-opology-Basics"><a href="#CH3-T-opology-Basics" class="headerlink" title="CH3 T opology Basics"></a>CH3 T opology Basics</h2><ol>
-<li>重要性</li>
-</ol>
-<ul>
-<li>是设计第一步，决定了策略路由和流控制方法；</li>
-<li>拓扑不仅指定网络的类型（例如，蝶形），还指定详细信息，例如交换机的基数，级数以及宽度和比特率每个频道</li>
-</ul>
-<ol>
-<li>考虑的东西</li>
-</ol>
-<ul>
-<li>端口数量以及每个端口的带宽和占空比的驱动</li>
-<li>每个芯片和板可用的引脚，线密度，可用的信号速率以及驱动器的驱动</li>
-<li>成本和性能。性能包括带宽和延迟，由拓扑以外的因素决定，例如，流量控制，路由策略和流量模式。</li>
-</ul>
-<ol>
-<li>评价</li>
-</ol>
-<ul>
-<li>二等分带宽，信道负载和路径延迟之类的措施，这些措施反映了拓扑对性能的影响。</li>
-</ul>
-<ol>
-<li>设计的陷阱</li>
-</ol>
-<p>​    尝试使网络的拓扑结构与当前问题的数据通信相匹配。</p>
-<p>​    原因：专用网络通常不是好主意，问题中的动态负载不平衡，或者问题大小与计算机大小之间不匹配，因此此类网络上的负载通常平衡不佳。如果重新分配数据和线程以平衡负载，则问题和网络之间的匹配将丢失。特定问题的网络通常无法很好地映射到可用的封装技术，需要较长的导线或较高的节点度。最后，这样的网络是不灵活的。如果算法更改为使用其他通信模式，则无法轻松更改网络。</p>
-<ol>
-<li>拓扑案例</li>
-</ol>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200715175324694.png" alt="image-20200715175324694"></p>
-<h3 id="3-1-Nomenclature（命名法）"><a href="#3-1-Nomenclature（命名法）" class="headerlink" title="3.1 Nomenclature（命名法）"></a>3.1 Nomenclature（命名法）</h3><h4 id="3-1-1-Channels-and-Nodes"><a href="#3-1-1-Channels-and-Nodes" class="headerlink" title="3.1.1 Channels and Nodes"></a>3.1.1 Channels and Nodes</h4><p>​    互连网络的拓扑结构由一组节点N <em>指定，该节点N </em>通过一组通道C连接。消息在一组终端节点N（其中N≥N *）中发起和终止。</p>
-<p>​    拓扑有向图</p>
-<p>channel c = (x, y) ∈ C。x是源节点$sc$，y是目的节点$dc$</p>
-<p>信道特征：</p>
-<ul>
-<li>width($w<em>c$,$w</em>{xy}$)   包含的并行信号数</li>
-<li>frequency, $f<em>c$or $f</em>{xy}$    每个信号上的比特传输速率</li>
-<li>latency, $t<em>c$or$ t</em>{xy}$    从x到y所需的时间。与传播速度和信道的物理长度直接相关$l_c = v<em>t_c$.信道带宽$b_c=w_c</em>f_c$</li>
-</ul>
-<h4 id="3-1-2-Direct-and-Indirect-Networks"><a href="#3-1-2-Direct-and-Indirect-Networks" class="headerlink" title="3.1.2 Direct and Indirect Networks"></a>3.1.2 Direct and Indirect Networks</h4><h4 id="3-1-3-Cuts-and-Bisections"><a href="#3-1-3-Cuts-and-Bisections" class="headerlink" title="3.1.3 Cuts and Bisections"></a>3.1.3 Cuts and Bisections</h4><p>​    网络切割点$C(N_1,N_2)$是一组通道，它将所有节点N *的集合划分为两个不相交的集合$N_1$和$N_2$</p>
-<p>$C(N_1,N_2)$每个元素都是一个通道，其源位于N1，目标位于N2，反之亦然。cut的带宽：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716092425525.png" alt="image-20200716092425525"></p>
-<p>​    Bisection二等分，就网络几乎分为一半的cut满足$N_2\le N_1 \le N_2+1$</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716093016194.png" alt="image-20200716093016194"></p>
-<p>​    有最小信道数</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716093153743.png" alt="image-20200716093153743"></p>
-<h4 id="3-1-4-Paths"><a href="#3-1-4-Paths" class="headerlink" title="3.1.4 Paths"></a>3.1.4 Paths</h4><p>信道的有序集合<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716093402879.png" alt="image-20200716093402879">$d<em>{c_i} = s</em>{c_{i+1}}$</p>
-<p>minimal path 节点x到节点y的跳数最小的路径</p>
-<p>$R_{xy}$所有x到y的最小路径的集合</p>
-<p>$H(x,y)$是最小路径的节点跳数</p>
-<p>网络的直径。所有节点对中$R_{xy}$    的最大值</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716093858198.png" alt="image-20200716093858198"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716094313632.png" alt="image-20200716094313632"></p>
-<p>平均最小跳数</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716094621734.png" alt="image-20200716094621734"></p>
-<h4 id="3-1-5-对称性"><a href="#3-1-5-对称性" class="headerlink" title="3.1.5 对称性"></a>3.1.5 对称性</h4><p>​    节点对称，边对称</p>
-<h3 id="3-2-交通模式"><a href="#3-2-交通模式" class="headerlink" title="3.2 交通模式"></a>3.2 交通模式</h3><p>​    考虑互连网络中消息的空间分布是很有用的。利用流量矩阵$\wedge$. 每个矩阵元素$\lambda_{s,d}$给出从节点s发送到节点d的流量份额</p>
-<p>​    评估互连网络的常见静态流量模式    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716100035143.png" alt="image-20200716100035143"></p>
-<p>​    随机流量：网络评估中最常用的流量模式是随机流量，其中每个源均可能发送到每个目的地。随机流量非常有益，因为通过使流量均匀分布，即使是通常负载平衡非常差的拓扑和路由算法，它也可以平衡负载。仅使用随机流量进行评估时，某些非常差的拓扑和路由算法看起来非常好。</p>
-<p>​    permutation（置换流量）：为了强调拓扑或路由算法，我们通常使用置换流量，其中每个源s将其所有流量发送到单个目标d  =π（s）。用于排列的流量矩阵是一个排列矩阵（其中每一行和每一列包含一个条目，所有其他条目均为零。由于它们将负载集中在单独的源－目的地对上，因此排列会强调拓扑和路由算法的负载平衡。</p>
-<h3 id="3-3performance"><a href="#3-3performance" class="headerlink" title="3.3performance"></a>3.3performance</h3><h4 id="3-3-1Throughput-and-Maximum-Channel-Load"><a href="#3-3-1Throughput-and-Maximum-Channel-Load" class="headerlink" title="3.3.1Throughput and Maximum Channel Load"></a>3.3.1Throughput and Maximum Channel Load</h4><p>​    网络的吞吐量是网络每个输入端口接受的数据速率（以比特/秒为单位）。吞吐量是整个网络的属性，并且取决于路由和流量控制（如我们在第2章中所看到的）以及拓扑。</p>
-<p>​    信道负载：$\gamma_c$定义为通道c所需带宽与输入端口带宽之比。等效地，该比率是如果每个输入根据给定的流量模式注入一个流量单位，则必须穿越通道c的流量数量。因为是比率，所以通道负载是无量纲的量。</p>
-<p>​    maximum channel load $\gamma<em>{max}=max</em>{c \in C}\gamma<em>c$ 当提供的流量达到网络的吞吐量时，此瓶颈通道上的负载将等于通道带宽b。定义理想吞吐量$\Theta</em>{ideal} = b/\gamma_{max}$</p>
-<p>​    负载下限：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716204550252.png" alt="image-20200716204550252"></p>
-<p>​    负载上限：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716204900596.png" alt="image-20200716204900596"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716205205552.png" alt="image-20200716205205552"></p>
-<h4 id="3-3-2-Latency"><a href="#3-3-2-Latency" class="headerlink" title="3.3.2 Latency"></a>3.3.2 Latency</h4><p>网络的等待时间是指从数据包的头部到达输入端口的时间到数据包的尾部离开输出端口的时间</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716212441662.png" alt="image-20200716212441662"></p>
-<p>$T_h$头等待时间。报文的头部头经过网络所需的时间</p>
-<p>$T_s$序列化等待时间，尾部追赶所需的时间，即长度为L的数据包穿过带宽为b的信道的时间。</p>
-<p>$T_0$表示零负载下没有竞争发生的延迟</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200716213005459.png" alt="image-20200716213005459"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200717193238297.png" alt="image-20200717193238297">s</p>
-<p>​    $t_r$路由延迟</p>
-<p>​    $t_{xy}$链路延迟</p>
-<h4 id="3-3-3-Path-Diversity"><a href="#3-3-3-Path-Diversity" class="headerlink" title="3.3.3 Path Diversity"></a>3.3.3 Path Diversity</h4><p>​    节点不相交路径</p>
-<p>​    边不相交路径</p>
-<h3 id="3-4-Packaging-Cost"><a href="#3-4-Packaging-Cost" class="headerlink" title="3.4 Packaging Cost"></a>3.4 Packaging Cost</h3><ol>
-<li>通道宽度w受每个节点的引脚数和全局布线总量的限制。</li>
-</ol>
-<p>​    基于典型的两层封装层次结构</p>
-<p>​    第一层，各个路由器通过本地布线连接。</p>
-<p>​    第二层，通过全局布线连接本地节点组。</p>
-<p>​    对于最大引脚数为$W_n$的节点，通道宽度w受以下条件约束：<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200718190946225.png" alt="image-20200718190946225"></p>
-<p>​    在此级别上，可用的全局导线数$W_s$限制了各个通道的宽度。</p>
-<p>​    为了估计特定拓扑所需的全局通道数，我们使用拓扑的最小通道二等分$B_c$</p>
-<p>​        优点：</p>
-<p>​            平均划分网络，又减少了导线的数量。有利于本地打包。        </p>
-<p>​        缺点：</p>
-<p>​            许多网络必须划分为两个以上的本地组才能满足打包技术的约束，无法实现</p>
-<p>​        带宽约束：    <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200718193846863.png" alt="image-20200718193846863"></p>
-<p>综上：    <strong>$ \omega \leq min(\frac{W_n}{\delta}, \frac{W_s}{B_C})$.</strong></p>
-<p>​    利用带宽来表示，而不是使用信道宽度.</p>
-<p>​    节点的最大带宽为$B_n = fW_n$，系统二等分的最大带宽为$B_s = fW_s$。</p>
-<p>​    则：每个通道的最大带宽为 $b \leq min(\frac{B_n}{\delta}, \frac{B_s}{B_C})$</p>
-<ol>
-<li><p>布线长度</p>
-<p>网络通道的长度必须保持较短，因为在临界长度以上，信号频率会随着导线长度呈二次方下降：</p>
-<script type="math/tex; mode=display">
-f = min(f_0,f_0(\frac{l_w}{l_c})^{-2})</script><p>$l_c$:导线的临界长度</p>
-<p>$f_0$:导线的标称信号传输率</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/04/%E4%B9%A6%E7%94%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/%E4%B9%A6%E7%94%9F/" class="post-title-link" itemprop="url">书生</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-04 23:20:53" itemprop="dateCreated datePublished" datetime="2020-07-04T23:20:53+08:00">2020-07-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-05 09:23:00" itemprop="dateModified" datetime="2020-07-05T09:23:00+08:00">2020-07-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%88%91%E5%9B%A2/" itemprop="url" rel="index"><span itemprop="name">我团</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/07/04/%E4%B9%A6%E7%94%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/04/%E4%B9%A6%E7%94%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>37</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>书生不可以没有，但空谈误国！</p>
-<p>不可以空谈，但是要有向往！！！</p>
-<p>少年中国有希望！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
   }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="云若无"
-      src="/images/15.png">
-  <p class="site-author-name" itemprop="name">云若无</p>
-  <div class="site-description" itemprop="description">还记得自己的梦想吗？！！！</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">81</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">34</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">51</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/yunruowu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yunruowu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yunruowu</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">57k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">52 分钟</span>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
-  <script>
-    firebase.initializeApp({
-      apiKey   : '',
-      projectId: ''
-    });
-
-    function getCount(doc, increaseCount) {
-      // IncreaseCount will be false when not in article page
-      return doc.get().then(d => {
-        var count = 0;
-        if (!d.exists) { // Has no data, initialize count
-          if (increaseCount) {
-            doc.set({
-              count: 1
-            });
-            count = 1;
-          }
-        } else { // Has data
-          count = d.data().count;
-          if (increaseCount) {
-            // If first view this article
-            doc.set({ // Increase count
-              count: count + 1
-            });
-            count++;
-          }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
         }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-        return count;
-      });
-    }
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-    function appendCountTo(el) {
-      return count => {
-        el.innerText = count;
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
       }
     }
-  </script>
-  <script>
-    (function() {
-      var db = firebase.firestore();
-      var articles = db.collection('articles');
-
-      if (CONFIG.page.isPost) { // Is article page
-        var title = document.querySelector('.post-title').innerText.trim();
-        var doc = articles.doc(title);
-        var increaseCount = CONFIG.hostname === location.hostname;
-        if (localStorage.getItem(title)) {
-          increaseCount = false;
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
         } else {
-          // Mark as visited
-          localStorage.setItem(title, true);
-        }
-        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
-      } else if (CONFIG.page.isHome) { // Is index page
-        var promises = [...document.querySelectorAll('.post-title')].map(element => {
-          var title = element.innerText.trim();
-          var doc = articles.doc(title);
-          return getCount(doc);
-        });
-        Promise.all(promises).then(counts => {
-          var metas = document.querySelectorAll('.firestore-visitors-count');
-          counts.forEach((val, idx) => {
-            appendCountTo(metas[idx])(val);
-          });
-        });
-      }
-    })();
-  </script>
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-  <script defer src="/lib/three/three.min.js"></script>
-    <script defer src="/lib/three/three-waves.min.js"></script>
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
+          document.documentElement.classList.remove('hide-aside')
         }
       }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yun's博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Yun's博客</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/" title="BFRP: Endpoint Congestion Avoidance Through Bilateral Flow Reservation">BFRP: Endpoint Congestion Avoidance Through Bilateral Flow Reservation</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-03T07:53:20.000Z" title="发表于 2020-08-03 15:53:20">2020-08-03</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/HiNA/">HiNA</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/HiNA/Papers/">Papers</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/">拥塞控制</a></span></div><div class="content"><!-- hexo-inject:begin --><!-- hexo-inject:end -->Bilateral Flow Reservation Protocol，BFRP​        与基于数据包的调度机制不同，BFRP通过调度流来避免拥塞。我们的设计基于SRP的调度策略。流完成时间与大流和小流的发送顺序有关。首先安排小流量可以减少平均流量完成时间。但是，当调度程序每次选择最小流量时，大流量可能会饿死。为了避免这种情况，我们为每个流设置优先级p，并且p等于流大小。每次调度程序对流进行舍入时，p的值都会减少d。当大流量四舍五入时，p的值将变得非常小，调度程序每次都会选择具有最小p的流量，以避免出现饥饿的情况。    
+​        图3显示了BFRP的过渡过程。在一个节点中，整个过程分为三种状态：SPECa，SPECb和NORMAL。如果网络没有拥塞，则BFRP将不会进入NORMAL状态。  SPECa状态是BFRP中发送方的初始状态。首先，发送方将选择具有最小p的流，并将推测性数据包发送到网络中。当发送方收到否定确认数据包（NACK）时，它将发送y预留数据包到目标，然后进入SPECb状态。但是，在SPECb状态下，如果发送方在预留数据包发送开始到授权时间到达之间的时 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/29/Network-Endpoint-Congestion-Control-for-Fine-Grained-Communication/" title="Network Endpoint Congestion Control for Fine-Grained Communication">Network Endpoint Congestion Control for Fine-Grained Communication</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-29T14:53:54.000Z" title="发表于 2020-07-29 22:53:54">2020-07-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/HiNA/">HiNA</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/HiNA/Papers/">Papers</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/">拥塞控制</a></span></div><div class="content">需要快速的响应时间和较低的开销
+Small-Message Speculative Reservation ProtocolSMSRP基于以下观察结果：如果端点没有拥塞，则无需为每个消息进行预留握手。与SRP协议会在每次消息传输之前急于启动保留的协议不同，SMSRP仅在通过推测性消息的丢弃在端点检测到拥塞之后才发布保留。    
 
-    
+图详细显示了SMSRP的操作。在此示例中，网络源正在将两个小消息M1和M2发送到可能拥塞的端点。每个消息足够小以适合单个网络数据包。消息准备好后，源将以推测模式立即将其发送。与SRP中的推测模式相似，推测消息使用低优先级VC，并且在发生拥塞时可以被网络丢弃。如果推测传输成功，例如在M1的肯定确认A1指示的情况下，则不需要保留。结果，当端点没有拥塞时，SMSRP几乎不会在网络中产生任何开销。
+如果网络端点拥塞，则经过一段时间的排队延迟后，网络将丢弃推测性消息，就像消息M2一样。网络交换机将相应的NACK发送回源。当消息源收到NACK时，它将启动到目的地的预留Res2，以获取消息的重传时间。在从目的地接收到授权Gnt $t_2$之后，源将等待直到分配的传输时间$ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/" title="Network Congestion Avoidance Through Speculative Reservation">Network Congestion Avoidance Through Speculative Reservation</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-29T08:37:33.000Z" title="发表于 2020-07-29 16:37:33">2020-07-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/HiNA/">HiNA</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/HiNA/Papers/">Papers</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/">拥塞控制</a></span></div><div class="content">
+SRP，Speculative Reservation Protocol，投机预约协议。
+协议通过以下方式提高了拥塞控制的最新水平：
 
-  
+SRP防止拥塞的形成，而不是在拥塞发生后对其进行反应。
+
+SRP具有非常快速的瞬态响应，与易发生拥塞的流量的发生几乎立即做出反应，相比之下，像ECN这样的数据包标记协议需要数百微秒的响应时间。
+
+SRP的开销很低，可以与网络媲美，而不会对良性流量进行拥塞控制。
+
+SRP提高了争夺网络热点的来源之间的公平性。
+阻塞案例：拥塞的扩散影响。
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
-      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
-      placeholder: "Just go go",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : 'zh-cn' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : ''
-    });
-  }, window.Valine);
-});
-</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
-</html>
+
+解决拥塞的办法：
+
+ECN
+
+启用ECN的路由器通过监视其输入或输出缓冲区的占用来检测拥塞。当缓冲区的占用率超过某个阈值时，路由器会标记通过缓冲区的数据包的ECN字段（在某些系统中，标记操作仅在标识为拥塞根源的端口上进行）。当标记的数据包到达其目的地时，ECN字段将使用拥塞通知数据包返回到数据包的源。发送方收到消息后会减缓发送速率，来缓解拥塞。在没有拥塞通知的情况下，发送方将逐渐提高其注入速率，以充分利用未拥塞网络的带宽。
+
+Speculative Reservation Protocol
+预防拥塞。
+传输信息 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/29/Interconnection-Networks-ch7/" title="Interconnection-Networks-ch7">Interconnection-Networks-ch7</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-29T03:49:18.000Z" title="发表于 2020-07-29 11:49:18">2020-07-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Interconnection-Networks/">Interconnection_Networks</a></span></div><div class="content">CHAPTER 7 Slicing and Dicing我们首先看concentrators and distributors。集中器将多个终端节点的流量组合到单个网络通道上。当来自任何终端的流量很小以充分利用网络通道时，可以使用它们。它们还可以有效地组合来自许多突发性终端的流量。当峰值流量与平均流量之比较大时，使用集中器可降低序列化延迟，并降低网络成本。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/28/Interconnection-Networks-ch6/" title="Interconnection-Networks-ch6">Interconnection-Networks-ch6</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-28T04:25:20.000Z" title="发表于 2020-07-28 12:25:20">2020-07-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Interconnection-Networks/">Interconnection_Networks</a></span></div><div class="content">Non-Blocking Networks
+如果网络可以处理输入和输出排列的所有电路请求，则称该网络为非阻塞网络。即，可以形成从每个输入到其选择的输出的专用路径，而没有任何冲突（共享通道）。相反，如果网络无法处理所有此类电路请求而没有冲突，则它就是阻塞网络.
+两种类型的非阻塞网络。strictly non-blocking, rearrangeably non-blocking
+首先，如果可以每次一个电路递增地设置任何排列，而无需重新路由（或重新排列）任何已设置的电路，则网络严格不阻塞。如果可以将任何未使用的输入连接到任何未使用的输出，而无需更改任何其他流量所采用的路径，则说明网络完全是无阻塞的。
+相反，如果网络可以路由电路进行任意排列，则网络可重新排列为非阻塞（或简单地可重新排列），但是排列的渐进式构造可能需要重新布置一些早期电路，以允许以后建立电路。可重新排列的网络可以将任何未连接的输入连接到任何未连接的输出，但是可能需要重新路由一些不相关的流量才能建立连接。
+6.1 Non-Blocking vs. Non-Interfering Networks分组交换网络中，资源分配好之后就 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/20/Interconnection-Networks-ch5-1/" title="Interconnection-Networks-ch5-1">Interconnection-Networks-ch5-1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-20T07:21:59.000Z" title="发表于 2020-07-20 15:21:59">2020-07-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Interconnection-Networks/">Interconnection_Networks</a></span></div><div class="content">Torus Network5.3 Building Mesh and T orus Networks将网络的抽象节点映射到物理空间中的实际位置，不同的封装技术可以实现一维的，二维的等映射。
+
+最简单的方式就是$p_i=a_i$，物理位置和逻辑地址相同，每个节点之间距离相同。
+
+但是这将导致$p_k和p_0$之间距离过大，如此长的信道可能导致过多的等待时间或需要较慢的信令速率。所以提出折叠的环形网络来解决问题。一种环形网络的折叠入下：
+
+消灭了 最长的网络，但是牺牲了以相邻节点距离短的优点。
+
+
+最终的物理放置图对比：
+
+通常，通过以折叠顺序组合k个折叠的k-ary n-1cube来构造折叠的k-ary n-cube
+
+当逻辑维数超过物理维数时，必须将几个逻辑维映射到每个物理维中。如果物理维数为q，则直接映射是将逻辑维的q折叠为每个物理维。
+
+
+Express Cubes原因：环状网络通道短，$t_c$时间通常由$t_r$决定，与直径小的网络相比，导致更多的$T_H$。可以增加维度减小直径。但是会导致$T_s$增大。
+
+所以Express sube出现了。就是添加了几个快速通道。通过路由 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/20/Interconnection-Networks-ch5/" title="LeetCode-10">LeetCode-10</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-20T07:21:59.000Z" title="发表于 2020-07-20 15:21:59">2020-07-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Interconnection-Networks/">Interconnection_Networks</a></span></div><div class="content">CH4 Torus Networks圆环和网状网络（ k-ary n-cubes）在规则的n维网格中打包$N=k^n$个节点，每个维中都有k个节点，并且最近邻之间有通道。
+优点：
+
+这种规则的物理布置与包装约束非常匹配。
+具有良好的路径分集，即使在排列流量上也可以具有良好的负载平衡。
+通道是双向的,可以利用双向信令，从而更有效地利用引脚和电线。
+
+缺点：
+
+它们的跳数比对数网络大；
+增加了网络的引脚成本。
+
+4.1The Structure of T orus Networks
+$N=k^n$个节点
+每个维中都有k个节点
+每个节点同时充当网络的输入端，输出端和交换节点
+每个节点被分配一个n-digit radix-k地址{an−1,…,a0}
+通过一对通道（每个方向一个）连接到地址相差±1（mod k）的所有节点。只需一个地址位。
+每个节点每个维度需要2个通道，总共2nN个通道。
+
+规则的（所有节点的度数相同），并且也是边缘对称的。网状网络和环状网络的区别：
+
+网状网络 在每个方向上都省略了从地址ak−1到地址a0的连接
+网状网络具有相同的节点度，但是对等通道的数目是具有相同基数和尺寸 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/19/Interconnection-Networks-ch3/" title="Interconnection-Networks-ch4.md">Interconnection-Networks-ch4.md</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-19T02:02:37.000Z" title="发表于 2020-07-19 10:02:37">2020-07-19</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Interconnection-Networks/">Interconnection_Networks</a></span></div><div class="content">Butterfly Networks俩个主要的拓扑家族
+
+蝶形网络是最基本的间接网络。
+对于交换机度数为$\delta = 2k, H = \log_kN +1$的N个节点的网络，BN拥有最小的直径。
+缺点：
+
+no path diversity: there is exactly one route from each source node to each destination node.
+the butterfly cannot be realized without long wires that must traverse at least half the diameter of the machine. 
+
+4.1The Structure of Butterfly Networks k-ary n-fly
+
+2-ary 4-fly
+
+​    k-ary n-fly网络由$k^n$个源终端节点，n个阶段, 每个阶段$k^{n-1}$ k×k crossbar switch节点以及最后$k^n$目的地终端节点组成。
+            
+        
+​     ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/09/Interconnection-Networks-ch2/" title="Interconnection_Networks-ch2">Interconnection_Networks-ch2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-09T02:30:22.000Z" title="发表于 2020-07-09 10:30:22">2020-07-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Interconnection-Networks/">Interconnection_Networks</a></span></div><div class="content">CH2 A Simple Interconnection Network2.1网络规范和限制​    有关网络设备的规范和约束，规范比如端口数量，传输速率。约束有关带宽，消耗。
+2.2拓扑​    蝶形网络拓扑
+
+​    speedup 加速比 网络总输入带宽与网络理想容量的比值。也被称为蝶形基数。
+2.5路由器
+路由器的数据路径包括四个18位输入寄存器，四个18位4：1多路复用器，四个移位器（用于移位标头phits的路由字段）和四个18位输出寄存器。数据路径由144位寄存器和大约650个门（等效于2个输入NAND）组成。
+Allocator
+分配器由四个几乎相同的位片组成，每个位片分为三个部分：解码，仲裁和保持。
+在解码部分中，对每个输入phit的高四位进行解码。每个解码器生成两个信号。如果输入i是一个head phit并且路由字段的高两位与输出端口号匹配，则信号i请求为true。此信号指示输入phit请求使用此头phit开始使用输出端口路由数据包。如果输入i上的点是有效载荷点，则解码器还会生成信号有效载荷i。分配器的保持逻辑使用此信号在数据包持续时间内保持信道（只要有效载荷位在所 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/07/04/%E4%B9%A6%E7%94%9F/" title="书生">书生</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-04T15:20:53.000Z" title="发表于 2020-07-04 23:20:53">2020-07-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%88%91%E5%9B%A2/">我团</a></span></div><div class="content">书生不可以没有，但空谈误国！
+不可以空谈，但是要有向往！！！
+少年中国有希望！
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云若无</div><div class="author-info__description">还记得自己的梦想吗？！！！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2021/06/01/dsdddddd/" title="dsdddddd">dsdddddd</a><time datetime="2021-06-01T03:03:02.000Z" title="发表于 2021-06-01 11:03:02">2021-06-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2021/06/01/hexo-todo/" title="hexo_todo">hexo_todo</a><time datetime="2021-06-01T01:50:53.000Z" title="发表于 2021-06-01 09:50:53">2021-06-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2021/03/07/testy/" title="testy">testy</a><time datetime="2021-03-07T14:18:53.000Z" title="发表于 2021-03-07 22:18:53">2021-03-07</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/11/05/glex/" title="glex">glex</a><time datetime="2020-11-05T00:19:28.000Z" title="发表于 2020-11-05 08:19:28">2020-11-05</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/10/25/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both-1/" title="Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both">Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both</a><time datetime="2020-10-25T10:08:55.000Z" title="发表于 2020-10-25 18:08:55">2020-10-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/"><span class="card-category-list-name">HiNA</span><span class="card-category-list-count">11</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/Papers/"><span class="card-category-list-name">Papers</span><span class="card-category-list-count">10</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/Papers/IB/"><span class="card-category-list-name">IB</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/"><span class="card-category-list-name">拥塞控制</span><span class="card-category-list-count">6</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Interconnection-Networks/"><span class="card-category-list-name">Interconnection_Networks</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/LeetCode/"><span class="card-category-list-name">LeetCode</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/BFRP/" style="font-size: 1.1em; color: #999">BFRP</a> <a href="/tags/BUG/" style="font-size: 1.1em; color: #999">BUG</a> <a href="/tags/Binary-Search/" style="font-size: 1.1em; color: #999">Binary_Search</a> <a href="/tags/C/" style="font-size: 1.17em; color: #999c9f">C++</a> <a href="/tags/CRP/" style="font-size: 1.1em; color: #999">CRP</a> <a href="/tags/CRSP/" style="font-size: 1.1em; color: #999">CRSP</a> <a href="/tags/GitHub/" style="font-size: 1.1em; color: #999">GitHub</a> <a href="/tags/IB/" style="font-size: 1.1em; color: #999">IB</a> <a href="/tags/Interconnection-Networks/" style="font-size: 1.43em; color: #99a6b9">Interconnection_Networks</a> <a href="/tags/LHRP/" style="font-size: 1.1em; color: #999">LHRP</a> <a href="/tags/LeetCode/" style="font-size: 1.5em; color: #99a9bf">LeetCode</a> <a href="/tags/Leetcode/" style="font-size: 1.1em; color: #999">Leetcode</a> <a href="/tags/Linux/" style="font-size: 1.17em; color: #999c9f">Linux</a> <a href="/tags/Omnet/" style="font-size: 1.1em; color: #999">Omnet++</a> <a href="/tags/PCRP/" style="font-size: 1.1em; color: #999">PCRP</a> <a href="/tags/SMSRP/" style="font-size: 1.1em; color: #999">SMSRP</a> <a href="/tags/SRP/" style="font-size: 1.1em; color: #999">SRP</a> <a href="/tags/STL/" style="font-size: 1.1em; color: #999">STL</a> <a href="/tags/Typora/" style="font-size: 1.23em; color: #999ea6">Typora</a> <a href="/tags/Ubuntu/" style="font-size: 1.1em; color: #999">Ubuntu</a> <a href="/tags/c/" style="font-size: 1.1em; color: #999">c++</a> <a href="/tags/congestion/" style="font-size: 1.1em; color: #999">congestion</a> <a href="/tags/debug/" style="font-size: 1.1em; color: #999">debug</a> <a href="/tags/git%EF%BC%8C%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">git，小技巧</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/tail/" style="font-size: 1.1em; color: #999">tail</a> <a href="/tags/%E5%86%85%E7%9C%81/" style="font-size: 1.1em; color: #999">内省</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.17em; color: #999c9f">动态规划</a> <a href="/tags/%E5%8F%B6%E7%BB%8D%E7%BF%81/" style="font-size: 1.1em; color: #999">叶绍翁</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.17em; color: #999c9f">命令行</a> <a href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">回溯算法</a> <a href="/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.17em; color: #999c9f">小技巧</a> <a href="/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/" style="font-size: 1.1em; color: #999">小知识</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 1.1em; color: #999">并查集</a> <a href="/tags/%E6%82%9F%E4%B8%8E%E6%A2%A6/" style="font-size: 1.3em; color: #99a1ac">悟与梦</a> <a href="/tags/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" style="font-size: 1.37em; color: #99a4b2">拥塞控制</a> <a href="/tags/%E6%97%A0%E5%90%8D%E6%B0%8F/" style="font-size: 1.1em; color: #999">无名氏</a> <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 1.1em; color: #999">日常</a> <a href="/tags/%E6%97%A5%E5%B8%B8%EF%BC%8C%E6%82%9F%E4%B8%8E%E6%A2%A6/" style="font-size: 1.1em; color: #999">日常，悟与梦</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">六月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">19</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">21</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">81</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-06-04T15:17:15.163Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云若无</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

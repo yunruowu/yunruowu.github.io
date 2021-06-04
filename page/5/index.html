@@ -1,1739 +1,233 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/yun-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/yun-16x16.png">
-  <meta name="msapplication-config" content="/images/yun-32x32.png">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="还记得自己的梦想吗？！！！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yun的博客">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Yun's博客 - 致奋斗的自己</title><meta name="keywords" content="云"><meta name="author" content="云若无"><meta name="copyright" content="云若无"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="还记得自己的梦想吗？！！！">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="website">
+<meta property="og:title" content="Yun&#39;s博客">
 <meta property="og:url" content="http://yoursite.com/page/5/index.html">
-<meta property="og:site_name" content="Yun的博客">
+<meta property="og:site_name" content="Yun&#39;s博客">
 <meta property="og:description" content="还记得自己的梦想吗？！！！">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:author" content="云若无">
 <meta property="article:tag" content="云">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://yoursite.com/page/5/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>Yun的博客</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/page/5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Yun\'s博客',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-06-04 23:17:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Yun的博客</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">致奋斗的自己</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/" class="post-title-link" itemprop="url">动态规划一点收获</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-29 23:09:30" itemprop="dateCreated datePublished" datetime="2020-06-29T23:09:30+08:00">2020-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-30 08:19:56" itemprop="dateModified" datetime="2020-06-30T08:19:56+08:00">2020-06-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>358</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="动态规划——收获"><a href="#动态规划——收获" class="headerlink" title="动态规划——收获"></a>动态规划——收获</h2><p>​    <a target="_blank" rel="noopener" href="https://yunruowu.github.io/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/">动态规划第一篇</a></p>
-<p>​    之前说了最近要学习动态规划算法，然后自己也刷了十几道题目。下面说一下自己的看法。</p>
-<p>​    首先动态规划的效率确实比很多暴力解法要好很多。但是同时必须要付出空间上的开销。一般都是一个dp数组。从我做的题目来看，动态规划就是求解N处的某个问题的解f(n)的最优解。同时f(n)又与f(n-1),f(n-2)等有关。最重要的就是如何求解这些关系。暴力方法可以使用递归直接去求解，但是如果用树形图画出求解过程，就会发现有很多f(k)会被多次计算，这就是开销最大的地方。那么我们自然而然的想法就是减少f(k)的计算次数，怎么做？一种是带一个备忘录，这个方法也不是最优的。最优的是自底向上的来计算f(i)并且进行记录，这样可以减少子问题的计算次数，也就提升了计算效率。有时间再取一些例子进行分享。</p>
-<p>​    😪</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/" class="post-title-link" itemprop="url">20.6.25一点杂念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-25 22:02:54 / 修改时间：22:36:13" itemprop="dateCreated datePublished" datetime="2020-06-25T22:02:54+08:00">2020-06-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%80%9D%E6%83%B3%E7%9A%84%E7%81%AB%E8%8A%B1/" itemprop="url" rel="index"><span itemprop="name">思想的火花</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/24/Interconnection-Networks-ch1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/24/Interconnection-Networks-ch1/" class="post-title-link" itemprop="url">Interconnection_Networks-1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-24 16:00:39" itemprop="dateCreated datePublished" datetime="2020-06-24T16:00:39+08:00">2020-06-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 16:39:59" itemprop="dateModified" datetime="2020-08-06T16:39:59+08:00">2020-08-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Interconnection-Networks/" itemprop="url" rel="index"><span itemprop="name">Interconnection_Networks</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/24/Interconnection-Networks-ch1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/24/Interconnection-Networks-ch1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>195</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="第一章-互连网络简介"><a href="#第一章-互连网络简介" class="headerlink" title="第一章 互连网络简介"></a>第一章 互连网络简介</h2><ol>
-<li><p>什么是互联网络？</p>
-<p>互连网络是在终端之间传输数据的可编程系统。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200624161515545.png" alt="image-20200624161515545"></p>
-</li>
-</ol>
-<p>从网络在不同时间可以建立不同链接的角度来看，该网络是可编程的。</p>
-<p>本书研究小型的网络，从芯片级别到系统级别的。</p>
-<ol>
-<li><p>Where do you find interconnection networks? </p>
-<p>组件间只要存在通信就有内联网络</p>
-</li>
-<li><p>Why are interconnection networks important?</p>
-<p>成为提升系统性能的限制。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/24/Linux%E5%91%BD%E4%BB%A4%E7%A7%AF%E7%B4%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/24/Linux%E5%91%BD%E4%BB%A4%E7%A7%AF%E7%B4%AF/" class="post-title-link" itemprop="url">Linux命令积累</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-24 08:01:56 / 修改时间：08:23:53" itemprop="dateCreated datePublished" datetime="2020-06-24T08:01:56+08:00">2020-06-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/24/Linux%E5%91%BD%E4%BB%A4%E7%A7%AF%E7%B4%AF/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/24/Linux%E5%91%BD%E4%BB%A4%E7%A7%AF%E7%B4%AF/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>477</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Linux命令积累"><a href="#Linux命令积累" class="headerlink" title="Linux命令积累"></a>Linux命令积累</h2><ol>
-<li><p>移动、复制命令：</p>
-<p><code>mv 源地址 目的地址</code></p>
-<p><code>cp 源地址 目的地址</code></p>
-</li>
-<li><p>添加路径到PATH</p>
-<p><code>export PATH=&quot;$HOME/bin:$PATH&quot;</code> 临时的</p>
-<p>~/.bashrc 打开这个文件，在后面添加上述命令即可完成永久的修改</p>
-<p>source ~/.bashrc  source 命令保存文件并将新文件中的 $PATH 加载到当前 shell 会话中：</p>
-</li>
-<li><p>创建目录</p>
-<p><code>mkdir 文件名</code></p>
-<p><code>mkdir -p /temp/dir1/dir2</code>创建文件树</p>
-</li>
-<li><p>安装</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apt<span class="literal">-get</span> install package_name 安装/更新一个 deb 包 </span><br><span class="line">apt<span class="literal">-cdrom</span> install package_name 从光盘安装/更新一个 deb 包 </span><br><span class="line">apt<span class="literal">-get</span> update 升级列表中的软件包 </span><br><span class="line">apt<span class="literal">-get</span> upgrade 升级所有已安装的软件 </span><br><span class="line">apt<span class="literal">-get</span> remove package_name 从系统删除一个deb包 </span><br><span class="line">apt<span class="literal">-get</span> check 确认依赖的软件仓库正确 </span><br><span class="line">apt<span class="literal">-get</span> clean 从下载的软件包中清理缓存 </span><br><span class="line">apt<span class="literal">-cache</span> search searched<span class="literal">-package</span> 返回包含所要搜索字符串的软件包名称 </span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/23/%E4%B8%80%E6%AC%A1Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/23/%E4%B8%80%E6%AC%A1Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">一次Ubuntu的安装记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-23 23:11:18" itemprop="dateCreated datePublished" datetime="2020-06-23T23:11:18+08:00">2020-06-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-03 16:37:17" itemprop="dateModified" datetime="2020-08-03T16:37:17+08:00">2020-08-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" itemprop="url" rel="index"><span itemprop="name">软件安装</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/23/%E4%B8%80%E6%AC%A1Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/23/%E4%B8%80%E6%AC%A1Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>283</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一次Ubuntu的安装记录"><a href="#一次Ubuntu的安装记录" class="headerlink" title="一次Ubuntu的安装记录"></a>一次Ubuntu的安装记录</h2><p>​    最近要在Linux上做一点东西，但是自己不太理解要做啥，本来是想用WSL的，结果发现有点困难😂。只能转到虚拟机里面来工作了。找了一个Ubuntu的iso安装文件，安装，很快。</p>
-<p>​    由于是新系统肯定需要下载软件，更新软件，确实花费了一定的时间。最难的是安装中文输入法，搞了我好久。现在还有一个bug，中文输入在terminal中无法显示光标。</p>
-<p>​    后面我还行去WSL里面试试，不折腾会死就是我本人了。</p>
-<p>​    一些小的启发：发现问题时多去百度，谷歌，收益很多。然后就是多试试，自己总能解决问题。</p>
-<p>​    还有Linux不要随意删除自带的python，很坑。记住！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/" class="post-title-link" itemprop="url">动态规划我来康康</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-18 09:17:25 / 修改时间：09:35:40" itemprop="dateCreated datePublished" datetime="2020-06-18T09:17:25+08:00">2020-06-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>209</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="动态规划的-云-看法"><a href="#动态规划的-云-看法" class="headerlink" title="动态规划的  云  看法"></a>动态规划的  <span style = "color :#87CEFA">云</span>  看法</h2><p>​    个人而言，时而觉得动态规划比较神秘困难，时而觉得简单。主要还是没有完全掌握方法和技巧，所以最近准备重新全面的了解一下这个算法，同时在LeetCode中进行刷题。</p>
-<p>​    现在我知道了递归的一般思路：递归解法-&gt;带备忘录的递归解法-&gt;动态规划的解法。</p>
-<p>​    其中还有求解最优子问题。</p>
-<p>​    动态规划问题最困难的就是写出状态转移方程。</p>
-<p>​    下面就安装上面的思路去刷题，看看自己能得到什么🏃‍♂️🏃‍♂️🏃‍♂️</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/" class="post-title-link" itemprop="url">一点点小想法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-17 18:05:36 / 修改时间：18:12:49" itemprop="dateCreated datePublished" datetime="2020-06-17T18:05:36+08:00">2020-06-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%86%85%E7%9C%81/" itemprop="url" rel="index"><span itemprop="name">内省</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>251</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/17/LeetCode-11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/17/LeetCode-11/" class="post-title-link" itemprop="url">LeetCode-11</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-17 18:01:10 / 修改时间：18:05:13" itemprop="dateCreated datePublished" datetime="2020-06-17T18:01:10+08:00">2020-06-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/17/LeetCode-11/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/17/LeetCode-11/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/repeated-dna-sequences/description/">187.重复的DNA序列</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-ii/description/">137.只出现一次的数字 II </a></li>
-</ol>
-<p>两个题目都是关于位运算的。不得不承认自己不会💔，确实没有这方面的练习，完全没有想法。这个还是需要自己多去尝试，多学习学习。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/LeetCode-10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/16/LeetCode-10/" class="post-title-link" itemprop="url">LeetCode-10</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-16 15:21:59" itemprop="dateCreated datePublished" datetime="2020-06-16T15:21:59+08:00">2020-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-22 15:55:07" itemprop="dateModified" datetime="2020-07-22T15:55:07+08:00">2020-07-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/16/LeetCode-10/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/16/LeetCode-10/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>143</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>这次题目没啥。难度不大</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/">105.从前序与中序遍历序列构造二叉树</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/">106.从中序与后序遍历序列构造二叉树</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/description/">114.二叉树展开为链表</a></li>
-</ol>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>前两题简单。直接第三题<br>要求就是把树变成链表，如下：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/2.png" alt="2"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/33.png" alt="33" style="zoom: 80%;" /></p>
-<p>具体算法是：</p>
-<ol>
-<li>将右节点放到左节点的最右边的节点下面。</li>
-<li>将左节点放到右节点的位置，左节点为空；</li>
-<li>遍历一下即可。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/13/win10%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/15.png">
-      <meta itemprop="name" content="云若无">
-      <meta itemprop="description" content="还记得自己的梦想吗？！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yun的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/13/win10%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">win10汇编学习的环境配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-13 18:18:40 / 修改时间：22:33:47" itemprop="dateCreated datePublished" datetime="2020-06-13T18:18:40+08:00">2020-06-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-users"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="firestore-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/06/13/win10%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/13/win10%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>779</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>​    想学习汇编语言的，首先最重要的装环境。学语言躲不掉的，而且头疼的步骤😂</p>
-<p>​    最开始肯定是想在win10下面运行的。网上一查装，感觉有点麻烦。然后就放弃了准备转战linux。之前把WSL删除了，又要重新弄，之前操作过，难度不大。之后就是安装汇编语言环境，这里也是坑，最后成功了，发现虚拟机DOSbox运行的时候很不正常。运行结果如下，我个人觉得是因为wsl不支持弹出程序界面。具体的我也不知道。就这样吧，win10我来了。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200613215435.png" alt="image-20200613215432641"></p>
-<h2 id="win10汇编学习的环境配置"><a href="#win10汇编学习的环境配置" class="headerlink" title="win10汇编学习的环境配置"></a>win10汇编学习的环境配置</h2><p>下面的都是自己在百度上找的，有的已经忘记了网址，只能提供下面几个了。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuzeyu12a/p/10285384.html">下载教程</a></p>
-<h3 id="需要的工具"><a href="#需要的工具" class="headerlink" title="需要的工具"></a>需要的工具</h3><ol>
-<li>dosBox模拟器。</li>
-<li>masm 5.0</li>
-<li>debug程序</li>
-</ol>
-<h4 id="一、dosBox模拟器"><a href="#一、dosBox模拟器" class="headerlink" title="一、dosBox模拟器"></a>一、dosBox模拟器</h4><ul>
-<li><p>下载地址：直接到官网下载即可。        </p>
-</li>
-<li><p>百度的简介：DOSBox是一个软件。它是当前在 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Windows/165458">Windows</a> 系统运行 <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/DOS/32025">DOS</a> 游戏的较为完美的解决方案，该软件不仅能支持相当多的游戏实现正常运行，而且能将声音完美表现出来。</p>
-<p>说实话我也不是很清楚这是干啥的，大概就是一个模拟器，或者是虚拟环境，包含8086汇编环境的，正好适合我的学习。</p>
-</li>
-<li><p>安装：安装包下载下来直接next,记得选择自己的安装目录就可以。</p>
-</li>
-<li><p>配置：这要是挂载目录。命令<code>mount c: c:\</code>前一个c盘是模拟器里面的，后面的是win10主机的目录。这样在模拟器里面需要每次输入一次。解决办法，修改配置文件DOSBox 0.74 Options.bat。</p>
-</li>
-<li><p>修改结果如下：</p>
-<p>配置环境变量主要是在后面使用其他工具时不需四处调整目录，简化操作。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200613221849.png" alt="image-20200613221849549"></p>
-</li>
-<li><p>难度：❤🧡💛</p>
-</li>
-</ul>
-<h4 id="二、masm5-0"><a href="#二、masm5-0" class="headerlink" title="二、masm5.0"></a>二、masm5.0</h4><ul>
-<li><p>安装：</p>
-<p>这个只要是为后面编译，链接程序，debug配置的</p>
-<p>主要程序如下：</p>
-</li>
-</ul>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200613222317.png" alt="image-20200613222317896"></p>
-<p>​        之前以为挺难的，后面发现只要下载了即可。我太高估了。💔</p>
-<ul>
-<li>难度：❤🧡</li>
-</ul>
-<h4 id="三、debug"><a href="#三、debug" class="headerlink" title="三、debug"></a>三、debug</h4><p>这个是单独装的，最后我移动到masm文件夹里面一样可以使用</p>
-<ul>
-<li>安装地址：github<a target="_blank" rel="noopener" href="https://github.com/Microsoft/MS-DOS">网址</a></li>
-<li>使用：<a target="_blank" rel="noopener" href="https://yunruowu.github.io/2020/06/13/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E4%B8%ADDebug%E7%9A%84%E4%BD%BF%E7%94%A8/">debug使用</a></li>
-<li>难度：🤍</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
   }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="云若无"
-      src="/images/15.png">
-  <p class="site-author-name" itemprop="name">云若无</p>
-  <div class="site-description" itemprop="description">还记得自己的梦想吗？！！！</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">81</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">34</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">51</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/yunruowu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yunruowu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">yunruowu</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">57k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">52 分钟</span>
-</div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
-  <script>
-    firebase.initializeApp({
-      apiKey   : '',
-      projectId: ''
-    });
-
-    function getCount(doc, increaseCount) {
-      // IncreaseCount will be false when not in article page
-      return doc.get().then(d => {
-        var count = 0;
-        if (!d.exists) { // Has no data, initialize count
-          if (increaseCount) {
-            doc.set({
-              count: 1
-            });
-            count = 1;
-          }
-        } else { // Has data
-          count = d.data().count;
-          if (increaseCount) {
-            // If first view this article
-            doc.set({ // Increase count
-              count: count + 1
-            });
-            count++;
-          }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
         }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-        return count;
-      });
-    }
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-    function appendCountTo(el) {
-      return count => {
-        el.innerText = count;
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
       }
     }
-  </script>
-  <script>
-    (function() {
-      var db = firebase.firestore();
-      var articles = db.collection('articles');
-
-      if (CONFIG.page.isPost) { // Is article page
-        var title = document.querySelector('.post-title').innerText.trim();
-        var doc = articles.doc(title);
-        var increaseCount = CONFIG.hostname === location.hostname;
-        if (localStorage.getItem(title)) {
-          increaseCount = false;
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
         } else {
-          // Mark as visited
-          localStorage.setItem(title, true);
-        }
-        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
-      } else if (CONFIG.page.isHome) { // Is index page
-        var promises = [...document.querySelectorAll('.post-title')].map(element => {
-          var title = element.innerText.trim();
-          var doc = articles.doc(title);
-          return getCount(doc);
-        });
-        Promise.all(promises).then(counts => {
-          var metas = document.querySelectorAll('.firestore-visitors-count');
-          counts.forEach((val, idx) => {
-            appendCountTo(metas[idx])(val);
-          });
-        });
-      }
-    })();
-  </script>
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-  <script defer src="/lib/three/three.min.js"></script>
-    <script defer src="/lib/three/three-waves.min.js"></script>
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
+          document.documentElement.classList.remove('hide-aside')
         }
       }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
-
-  
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yun's博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Yun's博客</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/" title="动态规划一点收获">动态规划一点收获</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-29T15:09:30.000Z" title="发表于 2020-06-29 23:09:30">2020-06-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content"><!-- hexo-inject:begin --><!-- hexo-inject:end -->动态规划——收获​    动态规划第一篇
+​    之前说了最近要学习动态规划算法，然后自己也刷了十几道题目。下面说一下自己的看法。
+​    首先动态规划的效率确实比很多暴力解法要好很多。但是同时必须要付出空间上的开销。一般都是一个dp数组。从我做的题目来看，动态规划就是求解N处的某个问题的解f(n)的最优解。同时f(n)又与f(n-1),f(n-2)等有关。最重要的就是如何求解这些关系。暴力方法可以使用递归直接去求解，但是如果用树形图画出求解过程，就会发现有很多f(k)会被多次计算，这就是开销最大的地方。那么我们自然而然的想法就是减少f(k)的计算次数，怎么做？一种是带一个备忘录，这个方法也不是最优的。最优的是自底向上的来计算f(i)并且进行记录，这样可以减少子问题的计算次数，也就提升了计算效率。有时间再取一些例子进行分享。
+​    😪
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/25/20-6-25%E4%B8%80%E7%82%B9%E6%9D%82%E5%BF%B5/" title="20.6.25一点杂念">20.6.25一点杂念</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-25T14:02:54.000Z" title="发表于 2020-06-25 22:02:54">2020-06-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%80%9D%E6%83%B3%E7%9A%84%E7%81%AB%E8%8A%B1/">思想的火花</a></span></div><div class="content">
+  0ad2aeb4bf0a00f059acc3e8525b3e6c03635d71f20012fe51dbe0107d33815c7723496a8f0ff4c8fb7838c071a01c02ed4a13cb35ad96c72be4a305da2894c05f78399f8767a6d9090536b0b112b49fb3b0fab4c0d02748d40e05810976545111e27cb26e2b2891a8ba2e75c54adc09b977db355a5cc87d5930142c99950e74aaff52ed4adfa75c24f76b585d71e830b09df757774f8bbf26c8de69b6349c8a65bd2b8fe20acc3b0f5d2e3bc1a19bac8d0004c328c1c42b9b1ce3660a85bc7c8050c63cb13f1c3ca46164efe6bd07ccaf94a493adf5a4792b89849854f1bbaf8dea5c88dac4db4bdb4aced472340706b4c4d89389d25a82b ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/24/Interconnection-Networks-ch1/" title="Interconnection_Networks-1">Interconnection_Networks-1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-24T08:00:39.000Z" title="发表于 2020-06-24 16:00:39">2020-06-24</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Interconnection-Networks/">Interconnection_Networks</a></span></div><div class="content">第一章 互连网络简介
+什么是互联网络？
+互连网络是在终端之间传输数据的可编程系统。
 
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : '4IGC8AvIRHIvT9eXEg68KCoU-MdYXbMMI',
-      appKey     : 'fjat7lYSANeIO7AhJYhb1Kwa',
-      placeholder: "Just go go",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : 'zh-cn' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : ''
-    });
-  }, window.Valine);
-});
-</script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
-</html>
+从网络在不同时间可以建立不同链接的角度来看，该网络是可编程的。
+本书研究小型的网络，从芯片级别到系统级别的。
+
+Where do you find interconnection networks? 
+组件间只要存在通信就有内联网络
+
+Why are interconnection networks important?
+成为提升系统性能的限制。
+
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/24/Linux%E5%91%BD%E4%BB%A4%E7%A7%AF%E7%B4%AF/" title="Linux命令积累">Linux命令积累</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-24T00:01:56.000Z" title="发表于 2020-06-24 08:01:56">2020-06-24</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">Linux命令积累
+移动、复制命令：
+mv 源地址 目的地址
+cp 源地址 目的地址
+
+添加路径到PATH
+export PATH=&quot;$HOME/bin:$PATH&quot; 临时的
+~/.bashrc 打开这个文件，在后面添加上述命令即可完成永久的修改
+source ~/.bashrc  source 命令保存文件并将新文件中的 $PATH 加载到当前 shell 会话中：
+
+创建目录
+mkdir 文件名
+mkdir -p /temp/dir1/dir2创建文件树
+
+安装
+12345678apt-get install package_name 安装/更新一个 deb 包 apt-cdrom install package_name 从光盘安装/更新一个 deb 包 apt-get update 升级列表中的软件包 apt-get upgrade 升级所有已安装的软件 apt-get remove package_name 从系统删除一个deb包 apt-get check 确认依赖的软件仓库正确 apt-get clean 从下载的软件包中清理缓存 apt-cache  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/23/%E4%B8%80%E6%AC%A1Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" title="一次Ubuntu的安装记录">一次Ubuntu的安装记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-23T15:11:18.000Z" title="发表于 2020-06-23 23:11:18">2020-06-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">软件安装</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/Linux/">Linux</a></span></div><div class="content">一次Ubuntu的安装记录​    最近要在Linux上做一点东西，但是自己不太理解要做啥，本来是想用WSL的，结果发现有点困难😂。只能转到虚拟机里面来工作了。找了一个Ubuntu的iso安装文件，安装，很快。
+​    由于是新系统肯定需要下载软件，更新软件，确实花费了一定的时间。最难的是安装中文输入法，搞了我好久。现在还有一个bug，中文输入在terminal中无法显示光标。
+​    后面我还行去WSL里面试试，不折腾会死就是我本人了。
+​    一些小的启发：发现问题时多去百度，谷歌，收益很多。然后就是多试试，自己总能解决问题。
+​    还有Linux不要随意删除自带的python，很坑。记住！
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/" title="动态规划我来康康">动态规划我来康康</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-18T01:17:25.000Z" title="发表于 2020-06-18 09:17:25">2020-06-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">动态规划的  云  看法​    个人而言，时而觉得动态规划比较神秘困难，时而觉得简单。主要还是没有完全掌握方法和技巧，所以最近准备重新全面的了解一下这个算法，同时在LeetCode中进行刷题。
+​    现在我知道了递归的一般思路：递归解法-&gt;带备忘录的递归解法-&gt;动态规划的解法。
+​    其中还有求解最优子问题。
+​    动态规划问题最困难的就是写出状态转移方程。
+​    下面就安装上面的思路去刷题，看看自己能得到什么🏃‍♂️🏃‍♂️🏃‍♂️
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/" title="一点点小想法">一点点小想法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-17T10:05:36.000Z" title="发表于 2020-06-17 18:05:36">2020-06-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%86%85%E7%9C%81/">内省</a></span></div><div class="content">
+  7598fd0d447fa3eaa88cce180daf64da4d9e073c4ff02148c2bad48a61baf8f79bb7abbc9f7a20735ce2e59ca867107e6f8f1e21c3cd6fdc7c0e3d4d1069073188486e6c5a90a010a8cf12d588f499ab6f668210701f5089e886619fc98ebb28706a188b8d0127f4d87ec30b3f245ea235c612dc64c07ad8b171827ba415a1a7ddb2b47c74fd1ee9e6166dc5551f43c517f12d02172edab29b8cef36d7bc80e1c6531810306b7d77ff5e24e4e6a539ed5fecb75495a77b33949208a2fee3dc867d22ca9b0293df7cf8ffc852b7a90d00a296e711a747cf2a5f2df20352c45bdeffaccfdc5a735bc0736d33512c5cd5a52b2444474a409c27f ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/17/LeetCode-11/" title="LeetCode-11">LeetCode-11</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-17T10:01:10.000Z" title="发表于 2020-06-17 18:01:10">2020-06-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/LeetCode/">LeetCode</a></span></div><div class="content">题目描述
+187.重复的DNA序列
+137.只出现一次的数字 II 
+
+两个题目都是关于位运算的。不得不承认自己不会💔，确实没有这方面的练习，完全没有想法。这个还是需要自己多去尝试，多学习学习。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/16/LeetCode-10/" title="LeetCode-10">LeetCode-10</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-16T07:21:59.000Z" title="发表于 2020-06-16 15:21:59">2020-06-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/LeetCode/">LeetCode</a></span></div><div class="content">题目这次题目没啥。难度不大
+
+105.从前序与中序遍历序列构造二叉树
+106.从中序与后序遍历序列构造二叉树
+114.二叉树展开为链表
+
+解题思路前两题简单。直接第三题要求就是把树变成链表，如下：
+
+
+具体算法是：
+
+将右节点放到左节点的最右边的节点下面。
+将左节点放到右节点的位置，左节点为空；
+遍历一下即可。
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2020/06/13/win10%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="win10汇编学习的环境配置">win10汇编学习的环境配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-13T10:18:40.000Z" title="发表于 2020-06-13 18:18:40">2020-06-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></span></div><div class="content">​    想学习汇编语言的，首先最重要的装环境。学语言躲不掉的，而且头疼的步骤😂
+​    最开始肯定是想在win10下面运行的。网上一查装，感觉有点麻烦。然后就放弃了准备转战linux。之前把WSL删除了，又要重新弄，之前操作过，难度不大。之后就是安装汇编语言环境，这里也是坑，最后成功了，发现虚拟机DOSbox运行的时候很不正常。运行结果如下，我个人觉得是因为wsl不支持弹出程序界面。具体的我也不知道。就这样吧，win10我来了。
+
+win10汇编学习的环境配置下面的都是自己在百度上找的，有的已经忘记了网址，只能提供下面几个了。
+下载教程
+需要的工具
+dosBox模拟器。
+masm 5.0
+debug程序
+
+一、dosBox模拟器
+下载地址：直接到官网下载即可。        
+
+百度的简介：DOSBox是一个软件。它是当前在 Windows 系统运行 DOS 游戏的较为完美的解决方案，该软件不仅能支持相当多的游戏实现正常运行，而且能将声音完美表现出来。
+说实话我也不是很清楚这是干啥的，大概就是一个模拟器，或者是虚拟环境，包含8086汇编环境的，正好适合我的学习。
+
+安装：安装包下 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云若无</div><div class="author-info__description">还记得自己的梦想吗？！！！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">34</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/2021/06/01/dsdddddd/" title="dsdddddd">dsdddddd</a><time datetime="2021-06-01T03:03:02.000Z" title="发表于 2021-06-01 11:03:02">2021-06-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2021/06/01/hexo-todo/" title="hexo_todo">hexo_todo</a><time datetime="2021-06-01T01:50:53.000Z" title="发表于 2021-06-01 09:50:53">2021-06-01</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2021/03/07/testy/" title="testy">testy</a><time datetime="2021-03-07T14:18:53.000Z" title="发表于 2021-03-07 22:18:53">2021-03-07</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/11/05/glex/" title="glex">glex</a><time datetime="2020-11-05T00:19:28.000Z" title="发表于 2020-11-05 08:19:28">2020-11-05</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2020/10/25/Evaluation-of-an-InfiniBand-Switch-Choose-Latency-or-Bandwidth-but-Not-Both-1/" title="Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both">Evaluation of an InfiniBand Switch:Choose Latency or Bandwidth, but Not Both</a><time datetime="2020-10-25T10:08:55.000Z" title="发表于 2020-10-25 18:08:55">2020-10-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/"><span class="card-category-list-name">HiNA</span><span class="card-category-list-count">11</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/Papers/"><span class="card-category-list-name">Papers</span><span class="card-category-list-count">10</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/Papers/IB/"><span class="card-category-list-name">IB</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/"><span class="card-category-list-name">拥塞控制</span><span class="card-category-list-count">6</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Interconnection-Networks/"><span class="card-category-list-name">Interconnection_Networks</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/LeetCode/"><span class="card-category-list-name">LeetCode</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/BFRP/" style="font-size: 1.1em; color: #999">BFRP</a> <a href="/tags/BUG/" style="font-size: 1.1em; color: #999">BUG</a> <a href="/tags/Binary-Search/" style="font-size: 1.1em; color: #999">Binary_Search</a> <a href="/tags/C/" style="font-size: 1.17em; color: #999c9f">C++</a> <a href="/tags/CRP/" style="font-size: 1.1em; color: #999">CRP</a> <a href="/tags/CRSP/" style="font-size: 1.1em; color: #999">CRSP</a> <a href="/tags/GitHub/" style="font-size: 1.1em; color: #999">GitHub</a> <a href="/tags/IB/" style="font-size: 1.1em; color: #999">IB</a> <a href="/tags/Interconnection-Networks/" style="font-size: 1.43em; color: #99a6b9">Interconnection_Networks</a> <a href="/tags/LHRP/" style="font-size: 1.1em; color: #999">LHRP</a> <a href="/tags/LeetCode/" style="font-size: 1.5em; color: #99a9bf">LeetCode</a> <a href="/tags/Leetcode/" style="font-size: 1.1em; color: #999">Leetcode</a> <a href="/tags/Linux/" style="font-size: 1.17em; color: #999c9f">Linux</a> <a href="/tags/Omnet/" style="font-size: 1.1em; color: #999">Omnet++</a> <a href="/tags/PCRP/" style="font-size: 1.1em; color: #999">PCRP</a> <a href="/tags/SMSRP/" style="font-size: 1.1em; color: #999">SMSRP</a> <a href="/tags/SRP/" style="font-size: 1.1em; color: #999">SRP</a> <a href="/tags/STL/" style="font-size: 1.1em; color: #999">STL</a> <a href="/tags/Typora/" style="font-size: 1.23em; color: #999ea6">Typora</a> <a href="/tags/Ubuntu/" style="font-size: 1.1em; color: #999">Ubuntu</a> <a href="/tags/c/" style="font-size: 1.1em; color: #999">c++</a> <a href="/tags/congestion/" style="font-size: 1.1em; color: #999">congestion</a> <a href="/tags/debug/" style="font-size: 1.1em; color: #999">debug</a> <a href="/tags/git%EF%BC%8C%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">git，小技巧</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/tail/" style="font-size: 1.1em; color: #999">tail</a> <a href="/tags/%E5%86%85%E7%9C%81/" style="font-size: 1.1em; color: #999">内省</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.17em; color: #999c9f">动态规划</a> <a href="/tags/%E5%8F%B6%E7%BB%8D%E7%BF%81/" style="font-size: 1.1em; color: #999">叶绍翁</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.17em; color: #999c9f">命令行</a> <a href="/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" style="font-size: 1.1em; color: #999">回溯算法</a> <a href="/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 1.17em; color: #999c9f">小技巧</a> <a href="/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/" style="font-size: 1.1em; color: #999">小知识</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 1.1em; color: #999">并查集</a> <a href="/tags/%E6%82%9F%E4%B8%8E%E6%A2%A6/" style="font-size: 1.3em; color: #99a1ac">悟与梦</a> <a href="/tags/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/" style="font-size: 1.37em; color: #99a4b2">拥塞控制</a> <a href="/tags/%E6%97%A0%E5%90%8D%E6%B0%8F/" style="font-size: 1.1em; color: #999">无名氏</a> <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 1.1em; color: #999">日常</a> <a href="/tags/%E6%97%A5%E5%B8%B8%EF%BC%8C%E6%82%9F%E4%B8%8E%E6%A2%A6/" style="font-size: 1.1em; color: #999">日常，悟与梦</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">六月 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">三月 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">19</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">21</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">81</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-06-04T15:17:15.163Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云若无</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

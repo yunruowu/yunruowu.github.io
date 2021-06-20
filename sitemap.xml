@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2021/06/20/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</loc>
+    
+    <lastmod>2021-06-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2021/03/07/testy/</loc>
+    
+    <lastmod>2021-06-20</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2021/06/16/%E4%BD%95%E4%B8%BA%E5%A4%A7%E5%AD%A6/</loc>
     
     <lastmod>2021-06-16</lastmod>
@@ -59,13 +73,6 @@
   
   <url>
     <loc>http://yoursite.com/2020/04/02/test-my-site/</loc>
-    
-    <lastmod>2021-03-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2021/03/07/testy/</loc>
     
     <lastmod>2021-03-07</lastmod>
     
@@ -620,7 +627,7 @@
 
   <url>
     <loc>http://yoursite.com/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -628,378 +635,413 @@
   
   <url>
     <loc>http://yoursite.com/tags/%E6%82%9F%E4%B8%8E%E6%A2%A6/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E8%AE%A1%E5%88%92/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/BFRP/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/C/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/CRSP/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/CRP/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/IB/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/c/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Interconnection-Networks/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/LeetCode/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Leetcode/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Binary-Search/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/PCRP/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/SRP/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/SMSRP/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/LHRP/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Omnet/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/congestion/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/tail/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Typora/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Linux/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/BUG/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/STL/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/python/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E8%A3%85%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/Ubuntu/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%86%85%E7%9C%81/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E8%AF%97/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%97%A0%E5%90%8D%E6%B0%8F/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%97%A5%E5%B8%B8%EF%BC%8C%E6%82%9F%E4%B8%8E%E6%A2%A6/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%94%9F%E6%B4%BB%E7%9A%84%E6%84%9F%E6%82%9F/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%9D%8E%E8%B4%BA/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/linux/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%97%A5%E5%B8%B8/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%99%BD%E5%B1%85%E6%98%93/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/git%EF%BC%8C%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/GitHub/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%9D%9C%E7%89%A7/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/debug/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E7%90%90%E8%AE%B0/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%8F%B6%E7%BB%8D%E7%BF%81/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%AD%8C/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E6%9D%8E%E5%8F%94%E5%90%8C/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E9%81%93%E5%BE%B7%E7%BB%8F/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/tags/%E5%85%B1%E4%BA%A7%E4%B8%BB%E4%B9%89/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/read/</loc>
+    <lastmod>2021-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</loc>
+    <lastmod>2021-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/%E5%AE%9E%E7%94%A8/</loc>
+    <lastmod>2021-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/%E5%B0%8F%E8%AF%B4/</loc>
+    <lastmod>2021-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/%E5%93%B2%E5%AD%A6/</loc>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1008,259 +1050,266 @@
   
   <url>
     <loc>http://yoursite.com/categories/%E6%80%9D%E6%83%B3%E7%9A%84%E7%81%AB%E8%8A%B1/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E4%BB%BB%E5%8A%A1/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/HiNA/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/ccf/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/LeetCode/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/HiNA/Papers/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/c/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/Interconnection-Networks/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/HiNA/Papers/IB/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/HiNA/Papers/%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/Linux/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/Omnet/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/markdown/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/WSL/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/C/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/hexo/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/code/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/python/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E5%86%85%E7%9C%81/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E6%B1%87%E7%BC%96/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%AF%97%E8%AF%8D%E8%B5%8B/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E6%82%9F%E4%B8%8E%E6%80%9D/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E6%88%91%E5%9B%A2/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/WSL/Linux/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%AF%97%E8%AF%8D%E8%B5%8B-%E7%99%BD%E5%B1%85%E6%98%93/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E7%90%90%E8%AE%B0/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/Linux/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%AF%97/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%AF%97%E8%AF%8D%E8%B5%8B/%E6%97%A0%E5%90%8D%E6%B0%8F/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%AF%97%E8%AF%8D%E8%B5%8B/%E6%9D%8E%E8%B4%BA/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%AF%97%E8%AF%8D%E8%B5%8B/%E6%9D%9C%E7%89%A7/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E8%AF%97%E8%AF%8D%E8%B5%8B/%E5%8F%B6%E7%BB%8D%E7%BF%81/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E9%81%93%E5%BE%B7%E7%BB%8F/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://yoursite.com/categories/%E5%85%B1%E4%BA%A7%E4%B8%BB%E4%B9%89/</loc>
-    <lastmod>2021-06-19</lastmod>
+    <lastmod>2021-06-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/book/</loc>
+    <lastmod>2021-06-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

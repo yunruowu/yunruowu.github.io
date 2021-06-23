@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>如何阅读一本书</title>
+    <title>BoomGate</title>
+    <url>/2021/06/21/BoomGate/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Abstract">Abstract</h2>
+<blockquote>
+<p>Abstract—Avoiding routing deadlock is an important compo­ nent of an interconnection network. For large-scale systems with high-radix topologies that leverage non-minimal adaptive routing, virtual channels (VCs) are commonly used to prevent routing deadlock. However, VCs in large-scale networks can be costly because of deep buffers and restrict VC usage. In this work, we propose BoomGATE for deadlock avoidance in large-scale networks. In particular, BoomGATE consists of two components <strong>Restricted Intermediate-node Non-minimal Routing (RINR) al­ gorithm</strong> and <strong>opportunistic flow control (OFC)</strong> which both exploit the low-diameter characteristics of high-radix networks while maximizing path diversity within the topology. We identify how routing deadlock in fully-connected topologies are caused by non­ minimal routes and propose to restrict the non-minimal routing to ensure deadlock freedom without additional virtual channels. We also propose an algorithm that ensures path diversity is loadbalanced across all nodes in the system. However, since path diversity is restricted with the RINR algorithm, complement RINR algorithm with opportunistic flow control (OFC) where “illegal routes” are allowed if and only if sufficient buffer can be guaranteed to ensure cyclical dependency does not occur. We propose both a static and dynamic OFC implementation. We evaluate the performance of BoomGATE and demonstrate there is minimal performance loss compared to global adaptive routing, while reducing the amount of buffers required by 50%.</p>
+</blockquote>
+<p><strong>Routing Deadlock:</strong></p>
+<p>​	Deadlock is defined as occurring in the network if  and only if there exists one or more cyclic dependency in channel dependency graph (CDG) of the network.</p>
+<h3 id="1-Question">1. Question?</h3>
+<h3 id="2-Method">2. Method?</h3>
+<h3 id="3-Answer">3. Answer?</h3>
+<h2 id="Introduction">Introduction</h2>
+<h3 id="1-为什么研究这个课题">1.为什么研究这个课题?</h3>
+<h3 id="2-目前这个课题研究到了哪个阶段">2.目前这个课题研究到了哪个阶段?</h3>
+<h3 id="3-作者的理论基于哪些假设">3.作者的理论基于哪些假设?</h3>
+<h2 id="Conclusion">Conclusion</h2>
+<h3 id="1-文章的缺陷">1.文章的缺陷</h3>
+<h3 id="2-关于该课题，作者的构思">2.关于该课题，作者的构思?</h3>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img_1/20210622090815.png" alt="image-20210622090815582"></p>
+]]></content>
+      <categories>
+        <category>HiNA</category>
+        <category>Papers</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>如何阅读一本书-1</title>
     <url>/2021/06/20/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>ssss</p>
-<p>sssssssssssssssssss</p>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h3 id="第一章-阅读的活力与艺术">第一章 阅读的活力与艺术</h3>
+<h4 id="阅读的目标：为获得咨询而读，以及为求得理解而读">阅读的目标：为获得咨询而读，以及为求得理解而读</h4>
+<h4 id="阅读就是学习：指导型学习，以及自我发现型的学习之间的差异">阅读就是学习：指导型学习，以及自我发现型的学习之间的差异</h4>
+<h4 id="老师的出现与缺席">老师的出现与缺席</h4>
 ]]></content>
       <categories>
         <category>book</category>
       </categories>
       <tags>
-        <tag>read</tag>
         <tag>方法论</tag>
-        <tag>实用</tag>
-        <tag>小说</tag>
-        <tag>哲学</tag>
+        <tag>如何阅读一本书</tag>
       </tags>
   </entry>
   <entry>
@@ -23,7 +48,12 @@
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>今天在看书的时候，看到了作者在大学里面，学习了很多课程，听讲座，看书。很多课程在我看来是和她的研究没有联系的。换做是我的话，我会不会去选择这些课程呢？如果按照我现在的环境和状态，断然是不会把时间花费在这些课程上的。所以我发现了一个很奇怪的事情----在大学我到底应该做什么？</p>
 <p>先谈一下自己的状态，现在是个研究生。可是我没有考虑过到底什么样的生活才是“好的”研究生生活。但是我也在这度过将近一年的时光了。在我看来，我和我的同学，并没有把学课程当成我们的一个优势，反而是一种负担。具体来说，选课时，不选自己感兴趣的，不选对自己有用的，选不点名的，选没有作业的，选好过的；上课时，能逃课的绝对不去上课，能划水的绝对不认真；作业，能不写的绝对不写，能抄的绝对不自己做；考试，能过就行，能不复习就不复习。这样的思想不是一个两个，和我一起上来的，十个有九个是这样的想法。我也是这样想的，一时间就陷入这样的困境里面，没有想过为什么这样是对的，好像这就是真理。对这样事情的思考绝对不可能归咎于自身，说到原因，学校课程安排不合理，课程学了也没有用。一直都是消息的拒绝。</p>
 <p>在一个就是在学校，是否有学校的生活。没有感受过大家一起去听老师的课，不是因为学分，仅仅是因为课程魅力。没有去泡图书馆，除非是有什么逼迫。感觉我在这里，并不是上学的状态，反倒是一种很压抑的感觉。有个类似于高考的指挥棒一样的东西，它引导着我走向它规划的道路，而我这几年（包括本科四年）也都是这样被一些琐事所困扰，浑浑噩噩的度过，很多时候我没有本心，也没有寻找过本心。很难想象我是怎么走到这一步的。</p>
-<p>不可否认，它有其自身的特殊性，但是这种特殊性让我觉得是一种局限性。虽然它从来没有强调过什么，但是只要出口有标准，所有人都会趋之若鹜的。可能这就是大局。在这里，我觉得自己不够真实</p>
+<p>不可否认，它有其自身的特殊性，但是这种特殊性让我觉得是一种局限性。虽然它从来没有强调过什么，但是只要出口有标准，所有人都会趋之若鹜的。可能这就是大局。在这里，我觉得自己不够真实。</p>
+<p>加一句塔拉的话</p>
+<blockquote>
+<p>教育意味着获得不同的视角，理解不同的人、经历和历史。接受教育，但不要让你的教育僵化成傲慢。教育应该是思想的拓展，同理心的深化，视野的开阔。教育不应该使你的偏见变得更顽固。如果人们受过教育，他们应该变得不那么确定，而不是更确定。他们应该多听，少说，对差异满怀激情，热爱那些不同于他们的想法。</p>
+<p align="right">——塔拉・韦斯特弗《福布斯杂志》访谈</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>悟与思</category>

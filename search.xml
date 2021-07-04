@@ -1,16 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>在我的一生中，我想要做_____</title>
+    <url>/2021/07/04/%E5%9C%A8%E6%88%91%E7%9A%84%E4%B8%80%E7%94%9F%E4%B8%AD%EF%BC%8C%E6%88%91%E6%83%B3%E8%A6%81%E5%81%9A/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="dae47f3def961490495a20fdeec1df8f804680882eb740ea2426aeecbecfcab3">6aeae6a0b22b6ffaff5e84397546cfb74780a8860e4a7389c5731d591e0ddd05d8e3ef1dc100eb7c940b17639cb339518e088c9c4a2b47126f6d58d1604996ae78a7822c644a13029c51075869689c25ea523bf885b7f1aa3eddfbd4cea8f9baa2e6dcc7b70fb228b9e30c22e92b88242aaa1f035cdc0ceae1087a0cadf013771abf0d6c0d5206fd56e6b8759cf848c8622040d01272dc331a28bff69631162b7d4b831c3f9b49415644ad4019a77466da8dea5818cfe8e3da2d8dda0162e942aab5bfc499faa828bc07f384afcfd1755077e3b0136a33506793b3b2b6a07aad2e74f2beea8a95950dd94ee2bd13690518258336c153f5e82d9f092d5a243137304c0a8007c2bc5087e127dabe9784ff80714fcf1f835ed1fcd8021f2c9e01b018173430dafb7268120acf23f770027be608dd444bbabfbf74ad24354905e1470cb37d766f8722f62d524c710d21a8f9b598a5fbb6a2f69d6dedab1b2c370e19eb7bc9656d0804224f62b835b4aff1f15ff84fe6be68d8ecb8e7a251a00eab1b0d43038533130f14316a47e1d6bdaa28c77f53c4a218507ca8ee36041eea3c18d999d9ed42ab79e104e006f704835845c103b1629b24571e1a3ad301dfae7c677067695febddd0a9b6f331fed79849f0c9e4b1450d81f0d15e7f451c4c6af1b8a5ca3d8ea7c63ea52cb94d6ef572a6c61bdeb9c0d987a548647abefca04f9f01b0cd2f369cab9bf31e08ca2ee2a0c52782e332eb324e7c7fbcd6e9ed6320dc368b11239b0830941f34c44d76d1a2ef80afbd88364cbb7614bf3cd29bd96e4d44564277be0e315bbdd596afe940f46336f8ae9ac34218d1e46fbc6365b7de0fdf385d97b9ee133d50920f638cccc1dd2e31fbc9b47ec7233fd22228a1370161efd17069d73e5d6b549a7b3ba73e722593c98c1f14577a5d46adae0c2793363878ea24553e8efa69519a2fdc00d17348af7f6e76940cca262ff7b7b00c61d3e3f81d074afc536ca5f10dcf8c5608162ddda28df752ddad89b70b92d4cf9505c7ade904359a854a6481cbd84964e41235f3c2250a219e38c2cab5c7f1a3692bc5b0e3accff056dd759363b747a704ee803c101439b7038275383afddda885984a1f07d758ab1e0ca869473890a4d037b2bd561cffd78b5fb9ec7a8e2cfc06b68e37f638e3bc9736eb30ac29287dd928d5e84fe69d308bd22faad59ead67d88b4062635c1e4bf8e7455f841e2d0110859b350dfea1103d2fade33a8150354d011e3bd76e58abf5b6298ddeaca97ca7e928370601b87647b011aa4638b74b207bb17af662f6e9714ab126fb00ad251bd8780a82a9ad38de9c06d1889a7f99fc660f192c3888e44d04f5a949d5ebdb99f951cca0fbca913062216df9728fabce5e537f72c725973bffe142c95a8fa0da40670909323d8d6c6f108e343fff8021bc7442bf371d354b4af6f96a73c3981ca47f98</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>梦想</category>
+      </categories>
+      <tags>
+        <tag>梦</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BoomGate</title>
     <url>/2021/06/21/BoomGate/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Abstract">Abstract</h2>
 <blockquote>
 <p>Abstract—Avoiding routing deadlock is an important compo­ nent of an interconnection network. For large-scale systems with high-radix topologies that leverage non-minimal adaptive routing, virtual channels (VCs) are commonly used to prevent routing deadlock. However, VCs in large-scale networks can be costly because of deep buffers and restrict VC usage. In this work, we propose BoomGATE for deadlock avoidance in large-scale networks. In particular, BoomGATE consists of two components <strong>Restricted Intermediate-node Non-minimal Routing (RINR) al­ gorithm</strong> and <strong>opportunistic flow control (OFC)</strong> which both exploit the low-diameter characteristics of high-radix networks while maximizing path diversity within the topology. We identify how routing deadlock in fully-connected topologies are caused by non­ minimal routes and propose to restrict the non-minimal routing to ensure deadlock freedom without additional virtual channels. We also propose an algorithm that ensures path diversity is loadbalanced across all nodes in the system. However, since path diversity is restricted with the RINR algorithm, complement RINR algorithm with opportunistic flow control (OFC) where “illegal routes” are allowed if and only if sufficient buffer can be guaranteed to ensure cyclical dependency does not occur. We propose both a static and dynamic OFC implementation. We evaluate the performance of BoomGATE and demonstrate there is minimal performance loss compared to global adaptive routing, while reducing the amount of buffers required by 50%.</p>
 </blockquote>
+<p>避免路由死锁是互连网络的重要组成部分。对于使用非最小自适应路由的高基数拓扑的大规模系统，虚拟通道(VCs)通常用于防止路由死锁。然而，大规模网络中的风险投资可能代价昂贵，因为有很深的缓冲区和限制vc的使用。在这项工作中，我们提出BoomGATE来避免大规模网络中的死锁。值得一提的是，BoomGATE由两个部分组成——受限中间节点非最小路由(RINR)算法和机会流控制(OFC)算法，它们都利用了高基数网络的低直径特性，同时最大化了拓扑中的路径多样性。我们确定了全连接拓扑中的路由死锁是如何由非最小路由引起的，并提出了限制非最小路由以确保死锁自由而不需要额外的虚拟通道。我们还提出了一种保证路径多样性在系统中所有节点负载均衡的算法。然而，由于RINR算法限制了路径的多样性，当且仅当保证有足够的缓冲区以确保不发生循环依赖时，使用机会流控制(opportunistic flow control, OFC)的RINR算法才允许“非法路由”。我们提出了静态和动态OFC实现。我们评估了BoomGATE的性能，并证明与全局自适应路由相比，它的性能损失最小，同时所需的缓冲区数量减少了50%</p>
+<p>看一下这篇文章introduction的第一段：<br>
+互连网络是大规模系统中的重要部分-&gt;<br>
+拓扑是互连网络的关键组件-&gt;<br>
+由于引脚带宽不断增长，最近更多的是利用高阶路由器来实现高阶拓扑+举例（至此引出高阶拓扑）-&gt;<br>
+这些高阶拓扑已经被应用到很多实际系统中+举例（强调高阶拓扑的重要性）-&gt;<br>
+高阶拓扑的一个特性是全连接+举例说明-&gt;<br>
+本文就是要在高阶拓扑中利用全连接的特性来避免死锁而不需要额外的VC</p>
+<p>平衡，遗忘非最小全局自适应路由</p>
 <p><strong>Routing Deadlock:</strong></p>
 <p>​	Deadlock is defined as occurring in the network if  and only if there exists one or more cyclic dependency in channel dependency graph (CDG) of the network.</p>
 <h3 id="1-Question">1. Question?</h3>
 <h3 id="2-Method">2. Method?</h3>
+<p>RINR</p>
+<p>bRINR</p>
+<p>sOFC</p>
+<p>dOFC</p>
+<ol>
+<li>我们通过新的路由算法和流量控制，提出BoomGATE -避免死锁的高基数路由器，不需要额外的VCs。</li>
+<li>我们提出一类非最小的全局自适应路由(RINR)，其中非最小路由受到限制，并增强RINR以实现均衡的RINR，其中非最小路由的路径多样性在所有节点之间均衡。</li>
+<li>我们提出了一种新的流量控制——机会流控制(OFC)，它可以在不造成死锁的情况下利用非法路由，并在缓冲区未充分利用bRINR时实现更高的性能。</li>
+<li>我们评估了我们提出的路由算法和流量控制的性能，并证明了与全局自适应路由相比，性能退化是最小的，同时减少了大规模系统路由器所需的缓冲区数量</li>
+</ol>
+<p>死锁定义：</p>
+<p>路由死锁是由于对网络资源[16]的依赖造成的。死锁的理论定义是:当且仅当网络[15]的信道依赖图(CDG)中存在一个或多个循环依赖时，才会发生在网络中。</p>
+<p>通常两种方法：避免死锁和死锁恢复</p>
+<p>避免：需要额外得资源 VC</p>
+<p>恢复：需要牺牲性能，假定死锁不经常发送</p>
+<p>RINR</p>
+<p>定理:如果非最小路由用RINR实现全局自适应路由，那么在全连通拓扑中，路由算法只需1vc就不会死锁。</p>
+<p>全局自适应路由[51]包括最小路由和非最小路由。</p>
+<p>情形一:最小路由:最小路由只遍历一个网络通道，不会导致路由死锁。</p>
+<p>案例二:非最小路由:基于通道依赖图(CDG)[15]，如果在通道资源中没有周期性依赖，则可以避免死锁。如果所有资源都是严格有序的，那么死锁就会被避免。通过只使用合法的非最小路由，网络访问通道中的所有非最小路由将严格按照递增的顺序排列，从而不会出现周期性的通道依赖关系。</p>
+<p>对于网络规模为N的情况，每个节点使用RINR路由算法的非最小路由的平均数目为2 (N - 2)。</p>
+<p>对于2跳非最小路由，为了通过路由限制来保证避免死锁，需要避免所有可能的死锁。可能造成死锁的节点(或通道)的最小数目是3。因此，被选择的3个通道的不同可能组合是NP3，因为在死锁中顺序很重要。对于每一个死锁的可能性，3个路径中的1个必须被禁用-因此，3个NP3非最小路径被RINR禁用(或者允许| NP3路径)。由于网络中源-目的路由数量为N(N - 1)，平均非最小路由(H avg_nonmin)为</p>
+<p>算法2</p>
+<p>前半部分(从第5行开始)表示如何对C1通道重新编号。每个禁用路由(第7行)都会有效地减少中间节点的数量，而启用路由(第8行)会增加特定非最小路径的中间节点数量。f o r循环执行最终修改一行和一列，如表V(a)所示。</p>
+<p>算法的后半部分(第12行)描述了如何重新编号C2通道以负载平衡非最小路径多样性。类似地，一次f o r循环执行会导致如表V(b)所示的修改。</p>
+<p>实际意义：RINR/bRINR为大规模网络中的非最小全局自适应路由提供了一个实用的替代方案，因为使用了基于表的路由，同时使用了最小和非最小的路由表[37]。然而，由于路由表的条目有限，并不是所有的非极小路由都能被利用。因此，与其随机生成中间节点来填充表，不如根据bRINR路由算法来填充非极小路由表中的非极小路径–将任何性能影响降到最低，同时避免了对额外VC的需求，并且可以在目前的大规模系统中轻易实现。路由表通常由一个单独的管理系统（例如Cray系统中的硬件监管组件[9]）管理，该系统负责更新/维护路由表，可以利用它来平衡路径的负载，同时最大限度地减少VC的需求。</p>
 <h3 id="3-Answer">3. Answer?</h3>
 <h2 id="Introduction">Introduction</h2>
 <h3 id="1-为什么研究这个课题">1.为什么研究这个课题?</h3>

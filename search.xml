@@ -34,6 +34,9 @@
 <p>所以还有一些时间可以用来学习，但是很明显自己并没有真正的把时间用在学习上。而是将其用在了手机娱乐上。</p>
 <p>不得不承认，手机上的很多东西，并不会给我带来新的提升，很多东西都只是一些无用的信息流，没有营养，需要抵制。</p>
 <p>最近两天，几个人的做法不太行，老是被说，责任在我。希望可以不要再出现这些奇奇怪怪的事情。</p>
+<p>任务不算复杂，但是没有很多专业知识，不算是一个很好的经历。</p>
+<p>有的时候，我真的搞不懂运气到底能带来什么？</p>
+<p>凭什么，就有这么多的误差。可能公平是不存在的。</p>
 ]]></content>
       <categories>
         <category>路漫漫</category>
@@ -1503,6 +1506,29 @@ $$</p>
       </tags>
   </entry>
   <entry>
+    <title>Omnet++</title>
+    <url>/2020/08/03/Omnet++/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Omnet">Omnet++</h2>
+<p>主要由六个部分组成：</p>
+<ol>
+<li>仿真内核库（simulation kernel library,简称Sim）</li>
+<li>网络描述语言的编译器（network description compiler, nedc）</li>
+<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
+<li>仿真程序的图形化用户接口－Tkenv</li>
+<li>仿真程序的命令行用户接口－Cmdenv</li>
+<li>图形化的输出工具－Plove和Scalar<br>
+整个结构如下：<br>
+<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Omnet++</category>
+      </categories>
+      <tags>
+        <tag>Omnet++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Network Congestion Avoidance through Packet-chaining Reservation</title>
     <url>/2020/08/03/Network-Congestion-Avoidance-through-Packet-chaining-Reservation/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Network-Congestion-Avoidance-through-Packet-chaining-Reservation">Network Congestion Avoidance through Packet-chaining Reservation</h2>
@@ -1550,29 +1576,6 @@ $$</p>
       <tags>
         <tag>拥塞控制</tag>
         <tag>PCRP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Omnet++</title>
-    <url>/2020/08/03/Omnet++/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Omnet">Omnet++</h2>
-<p>主要由六个部分组成：</p>
-<ol>
-<li>仿真内核库（simulation kernel library,简称Sim）</li>
-<li>网络描述语言的编译器（network description compiler, nedc）</li>
-<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
-<li>仿真程序的图形化用户接口－Tkenv</li>
-<li>仿真程序的命令行用户接口－Cmdenv</li>
-<li>图形化的输出工具－Plove和Scalar<br>
-整个结构如下：<br>
-<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Omnet++</category>
-      </categories>
-      <tags>
-        <tag>Omnet++</tag>
       </tags>
   </entry>
   <entry>

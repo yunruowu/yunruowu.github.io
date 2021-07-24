@@ -1632,6 +1632,29 @@ $$</p>
       </tags>
   </entry>
   <entry>
+    <title>Omnet++</title>
+    <url>/2020/08/03/Omnet++/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Omnet">Omnet++</h2>
+<p>主要由六个部分组成：</p>
+<ol>
+<li>仿真内核库（simulation kernel library,简称Sim）</li>
+<li>网络描述语言的编译器（network description compiler, nedc）</li>
+<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
+<li>仿真程序的图形化用户接口－Tkenv</li>
+<li>仿真程序的命令行用户接口－Cmdenv</li>
+<li>图形化的输出工具－Plove和Scalar<br>
+整个结构如下：<br>
+<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Omnet++</category>
+      </categories>
+      <tags>
+        <tag>Omnet++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Network Congestion Avoidance through Packet-chaining Reservation</title>
     <url>/2020/08/03/Network-Congestion-Avoidance-through-Packet-chaining-Reservation/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Network-Congestion-Avoidance-through-Packet-chaining-Reservation">Network Congestion Avoidance through Packet-chaining Reservation</h2>
@@ -1679,29 +1702,6 @@ $$</p>
       <tags>
         <tag>拥塞控制</tag>
         <tag>PCRP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Omnet++</title>
-    <url>/2020/08/03/Omnet++/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Omnet">Omnet++</h2>
-<p>主要由六个部分组成：</p>
-<ol>
-<li>仿真内核库（simulation kernel library,简称Sim）</li>
-<li>网络描述语言的编译器（network description compiler, nedc）</li>
-<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
-<li>仿真程序的图形化用户接口－Tkenv</li>
-<li>仿真程序的命令行用户接口－Cmdenv</li>
-<li>图形化的输出工具－Plove和Scalar<br>
-整个结构如下：<br>
-<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Omnet++</category>
-      </categories>
-      <tags>
-        <tag>Omnet++</tag>
       </tags>
   </entry>
   <entry>
@@ -1977,6 +1977,49 @@ $$</p>
       </tags>
   </entry>
   <entry>
+    <title>Interconnection-Networks-ch5-1</title>
+    <url>/2020/07/20/Interconnection-Networks-ch5-1/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Torus-Network-more">Torus Network<span id="more"></span></h2>
+<h3 id="5-3-Building-Mesh-and-T-orus-Networks">5.3 Building Mesh and T orus Networks</h3>
+<p>将网络的抽象节点映射到物理空间中的实际位置，不同的封装技术可以实现一维的，二维的等映射。</p>
+<ul>
+<li>
+<p>最简单的方式就是$p_i=a_i$，物理位置和逻辑地址相同，每个节点之间距离相同。</p>
+</li>
+<li>
+<p>但是这将导致$p_k和p_0$之间距离过大，如此长的信道可能导致过多的等待时间或需要较慢的信令速率。所以提出折叠的环形网络来解决问题。一种环形网络的折叠入下：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131524647.png" alt="image-20200727131524647"></p>
+<p>消灭了 最长的网络，但是牺牲了以相邻节点距离短的优点。</p>
+</li>
+</ul>
+<p>最终的物理放置图对比：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131557787.png" alt="image-20200727131557787"></p>
+<p>通常，通过以折叠顺序组合k个折叠的k-ary n-1cube来构造折叠的k-ary n-cube</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131614133.png" alt="image-20200727131614133"></p>
+<p>当逻辑维数超过物理维数时，必须将几个逻辑维映射到每个物理维中。如果物理维数为q，则直接映射是将逻辑维的q折叠为每个物理维。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132711914.png" alt="image-20200727132711914"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132749954.png" alt="image-20200727132749954"></p>
+<h3 id="Express-Cubes">Express Cubes</h3>
+<p>原因：环状网络通道短，$t_c$时间通常由$t_r$决定，与直径小的网络相比，导致更多的$T_H$。可以增加维度减小直径。但是会导致$T_s$增大。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114113438.png" alt="image-20200728114113438"></p>
+<p>所以Express sube出现了。就是添加了几个快速通道。通过路由必须在快速通道上的某个维度上经过较长距离的数据包，报头等待时间可以减少到接近信道等待时间限制。因为可以控制快速通道的数量以匹配网络的二等分宽度，所以可以在不增加序列化延迟的情况下实现报头延迟的减少。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114625185.png" alt="image-20200728114625185"></p>
+<p>每个维度，每隔i个节点设置一个express channel。</p>
+<p>普通网络中，在j维度有$H_j$跳，那么在快速立方体中，跳数为：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728115227480.png" alt="image-20200728115227480"></p>
+<p>对于长的维度，选择$i = \frac{t_r}{t_c}$,来平衡式中的两项，短的维度，选择$i=\sqrt{H_min}$</p>
+<p>分层的快速cube:</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120044122.png" alt="image-20200728120044122"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120023536.png" alt="image-20200728120023536"></p>
+]]></content>
+      <categories>
+        <category>Interconnection_Networks</category>
+      </categories>
+      <tags>
+        <tag>Interconnection_Networks</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode-10</title>
     <url>/2020/07/20/Interconnection-Networks-ch5/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="CH4-Torus-Networks-more">CH4 Torus Networks<span id="more"></span></h2>
@@ -2063,49 +2106,6 @@ $$</p>
 <ul>
 <li>n维：从a到b的最小单向路线的总数为<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200722181511667.png" alt="image-20200722181511667"></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Interconnection_Networks</category>
-      </categories>
-      <tags>
-        <tag>Interconnection_Networks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Interconnection-Networks-ch5-1</title>
-    <url>/2020/07/20/Interconnection-Networks-ch5-1/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Torus-Network-more">Torus Network<span id="more"></span></h2>
-<h3 id="5-3-Building-Mesh-and-T-orus-Networks">5.3 Building Mesh and T orus Networks</h3>
-<p>将网络的抽象节点映射到物理空间中的实际位置，不同的封装技术可以实现一维的，二维的等映射。</p>
-<ul>
-<li>
-<p>最简单的方式就是$p_i=a_i$，物理位置和逻辑地址相同，每个节点之间距离相同。</p>
-</li>
-<li>
-<p>但是这将导致$p_k和p_0$之间距离过大，如此长的信道可能导致过多的等待时间或需要较慢的信令速率。所以提出折叠的环形网络来解决问题。一种环形网络的折叠入下：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131524647.png" alt="image-20200727131524647"></p>
-<p>消灭了 最长的网络，但是牺牲了以相邻节点距离短的优点。</p>
-</li>
-</ul>
-<p>最终的物理放置图对比：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131557787.png" alt="image-20200727131557787"></p>
-<p>通常，通过以折叠顺序组合k个折叠的k-ary n-1cube来构造折叠的k-ary n-cube</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131614133.png" alt="image-20200727131614133"></p>
-<p>当逻辑维数超过物理维数时，必须将几个逻辑维映射到每个物理维中。如果物理维数为q，则直接映射是将逻辑维的q折叠为每个物理维。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132711914.png" alt="image-20200727132711914"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132749954.png" alt="image-20200727132749954"></p>
-<h3 id="Express-Cubes">Express Cubes</h3>
-<p>原因：环状网络通道短，$t_c$时间通常由$t_r$决定，与直径小的网络相比，导致更多的$T_H$。可以增加维度减小直径。但是会导致$T_s$增大。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114113438.png" alt="image-20200728114113438"></p>
-<p>所以Express sube出现了。就是添加了几个快速通道。通过路由必须在快速通道上的某个维度上经过较长距离的数据包，报头等待时间可以减少到接近信道等待时间限制。因为可以控制快速通道的数量以匹配网络的二等分宽度，所以可以在不增加序列化延迟的情况下实现报头延迟的减少。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114625185.png" alt="image-20200728114625185"></p>
-<p>每个维度，每隔i个节点设置一个express channel。</p>
-<p>普通网络中，在j维度有$H_j$跳，那么在快速立方体中，跳数为：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728115227480.png" alt="image-20200728115227480"></p>
-<p>对于长的维度，选择$i = \frac{t_r}{t_c}$,来平衡式中的两项，短的维度，选择$i=\sqrt{H_min}$</p>
-<p>分层的快速cube:</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120044122.png" alt="image-20200728120044122"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120023536.png" alt="image-20200728120023536"></p>
 ]]></content>
       <categories>
         <category>Interconnection_Networks</category>

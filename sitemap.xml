@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yunruowu.github.io/2021/07/24/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%85%E5%AE%B9%E7%9A%84%E5%85%B3%E7%B3%BB/</loc>
+    <loc>https://yunruowu.github.io/2021/07/24/%E6%88%91%E7%9A%84%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2021-07-24</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yunruowu.github.io/2021/07/24/%E6%88%91%E7%9A%84%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <loc>https://yunruowu.github.io/2021/07/24/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%85%E5%AE%B9%E7%9A%84%E5%85%B3%E7%B3%BB/</loc>
     
     <lastmod>2021-07-24</lastmod>
     
@@ -1081,6 +1081,20 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://yunruowu.github.io/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2021-07-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yunruowu.github.io/tags/%E8%A7%84%E7%9F%A9/</loc>
+    <lastmod>2021-07-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -1358,6 +1372,20 @@
   
   <url>
     <loc>https://yunruowu.github.io/categories/%E5%85%B1%E4%BA%A7%E4%B8%BB%E4%B9%89/</loc>
+    <lastmod>2021-07-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yunruowu.github.io/categories/%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2021-07-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yunruowu.github.io/categories/%E5%B7%A5%E4%BD%9C/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2021-07-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

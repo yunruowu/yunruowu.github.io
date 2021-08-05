@@ -40,28 +40,6 @@
       </tags>
   </entry>
   <entry>
-    <title>BFRP: Endpoint Congestion Avoidance Through Bilateral Flow Reservation</title>
-    <url>/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Bilateral-Flow-Reservation-Protocol，BFRP">Bilateral Flow Reservation Protocol，BFRP</h2>
-<p>​		与基于数据包的调度机制不同，BFRP通过调度流来避免拥塞。我们的设计基于SRP的调度策略。流完成时间与大流和小流的发送顺序有关。首先安排小流量可以减少平均流量完成时间。但是，当调度程序每次选择最小流量时，大流量可能会饿死。为了避免这种情况，我们为每个流设置优先级p，并且p等于流大小。每次调度程序对流进行舍入时，p的值都会减少d。当大流量四舍五入时，p的值将变得非常小，调度程序每次都会选择具有最小p的流量，以避免出现饥饿的情况。</p>
-<p>​		图3显示了BFRP的过渡过程。在一个节点中，整个过程分为三种状态：SPECa，SPECb和NORMAL。如果网络没有拥塞，则BFRP将不会进入NORMAL状态。  SPECa状态是BFRP中发送方的初始状态。首先，发送方将选择具有最小p的流，并将推测性数据包发送到网络中。当发送方收到否定确认数据包（NACK）时，它将发送y预留数据包到目标，然后进入SPECb状态。但是，在SPECb状态下，如果发送方在预留数据包发送开始到授权时间到达之间的时间内未执行任何操作，则会急剧增加准备发送的其他流的排队延迟，从而导致平均流量延迟增加。因此，建议在达到授权时间之前，先发送其他流的推测包。详细地说，在发送方发送预留数据包之后，数据包调度程序会在其他发送队列中选择具有最小p的就绪流，然后提前发送这个流推测性数据包。当发送方收到确认数据包（ACK）时，它将继续发送推测数据包。当接收到NACK时，为了确保源的多个预约流没有冲突授予时间，发送方将不对此流进行预留，以确保只有一个流预约给目标。但是，调度程序将选择另一个具有最小p的流进行传输。在授予时间到来之前，BFRP进入正常状态，并且数据包调度程序选择保留的流，发送方以正常模式发送该流的数据包。传输完成后，调度程序将根据此规则选择其他准备传输的流。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803203856734.png" alt="image-20200803203856734"></p>
-<p>​		下图显示了BFRP的操作。首先，我们假设网络没有拥塞。数据包调度程序从发送方队列（1）中选择具有最小p的流。之后，发送方将推测性数据包发送到目的地（2）。推测数据包在低优先级VC上传输。每个推测性分组都与生存时间survival time（ST）和排队时间相关联，如果网络中的推测性分组的排队时间大于ST，则该推测性分组将被丢弃。在我们的实现中，ST是基于高负载均匀流量下网络的数据包延迟分布的固定值，当推测性数据包进入路由器的输入端口时，数据包的排队时间开始。当排队时间到达输出端口中VC的开头时，将检查排队时间。接收到推测性数据包后，目的地需要用ACK进行回复，以通知发送方这些数据包已被接受。当网络没有拥塞时，通常会接受推测性数据包，并且目标返回ACK（3）。这样，分组将以推测性分组的形式传输，并且不会带来任何其他开销。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200804090633984.png" alt="image-20200804090633984"></p>
-<p>​		在拥塞的网络中，初始操作与上述相同。但是，当面临端点拥塞时，由于到达ST的排队时间，推测性数据包将被丢弃。届时，NACK将在路由器中生成并发送回发送方（5）。发送方中的NACK管理器收到NACK数据包后，发送方将从SPECa状态转换为SPECb状态，然后发送预约数据包与目标进行握手（6）。预留数据包很小，优先级最高。它在单独的VC上传输，以确保高优先级传递。预留数据包包含一个值n，它是将要发送的数据包的数量。</p>
-<p>​		一旦接收到预留包，接收器中的时间管理器将根据预留包中的n为发送方分配授权时间（$t_s$），并在回复包中返回相应的授权时间（7）。之后，时间管理器状态将正确更新。如果有另一个发送方发送的其他保留数据包到达此接收方，则时间管理器将返回给该保留数据包不早于$t_s  + n(1+ε)T_p$的开始时间，其中常数$T_p$是接收方接收所需的时间信道来接收消息，并且ε取决于控制分组的带宽开销。发送方的授权管理器将在收到授权数据包后开始计时，然后数据包调度程序将选择准备发送到其他发送队列中的，具有最小p的流（8）。然后，选定的流以推测性数据包的形式发送数据包（9）。如果目的地没有拥塞，将返回ACK数据包（10）。发送方继续发送推测性分组（11）。但是，如果端点在某个时刻过载，则推测包将被丢弃，路由器将生成NACK包并将其返回给发送方（12）。在接收到NACK之后，发送方将不会调度该流以发送保留数据包，而是选择具有最小p的另一个流并继续发送推测性数据包（13）。当预留流达到授予时间时，BFRP从SPECb状态进入正常状态，并且调度程序调度发送队列以发送普通数据包(14)(15)。在所有剩余的数据包都已发送后，BFRP从正常状态进入SPECa状态。所有传输将重复此过程。应当强调的是，为了最小化由控制操作引起的开销，所有预留分组，ACK，NACK和授权分组都是小的并且在单独的高优先级信道上发送。</p>
-]]></content>
-      <categories>
-        <category>HiNA</category>
-        <category>Papers</category>
-        <category>拥塞控制</category>
-      </categories>
-      <tags>
-        <tag>BFRP</tag>
-        <tag>拥塞控制</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>8.14计算机年会</title>
     <url>/2020/08/14/8-14%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B9%B4%E4%BC%9A/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -112,6 +90,68 @@
       </categories>
       <tags>
         <tag>计划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>8.1今日小记</title>
+    <url>/2021/08/02/8-1%E4%BB%8A%E6%97%A5%E5%B0%8F%E8%AE%B0/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="2ce991beea4cecee9633081a1f7d65ca22ce05dd0f14e0012155705f8cbc4492">e2f68a9cbca9e5015fd08de9db6ab95461feec28d88a9d72e041d16556160f1207921ebfe04cced484b6734a00f8c98fe11a1bd977531df51ed7cbaed899892714ee6749d52793f9e2777323a58a649e1b95f5b44aa53781b4e5938b4c07f1cf8cfc0539671be431a5f93afef0b2f6f275e0b5b7521c56325b197a5c01ab346c0dacd838dd1b7ef624de3783b12ffffb93577a59c760adf10ae3410d78af8bc12b25ffa297a476e591fca68fb269960f404e812e228bf2be43f841549452362c7657f5cfb2f08ba4c7e658f267a08297e94ca63bbd316ee88f3f78e041a6778272dc52ed88e9031a5fa901dea4ac0198929ca1c13d10a998b543345189e703183757349f90ae9c9d1572c796961a060ae4def95514a0a9e3f5431c059e881b4eb5d609c42448fe94553a98a8e3259406fd47c102c35722b5306c8c193fd1fb34a9961beb923d85771fffd74b5e006936f60094b2100c12e361cb5f0aa257bcdbc11a50ceecce58fc6cf9f2ecde4c686075892bc716a63096acd7f24de1f1b37e954c4f619672d8efe53c015ef841fccf9391cc637c0099549ad6560963b5a9d75fd3832cfc5f199429dd8da70dc17f8181701c4df3d4b55a90199d20a54d85a20e98727cdee336385b082dc4cbe2179e588acdc7ebf2b5935ffdcbcef32afd51d5607c43099c98d64bac918aed02618053ffeaa5a950ffa47827087ee391e6aac194e6e8c1d5ae8f98fb524cf6fbd88ad0142b5cbbde358e6d73c967a999e8a093c0b7bbaad51fa1fc2d76d97267b7d0943c533548b568344f381db470fa94f7d6335363a6b1ddf40cae57ae87c0d5b0930447e3f324eadb7cea56db39898775a4abd665ddd1c3dc05cbd9f16826495c89c0c3adc72b6d26c83a59329c3cc5b78b44b9bdff35f02376ab01c2530f6fecd8cf858ffc3f4997b65858f41e8612f211316c2a7f6e70eadad10f0db89a0c84d3d36a46544cf234aa22e3880990bbf8e31a5997d352bed4f2961feb69071f00593aa69b0aa444d694c9ce0c5bf761aee43f683acdc21032d6f62cb8b1e57ef729f2316aa7cadd6f1e53d46bd20b8f432e6f81f0eee2a9c341fe0458205b9a837de78198d45429eb9244cb8875b7c38c434db5c0c1a518c1d67654adcee0d2b8027f17f3123a352835ba05953e03bbf311aea82b0d831d588d4e3f087727f09f7bbf6d9583da1f72039a8dcd36b416c100a62e4a786089426514137dbdb1880bad1ada3dccc80439ed9d6ad48df56fdec219f66aad9b397444ee59c86999820ee35360407e292445db050314f2411a44c2a7743f0c05879154775d473abf6fbad23ab2f117c9c09e3c897e7971b1490284881667b08a17603047489993c318a1887ab6698895f6a867dc64333486fc6b89fe2095b4fda9f4df6726a040e2e55208038847f1b7477d90721eb4d8fed6e3af7d50638c341e80b3b1a6a9ddb9299989630d6427e407f42c482e6254c766acebb0b0d95b7fd640d415cda39703e5c8ed1d95d8479a4c04a07d517c489da69309b52dc98f50ee82cecf0fddc370b251bef9213f7d4a9d26f4b971c58d7b0adc0ca6746dfb32e82da79b87021f4ac2740e1b0b693bfbeb175d0168041f5d00304ce99e3b4033fd6032c7a21ed2ed18076c5eef6512597c649fd3b5017b0c177b1ff62446d5561d89d60b2945ccf85535058a78e832a6f9864d5cfaa0d9b5d182928aebaf7ad24feb906bb7f6dccce8c06288e47585b08bbad31e0b16861f5490</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>悟与梦</category>
+      </categories>
+      <tags>
+        <tag>煎熬</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BFRP: Endpoint Congestion Avoidance Through Bilateral Flow Reservation</title>
+    <url>/2020/08/03/BFRP-Endpoint-Congestion-Avoidance-Through-Bilateral-Flow-Reservation/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Bilateral-Flow-Reservation-Protocol，BFRP">Bilateral Flow Reservation Protocol，BFRP</h2>
+<p>​		与基于数据包的调度机制不同，BFRP通过调度流来避免拥塞。我们的设计基于SRP的调度策略。流完成时间与大流和小流的发送顺序有关。首先安排小流量可以减少平均流量完成时间。但是，当调度程序每次选择最小流量时，大流量可能会饿死。为了避免这种情况，我们为每个流设置优先级p，并且p等于流大小。每次调度程序对流进行舍入时，p的值都会减少d。当大流量四舍五入时，p的值将变得非常小，调度程序每次都会选择具有最小p的流量，以避免出现饥饿的情况。</p>
+<p>​		图3显示了BFRP的过渡过程。在一个节点中，整个过程分为三种状态：SPECa，SPECb和NORMAL。如果网络没有拥塞，则BFRP将不会进入NORMAL状态。  SPECa状态是BFRP中发送方的初始状态。首先，发送方将选择具有最小p的流，并将推测性数据包发送到网络中。当发送方收到否定确认数据包（NACK）时，它将发送y预留数据包到目标，然后进入SPECb状态。但是，在SPECb状态下，如果发送方在预留数据包发送开始到授权时间到达之间的时间内未执行任何操作，则会急剧增加准备发送的其他流的排队延迟，从而导致平均流量延迟增加。因此，建议在达到授权时间之前，先发送其他流的推测包。详细地说，在发送方发送预留数据包之后，数据包调度程序会在其他发送队列中选择具有最小p的就绪流，然后提前发送这个流推测性数据包。当发送方收到确认数据包（ACK）时，它将继续发送推测数据包。当接收到NACK时，为了确保源的多个预约流没有冲突授予时间，发送方将不对此流进行预留，以确保只有一个流预约给目标。但是，调度程序将选择另一个具有最小p的流进行传输。在授予时间到来之前，BFRP进入正常状态，并且数据包调度程序选择保留的流，发送方以正常模式发送该流的数据包。传输完成后，调度程序将根据此规则选择其他准备传输的流。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200803203856734.png" alt="image-20200803203856734"></p>
+<p>​		下图显示了BFRP的操作。首先，我们假设网络没有拥塞。数据包调度程序从发送方队列（1）中选择具有最小p的流。之后，发送方将推测性数据包发送到目的地（2）。推测数据包在低优先级VC上传输。每个推测性分组都与生存时间survival time（ST）和排队时间相关联，如果网络中的推测性分组的排队时间大于ST，则该推测性分组将被丢弃。在我们的实现中，ST是基于高负载均匀流量下网络的数据包延迟分布的固定值，当推测性数据包进入路由器的输入端口时，数据包的排队时间开始。当排队时间到达输出端口中VC的开头时，将检查排队时间。接收到推测性数据包后，目的地需要用ACK进行回复，以通知发送方这些数据包已被接受。当网络没有拥塞时，通常会接受推测性数据包，并且目标返回ACK（3）。这样，分组将以推测性分组的形式传输，并且不会带来任何其他开销。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200804090633984.png" alt="image-20200804090633984"></p>
+<p>​		在拥塞的网络中，初始操作与上述相同。但是，当面临端点拥塞时，由于到达ST的排队时间，推测性数据包将被丢弃。届时，NACK将在路由器中生成并发送回发送方（5）。发送方中的NACK管理器收到NACK数据包后，发送方将从SPECa状态转换为SPECb状态，然后发送预约数据包与目标进行握手（6）。预留数据包很小，优先级最高。它在单独的VC上传输，以确保高优先级传递。预留数据包包含一个值n，它是将要发送的数据包的数量。</p>
+<p>​		一旦接收到预留包，接收器中的时间管理器将根据预留包中的n为发送方分配授权时间（$t_s$），并在回复包中返回相应的授权时间（7）。之后，时间管理器状态将正确更新。如果有另一个发送方发送的其他保留数据包到达此接收方，则时间管理器将返回给该保留数据包不早于$t_s  + n(1+ε)T_p$的开始时间，其中常数$T_p$是接收方接收所需的时间信道来接收消息，并且ε取决于控制分组的带宽开销。发送方的授权管理器将在收到授权数据包后开始计时，然后数据包调度程序将选择准备发送到其他发送队列中的，具有最小p的流（8）。然后，选定的流以推测性数据包的形式发送数据包（9）。如果目的地没有拥塞，将返回ACK数据包（10）。发送方继续发送推测性分组（11）。但是，如果端点在某个时刻过载，则推测包将被丢弃，路由器将生成NACK包并将其返回给发送方（12）。在接收到NACK之后，发送方将不会调度该流以发送保留数据包，而是选择具有最小p的另一个流并继续发送推测性数据包（13）。当预留流达到授予时间时，BFRP从SPECb状态进入正常状态，并且调度程序调度发送队列以发送普通数据包(14)(15)。在所有剩余的数据包都已发送后，BFRP从正常状态进入SPECa状态。所有传输将重复此过程。应当强调的是，为了最小化由控制操作引起的开销，所有预留分组，ACK，NACK和授权分组都是小的并且在单独的高优先级信道上发送。</p>
+]]></content>
+      <categories>
+        <category>HiNA</category>
+        <category>Papers</category>
+        <category>拥塞控制</category>
+      </categories>
+      <tags>
+        <tag>BFRP</tag>
+        <tag>拥塞控制</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++中：：的使用</title>
+    <url>/2020/04/17/C-%E4%B8%AD%EF%BC%9A%EF%BC%9A%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="c-中-的用法">c++中::的用法</h2>
+<p>::是运算符中等级最高的，它分为三种:</p>
+<ol>
+<li>global scope(全局作用域符)，用法(::name)</li>
+<li>class scope(类作用域符)，用法(class::name)</li>
+<li>namespace scope(命名空间作用域符)，用法(namespace::name)<br>
+他们都是左关联(left-associativity)<br>
+他们的作用都是为了更明确的调用你想要的变量，如在程序中的某一处你想调用全局变量a，那么就写成::a，如果想调用class A中的成员变量a，那么就写成A::a,另外一个如果想调用namespace std中的cout成员，你就写成std::cout(相当于using namespace std; cout)意思是在这里我想用cout对象是命名空间std中的cout(即就是标准库里边的cout)</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+        <tag>小知识</tag>
       </tags>
   </entry>
   <entry>
@@ -176,24 +216,6 @@
       </categories>
   </entry>
   <entry>
-    <title>C++中：：的使用</title>
-    <url>/2020/04/17/C-%E4%B8%AD%EF%BC%9A%EF%BC%9A%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="c-中-的用法">c++中::的用法</h2>
-<p>::是运算符中等级最高的，它分为三种:</p>
-<ol>
-<li>global scope(全局作用域符)，用法(::name)</li>
-<li>class scope(类作用域符)，用法(class::name)</li>
-<li>namespace scope(命名空间作用域符)，用法(namespace::name)<br>
-他们都是左关联(left-associativity)<br>
-他们的作用都是为了更明确的调用你想要的变量，如在程序中的某一处你想调用全局变量a，那么就写成::a，如果想调用class A中的成员变量a，那么就写成A::a,另外一个如果想调用namespace std中的cout成员，你就写成std::cout(相当于using namespace std; cout)意思是在这里我想用cout对象是命名空间std中的cout(即就是标准库里边的cout)</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>C++</tag>
-        <tag>小知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CRSP: Network Congestion Control Through Credit Reservation</title>
     <url>/2020/08/03/CRSP-Network-Congestion-Control-Through-Credit-Reservation/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Network-Congestion-Control-Through-Credit-Reservation">Network Congestion Control Through Credit Reservation</h2>
@@ -251,6 +273,21 @@
       <tags>
         <tag>拥塞控制</tag>
         <tag>CRP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C艹_创建无重复元素的Vector</title>
+    <url>/2020/05/29/C%E8%89%B9-%E5%88%9B%E5%BB%BA%E6%97%A0%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%E7%9A%84Vector/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="c-创建无重复元素的Vector">c++创建无重复元素的Vector</h2>
+<p>​	我们知道，在刷题的时候，总是会遇到让我们创建无重复元素的问题。主要方法，在插入的时候进行处理。这里不选择这个。我们先使用SET容器，这样可以把元素无重复的插入。最后将Set的值赋给Vector。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ans.<span class="built_in">assign</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+<p>十分简单。学到了。</p>
+]]></content>
+      <categories>
+        <category>c++</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -408,21 +445,6 @@ $$</p>
       </tags>
   </entry>
   <entry>
-    <title>C艹_创建无重复元素的Vector</title>
-    <url>/2020/05/29/C%E8%89%B9-%E5%88%9B%E5%BB%BA%E6%97%A0%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%E7%9A%84Vector/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="c-创建无重复元素的Vector">c++创建无重复元素的Vector</h2>
-<p>​	我们知道，在刷题的时候，总是会遇到让我们创建无重复元素的问题。主要方法，在插入的时候进行处理。这里不选择这个。我们先使用SET容器，这样可以把元素无重复的插入。最后将Set的值赋给Vector。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ans.<span class="built_in">assign</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-<p>十分简单。学到了。</p>
-]]></content>
-      <categories>
-        <category>c++</category>
-      </categories>
-      <tags>
-        <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Floyd判圈算法（龟兔赛跑算法）</title>
     <url>/2020/06/11/Floyd%E5%88%A4%E5%9C%88%E7%AE%97%E6%B3%95%EF%BC%88%E9%BE%9F%E5%85%94%E8%B5%9B%E8%B7%91%E7%AE%97%E6%B3%95%EF%BC%89/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>​	Floyd判圈算法(Floyd Cycle Detection Algorithm)，又称龟兔赛跑算法(Tortoise and Hare Algorithm)，是一个可以在有限状态机、迭代函数或者链表上判断是否存在环，求出该环的起点与长度的算法。该算法据高德纳称由美国科学家罗伯特·弗洛伊德发明，但这一算法并没有出现在罗伯特·弗洛伊德公开发表的著作中。</p>
@@ -485,49 +507,6 @@ i = m + n + a<em>L        a为slow绕过的环的圈数。<br>
 <p>成为提升系统性能的限制。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Interconnection_Networks</category>
-      </categories>
-      <tags>
-        <tag>Interconnection_Networks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Interconnection-Networks-ch5-1</title>
-    <url>/2020/07/20/Interconnection-Networks-ch5-1/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Torus-Network-more">Torus Network<span id="more"></span></h2>
-<h3 id="5-3-Building-Mesh-and-T-orus-Networks">5.3 Building Mesh and T orus Networks</h3>
-<p>将网络的抽象节点映射到物理空间中的实际位置，不同的封装技术可以实现一维的，二维的等映射。</p>
-<ul>
-<li>
-<p>最简单的方式就是$p_i=a_i$，物理位置和逻辑地址相同，每个节点之间距离相同。</p>
-</li>
-<li>
-<p>但是这将导致$p_k和p_0$之间距离过大，如此长的信道可能导致过多的等待时间或需要较慢的信令速率。所以提出折叠的环形网络来解决问题。一种环形网络的折叠入下：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131524647.png" alt="image-20200727131524647"></p>
-<p>消灭了 最长的网络，但是牺牲了以相邻节点距离短的优点。</p>
-</li>
-</ul>
-<p>最终的物理放置图对比：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131557787.png" alt="image-20200727131557787"></p>
-<p>通常，通过以折叠顺序组合k个折叠的k-ary n-1cube来构造折叠的k-ary n-cube</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131614133.png" alt="image-20200727131614133"></p>
-<p>当逻辑维数超过物理维数时，必须将几个逻辑维映射到每个物理维中。如果物理维数为q，则直接映射是将逻辑维的q折叠为每个物理维。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132711914.png" alt="image-20200727132711914"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132749954.png" alt="image-20200727132749954"></p>
-<h3 id="Express-Cubes">Express Cubes</h3>
-<p>原因：环状网络通道短，$t_c$时间通常由$t_r$决定，与直径小的网络相比，导致更多的$T_H$。可以增加维度减小直径。但是会导致$T_s$增大。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114113438.png" alt="image-20200728114113438"></p>
-<p>所以Express sube出现了。就是添加了几个快速通道。通过路由必须在快速通道上的某个维度上经过较长距离的数据包，报头等待时间可以减少到接近信道等待时间限制。因为可以控制快速通道的数量以匹配网络的二等分宽度，所以可以在不增加序列化延迟的情况下实现报头延迟的减少。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114625185.png" alt="image-20200728114625185"></p>
-<p>每个维度，每隔i个节点设置一个express channel。</p>
-<p>普通网络中，在j维度有$H_j$跳，那么在快速立方体中，跳数为：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728115227480.png" alt="image-20200728115227480"></p>
-<p>对于长的维度，选择$i = \frac{t_r}{t_c}$,来平衡式中的两项，短的维度，选择$i=\sqrt{H_min}$</p>
-<p>分层的快速cube:</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120044122.png" alt="image-20200728120044122"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120023536.png" alt="image-20200728120023536"></p>
 ]]></content>
       <categories>
         <category>Interconnection_Networks</category>
@@ -740,6 +719,49 @@ $l_c$:导线的临界长度</p>
 <p>这个k值给出了最小的直径，这使得延迟的H部分最小化，同时使信道带宽最大化。这也最大限度地提高了理想的吞吐量并最小化了序列化延迟。任何小于此值的k都不会提高吞吐量，只会由于额外的跃点计数而增加延迟.</p>
 <h3 id="4-4-Path-Diversity-and-Extra-Stages">4.4 Path Diversity and Extra Stages</h3>
 <p><img src="C:%5CUsers%5Cmcdxw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200720071823533.png" alt="image-20200720071823533">没有路径多样性</p>
+]]></content>
+      <categories>
+        <category>Interconnection_Networks</category>
+      </categories>
+      <tags>
+        <tag>Interconnection_Networks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Interconnection-Networks-ch5-1</title>
+    <url>/2020/07/20/Interconnection-Networks-ch5-1/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Torus-Network-more">Torus Network<span id="more"></span></h2>
+<h3 id="5-3-Building-Mesh-and-T-orus-Networks">5.3 Building Mesh and T orus Networks</h3>
+<p>将网络的抽象节点映射到物理空间中的实际位置，不同的封装技术可以实现一维的，二维的等映射。</p>
+<ul>
+<li>
+<p>最简单的方式就是$p_i=a_i$，物理位置和逻辑地址相同，每个节点之间距离相同。</p>
+</li>
+<li>
+<p>但是这将导致$p_k和p_0$之间距离过大，如此长的信道可能导致过多的等待时间或需要较慢的信令速率。所以提出折叠的环形网络来解决问题。一种环形网络的折叠入下：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131524647.png" alt="image-20200727131524647"></p>
+<p>消灭了 最长的网络，但是牺牲了以相邻节点距离短的优点。</p>
+</li>
+</ul>
+<p>最终的物理放置图对比：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131557787.png" alt="image-20200727131557787"></p>
+<p>通常，通过以折叠顺序组合k个折叠的k-ary n-1cube来构造折叠的k-ary n-cube</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727131614133.png" alt="image-20200727131614133"></p>
+<p>当逻辑维数超过物理维数时，必须将几个逻辑维映射到每个物理维中。如果物理维数为q，则直接映射是将逻辑维的q折叠为每个物理维。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132711914.png" alt="image-20200727132711914"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200727132749954.png" alt="image-20200727132749954"></p>
+<h3 id="Express-Cubes">Express Cubes</h3>
+<p>原因：环状网络通道短，$t_c$时间通常由$t_r$决定，与直径小的网络相比，导致更多的$T_H$。可以增加维度减小直径。但是会导致$T_s$增大。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114113438.png" alt="image-20200728114113438"></p>
+<p>所以Express sube出现了。就是添加了几个快速通道。通过路由必须在快速通道上的某个维度上经过较长距离的数据包，报头等待时间可以减少到接近信道等待时间限制。因为可以控制快速通道的数量以匹配网络的二等分宽度，所以可以在不增加序列化延迟的情况下实现报头延迟的减少。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728114625185.png" alt="image-20200728114625185"></p>
+<p>每个维度，每隔i个节点设置一个express channel。</p>
+<p>普通网络中，在j维度有$H_j$跳，那么在快速立方体中，跳数为：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728115227480.png" alt="image-20200728115227480"></p>
+<p>对于长的维度，选择$i = \frac{t_r}{t_c}$,来平衡式中的两项，短的维度，选择$i=\sqrt{H_min}$</p>
+<p>分层的快速cube:</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120044122.png" alt="image-20200728120044122"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200728120023536.png" alt="image-20200728120023536"></p>
 ]]></content>
       <categories>
         <category>Interconnection_Networks</category>
@@ -1015,41 +1037,6 @@ $$</p>
       </tags>
   </entry>
   <entry>
-    <title>LeetCode 2</title>
-    <url>/2020/04/09/LeetCode-2/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><div align="right">---命都不要，就爱，就爱安逸。</div>
-<div align="right" size="2">《我的团长我的团》</div>
-<hr>
-<h2 id="题目">题目</h2>
-<pre><code>54.螺旋矩阵
-55.跳跃游戏
-</code></pre>
-<h2 id="想法">想法</h2>
-<ol>
-<li>螺旋矩阵</li>
-</ol>
-<ul>
-<li>思路：旋转矩阵就是绕着转，我的想法是按照每个循环左，下，右，上。一方面要考虑边界，一方面考虑是否被访问过，这里可以利用一个边界的标志，我采用了一个相同大小的tag矩阵来标志是否访问过。</li>
-</ul>
-<ol start="2">
-<li>跳跃游戏</li>
-</ol>
-<ul>
-<li>
-<p>思路：我自己的思路是利用递归，每次往前前进一次，不断递归，最终没有满足时间的要求。</p>
-</li>
-<li>
-<p>网上的解决办法<br>
-这里只要理解可以到达k处，那么k之前的位置都可以到达。所以一次遍历就满足要求了，而且时空效率都很高。</p>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&gt;k) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    k = <span class="built_in">max</span>(k, i+nums[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>LeetCode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode-12</title>
     <url>/2020/09/03/LeetCode-12/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="消除游戏"><a href="https://leetcode-cn.com/problems/elimination-game/">消除游戏</a></h2>
@@ -1082,6 +1069,41 @@ $$</p>
 <h2 id="想法">想法</h2>
 <span id="more"></span>
 <p>第一想法就是回溯，也就这么做了，四个方向分别探索，知道成功。时间空间效率极低😢.看来其他人的答案，主要是在判断上，我的是分开判断，人家的是||或了一下，这里有不同。再一个在确定是否探索过的问题上，我利用了一个tags二维数组，可以直接通过修改原数组来实现。这点我没有做导致空间不够。</p>
+]]></content>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode 2</title>
+    <url>/2020/04/09/LeetCode-2/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><div align="right">---命都不要，就爱，就爱安逸。</div>
+<div align="right" size="2">《我的团长我的团》</div>
+<hr>
+<h2 id="题目">题目</h2>
+<pre><code>54.螺旋矩阵
+55.跳跃游戏
+</code></pre>
+<h2 id="想法">想法</h2>
+<ol>
+<li>螺旋矩阵</li>
+</ol>
+<ul>
+<li>思路：旋转矩阵就是绕着转，我的想法是按照每个循环左，下，右，上。一方面要考虑边界，一方面考虑是否被访问过，这里可以利用一个边界的标志，我采用了一个相同大小的tag矩阵来标志是否访问过。</li>
+</ul>
+<ol start="2">
+<li>跳跃游戏</li>
+</ol>
+<ul>
+<li>
+<p>思路：我自己的思路是利用递归，每次往前前进一次，不断递归，最终没有满足时间的要求。</p>
+</li>
+<li>
+<p>网上的解决办法<br>
+这里只要理解可以到达k处，那么k之前的位置都可以到达。所以一次遍历就满足要求了，而且时空效率都很高。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&gt;k) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    k = <span class="built_in">max</span>(k, i+nums[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>LeetCode</tag>
@@ -1236,6 +1258,64 @@ $$</p>
       </tags>
   </entry>
   <entry>
+    <title>Network Congestion Avoidance Through Speculative Reservation</title>
+    <url>/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><span id="more"></span>
+<p>SRP，Speculative Reservation Protocol，投机预约协议。</p>
+<p>协议通过以下方式提高了拥塞控制的最新水平：</p>
+<ul>
+<li>
+<p>SRP防止拥塞的形成，而不是在拥塞发生后对其进行反应。</p>
+</li>
+<li>
+<p>SRP具有非常快速的瞬态响应，与易发生拥塞的流量的发生几乎立即做出反应，相比之下，像ECN这样的数据包标记协议需要数百微秒的响应时间。</p>
+</li>
+<li>
+<p>SRP的开销很低，可以与网络媲美，而不会对良性流量进行拥塞控制。</p>
+</li>
+<li>
+<p>SRP提高了争夺网络热点的来源之间的公平性。</p>
+<p>阻塞案例：拥塞的扩散影响。</p>
+</li>
+</ul>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205521681.png" alt="image-20200729205521681"></p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205638729.png" alt="image-20200729205638729"></p>
+<p>解决拥塞的办法：</p>
+<ol>
+<li>
+<p>ECN</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205721994.png" alt="image-20200729205721994"></p>
+</li>
+</ol>
+<p>启用ECN的路由器通过监视其输入或输出缓冲区的占用来检测拥塞。当缓冲区的占用率超过某个阈值时，路由器会标记通过缓冲区的数据包的ECN字段（在某些系统中，标记操作仅在标识为拥塞根源的端口上进行）。当标记的数据包到达其目的地时，ECN字段将使用拥塞通知数据包返回到数据包的源。发送方收到消息后会减缓发送速率，来缓解拥塞。在没有拥塞通知的情况下，发送方将逐渐提高其注入速率，以充分利用未拥塞网络的带宽。</p>
+<ol start="2">
+<li>
+<p>Speculative Reservation Protocol</p>
+<p>预防拥塞。</p>
+<p>传输信息，需要一个预约许可的握手</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729210250143.png" alt="image-20200729210250143"></p>
+</li>
+</ol>
+<p>a)是正常运行的时序图，在这种情况下，网络中不存在热点。发送方S通过首先发出预留数据包R来启动到目的地D的通信。此预留数据包很小，具有较高的网络优先级，并且在单独的控制虚拟通道（VC）[8]上传输以保证快速传递。预留中携带预留大小n，它指示源打算发送的数据包数量。选择大小以分摊多个数据包之间的SRP开销，同时提供对多个流的公平性和响应性。</p>
+<p>发出预约后，S开始以投机地方式将数据包P1和P2发送至D。这些推测数据包在低优先级VC上传输，并且等待时间（TTW）有限。如果投机性数据包在网络内部的总累积排队时间大于其TTW，则路由器会将其丢弃。我们通过在到达路由器输入端口时对数据包打上时间戳，然后在数据包位于输入缓冲区的开头时对此时间戳执行检查来实现TTW跟踪。由于投机数据包的性质不可靠，因此需要ack以通知源是否已成功传送或丢弃了它们。</p>
+<p>一旦预约数据包到达 <em>D</em>，目的地将根据其当前预约时间表返回一个携带发送起始时间的小型授权数据包 <em>G</em>($T_s$)（Grant）。另外，<em>D</em> 更新其预约时间表，它给下一个源的发送起始时间不会早于 <em>$T_s$</em> + <em>n</em>(1 + <em>ϵ</em>)$τ_p$。其中，常数 $τ_p$ 是目的地接收单个数据包的时间，<em>ϵ</em> 表示控制数据包（如 reservation、grant、ACK 等）的带宽开销。所有发送源都必须通过如此预约的方式想目的地进行预约并获得开始发送时间。</p>
+<p>当 <em>S</em> 收到授权数据包时，它停止向 <em>D</em> 发送投机数据包。到达时间 $T_s$ 之后，<em>S</em> 以非投机数据包的模式（即正常数据包）恢复向 <em>D</em> 的传输，从图2.1（a）中的示例 <em>P</em>3 开始。正常数据包不能被丢弃，并且不需要 ACK。在 <em>S</em> 成功发送完所有<em>n</em> 个数据包之后，未来 <em>S</em> 和 <em>D</em> 之间的任何传输都将重复此预约过程。</p>
+<p>图b显示了一个时序图，说明了在拥挤的网络中且节点 <em>D</em> 处有热点时的 SRP 执行过程。最初，<em>S</em> 发送预约数据包和投机数据包的过程与上述示例相同，具有较高网络优先级的预约数据包很快到达 <em>D</em>。但是，投机数据包在 <em>D</em> 附近遇到了较大的排队延迟。当排队延迟超过其 TTW 时，投机数据包被路由器丢弃，并且路由器返回 NACK 数据包给 <em>S</em>。当 <em>S</em> 收到 NACK 数据包时，它将停止向目标传输投机数据包，而后以正常数据包的模式在$T_s$处恢复数据包传输，从之前被丢弃的的数据包开始。</p>
+<p>由于丢弃协议，每个预约内乱序包的到达都是可能的。在图b的情况下，如果NACK数据包在ts之后返回，则重新发送的数据包将以乱序到达D。这个可以通过牺牲带宽来避免这个问题。方法是通过修改协议，使得在达到ts之后，S重新传输所有未完成的推测性数据包。这样可以确保有序的数据包到达，但要以可能的重复数据包到达D为代价。</p>
+<p>SRP 可以减少延迟和带宽开销。发送投机数据包可以减少 SRP 的等待时间开销。在中低网络负载下，大多数投机数据包能够到达目的地，并使得 SRP 的延迟与基准网络的延迟相同。为了防止超短流预约开销过大和长流长时间垄断热点目标，SRP 设置了两个阈值：<em>$n_{min}$</em> 和 $n_{max}$。当流长度 n &lt; $n_{min}$，绕过 SRP协议直接发送；当流长度 n &gt; $n_{max}$ 时，则将长流按照$n_{max}$进行分段，分为多个长度为的$n_{max}$流，SRP 将他们视为不同的流，分别进行预约。</p>
+<p>在高网络负载下，由于增加的排队延迟，推测性数据包被更频繁地丢弃。丢弃推测性数据包会浪费网络带宽，并且是高负载时开销的主要来源。但是，推测性数据包永远不会减少可用于非推测性数据包的带宽，因为它们是在单独的较低优先级虚拟通道上发送的。可以通过调整推测的TTW和预留粒度来控制推测的丢弃开销。</p>
+]]></content>
+      <categories>
+        <category>HiNA</category>
+        <category>Papers</category>
+        <category>拥塞控制</category>
+      </categories>
+      <tags>
+        <tag>拥塞控制</tag>
+        <tag>SRP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode-9</title>
     <url>/2020/06/06/LeetCode-9/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="题目">题目</h2>
@@ -1293,64 +1373,6 @@ $$</p>
       </categories>
       <tags>
         <tag>命令行</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Network Congestion Avoidance Through Speculative Reservation</title>
-    <url>/2020/07/29/Network-Congestion-Avoidance-Through-Speculative-Reservation/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><span id="more"></span>
-<p>SRP，Speculative Reservation Protocol，投机预约协议。</p>
-<p>协议通过以下方式提高了拥塞控制的最新水平：</p>
-<ul>
-<li>
-<p>SRP防止拥塞的形成，而不是在拥塞发生后对其进行反应。</p>
-</li>
-<li>
-<p>SRP具有非常快速的瞬态响应，与易发生拥塞的流量的发生几乎立即做出反应，相比之下，像ECN这样的数据包标记协议需要数百微秒的响应时间。</p>
-</li>
-<li>
-<p>SRP的开销很低，可以与网络媲美，而不会对良性流量进行拥塞控制。</p>
-</li>
-<li>
-<p>SRP提高了争夺网络热点的来源之间的公平性。</p>
-<p>阻塞案例：拥塞的扩散影响。</p>
-</li>
-</ul>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205521681.png" alt="image-20200729205521681"></p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205638729.png" alt="image-20200729205638729"></p>
-<p>解决拥塞的办法：</p>
-<ol>
-<li>
-<p>ECN</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729205721994.png" alt="image-20200729205721994"></p>
-</li>
-</ol>
-<p>启用ECN的路由器通过监视其输入或输出缓冲区的占用来检测拥塞。当缓冲区的占用率超过某个阈值时，路由器会标记通过缓冲区的数据包的ECN字段（在某些系统中，标记操作仅在标识为拥塞根源的端口上进行）。当标记的数据包到达其目的地时，ECN字段将使用拥塞通知数据包返回到数据包的源。发送方收到消息后会减缓发送速率，来缓解拥塞。在没有拥塞通知的情况下，发送方将逐渐提高其注入速率，以充分利用未拥塞网络的带宽。</p>
-<ol start="2">
-<li>
-<p>Speculative Reservation Protocol</p>
-<p>预防拥塞。</p>
-<p>传输信息，需要一个预约许可的握手</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200729210250143.png" alt="image-20200729210250143"></p>
-</li>
-</ol>
-<p>a)是正常运行的时序图，在这种情况下，网络中不存在热点。发送方S通过首先发出预留数据包R来启动到目的地D的通信。此预留数据包很小，具有较高的网络优先级，并且在单独的控制虚拟通道（VC）[8]上传输以保证快速传递。预留中携带预留大小n，它指示源打算发送的数据包数量。选择大小以分摊多个数据包之间的SRP开销，同时提供对多个流的公平性和响应性。</p>
-<p>发出预约后，S开始以投机地方式将数据包P1和P2发送至D。这些推测数据包在低优先级VC上传输，并且等待时间（TTW）有限。如果投机性数据包在网络内部的总累积排队时间大于其TTW，则路由器会将其丢弃。我们通过在到达路由器输入端口时对数据包打上时间戳，然后在数据包位于输入缓冲区的开头时对此时间戳执行检查来实现TTW跟踪。由于投机数据包的性质不可靠，因此需要ack以通知源是否已成功传送或丢弃了它们。</p>
-<p>一旦预约数据包到达 <em>D</em>，目的地将根据其当前预约时间表返回一个携带发送起始时间的小型授权数据包 <em>G</em>($T_s$)（Grant）。另外，<em>D</em> 更新其预约时间表，它给下一个源的发送起始时间不会早于 <em>$T_s$</em> + <em>n</em>(1 + <em>ϵ</em>)$τ_p$。其中，常数 $τ_p$ 是目的地接收单个数据包的时间，<em>ϵ</em> 表示控制数据包（如 reservation、grant、ACK 等）的带宽开销。所有发送源都必须通过如此预约的方式想目的地进行预约并获得开始发送时间。</p>
-<p>当 <em>S</em> 收到授权数据包时，它停止向 <em>D</em> 发送投机数据包。到达时间 $T_s$ 之后，<em>S</em> 以非投机数据包的模式（即正常数据包）恢复向 <em>D</em> 的传输，从图2.1（a）中的示例 <em>P</em>3 开始。正常数据包不能被丢弃，并且不需要 ACK。在 <em>S</em> 成功发送完所有<em>n</em> 个数据包之后，未来 <em>S</em> 和 <em>D</em> 之间的任何传输都将重复此预约过程。</p>
-<p>图b显示了一个时序图，说明了在拥挤的网络中且节点 <em>D</em> 处有热点时的 SRP 执行过程。最初，<em>S</em> 发送预约数据包和投机数据包的过程与上述示例相同，具有较高网络优先级的预约数据包很快到达 <em>D</em>。但是，投机数据包在 <em>D</em> 附近遇到了较大的排队延迟。当排队延迟超过其 TTW 时，投机数据包被路由器丢弃，并且路由器返回 NACK 数据包给 <em>S</em>。当 <em>S</em> 收到 NACK 数据包时，它将停止向目标传输投机数据包，而后以正常数据包的模式在$T_s$处恢复数据包传输，从之前被丢弃的的数据包开始。</p>
-<p>由于丢弃协议，每个预约内乱序包的到达都是可能的。在图b的情况下，如果NACK数据包在ts之后返回，则重新发送的数据包将以乱序到达D。这个可以通过牺牲带宽来避免这个问题。方法是通过修改协议，使得在达到ts之后，S重新传输所有未完成的推测性数据包。这样可以确保有序的数据包到达，但要以可能的重复数据包到达D为代价。</p>
-<p>SRP 可以减少延迟和带宽开销。发送投机数据包可以减少 SRP 的等待时间开销。在中低网络负载下，大多数投机数据包能够到达目的地，并使得 SRP 的延迟与基准网络的延迟相同。为了防止超短流预约开销过大和长流长时间垄断热点目标，SRP 设置了两个阈值：<em>$n_{min}$</em> 和 $n_{max}$。当流长度 n &lt; $n_{min}$，绕过 SRP协议直接发送；当流长度 n &gt; $n_{max}$ 时，则将长流按照$n_{max}$进行分段，分为多个长度为的$n_{max}$流，SRP 将他们视为不同的流，分别进行预约。</p>
-<p>在高网络负载下，由于增加的排队延迟，推测性数据包被更频繁地丢弃。丢弃推测性数据包会浪费网络带宽，并且是高负载时开销的主要来源。但是，推测性数据包永远不会减少可用于非推测性数据包的带宽，因为它们是在单独的较低优先级虚拟通道上发送的。可以通过调整推测的TTW和预留粒度来控制推测的丢弃开销。</p>
-]]></content>
-      <categories>
-        <category>HiNA</category>
-        <category>Papers</category>
-        <category>拥塞控制</category>
-      </categories>
-      <tags>
-        <tag>拥塞控制</tag>
-        <tag>SRP</tag>
       </tags>
   </entry>
   <entry>
@@ -1434,29 +1456,6 @@ $$</p>
       </tags>
   </entry>
   <entry>
-    <title>Omnet++</title>
-    <url>/2020/08/03/Omnet++/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Omnet">Omnet++</h2>
-<p>主要由六个部分组成：</p>
-<ol>
-<li>仿真内核库（simulation kernel library,简称Sim）</li>
-<li>网络描述语言的编译器（network description compiler, nedc）</li>
-<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
-<li>仿真程序的图形化用户接口－Tkenv</li>
-<li>仿真程序的命令行用户接口－Cmdenv</li>
-<li>图形化的输出工具－Plove和Scalar<br>
-整个结构如下：<br>
-<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Omnet++</category>
-      </categories>
-      <tags>
-        <tag>Omnet++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PCF: Provably Resilient Flexible Routing</title>
     <url>/2020/09/28/PCF-Provably-Resilient-Flexible-Routing/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Abstract">Abstract</h2>
@@ -1505,6 +1504,29 @@ $$</p>
       </tags>
   </entry>
   <entry>
+    <title>Omnet++</title>
+    <url>/2020/08/03/Omnet++/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Omnet">Omnet++</h2>
+<p>主要由六个部分组成：</p>
+<ol>
+<li>仿真内核库（simulation kernel library,简称Sim）</li>
+<li>网络描述语言的编译器（network description compiler, nedc）</li>
+<li>图形化的网络编辑器（graphical network description editor,GNED）</li>
+<li>仿真程序的图形化用户接口－Tkenv</li>
+<li>仿真程序的命令行用户接口－Cmdenv</li>
+<li>图形化的输出工具－Plove和Scalar<br>
+整个结构如下：<br>
+<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/p1.png" alt="p1"></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Omnet++</category>
+      </categories>
+      <tags>
+        <tag>Omnet++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Tales of the Tail-Hardware, OS, and Application-level Sources of Tail Latency</title>
     <url>/2020/09/06/Tales-of-the-Tail-Hardware-OS-and-Application-level-Sources-of-Tail-Latency/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Abstract">Abstract</h2>
@@ -1525,6 +1547,62 @@ $$</p>
       </categories>
       <tags>
         <tag>tail</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typora上传图片</title>
+    <url>/2020/06/05/Typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="背景">背景</h2>
+<p>​	从开始用markdown写文章，自己只会写文字，现在有了多元的需求。比如图片，代码等。这些东西利用原生的代码可以完成，但是人总是偷懒的，没有人愿意先上传图片，再复制链接，最后写在文章中，这样存在很多无用功，所以需要偷懒。😀😉！</p>
+<h2 id="我的历程">我的历程</h2>
+<ol>
+<li>手写链接+本地保存。垃圾+蠢</li>
+<li>利用SMMS图床，用了几次感觉没啥意义，立马放弃。</li>
+<li>picGo+github图床。使用起来比较好用，但是国内访问github比较麻烦，上传问题不大，主要是本地显示问题。有点麻烦，于今天弃坑。</li>
+<li>picGo+gitee图床，这里必须表扬gitee，访问快，无阻碍。❤</li>
+</ol>
+<h2 id="配置流程">配置流程</h2>
+<p>现在说来只有一句，搞这个玩意，我花了4-5个小时，还不加之前配置picGo+github图床的时间，心累💢！。</p>
+<ol>
+<li>
+<p>gitee创建仓库，生成令牌，这个比较简单，gitee全中文的界面没有障碍。</p>
+</li>
+<li>
+<p>下载picGo插件picgo-plugin-gitee-uploader。不知道picGo怎么回事，反正我装了好久才成功，还使用了``npm install picgo-plugin-gitee-uploader -g`下载，最终是怎么成功的，我自己也不知道了😅。</p>
+</li>
+<li>
+<p>配置插件。</p>
+<p>​     <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605164924.png" alt="image-20200605164924047"></p>
+</li>
+<li>
+<p>配置Typora</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605165122.png" alt="image-20200605165122064"></p>
+<p>细节性的就不细说，看看就可以理解了。</p>
+</li>
+<li>
+<p>最后验证一些即可。好用的不行。</p>
+</li>
+</ol>
+<h2 id="报错的排除">报错的排除</h2>
+<p>在上传的时候主要有两个错误</p>
+<ol>
+<li>
+<p>“failed to fetch” 这个是picGo的端口设置错误，改成<strong>36677端口</strong>。</p>
+</li>
+<li>
+<p>{“success”,false}，出错，基本上是配置（可能是重名）错了，现在运行起来基本不会出现。</p>
+</li>
+</ol>
+<h2 id="结语">结语</h2>
+<p>在找解决办法的过程中，真的好无奈，啥也不敢确定，只能不断地测试，最终成功后：</p>
+<p><strong>拨开云雾见青天！</strong></p>
+<p>人的心情都好了😉😉😉！</p>
+]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+      <tags>
+        <tag>Typora</tag>
       </tags>
   </entry>
   <entry>
@@ -1732,62 +1810,6 @@ $$</p>
       </categories>
   </entry>
   <entry>
-    <title>Typora上传图片</title>
-    <url>/2020/06/05/Typora%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="背景">背景</h2>
-<p>​	从开始用markdown写文章，自己只会写文字，现在有了多元的需求。比如图片，代码等。这些东西利用原生的代码可以完成，但是人总是偷懒的，没有人愿意先上传图片，再复制链接，最后写在文章中，这样存在很多无用功，所以需要偷懒。😀😉！</p>
-<h2 id="我的历程">我的历程</h2>
-<ol>
-<li>手写链接+本地保存。垃圾+蠢</li>
-<li>利用SMMS图床，用了几次感觉没啥意义，立马放弃。</li>
-<li>picGo+github图床。使用起来比较好用，但是国内访问github比较麻烦，上传问题不大，主要是本地显示问题。有点麻烦，于今天弃坑。</li>
-<li>picGo+gitee图床，这里必须表扬gitee，访问快，无阻碍。❤</li>
-</ol>
-<h2 id="配置流程">配置流程</h2>
-<p>现在说来只有一句，搞这个玩意，我花了4-5个小时，还不加之前配置picGo+github图床的时间，心累💢！。</p>
-<ol>
-<li>
-<p>gitee创建仓库，生成令牌，这个比较简单，gitee全中文的界面没有障碍。</p>
-</li>
-<li>
-<p>下载picGo插件picgo-plugin-gitee-uploader。不知道picGo怎么回事，反正我装了好久才成功，还使用了``npm install picgo-plugin-gitee-uploader -g`下载，最终是怎么成功的，我自己也不知道了😅。</p>
-</li>
-<li>
-<p>配置插件。</p>
-<p>​     <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605164924.png" alt="image-20200605164924047"></p>
-</li>
-<li>
-<p>配置Typora</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605165122.png" alt="image-20200605165122064"></p>
-<p>细节性的就不细说，看看就可以理解了。</p>
-</li>
-<li>
-<p>最后验证一些即可。好用的不行。</p>
-</li>
-</ol>
-<h2 id="报错的排除">报错的排除</h2>
-<p>在上传的时候主要有两个错误</p>
-<ol>
-<li>
-<p>“failed to fetch” 这个是picGo的端口设置错误，改成<strong>36677端口</strong>。</p>
-</li>
-<li>
-<p>{“success”,false}，出错，基本上是配置（可能是重名）错了，现在运行起来基本不会出现。</p>
-</li>
-</ol>
-<h2 id="结语">结语</h2>
-<p>在找解决办法的过程中，真的好无奈，啥也不敢确定，只能不断地测试，最终成功后：</p>
-<p><strong>拨开云雾见青天！</strong></p>
-<p>人的心情都好了😉😉😉！</p>
-]]></content>
-      <categories>
-        <category>markdown</category>
-      </categories>
-      <tags>
-        <tag>Typora</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora绘图</title>
     <url>/2020/06/05/Typora%E7%BB%98%E5%9B%BE/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>在学习的过程中不可避免地要绘制流程图，树状图，这些图画起来比较简单，但是要达到美观就比较麻烦了。所以在网上找了一些绘图的工具，首先是Typora的自带绘图工具。</p>
@@ -1921,6 +1943,44 @@ $$</p>
 ]]></content>
   </entry>
   <entry>
+    <title>YunBlog可以评论啦</title>
+    <url>/2020/08/08/hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>##起因</p>
+<p>​		本来我这个博客也没有很多人看到，只是自己写着玩的，所以就没有设置评论的功能。</p>
+<p>​		但是今天有个小可爱问我怎么没有评论功能，导致她想评论的时候，没有办法。那不行呀，必须服务好她。所以就在网上找了一些教程。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808212733403.png" alt="image-20200808212733403"></p>
+<p>​		首先是查看有哪些评论系统，网址在这里，<a href="https://www.zhihu.com/question/267598518">Hexo（NexT 主题）评论系统哪个好？</a></p>
+<p>​		然后选择了Valine，然后它主页说hexo已经可以支持这个评论系统了，那下面的事情就简单很多了。接下来找了一个教程：<a href="https://yuanmomo.net/2019/06/20/hexo-add-valine/">Hexo Next 主题添加 Valine 评论系统</a>。感谢博主的帮助。</p>
+<h3 id="系统配置：">系统配置：</h3>
+<ol>
+<li>
+<p>申请 LeanCloud账户，这个具体干啥的我也没研究，感觉功能挺多。</p>
+</li>
+<li>
+<p>申请应用，按照下图添加两个类：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808213759214.png" alt="image-20200808213759214"></p>
+</li>
+<li>
+<p>最后应用Keys中记住两个<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214003660.png" alt="image-20200808214003660"></p>
+<p>​	这是要填写在配置文件中的。</p>
+</li>
+</ol>
+<h2 id="配置文件：">配置文件：</h2>
+<ol>
+<li>编辑 next的_config.yml 文件</li>
+</ol>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214252561.png" alt="image-20200808214252561"></p>
+<p>修改 valine.min.js 的 cdn 文件地址，到这里 <a href="https://www.jsdelivr.com/package/npm/valine">https://www.jsdelivr.com/package/npm/valine</a> 这个地址选择最新版本的Valine，然后获取cdn地址，修改到 主题配置文件 _config.yml 即可。</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214325591.png" alt="image-20200808214325591"></p>
+<h2 id="成果：">成果：</h2>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214539154.png" alt="image-20200808214539154"></p>
+<p>搞定啦！🐱‍🏍💞</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+  </entry>
+  <entry>
     <title>glex</title>
     <url>/2020/11/05/glex/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Send">Send</h2>
@@ -2036,42 +2096,22 @@ $$</p>
 ]]></content>
   </entry>
   <entry>
-    <title>YunBlog可以评论啦</title>
-    <url>/2020/08/08/hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>##起因</p>
-<p>​		本来我这个博客也没有很多人看到，只是自己写着玩的，所以就没有设置评论的功能。</p>
-<p>​		但是今天有个小可爱问我怎么没有评论功能，导致她想评论的时候，没有办法。那不行呀，必须服务好她。所以就在网上找了一些教程。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808212733403.png" alt="image-20200808212733403"></p>
-<p>​		首先是查看有哪些评论系统，网址在这里，<a href="https://www.zhihu.com/question/267598518">Hexo（NexT 主题）评论系统哪个好？</a></p>
-<p>​		然后选择了Valine，然后它主页说hexo已经可以支持这个评论系统了，那下面的事情就简单很多了。接下来找了一个教程：<a href="https://yuanmomo.net/2019/06/20/hexo-add-valine/">Hexo Next 主题添加 Valine 评论系统</a>。感谢博主的帮助。</p>
-<h3 id="系统配置：">系统配置：</h3>
+    <title>powershell和cmd一次执行多个命令</title>
+    <url>/2020/04/10/powershell%E5%92%8Ccmd%E4%B8%80%E6%AC%A1%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>之前遇到很多需要依次输入的命令，有的命令需要等待时间。今天找到了如何一次输入多条命令的方法👍</p>
 <ol>
-<li>
-<p>申请 LeanCloud账户，这个具体干啥的我也没研究，感觉功能挺多。</p>
-</li>
-<li>
-<p>申请应用，按照下图添加两个类：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808213759214.png" alt="image-20200808213759214"></p>
-</li>
-<li>
-<p>最后应用Keys中记住两个<img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214003660.png" alt="image-20200808214003660"></p>
-<p>​	这是要填写在配置文件中的。</p>
-</li>
+<li>Powershell<br>
+在powershell中命令后面加上‘|’<br>
+eg:<br>
+<code>hexo clean | hexo g | hexo d</code>此命令可以一步实现博客的部署。</li>
+<li>cmd<br>
+在cmd中将‘|’改为‘&amp;&amp;’即可。</li>
 </ol>
-<h2 id="配置文件：">配置文件：</h2>
-<ol>
-<li>编辑 next的_config.yml 文件</li>
-</ol>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214252561.png" alt="image-20200808214252561"></p>
-<p>修改 valine.min.js 的 cdn 文件地址，到这里 <a href="https://www.jsdelivr.com/package/npm/valine">https://www.jsdelivr.com/package/npm/valine</a> 这个地址选择最新版本的Valine，然后获取cdn地址，修改到 主题配置文件 _config.yml 即可。</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214325591.png" alt="image-20200808214325591"></p>
-<h2 id="成果：">成果：</h2>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/image-20200808214539154.png" alt="image-20200808214539154"></p>
-<p>搞定啦！🐱‍🏍💞</p>
 ]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
+      <tags>
+        <tag>命令行</tag>
+        <tag>小技巧</tag>
+      </tags>
   </entry>
   <entry>
     <title>hexo_todo</title>
@@ -2102,38 +2142,6 @@ $$</p>
 ]]></content>
   </entry>
   <entry>
-    <title>powershell和cmd一次执行多个命令</title>
-    <url>/2020/04/10/powershell%E5%92%8Ccmd%E4%B8%80%E6%AC%A1%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>之前遇到很多需要依次输入的命令，有的命令需要等待时间。今天找到了如何一次输入多条命令的方法👍</p>
-<ol>
-<li>Powershell<br>
-在powershell中命令后面加上‘|’<br>
-eg:<br>
-<code>hexo clean | hexo g | hexo d</code>此命令可以一步实现博客的部署。</li>
-<li>cmd<br>
-在cmd中将‘|’改为‘&amp;&amp;’即可。</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>命令行</tag>
-        <tag>小技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python中plt画图出现警告</title>
-    <url>/2020/04/29/python%E4%B8%ADplt%E7%94%BB%E5%9B%BE%E5%87%BA%E7%8E%B0%E8%AD%A6%E5%91%8A/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="警告">警告</h2>
-<p>最近做毕设的时候，需要画图来查看算法优化性能。之前都是利用截图来保存的，今天网上找到了可以自动保存图片的方法，在使用的过程中出现警告：<code>libpng warning: iCCP: known incorrect sRGB profile</code>。在查阅资料后发现是因为使用了QQ输入法，这个错误也太搞笑了，记录一下。顺便记录保存图片代码</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">69</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(t, t, <span class="string">&#x27;r&#x27;</span>, t, t**<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">label = [<span class="string">&#x27;t&#x27;</span>, <span class="string">&#x27;t**2&#x27;</span>]</span><br><span class="line">plt.yscale(<span class="string">&#x27;log&#x27;</span>)</span><br><span class="line">plt.legend(label, loc=<span class="string">&#x27;upper left&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;./test&#x27;</span>+<span class="built_in">str</span>(i)+<span class="string">&#x27;.png&#x27;</span>)</span><br><span class="line"><span class="comment"># plt.show()</span></span><br><span class="line">plt.pause(<span class="number">1.5</span>)</span><br><span class="line">plt.close()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>小技巧</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python打包为.exe程序</title>
     <url>/2020/10/16/python%E6%89%93%E5%8C%85%E4%B8%BA-exe%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="Python导出exe打包">Python导出exe打包</h2>
@@ -2151,6 +2159,20 @@ eg:<br>
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中plt画图出现警告</title>
+    <url>/2020/04/29/python%E4%B8%ADplt%E7%94%BB%E5%9B%BE%E5%87%BA%E7%8E%B0%E8%AD%A6%E5%91%8A/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="警告">警告</h2>
+<p>最近做毕设的时候，需要画图来查看算法优化性能。之前都是利用截图来保存的，今天网上找到了可以自动保存图片的方法，在使用的过程中出现警告：<code>libpng warning: iCCP: known incorrect sRGB profile</code>。在查阅资料后发现是因为使用了QQ输入法，这个错误也太搞笑了，记录一下。顺便记录保存图片代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">69</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(t, t, <span class="string">&#x27;r&#x27;</span>, t, t**<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">label = [<span class="string">&#x27;t&#x27;</span>, <span class="string">&#x27;t**2&#x27;</span>]</span><br><span class="line">plt.yscale(<span class="string">&#x27;log&#x27;</span>)</span><br><span class="line">plt.legend(label, loc=<span class="string">&#x27;upper left&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&#x27;./test&#x27;</span>+<span class="built_in">str</span>(i)+<span class="string">&#x27;.png&#x27;</span>)</span><br><span class="line"><span class="comment"># plt.show()</span></span><br><span class="line">plt.pause(<span class="number">1.5</span>)</span><br><span class="line">plt.close()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>小技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -2246,25 +2268,6 @@ eg:<br>
       </tags>
   </entry>
   <entry>
-    <title>一次Ubuntu的安装记录</title>
-    <url>/2020/06/23/%E4%B8%80%E6%AC%A1Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="一次Ubuntu的安装记录">一次Ubuntu的安装记录</h2>
-<p>​	最近要在Linux上做一点东西，但是自己不太理解要做啥，本来是想用WSL的，结果发现有点困难😂。只能转到虚拟机里面来工作了。找了一个Ubuntu的iso安装文件，安装，很快。</p>
-<p>​	由于是新系统肯定需要下载软件，更新软件，确实花费了一定的时间。最难的是安装中文输入法，搞了我好久。现在还有一个bug，中文输入在terminal中无法显示光标。</p>
-<p>​	后面我还行去WSL里面试试，不折腾会死就是我本人了。</p>
-<p>​	一些小的启发：发现问题时多去百度，谷歌，收益很多。然后就是多试试，自己总能解决问题。</p>
-<p>​	还有Linux不要随意删除自带的python，很坑。记住！</p>
-]]></content>
-      <categories>
-        <category>软件安装</category>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一次计算机体系结构会议</title>
     <url>/2020/08/13/%E4%B8%80%E6%AC%A1%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%BC%9A%E8%AE%AE/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -2284,6 +2287,25 @@ eg:<br>
       </categories>
   </entry>
   <entry>
+    <title>一次Ubuntu的安装记录</title>
+    <url>/2020/06/23/%E4%B8%80%E6%AC%A1Ubuntu%E7%9A%84%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="一次Ubuntu的安装记录">一次Ubuntu的安装记录</h2>
+<p>​	最近要在Linux上做一点东西，但是自己不太理解要做啥，本来是想用WSL的，结果发现有点困难😂。只能转到虚拟机里面来工作了。找了一个Ubuntu的iso安装文件，安装，很快。</p>
+<p>​	由于是新系统肯定需要下载软件，更新软件，确实花费了一定的时间。最难的是安装中文输入法，搞了我好久。现在还有一个bug，中文输入在terminal中无法显示光标。</p>
+<p>​	后面我还行去WSL里面试试，不折腾会死就是我本人了。</p>
+<p>​	一些小的启发：发现问题时多去百度，谷歌，收益很多。然后就是多试试，自己总能解决问题。</p>
+<p>​	还有Linux不要随意删除自带的python，很坑。记住！</p>
+]]></content>
+      <categories>
+        <category>软件安装</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一点感悟2020.4.11</title>
     <url>/2020/04/11/%E4%B8%80%E7%82%B9%E6%84%9F%E6%82%9F2020-4-11/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><span id="more"></span>
@@ -2300,29 +2322,6 @@ eg:<br>
 ]]></content>
       <tags>
         <tag>悟与梦</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一点点小想法</title>
-    <url>/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="23af34498e97bf5de94e59fdd0396c0f4b98c7afbcd49b5f9c88b6de3a56620f">7598fd0d447fa3eaa88cce180daf64da117399b2248901ef3260a647dc941e9736658e554111b0981311f91baa324aa2db3f2ad1839cf1896b5982f109bb1b4c0bac4da99bf6e9d75f8c3a876516ad919d54a892d8b8bdff4b234294dd23d1a7820c0a42ada5e0b867c1dedd1583f64c7909190bf3091927db1a58b4d289a433c72009e846db748810d3d85ed4be322a837e47577c83ecd0c102a9d7cccd2e54db18965e26728185f2c43275c0f9785d3975ecddb3138310a6fb740cc7214f6652365a82f4222a71afc9094b79ce6246607fa6a496e7a3f0eb62bb0c06b97f3c3586d4661c15412d1d8026b626dd33eb6d6a2f4cb30e9f90be477a719f4c760a887822eccf062edf9d12ff49ed73ddef5727081ac06773fa92b1f31083ede59e24359c98cbaa2d710825bbccab2c1a65747026dc4b5543d647a253bf6a162488400c428eeb63d3162c7a53eecd673dab38ae080d99fc2b0ef5ee5e174ee273c9736f5364536482a87ae38ddbf5e70a08fb9666cd05b214ebea91b7e5833d1848929f7efc1854ae72055086c83ff4a4f16197a489001b146039cbcfcef3c325fc52f42108071d0ce753ebb1048a90726231f2a9274e76af2d2238dd8f8617889c4adc9b1c5900ff6d2a56ecce85f43e414b49ad62ee95f01438ad11fa4c141958f44d10abf7ce4d71fe8d5442e612b817441f67494291e6bc6ff98ee936b197d7024ca74911de5511f8f5f0a14344283ca8462956c4a87fa7228103b57a05c6b1284a524ba0ba19649b555bcdc32d518665f9f4e2c78a0e6eac205d8b68d5068d35711348a23bd39758d5363949d2424896f1adc98128d25fcecfd1f24ad9308b7838de487661b5181ab80653742320cde66420eb908341771a3147ee581f5558a42969381c1ab98e35de5a453f7e59f5360edfc3163005da11706beeb19332bdc4684126019d3d9b8192057b22f2b15c0c25152655586ac54e6d4a06bcf141d51cb9e4c0b01acf537d4fcb12bc88632ff26e5f28b6e933f46791118635313be9df113047b30dd7920732a8ed02e945e96807e6ff039ebf43f0c241fecbb73e00086a2bdcb2aec74913e009416649ae4b0c6605b6f8e54efce6b9bb9857b1efdd7bcf39012c3ea60dbfe9e46fbb42ecfb5ded3487f5028eac63413e36f6ebb9165bd8cc9cf332fdd63f73af8e3b3a8413bb95e637951d422f0ffcff7643e2caec987d26a9a44dc9661b952945c28b8ffded0b658a04d3dd03b19d31f22f550c65251529351531c1dce16a4b507c902bcc</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>内省</category>
-      </categories>
-      <tags>
-        <tag>悟与梦</tag>
-        <tag>内省</tag>
       </tags>
   </entry>
   <entry>
@@ -2368,6 +2367,29 @@ eg:<br>
       </categories>
       <tags>
         <tag>贺兰山</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一点点小想法</title>
+    <url>/2020/06/17/%E4%B8%80%E7%82%B9%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="23af34498e97bf5de94e59fdd0396c0f4b98c7afbcd49b5f9c88b6de3a56620f">7598fd0d447fa3eaa88cce180daf64da117399b2248901ef3260a647dc941e9736658e554111b0981311f91baa324aa2db3f2ad1839cf1896b5982f109bb1b4c0bac4da99bf6e9d75f8c3a876516ad919d54a892d8b8bdff4b234294dd23d1a7820c0a42ada5e0b867c1dedd1583f64c7909190bf3091927db1a58b4d289a433c72009e846db748810d3d85ed4be322a837e47577c83ecd0c102a9d7cccd2e54db18965e26728185f2c43275c0f9785d3975ecddb3138310a6fb740cc7214f6652365a82f4222a71afc9094b79ce6246607fa6a496e7a3f0eb62bb0c06b97f3c3586d4661c15412d1d8026b626dd33eb6d6a2f4cb30e9f90be477a719f4c760a887822eccf062edf9d12ff49ed73ddef5727081ac06773fa92b1f31083ede59e24359c98cbaa2d710825bbccab2c1a65747026dc4b5543d647a253bf6a162488400c428eeb63d3162c7a53eecd673dab38ae080d99fc2b0ef5ee5e174ee273c9736f5364536482a87ae38ddbf5e70a08fb9666cd05b214ebea91b7e5833d1848929f7efc1854ae72055086c83ff4a4f16197a489001b146039cbcfcef3c325fc52f42108071d0ce753ebb1048a90726231f2a9274e76af2d2238dd8f8617889c4adc9b1c5900ff6d2a56ecce85f43e414b49ad62ee95f01438ad11fa4c141958f44d10abf7ce4d71fe8d5442e612b817441f67494291e6bc6ff98ee936b197d7024ca74911de5511f8f5f0a14344283ca8462956c4a87fa7228103b57a05c6b1284a524ba0ba19649b555bcdc32d518665f9f4e2c78a0e6eac205d8b68d5068d35711348a23bd39758d5363949d2424896f1adc98128d25fcecfd1f24ad9308b7838de487661b5181ab80653742320cde66420eb908341771a3147ee581f5558a42969381c1ab98e35de5a453f7e59f5360edfc3163005da11706beeb19332bdc4684126019d3d9b8192057b22f2b15c0c25152655586ac54e6d4a06bcf141d51cb9e4c0b01acf537d4fcb12bc88632ff26e5f28b6e933f46791118635313be9df113047b30dd7920732a8ed02e945e96807e6ff039ebf43f0c241fecbb73e00086a2bdcb2aec74913e009416649ae4b0c6605b6f8e54efce6b9bb9857b1efdd7bcf39012c3ea60dbfe9e46fbb42ecfb5ded3487f5028eac63413e36f6ebb9165bd8cc9cf332fdd63f73af8e3b3a8413bb95e637951d422f0ffcff7643e2caec987d26a9a44dc9661b952945c28b8ffded0b658a04d3dd03b19d31f22f550c65251529351531c1dce16a4b507c902bcc</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>内省</category>
+      </categories>
+      <tags>
+        <tag>悟与梦</tag>
+        <tag>内省</tag>
       </tags>
   </entry>
   <entry>
@@ -2502,22 +2524,6 @@ eg:<br>
 ]]></content>
   </entry>
   <entry>
-    <title>动态规划一点收获</title>
-    <url>/2020/06/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="动态规划——收获">动态规划——收获</h2>
-<p>​	<a href="https://yunruowu.github.io/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/">动态规划第一篇</a></p>
-<p>​	之前说了最近要学习动态规划算法，然后自己也刷了十几道题目。下面说一下自己的看法。</p>
-<p>​	首先动态规划的效率确实比很多暴力解法要好很多。但是同时必须要付出空间上的开销。一般都是一个dp数组。从我做的题目来看，动态规划就是求解N处的某个问题的解f(n)的最优解。同时f(n)又与f(n-1),f(n-2)等有关。最重要的就是如何求解这些关系。暴力方法可以使用递归直接去求解，但是如果用树形图画出求解过程，就会发现有很多f(k)会被多次计算，这就是开销最大的地方。那么我们自然而然的想法就是减少f(k)的计算次数，怎么做？一种是带一个备忘录，这个方法也不是最优的。最优的是自底向上的来计算f(i)并且进行记录，这样可以减少子问题的计算次数，也就提升了计算效率。有时间再取一些例子进行分享。</p>
-<p>​	😪</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>准备复试的某一天</title>
     <url>/2020/05/17/%E5%87%86%E5%A4%87%E5%A4%8D%E8%AF%95%E7%9A%84%E6%9F%90%E4%B8%80%E5%A4%A9/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -2540,6 +2546,22 @@ eg:<br>
       </tags>
   </entry>
   <entry>
+    <title>动态规划一点收获</title>
+    <url>/2020/06/29/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="动态规划——收获">动态规划——收获</h2>
+<p>​	<a href="https://yunruowu.github.io/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/">动态规划第一篇</a></p>
+<p>​	之前说了最近要学习动态规划算法，然后自己也刷了十几道题目。下面说一下自己的看法。</p>
+<p>​	首先动态规划的效率确实比很多暴力解法要好很多。但是同时必须要付出空间上的开销。一般都是一个dp数组。从我做的题目来看，动态规划就是求解N处的某个问题的解f(n)的最优解。同时f(n)又与f(n-1),f(n-2)等有关。最重要的就是如何求解这些关系。暴力方法可以使用递归直接去求解，但是如果用树形图画出求解过程，就会发现有很多f(k)会被多次计算，这就是开销最大的地方。那么我们自然而然的想法就是减少f(k)的计算次数，怎么做？一种是带一个备忘录，这个方法也不是最优的。最优的是自底向上的来计算f(i)并且进行记录，这样可以减少子问题的计算次数，也就提升了计算效率。有时间再取一些例子进行分享。</p>
+<p>​	😪</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>动态规划我来康康</title>
     <url>/2020/06/18/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%88%91%E6%9D%A5%E5%BA%B7%E5%BA%B7/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="动态规划的-span-style-color-87CEFA-云-span-看法">动态规划的  <span style = "color :#87CEFA">云</span>  看法</h2>
@@ -2554,28 +2576,6 @@ eg:<br>
       </categories>
       <tags>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回溯算法题目</title>
-    <url>/2020/06/05/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E9%A2%98%E7%9B%AE/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="算法描述"><a href="https://leetcode-cn.com/tag/backtracking/">算法描述</a></h2>
-<p>回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就 “回溯” 返回，尝试别的路径。回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为 “回溯点”。许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
-<p>回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。</p>
-<h2 id="算法使用方法">算法使用方法</h2>
-<p>我觉得在使用回溯算法的时候，需要使用树形的结构来帮助算法的运行。我在使用回溯的时候都是理由深度优先搜索算法和剪枝来解决问题的。</p>
-<p>整个深度搜索算法的结构如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n;	<span class="comment">// 最终能达到的树的深度</span></span><br><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; ans; <span class="comment">//如果要求不重复，可以声明为set或者在算法中排除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur, vector&lt;<span class="keyword">int</span>&gt;tags, vector&lt;<span class="keyword">int</span>&gt; ins)</span><span class="comment">//cur表示当前到达的树的层次，tag表示一种约束，比如只能元素只能用一次等。ins 表示当前整个路径上的节点。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cur == n)&#123;<span class="comment">//可能还有其他限制条件，这里只是深度满足要求。</span></span><br><span class="line">        ans.<span class="built_in">push_back</span>(ins);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>()&#123;<span class="comment">//遍历可以遍历的</span></span><br><span class="line">        <span class="comment">// 处理tags和ins</span></span><br><span class="line">        <span class="built_in">dfs</span>(cur+<span class="number">1</span>, tags,ins);</span><br><span class="line">        <span class="comment">//恢复</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>下面用树形图来解释一下算法：</p>
-<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605162618.png" alt="二叉树"></p>
-<p>首先就从空节点a开始，每次添加一个节点，从可选的节点中选择，继续到下一层，同时可以存在剪枝，在每个节点开始时，判断是否达到最终条件或者超过最终条件，这样可以将该节点及其以下的节点删除，不用遍历。在遍历子节点完成后，会回到当前节点的上一个状态，这样就是回溯。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-        <tag>回溯算法</tag>
       </tags>
   </entry>
   <entry>
@@ -2603,6 +2603,28 @@ eg:<br>
       <tags>
         <tag>诗</tag>
         <tag>李贺</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在我的一生中，我想要做_____</title>
+    <url>/2021/07/04/%E5%9C%A8%E6%88%91%E7%9A%84%E4%B8%80%E7%94%9F%E4%B8%AD%EF%BC%8C%E6%88%91%E6%83%B3%E8%A6%81%E5%81%9A/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="dae47f3def961490495a20fdeec1df8f804680882eb740ea2426aeecbecfcab3">6aeae6a0b22b6ffaff5e84397546cfb74780a8860e4a7389c5731d591e0ddd05d8e3ef1dc100eb7c940b17639cb339518e088c9c4a2b47126f6d58d1604996ae78a7822c644a13029c51075869689c25ea523bf885b7f1aa3eddfbd4cea8f9baa2e6dcc7b70fb228b9e30c22e92b88242aaa1f035cdc0ceae1087a0cadf013771abf0d6c0d5206fd56e6b8759cf848c8622040d01272dc331a28bff69631162b7d4b831c3f9b49415644ad4019a77466da8dea5818cfe8e3da2d8dda0162e942aab5bfc499faa828bc07f384afcfd1755077e3b0136a33506793b3b2b6a07aad2e74f2beea8a95950dd94ee2bd13690518258336c153f5e82d9f092d5a243137304c0a8007c2bc5087e127dabe9784ff80714fcf1f835ed1fcd8021f2c9e01b018173430dafb7268120acf23f770027be608dd444bbabfbf74ad24354905e1470cb37d766f8722f62d524c710d21a8f9b598a5fbb6a2f69d6dedab1b2c370e19eb7bc9656d0804224f62b835b4aff1f15ff84fe6be68d8ecb8e7a251a00eab1b0d43038533130f14316a47e1d6bdaa28c77f53c4a218507ca8ee36041eea3c18d999d9ed42ab79e104e006f704835845c103b1629b24571e1a3ad301dfae7c677067695febddd0a9b6f331fed79849f0c9e4b1450d81f0d15e7f451c4c6af1b8a5ca3d8ea7c63ea52cb94d6ef572a6c61bdeb9c0d987a548647abefca04f9f01b0cd2f369cab9bf31e08ca2ee2a0c52782e332eb324e7c7fbcd6e9ed6320dc368b11239b0830941f34c44d76d1a2ef80afbd88364cbb7614bf3cd29bd96e4d44564277be0e315bbdd596afe940f46336f8ae9ac34218d1e46fbc6365b7de0fdf385d97b9ee133d50920f638cccc1dd2e31fbc9b47ec7233fd22228a1370161efd17069d73e5d6b549a7b3ba73e722593c98c1f14577a5d46adae0c2793363878ea24553e8efa69519a2fdc00d17348af7f6e76940cca262ff7b7b00c61d3e3f81d074afc536ca5f10dcf8c5608162ddda28df752ddad89b70b92d4cf9505c7ade904359a854a6481cbd84964e41235f3c2250a219e38c2cab5c7f1a3692bc5b0e3accff056dd759363b747a704ee803c101439b7038275383afddda885984a1f07d758ab1e0ca869473890a4d037b2bd561cffd78b5fb9ec7a8e2cfc06b68e37f638e3bc9736eb30ac29287dd928d5e84fe69d308bd22faad59ead67d88b4062635c1e4bf8e7455f841e2d0110859b350dfea1103d2fade33a8150354d011e3bd76e58abf5b6298ddeaca97ca7e928370601b87647b011aa4638b74b207bb17af662f6e9714ab126fb00ad251bd8780a82a9ad38de9c06d1889a7f99fc660f192c3888e44d04f5a949d5ebdb99f951cca0fbca913062216df9728fabce5e537f72c725973bffe142c95a8fa0da40670909323d8d6c6f108e343fff8021bc7442bf371d354b4af6f96a73c3981ca47f98</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>梦想</category>
+      </categories>
+      <tags>
+        <tag>梦</tag>
       </tags>
   </entry>
   <entry>
@@ -2637,26 +2659,31 @@ eg:<br>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
   </entry>
   <entry>
-    <title>在我的一生中，我想要做_____</title>
-    <url>/2021/07/04/%E5%9C%A8%E6%88%91%E7%9A%84%E4%B8%80%E7%94%9F%E4%B8%AD%EF%BC%8C%E6%88%91%E6%83%B3%E8%A6%81%E5%81%9A/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="dae47f3def961490495a20fdeec1df8f804680882eb740ea2426aeecbecfcab3">6aeae6a0b22b6ffaff5e84397546cfb74780a8860e4a7389c5731d591e0ddd05d8e3ef1dc100eb7c940b17639cb339518e088c9c4a2b47126f6d58d1604996ae78a7822c644a13029c51075869689c25ea523bf885b7f1aa3eddfbd4cea8f9baa2e6dcc7b70fb228b9e30c22e92b88242aaa1f035cdc0ceae1087a0cadf013771abf0d6c0d5206fd56e6b8759cf848c8622040d01272dc331a28bff69631162b7d4b831c3f9b49415644ad4019a77466da8dea5818cfe8e3da2d8dda0162e942aab5bfc499faa828bc07f384afcfd1755077e3b0136a33506793b3b2b6a07aad2e74f2beea8a95950dd94ee2bd13690518258336c153f5e82d9f092d5a243137304c0a8007c2bc5087e127dabe9784ff80714fcf1f835ed1fcd8021f2c9e01b018173430dafb7268120acf23f770027be608dd444bbabfbf74ad24354905e1470cb37d766f8722f62d524c710d21a8f9b598a5fbb6a2f69d6dedab1b2c370e19eb7bc9656d0804224f62b835b4aff1f15ff84fe6be68d8ecb8e7a251a00eab1b0d43038533130f14316a47e1d6bdaa28c77f53c4a218507ca8ee36041eea3c18d999d9ed42ab79e104e006f704835845c103b1629b24571e1a3ad301dfae7c677067695febddd0a9b6f331fed79849f0c9e4b1450d81f0d15e7f451c4c6af1b8a5ca3d8ea7c63ea52cb94d6ef572a6c61bdeb9c0d987a548647abefca04f9f01b0cd2f369cab9bf31e08ca2ee2a0c52782e332eb324e7c7fbcd6e9ed6320dc368b11239b0830941f34c44d76d1a2ef80afbd88364cbb7614bf3cd29bd96e4d44564277be0e315bbdd596afe940f46336f8ae9ac34218d1e46fbc6365b7de0fdf385d97b9ee133d50920f638cccc1dd2e31fbc9b47ec7233fd22228a1370161efd17069d73e5d6b549a7b3ba73e722593c98c1f14577a5d46adae0c2793363878ea24553e8efa69519a2fdc00d17348af7f6e76940cca262ff7b7b00c61d3e3f81d074afc536ca5f10dcf8c5608162ddda28df752ddad89b70b92d4cf9505c7ade904359a854a6481cbd84964e41235f3c2250a219e38c2cab5c7f1a3692bc5b0e3accff056dd759363b747a704ee803c101439b7038275383afddda885984a1f07d758ab1e0ca869473890a4d037b2bd561cffd78b5fb9ec7a8e2cfc06b68e37f638e3bc9736eb30ac29287dd928d5e84fe69d308bd22faad59ead67d88b4062635c1e4bf8e7455f841e2d0110859b350dfea1103d2fade33a8150354d011e3bd76e58abf5b6298ddeaca97ca7e928370601b87647b011aa4638b74b207bb17af662f6e9714ab126fb00ad251bd8780a82a9ad38de9c06d1889a7f99fc660f192c3888e44d04f5a949d5ebdb99f951cca0fbca913062216df9728fabce5e537f72c725973bffe142c95a8fa0da40670909323d8d6c6f108e343fff8021bc7442bf371d354b4af6f96a73c3981ca47f98</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <title>回溯算法题目</title>
+    <url>/2020/06/05/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E9%A2%98%E7%9B%AE/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="算法描述"><a href="https://leetcode-cn.com/tag/backtracking/">算法描述</a></h2>
+<p>回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就 “回溯” 返回，尝试别的路径。回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为 “回溯点”。许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
+<p>回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。</p>
+<h2 id="算法使用方法">算法使用方法</h2>
+<p>我觉得在使用回溯算法的时候，需要使用树形的结构来帮助算法的运行。我在使用回溯的时候都是理由深度优先搜索算法和剪枝来解决问题的。</p>
+<p>整个深度搜索算法的结构如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n;	<span class="comment">// 最终能达到的树的深度</span></span><br><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; ans; <span class="comment">//如果要求不重复，可以声明为set或者在算法中排除</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> cur, vector&lt;<span class="keyword">int</span>&gt;tags, vector&lt;<span class="keyword">int</span>&gt; ins)</span><span class="comment">//cur表示当前到达的树的层次，tag表示一种约束，比如只能元素只能用一次等。ins 表示当前整个路径上的节点。</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cur == n)&#123;<span class="comment">//可能还有其他限制条件，这里只是深度满足要求。</span></span><br><span class="line">        ans.<span class="built_in">push_back</span>(ins);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>()&#123;<span class="comment">//遍历可以遍历的</span></span><br><span class="line">        <span class="comment">// 处理tags和ins</span></span><br><span class="line">        <span class="built_in">dfs</span>(cur+<span class="number">1</span>, tags,ins);</span><br><span class="line">        <span class="comment">//恢复</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面用树形图来解释一下算法：</p>
+<p><img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/20200605162618.png" alt="二叉树"></p>
+<p>首先就从空节点a开始，每次添加一个节点，从可选的节点中选择，继续到下一层，同时可以存在剪枝，在每个节点开始时，判断是否达到最终条件或者超过最终条件，这样可以将该节点及其以下的节点删除，不用遍历。在遍历子节点完成后，会回到当前节点的上一个状态，这样就是回溯。</p>
+]]></content>
       <categories>
-        <category>梦想</category>
+        <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>梦</tag>
+        <tag>LeetCode</tag>
+        <tag>回溯算法</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>工具与内容的关系</title>
+    <url>/2021/07/24/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%85%E5%AE%B9%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
   </entry>
   <entry>
     <title>如何阅读一本书-1</title>
@@ -2836,11 +2863,6 @@ eg:<br>
       </tags>
   </entry>
   <entry>
-    <title>工具与内容的关系</title>
-    <url>/2021/07/24/%E5%B7%A5%E5%85%B7%E4%B8%8E%E5%86%85%E5%AE%B9%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-  </entry>
-  <entry>
     <title>并查集</title>
     <url>/2020/06/01/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>今天在刷题的过程中，遇到了有关并查集的问题，之前有学过，但是一直没有使用过。所以没啥映像。现在好好学习一下。</p>
@@ -2862,6 +2884,17 @@ eg:<br>
       </categories>
       <tags>
         <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开始我的博客之旅</title>
+    <url>/2020/04/02/%E5%BC%80%E5%A7%8B%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%B9%8B%E6%97%85/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="为什么开始">为什么开始</h2>
+<p>怎么写自己的博客，我还没有想好，也还没有想到写哪些内容。我觉得这应该是一篇技术型的博客，所以在这里我将记录一些我的学习过程，比如我现在正在写的leetcode的题解，在看的《STL的源码剖析》。我也希望可<br>
+以在这里审视自己的能力和不足，如若可以，提升自己的书面表达能力也是一种收获。</p>
+]]></content>
+      <tags>
+        <tag>日常</tag>
       </tags>
   </entry>
   <entry>
@@ -2921,17 +2954,6 @@ eg:<br>
       </categories>
       <tags>
         <tag>写作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开始我的博客之旅</title>
-    <url>/2020/04/02/%E5%BC%80%E5%A7%8B%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%B9%8B%E6%97%85/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="为什么开始">为什么开始</h2>
-<p>怎么写自己的博客，我还没有想好，也还没有想到写哪些内容。我觉得这应该是一篇技术型的博客，所以在这里我将记录一些我的学习过程，比如我现在正在写的leetcode的题解，在看的《STL的源码剖析》。我也希望可<br>
-以在这里审视自己的能力和不足，如若可以，提升自己的书面表达能力也是一种收获。</p>
-]]></content>
-      <tags>
-        <tag>日常</tag>
       </tags>
   </entry>
   <entry>
@@ -3104,33 +3126,6 @@ fatal: remote origin already exists.<br>
       </tags>
   </entry>
   <entry>
-    <title>江南春</title>
-    <url>/2020/08/09/%E6%B1%9F%E5%8D%97%E6%98%A5/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><div align=center>
-    <h2>
-        江南春
-    </h2>
-    <p>
-        [唐]	杜牧
-    </p>
-    <p>
-        千里莺啼绿映红，水村山郭酒旗中。
-    </p>
-    <p>
-        南朝四百八十寺，多少楼台烟雨中。
-    </p>
-</div>
-]]></content>
-      <categories>
-        <category>诗词赋</category>
-        <category>杜牧</category>
-      </categories>
-      <tags>
-        <tag>诗</tag>
-        <tag>杜牧</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>汇编语言中Debug的使用</title>
     <url>/2020/06/13/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E4%B8%ADDebug%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h2 id="汇编语言中Debug的使用">汇编语言中Debug的使用</h2>
@@ -3286,31 +3281,6 @@ eg:      <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/imag
       </tags>
   </entry>
   <entry>
-    <title>游园不值</title>
-    <url>/2020/08/11/%E6%B8%B8%E5%9B%AD%E4%B8%8D%E5%80%BC/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><div align = center>
-    <h2> 游园不值
-    </h2>
-	<div>
-    [宋]叶绍翁
-    </div>
-    <div>应怜屐齿印苍苔，小扣柴扉久不开。
-    </div>
-    <div>
-        春色满园关不住，一枝红杏出墙来。
-    </div>
-</div>
-]]></content>
-      <categories>
-        <category>诗词赋</category>
-        <category>叶绍翁</category>
-      </categories>
-      <tags>
-        <tag>诗</tag>
-        <tag>叶绍翁</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>纪念刘和珍君</title>
     <url>/2021/06/13/%E7%BA%AA%E5%BF%B5%E5%88%98%E5%92%8C%E7%8F%8D%E5%90%9B/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>一</p>
@@ -3351,6 +3321,58 @@ eg:      <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/imag
       </categories>
       <tags>
         <tag>琐记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>江南春</title>
+    <url>/2020/08/09/%E6%B1%9F%E5%8D%97%E6%98%A5/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><div align=center>
+    <h2>
+        江南春
+    </h2>
+    <p>
+        [唐]	杜牧
+    </p>
+    <p>
+        千里莺啼绿映红，水村山郭酒旗中。
+    </p>
+    <p>
+        南朝四百八十寺，多少楼台烟雨中。
+    </p>
+</div>
+]]></content>
+      <categories>
+        <category>诗词赋</category>
+        <category>杜牧</category>
+      </categories>
+      <tags>
+        <tag>诗</tag>
+        <tag>杜牧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>游园不值</title>
+    <url>/2020/08/11/%E6%B8%B8%E5%9B%AD%E4%B8%8D%E5%80%BC/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><div align = center>
+    <h2> 游园不值
+    </h2>
+	<div>
+    [宋]叶绍翁
+    </div>
+    <div>应怜屐齿印苍苔，小扣柴扉久不开。
+    </div>
+    <div>
+        春色满园关不住，一枝红杏出墙来。
+    </div>
+</div>
+]]></content>
+      <categories>
+        <category>诗词赋</category>
+        <category>叶绍翁</category>
+      </categories>
+      <tags>
+        <tag>诗</tag>
+        <tag>叶绍翁</tag>
       </tags>
   </entry>
   <entry>
@@ -3648,28 +3670,6 @@ eg:      <img src="https://gitee.com/yunruowu/PictureForBolg/raw/master/img/imag
       </categories>
       <tags>
         <tag>共产主义</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>8.1今日小记</title>
-    <url>/2021/08/02/8-1%E4%BB%8A%E6%97%A5%E5%B0%8F%E8%AE%B0/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="2ce991beea4cecee9633081a1f7d65ca22ce05dd0f14e0012155705f8cbc4492">e2f68a9cbca9e5015fd08de9db6ab95461feec28d88a9d72e041d16556160f1207921ebfe04cced484b6734a00f8c98fe11a1bd977531df51ed7cbaed899892714ee6749d52793f9e2777323a58a649e1b95f5b44aa53781b4e5938b4c07f1cf8cfc0539671be431a5f93afef0b2f6f275e0b5b7521c56325b197a5c01ab346c0dacd838dd1b7ef624de3783b12ffffb93577a59c760adf10ae3410d78af8bc12b25ffa297a476e591fca68fb269960f404e812e228bf2be43f841549452362c7657f5cfb2f08ba4c7e658f267a08297e94ca63bbd316ee88f3f78e041a6778272dc52ed88e9031a5fa901dea4ac0198929ca1c13d10a998b543345189e703183757349f90ae9c9d1572c796961a060ae4def95514a0a9e3f5431c059e881b4eb5d609c42448fe94553a98a8e3259406fd47c102c35722b5306c8c193fd1fb34a9961beb923d85771fffd74b5e006936f60094b2100c12e361cb5f0aa257bcdbc11a50ceecce58fc6cf9f2ecde4c686075892bc716a63096acd7f24de1f1b37e954c4f619672d8efe53c015ef841fccf9391cc637c0099549ad6560963b5a9d75fd3832cfc5f199429dd8da70dc17f8181701c4df3d4b55a90199d20a54d85a20e98727cdee336385b082dc4cbe2179e588acdc7ebf2b5935ffdcbcef32afd51d5607c43099c98d64bac918aed02618053ffeaa5a950ffa47827087ee391e6aac194e6e8c1d5ae8f98fb524cf6fbd88ad0142b5cbbde358e6d73c967a999e8a093c0b7bbaad51fa1fc2d76d97267b7d0943c533548b568344f381db470fa94f7d6335363a6b1ddf40cae57ae87c0d5b0930447e3f324eadb7cea56db39898775a4abd665ddd1c3dc05cbd9f16826495c89c0c3adc72b6d26c83a59329c3cc5b78b44b9bdff35f02376ab01c2530f6fecd8cf858ffc3f4997b65858f41e8612f211316c2a7f6e70eadad10f0db89a0c84d3d36a46544cf234aa22e3880990bbf8e31a5997d352bed4f2961feb69071f00593aa69b0aa444d694c9ce0c5bf761aee43f683acdc21032d6f62cb8b1e57ef729f2316aa7cadd6f1e53d46bd20b8f432e6f81f0eee2a9c341fe0458205b9a837de78198d45429eb9244cb8875b7c38c434db5c0c1a518c1d67654adcee0d2b8027f17f3123a352835ba05953e03bbf311aea82b0d831d588d4e3f087727f09f7bbf6d9583da1f72039a8dcd36b416c100a62e4a786089426514137dbdb1880bad1ada3dccc80439ed9d6ad48df56fdec219f66aad9b397444ee59c86999820ee35360407e292445db050314f2411a44c2a7743f0c05879154775d473abf6fbad23ab2f117c9c09e3c897e7971b1490284881667b08a17603047489993c318a1887ab6698895f6a867dc64333486fc6b89fe2095b4fda9f4df6726a040e2e55208038847f1b7477d90721eb4d8fed6e3af7d50638c341e80b3b1a6a9ddb9299989630d6427e407f42c482e6254c766acebb0b0d95b7fd640d415cda39703e5c8ed1d95d8479a4c04a07d517c489da69309b52dc98f50ee82cecf0fddc370b251bef9213f7d4a9d26f4b971c58d7b0adc0ca6746dfb32e82da79b87021f4ac2740e1b0b693bfbeb175d0168041f5d00304ce99e3b4033fd6032c7a21ed2ed18076c5eef6512597c649fd3b5017b0c177b1ff62446d5561d89d60b2945ccf85535058a78e832a6f9864d5cfaa0d9b5d182928aebaf7ad24feb906bb7f6dccce8c06288e47585b08bbad31e0b16861f5490</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>悟与梦</category>
-      </categories>
-      <tags>
-        <tag>煎熬</tag>
       </tags>
   </entry>
 </search>
